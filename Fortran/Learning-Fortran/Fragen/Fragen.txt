@@ -1,0 +1,13 @@
+		FRAGEN ZU FORTRAN
+
+- Wie speichern Arrays ihre Werte?
+    - speichere 1.2 als Zahl mit QuadruplePrecision ab. Print.
+    - Weise einem Element eines Arrays mit Quadr.Prec. die Zahl zu. Print.
+    - Die Zahlen sind nicht gleich. (siehe Frage-Array-skript)
+
+
+- Is there a "good" way to import an unknown number of lines from a file
+    into an array? Assuming we know the number of columns.
+
+- Why does the (gfortran) compiler create a .mod and a .o file? (Makefiles...)
+

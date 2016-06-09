@@ -1,0 +1,11 @@
+Some maybe useful links for fortran:
+
+
+F90 Tutorial
+http://www.cs.mtu.edu/~shene/COURSES/cs201/NOTES/fortran.html
+
+Fortran Book 3rd Edition programs
+http://www.fortranplus.co.uk/book3_examples.html
+
+Debug with gdb:
+http://infohost.nmt.edu/tcc/help/lang/fortran/gdb.html

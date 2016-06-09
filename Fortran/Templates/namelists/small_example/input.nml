@@ -1,0 +1,22 @@
+! This is an example for a namelist.
+! Syntax:
+!
+! &GROUPNAME
+!  element1 = whatever ,
+!  element2 = whatever/
+!
+!
+!
+&NMLINT
+ SOMEINT = 1,
+ SOMEOTHERINT = 13/
+!
+&NMLREAL
+ SOMEREALONE = 3.14159,
+ SOMEREALTWO = 1.414,
+ SOMEREALTHREE = 17.81/
+!
+&NMLARRAY
+ SOMEREALARRAY = 2.0 3.1 7.5 16.3,
+ SOMEINTARRAY = 4 5 6/
+!
