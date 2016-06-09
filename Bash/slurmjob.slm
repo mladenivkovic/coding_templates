@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --mem=64000
+#SBATCH -n 16 -t 01:00:00
+#SBATCH -p debug
+#SBATCH --job-name='Jobname'
+#SBATCH --ntasks-per-core=1
+
+
+#execute with sbatch slurmjob.slm
+
+
+export DATE=`date +%F_%Hh%M`
+
+srun -n 16 ./myexecfile cmd line args > run$DATE.log
+
