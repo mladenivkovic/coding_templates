@@ -1,6 +1,0 @@
- type in the rainfall values
- one per line
- average   9.00000000    
- total   108.000000    
- The car's speed is   9.00000000     mph
- The car's speed is   9.00000000     mph
