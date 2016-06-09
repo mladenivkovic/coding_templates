@@ -121,15 +121,19 @@ PATH="/home/mivkov/UZH/High_Performance_Computing/hydro/Py:"$PATH
 # ALIASES
 #============================
 
+#SSH
 alias ela='ssh -2Y stud01@ela.cscs.ch'
 alias dora='ssh -2Yt stud01@ela.cscs.ch ssh -2Y dora'
 alias linux.physik='ssh mivkov@linux.physik.uzh.ch'
-alias ft='cd $HOME/projekte/Fortran/Templates'
-alias lf='cd $HOME/projekte/Fortran/Learning-Fortran'
 alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
-alias ..='cd ..'
 alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y zbox'
 
+
+#directory shortcuts
+alias ft='cd ~/Coding/templates/Fortran' # go to fortran templates
+alias ..='cd ..'
+alias pj='cd ~/Coding/projekte' # go to projects
+alias templ='cd ~/Coding/templates' #go to templates
 
 
 
