@@ -1,0 +1,148 @@
+# Sample .bashrc for SuSE Linux
+# Copyright (c) SuSE GmbH Nuernberg
+
+# There are 3 different types of shells in bash: the login shell, normal shell
+# and interactive shell. Login shells read ~/.profile and interactive shells
+# read ~/.bashrc; in our setup, /etc/profile sources ~/.bashrc - thus all
+# settings made here will also take effect in a login shell.
+#
+# NOTE: It is recommended to make language settings in ~/.profile rather than
+# here, since multilingual X sessions would not work properly if LANG is over-
+# ridden in every subshell.
+
+# Some applications read the EDITOR variable to determine your favourite text
+# editor. So uncomment the line below and enter the editor of your choice :-)
+#export EDITOR=/usr/bin/vim
+#export EDITOR=/usr/bin/mcedit
+
+# For some news readers it makes sense to specify the NEWSSERVER variable here
+#export NEWSSERVER=your.news.server
+
+# If you want to use a Palm device with Linux, uncomment the two lines below.
+# For some (older) Palm Pilots, you might need to set a lower baud rate
+# e.g. 57600 or 38400; lowest is 9600 (very slow!)
+#
+#export PILOTPORT=/dev/pilot
+#export PILOTRATE=115200
+
+export TERM=xterm
+#=================
+#COLORS
+#=================
+
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;05m"
+COL_GREEN=$ESC_SEQ"32;055555m"
+COL_GREEN_ITALIC=$ESC_SEQ"32;03m"
+COL_YELLOW=$ESC_SEQ"33;05m"
+COL_BLUE=$ESC_SEQ"34;05m"
+COL_MAGENTA=$ESC_SEQ"35;05m"
+COL_CYAN=$ESC_SEQ"36;05m"
+COL_NORMAL_ITALIC=$ESC_SEQ"39;03m"
+
+
+#=================
+# GREETING MESSAGE
+#=================
+
+echo -e "$COL_GREEN_ITALIC"" Good luck and have fun!" "$COL_RESET"
+#echo -e "$COL_BLUE""    You are using zsh." "$COL_RESET" 
+echo -e "$COL_NORMAL_ITALIC"" type 'showvars', 'showaliases' and 'showfuncs' to see variables,"
+echo -e " aliases and functions defined in the ~/.bashrc file.""$COL_RESET" 
+
+
+#=================
+# DORA-STUFF
+#=================
+
+#load intel compiler at login
+if [[ "$HOSTNAME" == 'dora'* ]]; then
+    #enter here modules to be loaded/removed
+    module switch PrgEnv-cray/5.2.82 PrgEnv-intel
+    echo -e "$COL_GREEN" "Modules configured according to ~/.bashrc file" "$COL_RESET"
+fi
+
+#================
+# HISTORY
+#=================
+
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+
+
+
+#=================
+#PERSONAL ALIASES
+#=================
+
+alias dora="ssh stud01@dora.cscs.ch"
+alias ls="ls --color"
+alias ..='cd ..'
+alias hs='cd ~/hydro/HYDRO/F90/MPI/Src' #go to hydro source dir
+alias he='cd /users/stud01/hydro/HYDRO/F90/MPI/exec' #go to hydro exec dir
+alias cph='cp /users/stud01/hydro/HYDRO/F90/MPI/Src/hydro_mpi /users/stud01/hydro/HYDRO/F90/MPI/exec/scaling/'
+alias python='/users/biernack/Enthought/Canopy_64bit/User/bin/python'
+alias ffmpeg='/users/biernack/bin/ffmpeg'
+
+#==================
+#PERSONAL VARIABLES
+#==================
+
+
+# Adding scripts/ to system path
+export PATH="/users/stud01/hydro/scripts/scaling:/users/stud01/hydro/scripts/:/users/stud01/hydro/Py:$PATH"
+
+# Customise prompt
+#export PS1=’<here should be your prompt specifiers>’
+
+#Prompt: (The thing that is before where you type in your commands)
+
+export PS1="\[\033[38;5;239m\] \u @ \H: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
+
+
+
+
+
+#==================
+#PERSONAL FUNCTIONS
+#==================
+
+export shellfile_in_use='/users/stud01/.bashrc'
+#=================
+# show zshrc data
+function showaliases { #function to print all my self defined aliases in the ~/.zshrc file.
+    echo " "
+    echo "Printing all aliases defined in the "$shellfile_in_use" file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' "$shellfile_in_use" | egrep --color=always '^[[:blank:]]*alias'
+    echo " "
+}
+
+function showvars { #function to print all my self defined and exported variables in the ~/.zshrc file.
+    echo " "
+    echo "Printing all exported variables defined in the "$shellfile_in_use" file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' "$shellfile_in_use" | egrep --color=always '^[[:blank:]]*export'
+    echo " "
+}
+
+
+function showfuncs { #function to print all my self defined functions in the ~/.zshrc file.
+    echo " "
+    echo "Printing all functions defined in the "$shellfile_in_use" file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' $shellfile_in_use | egrep --color=always '^[[:blank:]]*function'
+    echo " "
+}
+

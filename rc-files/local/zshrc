@@ -1,0 +1,138 @@
+# Created by newuser for 5.0.5
+
+#=== SWITCH TO BASH
+#echo "switching to bash." 
+#echo "If you want to remove automatic switching to bash, remove lines 5 & 6 from ~/.zshrc"
+#export SHELL=/bin/bash
+#exec /bin/bash
+
+#PS1=$'\e[0;31m [%n@%m]%~%#  \e[0m'
+
+#=================
+# COLORS
+#=================
+
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+COL_MAGENTA=$ESC_SEQ"35;01m"
+COL_CYAN=$ESC_SEQ"36;01m"
+
+#=================
+# GREETING MESSAGE
+#=================
+
+echo -e "$COL_RED""    Good luck and have fun!" "$COL_RESET"
+echo -e "$COL_BLUE""    You are using zsh." "$COL_RESET" 
+echo "    type 'showvars', 'showaliases' and 'showfuncs' to see variables," 
+echo "    aliases and functions defined in the ~/.zshrc file."
+
+
+
+
+#=================
+# ZBOX-STUFF
+#=================
+
+
+#AUTOMATICALLY LOADING MODULES IF ON ZBOX: hostname=f1
+
+if [[ "$HOSTNAME" == 'f1' ]]; then
+    #enter here modules to be loaded/removed
+    module rm gcc
+    module switch mpi mpi/mvapich2/1.9b/intel
+    echo -e "$COL_GREEN" "   Modules configured according to ~/.zshrc file" "$COL_RESET"
+fi
+
+
+
+
+#IF ON ZBOX: ADD SELF MADE PROGRAMS TO PATH
+
+if [[ "$HOSTNAME" == 'f1' ]]; then
+    export PATH="/zbox/user/mivkov/source/executables:/zbox/user/mivkov/source/executables/hop:/zbox/user/mivkov/source/executables/selfmade:$PATH"
+fi
+
+
+
+#CHECKING IF I'M ON ZBOX BEFORE EXECUTING SBATCH OR SQUEUE, ALSO SQUEUE ALIAS
+
+function mbatch { # function to check first if I'm on zbox before executing sbatch. Also copy sbatch output to sbatch_jobID.log
+    if [[ "$HOSTNAME" == 'f1' ]]; then
+        export EXECDATE=`date +%F_%Hh%M`
+        sbatch $1 | tee "sbatch_jobID_$EXECDATE.log"
+    else
+        echo -e "$COL_RED" "You're not on zbox..." "$COL_RESET"
+    fi
+}
+
+
+
+function sq { # function to check first if I'm on zbox before execution squeue -u mivkov
+    if [[ "$HOSTNAME" == 'f1' ]]; then
+        squeue -u mivkov    
+    else
+        echo -e "$COL_RED" "You're not on zbox..." "$COL_RESET"
+    fi
+}
+
+
+
+
+
+#=================
+#PERSONAL ALIASES
+#=================
+
+alias zbox='ssh zbox'
+alias ramses='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/'
+alias rexec='cd /zbox/user/mivkov/ramses-exec/'
+alias icfiles='cd /zbox/user/mivkov/ic_files/'
+alias ..='cd ..'
+
+#=================
+#PERSONAL VARIABLES
+#=================
+
+#Prompt: (The thing that is before where you type in your commands)
+export PS1="\[\033[38;5;230m\]\u@\h\w:[\[$(tput bold)\]\v\[$(tput sgr0)\]]\\$\[$(tput sgr0)\]"
+
+
+export PATCH=/home/uzh/mivkov/bachelorarbeit/workbench/ramses/patches_mladen
+export EXEC=/home/uzh/mivkov/bachelorarbeit/workbench/ramses/execution
+export SRC='/zbox/user/mivkov/source'
+
+
+#functions to show specified content of ~/.SHELLrc file
+
+export shellfile_in_use=$HOME/.zshrc
+
+
+function showaliases { #function to print all my self defined aliases in the ~/.zshrc file.
+    echo " "
+    echo "Printing all aliases defined in the "$shellfile_in_use" file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' "$shellfile_in_use" | egrep '^[[:blank:]]*alias'
+    echo " "
+}
+
+function showvars { #function to print all my self defined and exported variables in the ~/.zshrc file.
+    echo " "
+    echo "Printing all exported variables defined in the "$shellfile_in_use" file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' "$shellfile_in_use" | egrep '^[[:blank:]]*export'
+    echo " "
+}
+
+
+function showfuncs { #function to print all my self defined functions in the ~/.zshrc file.
+    echo " "
+    echo "Printing all functions defined in the "$shellfile_in_use" file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' $shellfile_in_use | egrep '^[[:blank:]]*function'
+    echo " "
+}
+

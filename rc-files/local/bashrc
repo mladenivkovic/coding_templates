@@ -1,0 +1,224 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+# there is more in the ~/.profile file.
+
+
+export TERM=xterm
+
+
+#=================
+# COLORS
+#=================
+
+# Colors for echo output.
+# Use with echo -e "$COL_NAME" Your text here "$COL_RESET"
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+COL_MAGENTA=$ESC_SEQ"35;01m"
+COL_CYAN=$ESC_SEQ"36;01m"
+
+
+
+
+
+
+
+#=================
+# GREETING MESSAGE
+#=================
+
+# Greetings
+echo -e "$COL_BLUE"" Good luck and have fun!" "$COL_RESET"
+echo " type 'showvars', 'showaliases' and 'showfuncs' to see variables," 
+echo " aliases and functions defined in the ~/.bashrc file."
+
+
+
+
+
+
+#================
+# HISTORY
+#=================
+
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+
+
+
+
+
+
+#===================================
+# COLOR SUPPORT FOR INBUILT PROGRAMS
+#===================================
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alh'
+#alias la='ls -A'
+#alias l='ls -CF'
+
+
+
+
+
+
+
+
+
+#============================
+# VARIABLES
+#============================
+
+
+#Prompt: (The thing that is before where you type in your commands)
+
+export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
+
+
+
+
+# PATH VARIABLE
+
+# Add executables from /home/mivkov/Skripte/execs_included_in_path
+# to $PATH variable
+PATH="/home/mivkov/Skripte/execs_included_in_path:"$PATH
+# Add intel (fortran) compiler to path var
+PATH="/opt/intel/bin:"$PATH
+# add HPC python scripts
+PATH="/home/mivkov/UZH/High_Performance_Computing/hydro/Py:"$PATH
+
+
+
+#============================
+# ALIASES
+#============================
+
+alias ela='ssh -2Y stud01@ela.cscs.ch'
+alias dora='ssh -2Yt stud01@ela.cscs.ch ssh -2Y dora'
+alias linux.physik='ssh mivkov@linux.physik.uzh.ch'
+alias ft='cd $HOME/projekte/Fortran/Templates'
+alias lf='cd $HOME/projekte/Fortran/Learning-Fortran'
+alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
+alias ..='cd ..'
+alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y zbox'
+
+
+
+
+
+
+
+
+
+
+
+#===========================
+# FUNCTIONS
+#===========================
+
+
+#===========================
+#functions to show specified content of ~/.bashrc file
+
+function showaliases { #function to print all my self defined aliases in the ~/.SHELLrc file.
+    shell_in_use=$0
+    echo " "
+    echo "Printing all aliases defined in the ".$shell_in_use"rc file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*alias'
+    echo " "
+}
+
+function showvars { #function to print all my self defined and exported variables in the ~/.SHELLrc file.
+    shell_in_use=$0
+    echo " "
+    echo "Printing all exported variables defined in the ".$shell_in_use"rc file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*export'
+    echo " "
+}
+
+function showfuncs { #function to print all my self defined functions in the ~/.bashrc file.
+    shell_in_use=$0
+    echo " "
+    echo "Printing all functions defined in the ".$shell_in_use"rc file:"
+    echo " "
+    sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*function'
+    echo " "
+}
+
+#===========================
+
+
+function space { # Zeigt Grösse des Arbeitsverzeichnisses
+    echo "Arbeitsverzeichnis: " $PWD
+    echo "Grösse des Arbeitsverzeichnisses " `du -h 2>>/dev/null | tail -n1`
+    echo "Benutze du -h für weitere Informationen."
+
+    echo ""
+    echo "Informationen zur Hauptpartition:"
+    df -h | head -n1
+    df -h | grep nvme0n1p5 --colour=never
+    echo "Benutze df -h für weitere Informationen."
+}
+
+alias disk=space
+
+
+
+
+
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+#alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+#if [ -f ~/.bash_aliases ]; then
+#    . ~/.bash_aliases
+#fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if ! shopt -oq posix; then
+#  if [ -f /usr/share/bash-completion/bash_completion ]; then
+#    . /usr/share/bash-completion/bash_completion
+#  elif [ -f /etc/bash_completion ]; then
+#    . /etc/bash_completion
+#  fi
+#fi
+
+
