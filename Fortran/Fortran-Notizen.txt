@@ -1,0 +1,72 @@
+###############
+FORTRAN NOTIZEN	
+###############
+
+
+COMPILER
+    
+    GFORTRAN
+    gfortran -o exec-file.out dateiname.f90
+    mpif90  für MPI
+        
+        FLAGS
+        -O3     höchste Optimierung
+        
+        Für "debugging":
+        -traceback -check uninit -check bounds -ftrapuv -fpp -fpe0 -cpp
+        -frecord-marker=4 -ffree-line-length-none -fbacktrace -g -O -fbounds-check -Wuninitialized -Wall
+        -x f95-cpp-input 
+        
+        Für MPI:
+        -m64
+        
+        
+        Für OpenMP:
+        -fopenmp
+    
+    INTEL
+    ifort  -o exec-file.out dateiname.f90
+    mpiifort für MPI
+        
+        FLAGS
+        -O3     höchste Optimierung
+        
+        Für "debugging":
+        -traceback -mcmodel=medium -shared-intel -check all
+        ersetze -check all mit -check all,noarg_temp_created , falls 
+        MPI zu viele temporary array etc Warnungen erstellt.
+        
+        Für OpenMP:
+        -openmp
+        
+        Für preprocessing:
+        -cpp
+    
+    CRAY
+    ftn -o exec-file.out dateiname.f90
+        
+        FLAGS
+        Auf dora: schau, dass die richtigen module geladen sind, wie
+        gfortran oder intel. Dann die entsprechenden flags verwenden.
+ 
+ 
+ 
+ 
+ 
+VARIA		
+		
+
+- "Strings": Falls mehr als ein Zeichen, (maximale) Länge angeben!
+	character (len = 20) :: var="my String"
+- myvar=1.23_dp !Definiert myvar als 64-bit Real. Standardmässig wäre es ein 32-bit Real. 
+
+- forall: allows calculations fo be carried out simultaneously in a multiprocessor environment
+	forall (i=1:n)
+		a(i,i) = a(i, i) - lambda
+	end forall
+
+
+One may use GNU Fortran as a syntax checker (or verify that GNU Fortran's frontend correctly accepts or rejects a program), by specifying -fsyntax-only on the command line.
+
+
+

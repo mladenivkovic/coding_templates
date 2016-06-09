@@ -1,0 +1,56 @@
+		VIM-NOTIZEN
+
+EINFÜGEN
+i		einfügen (insert)
+A		am Ende der Zeile einfügen (Append) (Shift + a; Grossbuchstabe!)
+o		In neuer Zeile einfügen
+"*p     Aus Systemclipboard einfügen
+
+BEWEGEN
+2w 			um 2 Wörter nach vorne zu springen
+0			Zum Zeilenanfang (Zahl Null)
+gg			Zum Dateianfang gehen
+G			Zum Dateiende gehen
+Nummer+G		Zur Zeilennummer gehen
+ctrl+o			Zur vorherigen Position
+ctrl+i			Zurück zur weiteren Position (undo ctrl+o)
+
+
+LÖSCHEN
+x			lösche Zeichen unter dem Cursor
+dd			lösche ganze Zeile
+d5w			lösche die nächsten 5 Wörter
+d$			lösche bis zum Ende der Zeile
+p			gelöschtes beim Cursor einfügen (bzw. in der nächsten Zeile)
+rx			ersetze Zeichen durch x
+R			ersetze mehrere Zeichen
+ce			lösche bis zum Ende des Wortes, und schreibe direkt (change)
+
+
+VERSCHIEDENES
+u			undo
+ctrl+R			redo
+y 			kopieren (mit v auswählen)
+yy          kopiere ganze Zeile
+p			gelöschtes/kopiertes beim Cursor einfügen (bzw. in der nächsten Zeile)
+rx			ersetze Zeichen durch x
+ce			lösche bis zum Ende des Wortes, und schreibe direkt (change)
+ctrl+g			Position in der Datei anzeigen
+%			Nächste Klammer gleicher Sorte
+:!			Ausführen eines externen Kommandos. Bsp :!ls
+v			Auswählen
+v:w Test		Schreibe die Auswahl in Datei Test
+:r Dateiname		Liest Datei ein
+
+SUCHEN
+/wort			Sucht Wort
+n			nächster Eintrag
+N			vorheriger Eintrag
+%			nächste Klammer
+#            Gehe zum nächsten Wort wie das ausgewählte
+:s/wort1/wort2		Ersetzt das nächste wort1 mit wort2 in der Zeile
+:s/wort1/wort2/g	Ersetzt alle wort1 mit wort2 in der Zeile
+:%s/wort1/wort2/g	Ersetzt alle wort1 mit wort2 im ganzen Dokument
+:%s/wort1/wort2/gc	Ersetzt alle wort1 mit wort2 im ganzen Dokument mit Fragenkatalog
+:noh			Entfernt Markierungen des gesuchten
+
