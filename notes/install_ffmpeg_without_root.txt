@@ -1,0 +1,31 @@
+1) install YASM:
+    Download:
+    ./autogen.sh --prefix=/home/uzh/mivkov/programme/
+    ./configure --prefix=/home/uzh/mivkov/programme/
+    make
+    make install
+
+2) install x264
+
+    Download:
+    cd x264-blablabla
+    ./configure --enable-static --enable-shared --prefix=/home/uzh/mivkov/programme
+    make
+    make install
+    export LD_LIBRARY_PATH="/home/uzh/mivkov/programme/lib:"LD_LIBRARY_PATH
+    ldconfig -C /home/uzh/mivkov/programme/ld.so.cache
+
+
+3) install ffmpeg
+    Download: https://ffmpeg.org/download.html
+    cd ffmpeg-XYZ
+    export PKG_CONFIG_PATH=/home/uzh/mivkov/programme/lib/pkgconfig
+    ./configure  --extra-cflags="-l /home/uzh/mivkov/programme/bin" --extra-libs="-L /home/uzh/mivkov/programme/lib/libx264.a" --extra-ldflags="-L /home/uzh/mivkov/programme/bin" --prefix=/home/uzh/mivkov/programme --enable-gpl --enable-libx264 --enable-shared
+    make
+    make install
+    ldconfig -C /home/uzh/mivkov/programme/ld.so.cache
+
+
+    add
+        export LD_LIBRARY_PATH="/home/uzh/mivkov/programme/lib:"LD_LIBRARY_PATH
+    to your .bashrc or .zshrc, whatever you are using. Otherwise, ffmpeg will not find the libraries.
