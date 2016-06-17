@@ -9,8 +9,9 @@ So far, it contains some templates for:
 -   Bash
 -   Fortran
 -   Python
+-   LaTeX
 
-Although Python is only in the beginning stages. In the near future, probably Java, more Python, C and C++ will join the ranks.
+In the near future, probably Java, C and C++ will join the ranks as well as new templates to the already existing languages.
 
 ### How do I get set up? ###
 
