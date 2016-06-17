@@ -50,9 +50,10 @@ v:w Test	Schreibe die Auswahl in Datei Test
 :r Dateiname		Liest Datei ein
 m<letter>   erstellt Markierung an dieser Stelle
 '<letter>   gehe zur Markierung
+~           Gross- zu Kleinbuchstaben umwandeln und umgekehrt
 
 SUCHEN
-/wort			Sucht Wort
+/wort		Sucht Wort
 n			nächster Eintrag
 N			vorheriger Eintrag
 %			nächste Klammer
