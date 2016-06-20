@@ -22,6 +22,10 @@ workdir= str(getcwd())
 
 
 def extract_ascii(filename):
+    #Der grösste Teil dieser Funkion ist unwichtig für die Vorlage.
+    #Er bezieht sich hauptsächlich darauf, die Daten richtig
+    #auszulesen und allfällige Nullen in Werte != 0 zu verwandeln,
+    #da die LogNorm keine Nullen handlen kann.
 
     awk_callmap = ['awk', ' {print $3} ', getcwd()+'/'+filename]
     p2 = subprocess.Popen(awk_callmap, stdout=subprocess.PIPE)
