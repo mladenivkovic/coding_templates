@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# -*- coding: utf8 -*-
 # for more colormaps, see http://www.ctac.uzh.ch/dokuwiki/doku.php?id=colormaps
 
 from numpy import array, sqrt
@@ -12,7 +12,7 @@ from matplotlib.colors import LogNorm, Normalize
 from mpl_toolkits.axes_grid1 import make_axes_locatable, axes_size
 
 
-filename = '../inputfiles/mass00008.map'
+filename = '../inputfiles/part2map_output.txt'
 outputfilename = 'finetuned_plot'
 xlabel="x axis label"
 ylabel=r"y axis label with TeX- Stuff: $a \cdot \ x^{4}$"
