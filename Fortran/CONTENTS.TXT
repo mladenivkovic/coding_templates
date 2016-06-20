@@ -1,0 +1,125 @@
+Last update: 20.06.2016
+
+
+THIS DIRECTORY CONTAINS:
+
+- arrays.f90
+    initiating and printing arrays.
+    - initiate arraym, allocatable array
+    - dimensions
+    - allocating arrays
+    - accessing and printing multidimensional arrays
+    - filling array with input from a file
+
+- complex.f90
+    complex numbers itrinistics in fortran.
+    - arithmetics
+    - real part, imaginary part, conjugate, abs
+
+
+- CONTENTS.TXT
+    this file.
+
+- functions.f90
+    defining a function in fortran
+    defining a recursive function
+
+- if-else-case.f90
+    How to use if, else, and case statements
+
+- inputfiles/*
+    Contains files that the programs use.
+
+- linkedlist_reals.f90
+    reads in an unknown number of reals from a file.
+
+- linkedlists.f90
+    how to implement a singly linked list.
+
+- logicaloperators.f90
+    logical operators: AND, OR, AND.NOT, EQV, NEQV, NOT
+
+- loops.f90
+    DO, GENERAL DO, DO WHILE (for implied do, see arrays.f90)
+
+- make/
+    Makefile
+        -
+    modules.f90
+        -
+    physical_constants.f90
+        -
+    precision_specification.f90
+        -
+    simple_math_module.f90
+        -
+
+- makedir_and_file.f90
+
+- modules/
+    modules.f90
+        -
+    physical_constants.f90
+        -
+    precision_specification.f90
+        -
+    simple_math_module.f90
+        -
+
+- MPI/
+    helloworld_mpi.f90
+        -
+    mapdomain2d-2.f90
+    mapdomain2d.f90
+    mladen_output.txt
+    mpi_sendarraysforhydrocode.f90
+    optimal_processor_distribution.f90
+    reduce.f90
+    send_and_receive.f90
+    sendpartofmultidimarray.f90
+    sendreceive.f90
+    timingnprocessors.dat
+    writeinonefile.f90
+
+- namelists/
+    big_example/
+        input.nml
+        module_datastuff.f90
+        module_numeric.f90
+        namelist.f90
+        zzz-numericmain
+
+    small_example/
+        input.nml
+        smallnamelistexample.f90
+
+- notes_and_docs/
+    Fortran-Notizen.txt
+    gfortran.pdf
+    links.txt
+
+- NumericInquiryFunctions/
+    NumericInquiryFunctions-Integers.f90
+    NumericInquiryFunctions-Integers-Output.txt
+    NumericInquiryFunctions-Reals.f90
+    NumericInquiryFunctions-Reals-Output.txt
+
+- pointers.f90
+
+- preprocessingoptions.f90
+
+- printing.f90
+
+- readfromfile.f90
+
+- subroutines.f90
+
+- timing.f90
+
+- timing_module.f90
+
+- types.f90
+
+- write.f90
+
+- writingtofile.f90
