@@ -14,7 +14,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable, axes_size
 #für schönen colorbar
 
 
-outputfilename = "scatterplot_with_colorbar"
+outputfilename = "plot_scatterplot_with_colorbar"
 workdir= str(getcwd())
 
 #generate random values

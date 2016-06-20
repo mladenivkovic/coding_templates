@@ -13,7 +13,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable, axes_size
 
 
 filename = '../inputfiles/part2map_output.txt'
-outputfilename = 'finetuned_plot'
+outputfilename = 'plot_finetuning'
 xlabel="x axis label"
 ylabel=r"y axis label with TeX- Stuff: $a \cdot \ x^{4}$"
 title="Plot title."

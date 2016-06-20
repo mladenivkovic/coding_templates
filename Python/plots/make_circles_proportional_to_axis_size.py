@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-outputfilename = "proportional_circles"
+outputfilename = "plot_proportional_circles"
 title='Proportional clump sizes to image/axis dimensions plot'
 workdir= str(getcwd())
 

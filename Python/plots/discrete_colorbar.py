@@ -13,7 +13,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable, axes_size
 #für schönen colorbar
 
 
-outputfilename = "discrete_colorbar"
+outputfilename = "plot_discrete_colorbar"
 workdir= str(getcwd())
 
 #generate random values
