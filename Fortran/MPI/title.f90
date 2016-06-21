@@ -1,3 +1,7 @@
+! A subroutine which converts an integer to a character
+! of precisely len=5 and fills it with zeros if necessary.
+
+
 !=======================================================================
 subroutine title(n,nchar)
 !=======================================================================
