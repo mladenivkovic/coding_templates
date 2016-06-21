@@ -9,7 +9,7 @@ program timing
     integer :: someint, someotherint
     integer, parameter :: n = 10000
 
-    call cpu_time(t_callcpu)
+    call cpu_time(t_callcpu) !Fortran intrinsic
     t1 = t_callcpu
     
     do someint = 1, n
