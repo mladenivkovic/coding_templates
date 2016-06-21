@@ -1,3 +1,5 @@
+! calculate the optimal rectangular processor distribution
+! by minimising communication time.
 program distribution
 
     implicit none

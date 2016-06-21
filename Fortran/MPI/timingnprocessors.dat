@@ -1,9 +1,0 @@
-nproc = 1 time = 1.266
-nproc = 2 time = 0.672
-nproc = 3 time = 0.461
-nproc = 4 time = 0.703
-nproc = 5 time = 0.570
-nproc = 6 time = 0.469
-nproc = 7 time = 0.422
-nproc = 8 time = 0.375
-for i in {1..8}; do mpirun -n 8 ./a.out | awk -v var=8 'NR == 15 {print nproc =  var  time =  }'>> timingnprocessors.dat; done 
