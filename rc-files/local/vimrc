@@ -20,6 +20,7 @@ hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
 "Line Numbers
 set number
+set relativenumber
 
 " line wrap and other stuff
 set linebreak
