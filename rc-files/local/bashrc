@@ -130,10 +130,15 @@ alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/f
 
 
 #directory shortcuts
-alias ft='cd ~/Coding/templates/Fortran' # go to fortran templates
 alias ..='cd ..'
 alias pj='cd ~/Coding/projekte' # go to projects
-alias templ='cd ~/Coding/templates' #go to templates
+alias templ='cd ~/Coding/coding_templates' #go to templates
+alias t=templ
+alias ft='cd ~/Coding/coding_templates/Fortran' # go to fortran templates
+alias pt='cd ~/Coding/coding_templates/Python' # go to python templates
+alias ppt='cd ~/Coding/coding_templates/Python/plots' # go to python plot templates
+alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
+alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
 
 
 
