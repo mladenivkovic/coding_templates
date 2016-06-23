@@ -74,7 +74,28 @@ program reducing
     !		= which process number is the main process
     ! comm:	communicator
     ! ierror:	error integer
-    
+
+
+
+! possible operations:
+!MPI_SUM     Sum of elements
+!MPI_PROD    Product of elements
+!MPI_MAX     Maximum of elements
+!MPI_MIN     Minimum of elements
+!MPI_MAXLOC  Maximum of elements and location
+!MPI_MINLOC  Minimum of elements and location
+!MPI_LAND    Logical AND
+!MPI_LOR     Logical OR
+!MPI_LXOR    Logical exclusive OR
+
+
+
+
+
+
+
+
+
     call mpi_reduce(partial_pi, total_pi, 1, mpi_double_precision, mpi_sum, 0, mpi_comm_world, error_number)
     if (this_process==0) then
       print 100, n, time_difference()

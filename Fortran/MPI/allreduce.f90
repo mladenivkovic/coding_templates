@@ -31,8 +31,8 @@ program reducing
     
 
   if(myid==0)write(*, '(A5,I3,A6,5F8.3)') "myid", myid, "array", somearray_sum
-    ! mpi_reduce(sendbuf, recvbuf, count, datatype, op, root, comm)
-    ! "reduce n_processes of result to only one"
+    ! mpi_allreduce(sendbuf, recvbuf, count, datatype, op, comm, code)
+    ! "reduce n_processes of result, then distribute result"
     ! sendbuf:	address of send buffer = partial_pi
     !		= partial pi; what will be sent to be reduced
     ! recbuf: 	address of receive buffer
@@ -49,5 +49,16 @@ program reducing
     ! comm:	communicator
     ! ierror:	error integer
     
+! possible operations:
+!MPI_SUM     Sum of elements
+!MPI_PROD    Product of elements
+!MPI_MAX     Maximum of elements
+!MPI_MIN     Minimum of elements
+!MPI_MAXLOC  Maximum of elements and location
+!MPI_MINLOC  Minimum of elements and location
+!MPI_LAND    Logical AND
+!MPI_LOR     Logical OR
+!MPI_LXOR    Logical exclusive OR
+
      call mpi_finalize(error_number)
 end program reducing
