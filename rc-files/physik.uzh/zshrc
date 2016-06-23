@@ -14,7 +14,7 @@ COL_CYAN=$ESC_SEQ"36;05m"
 COL_NORMAL_ITALIC=$ESC_SEQ"39;03m"
 
 #make ls respect solarized dircolors
-dircolors .dircolors 2>&1 /dev/null
+#dircolors .dircolors 2>&1 /dev/null
 
 
 #=================
@@ -91,7 +91,9 @@ function sq { # function to check first if I'm on zbox before execution squeue -
     fi
 }
 
-
+function rgrep {
+    grep -i -r $1 . | grep -v "utils" | grep -v "Binary" | grep -v "patch"
+    }
 
 
 
@@ -108,6 +110,8 @@ function sq { # function to check first if I'm on zbox before execution squeue -
 #=================
 
 alias ..='cd ..'
+alias ll='ls -lh'
+alias la='ls -a'
 
 #self-installed programs
 alias vim='/home/uzh/mivkov/programme/bin/vim'
@@ -139,9 +143,13 @@ alias clump=clmp
 alias mk='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/'
 alias comp=mk
 
+# go to main dir
+alias src='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/'
+
 #go to my patch dir
 alias pa='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/patches_mladen'
 
+alias scr='cd /zbox/user/mivkov/source/executables/selfmade'
 
 #----------------------
 
