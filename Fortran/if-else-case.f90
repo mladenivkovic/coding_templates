@@ -110,7 +110,8 @@ program ifelsecase
     write(*, *) ""
 
     casechar='g'
-    
+   
+    ! can be done without "somename"
     somename: select case (casechar)
         case ('a', 'b', 'c') somename
             write(*, *) "Got a, b or c"
