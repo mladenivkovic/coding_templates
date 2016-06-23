@@ -1,0 +1,22 @@
+git add
+    Add a new file for commit
+
+git commit -m "Your commit message"
+    commit all added files
+
+git push
+    push all commits to remote repo
+
+git pull
+    pull all new commits from remote repo
+
+git checkout <branchname>
+    switch to branch <branchname>
+
+git checkout "COMMIT_ID" -- somefile.txt
+    "revert" somefile.txt to version of "COMMIT_ID"
+
+git diff-tree --no-commit-id --name-only -r "COMMIT_ID"
+    show which files were included in commit 
+
+
