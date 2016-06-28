@@ -1,9 +1,10 @@
-###############
-FORTRAN NOTIZEN	
-###############
+#######################
+    FORTRAN NOTIZEN	
+#######################
 
-
+------------
 COMPILER
+------------
     
     GFORTRAN
     gfortran -o exec-file.out dateiname.f90
@@ -53,20 +54,34 @@ COMPILER
  
  
  
+------------
 VARIA		
-		
+------------
 
-- "Strings": Falls mehr als ein Zeichen, (maximale) Länge angeben!
-	character (len = 20) :: var="my String"
-- myvar=1.23_dp !Definiert myvar als 64-bit Real. Standardmässig wäre es ein 32-bit Real. 
+- "Strings":
+    Falls mehr als ein Zeichen, (maximale) Länge angeben!
+    character (len = 20) :: var="my String"
 
-- forall: allows calculations fo be carried out simultaneously in a multiprocessor environment
-	forall (i=1:n)
-		a(i,i) = a(i, i) - lambda
-	end forall
+- myvar=1.23_dp 
+    !Definiert myvar als 64-bit Real. Standardmässig wäre es ein 32-bit Real. 
+
+- forall: 
+    allows calculations fo be carried out simultaneously in a multiprocessor 
+    environment
+	  forall (i=1:n)
+	   	 a(i,i) = a(i, i) - lambda
+	  end forall
 
 
-One may use GNU Fortran as a syntax checker (or verify that GNU Fortran's frontend correctly accepts or rejects a program), by specifying -fsyntax-only on the command line.
+-   One may use GNU Fortran as a syntax checker (or verify that GNU Fortran's
+    frontend correctly accepts or rejects a program), by specifying 
+    -fsyntax-only on the command line.
 
-
+- Subroutines:
+    subroutines can access (read/write) variables specified in the main program.
+    Even if the variables aren't instatiated in the subroutine.
+    
+- preprocessing instructions:
+    must not have any whitespace before them. Must be on the
+    beginning of the line.
 

@@ -21,6 +21,10 @@ program preprocessing
 
 
 
+! preprocessing directives must always be at the beginning of the line.
+! No whitespace before them is allowed!
+
+
     implicit none
     integer, parameter :: n = 1000000
     integer :: i
