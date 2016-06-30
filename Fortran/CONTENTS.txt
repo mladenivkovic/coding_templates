@@ -182,6 +182,10 @@ THIS DIRECTORY CONTAINS:
     - format statements
 
 
+- random.f90
+    - generating random reals
+
+    
 - readfromfile.f90
     how to read in from files.
 
