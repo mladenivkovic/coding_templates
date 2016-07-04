@@ -3,7 +3,7 @@ Last update: 20.06.2016
 # THIS DIRECTORY CONTAINS: #
 
 
-### awk.sh ### 
+### awk.sh 
     using awk.
     - reading in selected parts or columns of a file.
     - printing them out formatted or unformatted
@@ -13,25 +13,25 @@ Last update: 20.06.2016
     various options on how to use if statements.
 
 
-### cmdlineargs.sh ### 
+### cmdlineargs.sh 
     how to pass command line arguments and options/flags.
     how to pass on command line args to the script as variables.
 
 
-### creating_enumerated_outputfiles.sh ### 
+### creating_enumerated_outputfiles.sh 
     how to create enumerated strings (filenames), so that the
     number always takes the same amount of digits
 
 
-### date.sh ### 
+### date.sh 
     nicely formatted date, useful for filenames.
 
 
-### for-loops.sh ### 
+### for-loops.sh 
     3 possible for-loops.
 
 
-### formattet_output.sh ### 
+### formattet_output.sh 
     formatted output:
     - strings
     - integers
@@ -39,11 +39,11 @@ Last update: 20.06.2016
     - examples of tables
 
 
-### input/* ###
+### input/* 
     input files that the scripts use.
 
 
-### my_ffmpeg ###
+### my_ffmpeg
     how to use ffmpeg oneliners. Resp. an example of it.
 
 

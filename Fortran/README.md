@@ -19,10 +19,6 @@ Last update: 04.07.2016
     - real part, imaginary part, conjugate, abs
 
 
-### CONTENTS.TXT
-    this file.
-
-
 ### functions.f90 ###
     defining a function in fortran
     defining a recursive function
@@ -69,13 +65,13 @@ Last update: 04.07.2016
     modules.f90 ###
         - a program to demonstrate how modules work.
 
-    physical_constants.f90 ###
+    physical_constants.f90 
         - module containing physical constants
 
-    precision_specification.f90 ###
+    precision_specification.f90
         - module specifying the precision of reals
    
-    simple_math_module.f90 ###
+    simple_math_module.f90 
         - module containing simple math subroutines for demonstration.
 
 ### makedir_and_file.f90 ###
@@ -83,61 +79,61 @@ Last update: 04.07.2016
 
 
 ### modules/
-    modules.f90 ###
+    modules.f90 
         - a program to demonstrate how modules work.
 
-    physical_constants.f90 ###
+    physical_constants.f90
         - module containing physical constants
 
-    precision_specification.f90 ###
+    precision_specification.f90
         - module specifying the precision of reals
    
-    simple_math_module.f90 ###
+    simple_math_module.f90
         - module containing simple math subroutines for demonstration.
 
 
 ### MPI/
-    helloworld_mpi.f90 ###
+    helloworld_mpi.f90
         - Initialise MPI; each processor says hello.
 
-    mapdomain2d-2.f90 ###
+    mapdomain2d-2.f90
         - Create a "processor map": Split a domain in squares; Then assign
         each processor its neighbours.
         Lowest rank is bottom left, rank increases to the right and upwards.
 
-    mapdomain2d.f90 ###
+    mapdomain2d.f90
         - Create a "processor map": Split a domain in squares; Then assign
         each processor its neighbours.
         Lowest rank is upper left, rank increases to the right and downwards.
 
-    mpi_sendarraysforhydrocode.f90 ###
+    mpi_sendarraysforhydrocode.f90
         Send the last two columns of an array to the right neighbour
         and the first two columns the left neighbour.
         receive first two domain columns (first two rows/columns are 
         ghost cells) from left neighbour and receive last two domain
         columns from right neighbour.
 
-    optimal_processor_distribution.f90 ###
+    optimal_processor_distribution.f90
         calculate the optimal rectangular processor distribution
         by minimising communication time.
 
-    reduce.f90 ###
+    reduce.f90
         Demonstration of MPI_REDUCE.
         Calculates pi with the MPI reduce operation.
         This is done by integrating  INTEGRAL 4 * 1 / (1 + x^2) FROM 0 TO 1 = 4 * atan(1) = pi.
         It also times the process.
 
-    sendpartofmultidimarray.f90 ###
+    sendpartofmultidimarray.f90
         sending parts of multidimensional arrays using derived MPI types.
 
-    sendreceive.f90 ###
+    sendreceive.f90
         Demonstrates MPI_SENDRCV()
 
-    title.f90 ###
+    title.f90
         A subroutine which converts an integer to a character
         of precisely len=5 and fills it with zeros if necessary.
         
-    write_mpi.f90 ###
+    write_mpi.f90
         - stdout only from 1 processor
         - writing everything in exaclty 1 file in the correct order
 
@@ -149,13 +145,13 @@ Last update: 04.07.2016
 
     big_example/
         input.nml
-        module_datastuff.f90 ###
-        module_numeric.f90 ###
-        namelist.f90 ###
+        module_datastuff.f90
+        module_numeric.f90
+        namelist.f90
 
     small_example/
         input.nml
-        smallnamelistexample.f90 ###
+        smallnamelistexample.f90
 
 
 ### notes_and_docs/
@@ -168,9 +164,9 @@ Last update: 04.07.2016
 
 
 ### NumericInquiryFunctions/
-    NumericInquiryFunctions-Integers.f90 ###
+    NumericInquiryFunctions-Integers.f90
     NumericInquiryFunctions-Integers-Output.txt
-    NumericInquiryFunctions-Reals.f90 ###
+    NumericInquiryFunctions-Reals.f90 
     NumericInquiryFunctions-Reals-Output.txt
 
 
@@ -192,7 +188,11 @@ Last update: 04.07.2016
 ### random.f90 ###
     - generating random reals
 
-    
+
+### README.md
+    this file.
+
+   
 ### readfromfile.f90 ###
     how to read in from files.
 
