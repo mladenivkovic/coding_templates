@@ -51,15 +51,15 @@ Last update: 20.06.2016
     output made by the scripts.
 
 
-### readlineforline.sh ### 
+### readlineforline.sh
     read in line for line of a file.
 
 
-### simplemath.sh ### 
+### simplemath.sh 
     how to perform simple arithmetics in a script/terminal
 
 
-### slurmjob.slm ###
+### slurmjob.slm
     example file for a slurm job.
     To be executed on a slurm system with "sbatch slurmjob.slm"
 
