@@ -1,4 +1,4 @@
-Last update: 21.06.2016
+Last update: 04.07.2016
 
 
 THIS DIRECTORY CONTAINS:
@@ -36,11 +36,18 @@ THIS DIRECTORY CONTAINS:
     Contains files that the programs use.
 
 
+- linkedlist_in_parts.f90
+    This program shows how to create a linked list that is appended to with
+    "breaks" in between: Append your "object" to whatever list
+    it's supposed to be appended, while the order you "read them in" is
+    unknown. (But you know where they should be sorted into.)
+
+
 - linkedlist_reals.f90
     reads in an unknown number of reals from a file.
 
 
-- linkedlists.f90
+- linkedlist.f90
     how to implement a singly linked list.
 
 
