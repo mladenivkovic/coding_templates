@@ -1,7 +1,7 @@
 Last update: 04.07.2016
 
 
-THIS DIRECTORY CONTAINS:
+# THIS DIRECTORY CONTAINS: #
 
 
 ### arrays.f90 ###
@@ -59,31 +59,31 @@ THIS DIRECTORY CONTAINS:
     DO, GENERAL DO, DO WHILE (for implied do, see arrays.f90)
 
 
-### make/
+### make/ ###
     How to compile a (bigger) program using a makefile.
     Contains the same files as modules/
 
-    Makefile
+### make/Makefile ###
         - the actual makefile.
 
-    modules.f90 ###
+### make/modules.f90 ###
         - a program to demonstrate how modules work.
 
-    physical_constants.f90 ###
+### make/physical_constants.f90 ###
         - module containing physical constants
 
-    precision_specification.f90 ###
+### make/precision_specification.f90 ###
         - module specifying the precision of reals
    
-    simple_math_module.f90 ###
+### make/simple_math_module.f90 ###
         - module containing simple math subroutines for demonstration.
 
-### makedir_and_file.f90 ###
+### make/makedir_and_file.f90 ###
     Create a directory and a file within that directory.
 
 
-### modules/
-    modules.f90 ###
+##  modules/ ##
+### modules.f90 ###
         - a program to demonstrate how modules work.
 
     physical_constants.f90 ###
