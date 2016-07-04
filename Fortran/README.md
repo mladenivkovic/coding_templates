@@ -63,27 +63,27 @@ Last update: 04.07.2016
     How to compile a (bigger) program using a makefile.
     Contains the same files as modules/
 
-### make/Makefile ###
+    Makefile
         - the actual makefile.
 
-### make/modules.f90 ###
+    modules.f90 ###
         - a program to demonstrate how modules work.
 
-### make/physical_constants.f90 ###
+    physical_constants.f90 ###
         - module containing physical constants
 
-### make/precision_specification.f90 ###
+    precision_specification.f90 ###
         - module specifying the precision of reals
    
-### make/simple_math_module.f90 ###
+    simple_math_module.f90 ###
         - module containing simple math subroutines for demonstration.
 
-### make/makedir_and_file.f90 ###
+### makedir_and_file.f90 ###
     Create a directory and a file within that directory.
 
 
-##  modules/ ##
-### modules.f90 ###
+### modules/
+    modules.f90 ###
         - a program to demonstrate how modules work.
 
     physical_constants.f90 ###
