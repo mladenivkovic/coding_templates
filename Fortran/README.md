@@ -31,6 +31,8 @@ Last update: 04.07.2016
 ### inputfiles/*
     Contains files that the programs use.
 
+### itrinistic_functions.f90 ###
+    Demonstrates some fortran itrinistic mathematical functions.
 
 ### linkedlist_in_parts.f90 ###
     This program shows how to create a linked list that is appended to with
