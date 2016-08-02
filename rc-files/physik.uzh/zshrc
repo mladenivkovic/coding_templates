@@ -55,6 +55,7 @@ if [[ "$HOSTNAME" == 'f1' || "$HOSTNAME" == "malin1" ]]; then
     PATH="/zbox/user/mivkov/source/executables/ramses/hop:"$PATH
     PATH="/zbox/user/mivkov/source/executables/ramses:"$PATH
     PATH="/zbox/user/mivkov/source/executables/selfmade:"$PATH
+    PATH="/zbox/user/mivkov/source/executables/dice/bin:"$PATH #dice
     #Hydro stuff
     PATH="/zbox/user/mivkov/hydro/scripts:"$PATH
     PATH="/zbox/user/mivkov/hydro/scripts/scaling:"$PATH
@@ -124,20 +125,14 @@ alias zbox='ssh -2Y -i ~/.ssh/forzbox zbox'
 alias ramses='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/'
 alias rexec='cd /zbox/user/mivkov/ramses-exec/'
 alias icfiles='cd /zbox/user/mivkov/ic_files/'
-alias go='sbatch job-clumpfindtesting.slm'
-
-#remove logfiles from a zbox run
-alias rmlog="(rm -f run*.log) 2>/dev/null; (rm -f sbatch*.log) 2>/dev/null; (rm -f slurm*.out) 2>/dev/null"
-
-#remove output_00009 dir 
-alias rm9='rm -r output_00009/'
-
-#copy ramses exec to my testing directory
-alias cpr='cp /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/ramses3d-mladen /zbox/user/mivkov/ramses-exec/clumpfinder'
+alias go='sbatch job-unbinding.slm'
 
 #go to clumpfinder dir
-alias clmp='cd /zbox/user/mivkov/ramses-exec/clumpfinder'
+alias unb='cd /zbox/user/mivkov/ramses-exec/unbinding'
+alias p='cd /zbox/user/mivkov/ramses-exec/pawel'
+alias clmp=unb
 alias clump=clmp
+alias d='cd /zbox/user/mivkov/ramses-exec/dice'
 
 #go to ramses bin dir to make
 alias mk='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/'
@@ -147,9 +142,22 @@ alias comp=mk
 alias src='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/'
 
 #go to my patch dir
-alias pa='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/patches_mladen'
+alias pa='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/patch/unbinding'
 
 alias scr='cd /zbox/user/mivkov/source/executables/selfmade'
+
+
+
+
+#remove logfiles from a zbox run
+alias rmlog="(rm -f run*.log) 2>/dev/null; (rm -f sbatch*.log) 2>/dev/null; (rm -f slurm*.out) 2>/dev/null"
+
+#remove output_00009 dir 
+alias rm9='rm -r output_00009/'
+
+#copy ramses exec to my testing directory
+alias cpr='cp /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/ramses3d-mladen /zbox/user/mivkov/ramses-exec/unbinding'
+alias cpd='cp /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/ramses3d-dice /zbox/user/mivkov/ramses-exec/dice'
 
 #----------------------
 
@@ -157,12 +165,12 @@ alias scr='cd /zbox/user/mivkov/source/executables/selfmade'
 alias hy='cd /zbox/user/mivkov/hydro'
 alias hs='cd /zbox/user/mivkov/hydro/HYDRO/F90/MPI/Src'
 alias he='cd /zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/parallel_code/'
-alias cph='cp /zbox/user/mivkov/hydro/HYDRO/F90/MPI/Src/hydro_mpi /zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/parallel_code/'
-export HEX='/zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/'
-alias goh='sbatch job-hydro.slm'
-
-alias sc='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/Src '
-alias se='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/exec ' 
+#alias cph='cp /zbox/user/mivkov/hydro/HYDRO/F90/MPI/Src/hydro_mpi /zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/parallel_code/'
+#export HEX='/zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/'
+#alias goh='sbatch job-hydro.slm'
+#
+#alias sc='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/Src '
+#alias se='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/exec ' 
 
 #==================
 #PERSONAL VARIABLES
@@ -172,6 +180,7 @@ alias se='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/exec '
 export PATCH=/home/uzh/mivkov/bachelorarbeit/workbench/ramses/patches_mladen
 export EXEC=/home/uzh/mivkov/bachelorarbeit/workbench/ramses/execution
 export SRC='/zbox/user/mivkov/source'
+export SCR='/zbox/user/mivkov/source/executables/selfmade'
 
 # prompt
 export NEWLINE=$'\n'
