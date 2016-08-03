@@ -122,7 +122,7 @@ alias ffmpeg='/home/uzh/mivkov/programme/bin/ffmpeg'
 # RAMSES STUFF
 # ------------
 alias zbox='ssh -2Y -i ~/.ssh/forzbox zbox'
-alias ramses='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/'
+alias ramses='cd /home/uzh/mivkov/bachelorarbeit/ramses/'
 alias rexec='cd /zbox/user/mivkov/ramses-exec/'
 alias icfiles='cd /zbox/user/mivkov/ic_files/'
 alias go='sbatch job-unbinding.slm'
@@ -135,14 +135,15 @@ alias clump=clmp
 alias d='cd /zbox/user/mivkov/ramses-exec/dice'
 
 #go to ramses bin dir to make
-alias mk='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/'
+alias mk='cd /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin_clean/'
+alias mkd='cd /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin_dice/'
 alias comp=mk
 
 # go to main dir
-alias src='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/'
+alias src='cd /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/'
 
 #go to my patch dir
-alias pa='cd /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/patch/unbinding'
+alias pa='cd /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/patch/unbinding'
 
 alias scr='cd /zbox/user/mivkov/source/executables/selfmade'
 
@@ -156,8 +157,8 @@ alias rmlog="(rm -f run*.log) 2>/dev/null; (rm -f sbatch*.log) 2>/dev/null; (rm 
 alias rm9='rm -r output_00009/'
 
 #copy ramses exec to my testing directory
-alias cpr='cp /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/ramses3d-mladen /zbox/user/mivkov/ramses-exec/unbinding'
-alias cpd='cp /home/uzh/mivkov/bachelorarbeit/workbench/ramses/trunk/ramses/bin/ramses3d-dice /zbox/user/mivkov/ramses-exec/dice'
+alias cpr='cp /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin/ramses3d-mladen /zbox/user/mivkov/ramses-exec/unbinding'
+alias cpd='cp /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin/ramses3d-dice /zbox/user/mivkov/ramses-exec/dice'
 
 #----------------------
 
@@ -177,8 +178,8 @@ alias he='cd /zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/parallel_code/'
 #==================
 
 
-export PATCH=/home/uzh/mivkov/bachelorarbeit/workbench/ramses/patches_mladen
-export EXEC=/home/uzh/mivkov/bachelorarbeit/workbench/ramses/execution
+export PATCH=/home/uzh/mivkov/bachelorarbeit/ramses/patches_mladen
+export EXEC=/home/uzh/mivkov/bachelorarbeit/ramses/execution
 export SRC='/zbox/user/mivkov/source'
 export SCR='/zbox/user/mivkov/source/executables/selfmade'
 
