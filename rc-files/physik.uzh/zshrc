@@ -157,8 +157,8 @@ alias rmlog="(rm -f run*.log) 2>/dev/null; (rm -f sbatch*.log) 2>/dev/null; (rm 
 alias rm9='rm -r output_00009/'
 
 #copy ramses exec to my testing directory
-alias cpr='cp /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin/ramses3d-mladen /zbox/user/mivkov/ramses-exec/unbinding'
-alias cpd='cp /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin/ramses3d-dice /zbox/user/mivkov/ramses-exec/dice'
+alias cpr='cp /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin_clean/ramses3d-mladen /zbox/user/mivkov/ramses-exec/unbinding'
+alias cpd='cp /home/uzh/mivkov/bachelorarbeit/ramses/trunk/ramses/bin_dice/ramses3d-dice /zbox/user/mivkov/ramses-exec/dice'
 
 #----------------------
 
