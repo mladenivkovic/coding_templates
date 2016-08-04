@@ -57,8 +57,7 @@ def extract_ascii(filename):
 
     
     # reshape data for imshow
-    data_map = data_map.reshape(gridsize, gridsize)
-
+    data_map = data_map.reshape(int(gridsize+0.5),int(gridsize+0.5))
     return data_map, minvalue, maxvalue, gridsize
 
 
@@ -98,8 +97,11 @@ if __name__ == "__main__":
     ax1.set_xlabel(xlabel, size=16, labelpad=2, family='serif')
     ax1.set_ylabel(ylabel, size=16, labelpad=2, family='serif')
 
+    # draw only first and last tick
     ax1.axes.get_xaxis().set_ticks([0, data_map.shape[1]-1])
     ax1.axes.get_yaxis().set_ticks([0, data_map.shape[0]-1])
+    #other tick parameters
+    ax1.tick_params(axis='both',which='major',labelsize=15)
     
  
     divider1 = make_axes_locatable(ax1)
@@ -118,8 +120,12 @@ if __name__ == "__main__":
     ax2.set_xlabel(xlabel, size=16, labelpad=2, family='serif')
     ax2.set_ylabel(ylabel, size=16, labelpad=2, family='serif')
 
+    # draw only first and last tick
     ax2.axes.get_xaxis().set_ticks([0, data_map.shape[1]-1])
     ax2.axes.get_yaxis().set_ticks([0, data_map.shape[0]-1])
+    #other tick parameters
+    ax2.tick_params(axis='both',which='major',labelsize=15)
+
 
 
     divider2 = make_axes_locatable(ax2)
