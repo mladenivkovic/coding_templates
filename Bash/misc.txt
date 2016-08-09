@@ -1,0 +1,9 @@
+Miscellanious stuff/tricks
+
+
+1) Get total lines of multiple files
+
+find /path/to/dir/ -name '*.txt' -exec wc -l {} \; | awk '{total += $1} END{print total}'
+
+2) sed remove all white space in the beginning of the line:
+sed -e "s/^[ \t]*//" file.txt

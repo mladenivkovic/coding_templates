@@ -1,0 +1,11 @@
+Notes on Linux Stuff
+
+1) System Information
+    ifconfig        Network information / network interface
+    cpuinfo         cpu info
+    lscpu           cpu architecture
+    uname           system information (-a for all, -r kernel)
+    du -h           disk usage
+    df -h           file system disk space usage
+    sensors         hardware temperature, fans
+    
