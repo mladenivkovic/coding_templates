@@ -8,4 +8,5 @@ Notes on Linux Stuff
     du -h           disk usage
     df -h           file system disk space usage
     sensors         hardware temperature, fans
+    xrandr          screen setup
     
