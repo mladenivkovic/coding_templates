@@ -28,6 +28,13 @@
 \captionsetup{font=small,labelfont=bf, format=plain, justification=centering}
 \allowdisplaybreaks % allows page breaks in align/equation environment
 
+%bibliography
+\usepackage[backend=bibtex,sorting=nyt,bibencoding=ascii]{biblatex}
+\addbibresource{references.bib}
+\usepackage{csquotes} %recommended when using babel and biblatex
+
+
+
 %--------------------------------------------
 % NEUE BEFEHLE
 %--------------------------------------------
@@ -82,6 +89,12 @@
 
 
 
+
+
+
+
+
+
 %------------------------------------------
 %:Metainformationen
 
@@ -94,13 +107,45 @@ mladen.ivkovic@uzh.ch\\
 %------------------------------------------
 
 
+
+
+
+
+
+
+
+
+
 \begin{document}
+		
+		
+%--------------------------------------------
+% Stuff that needs to be done before all else
+%--------------------------------------------
 %\pagestyle{plain}
+\nocite{*} % show all entries of bibliography, even if they are not cited.
+		
+		
+%\pagestyle{plain}
+
+
+
+
+
+%Titlepage
 
 \maketitle
 \clearpage
+
+%Table of Contents
 \tableofcontents %Auf englisch wechseln: Ändere usepackage ngeman babel in english babel
 \clearpage
+
+
+
+
+
+
 
 \section*{Anmerkung des Autoren}
 
@@ -235,6 +280,13 @@ Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsigna
 
 
 
+
+
+
+\section{Bibliographie und Zitate}
+Einstein said something important\cite{einstein} and so did Dirac \cite{dirac}.
+
+So they both said something important \cite{dirac,einstein}.
 
 
 \section{Mathematik und Symbole}
@@ -411,4 +463,22 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
 
 
 \end{appendix}
+
+
+
+
+
+%------------
+%Bibliography
+%------------
+%https://www.sharelatex.com/learn/Bibliography_management_in_LaTeX
+%\medskip % or: \bigskip to add some space
+
+
+\printbibliography
+%\printbibliography[heading=bibintoc,title={Set some title instead of "References"}]
+%if heading=bibintoc: set references in table of contents
+
+
+
 \end{document}

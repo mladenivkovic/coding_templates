@@ -4,3 +4,8 @@
 *.toc
 *.out
 *.log
+*.bbl
+*.bcf
+*.run.xml
+*blx.bib
+*.blg
