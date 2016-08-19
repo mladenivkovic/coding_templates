@@ -1,0 +1,83 @@
+%preamble
+\input{./header.tex}
+
+%------------------------------------------
+%:Metainformationen
+
+\title{Titel}
+\author{Mladen Ivkovic\\
+mladen.ivkovic@uzh.ch\\
+}
+\date{Datum}
+
+%------------------------------------------
+
+
+\begin{document}
+%\pagestyle{plain}
+
+%Titlepage
+\maketitle
+\clearpage
+\tableofcontents %Auf englisch wechseln: Ändere usepackage ngeman babel in english babel
+\clearpage
+
+%Vorwort/Anmerkung
+\input{./preface.tex}
+
+
+
+
+%Section 1
+\input{./section1.tex}
+
+
+
+
+
+
+\section{Tabellen}
+\subsection{Einfach}
+\begin{center}
+\begin{tabular}[c]{c | c | c || c| c | c || c | c || c | c | c || c| c| c}
+\multicolumn{3}{c||}{Konjunktion}	&	\multicolumn{3}{c||}{Disjunktion} & \multicolumn{2}{c||}{Negation} & \multicolumn{3}{c||}{NAND} & \multicolumn{3}{c}{NOR}\\
+\multicolumn{3}{c||}{UND}	&	\multicolumn{3}{c||}{ODER} & \multicolumn{2}{c||}{} & \multicolumn{3}{c||}{} & \multicolumn{3}{c}{}\\
+\hline
+$a$ & $b$ & $a$ $\wedge$ $b$ & $a$ & $b$ & $a$ $\vee$ $b$ & $a$ & $\bar{a}$ & $a$ & $b$ & $\overline{a \wedge b}$ & $a$ & $b$ & $\overline{a \vee b}$\\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1\\
+0 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 1 & 0\\
+1 & 0 & 0 & 1 & 0 & 1 & & & 1 & 0 & 1 & 1 & 0 & 0\\
+1 & 1 & 1 & 1 & 1 & 1 & & & 1 & 1 & 0 & 1 & 1 & 0\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+%-----------------------------
+\section{Zwei Bilder}
+
+\begin{figure}[h!]
+\centering
+  \minipage{0.3\textwidth}
+    \fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/rsflipflop.png}}%
+    \caption{RS-Flipflop}%
+    \label{fig:rsflipflop}
+  \endminipage\hspace{1cm}   
+%
+  \minipage{0.4\textwidth}
+    \fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/rsflipfloptakt.png}}%
+    \caption{getaktetes RS-Flipflop}%
+    \label{fig:rsflipfloptakt}
+  \endminipage
+\end{figure}
+
+Dabei müssen wir eine Nebenbedingung $R \wedge S = 0$ setzen - $R$ und $S$ dürfen niemals gleichzeitig $= 1$ sein. In der Realisierung, dargestellt in Abb. \ref{fig:rsflipflop}, führt dies zu oszillationen. 
+
+Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsignal mit einem UND-Gatter jeweils mit dem $R$- und $S$-Eingang zu verbinden (siehe Abb. \ref{fig:rsflipfloptakt}).
+
+
+
+\end{document}
