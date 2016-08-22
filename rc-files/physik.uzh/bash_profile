@@ -1,0 +1,4 @@
+# needed for python on zbox
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi

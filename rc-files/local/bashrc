@@ -82,8 +82,8 @@ fi
 
 # some more ls aliases
 alias ll='ls -alh'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias la='ls -A'
+alias l='ls -CF'
 
 
 
@@ -100,8 +100,9 @@ alias ll='ls -alh'
 
 #Prompt: (The thing that is before where you type in your commands)
 
-export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
-
+export NEWLINE=$'\n'
+#export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
+export PS1="\[\e[40m\]\A [\u@\h] - \W \[\e[m\] ${NEWLINE}  "
 
 
 
