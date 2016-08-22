@@ -1,0 +1,57 @@
+==================
+NOTES ON C++
+==================
+
+
+
+==================
+COMPILING
+==================
+
+FLAGS
+    -std=c++11
+        choose C++ standard (library). There are various standards to choose from.
+
+
+
+
+==================
+INPUT/OUTPUT
+==================
+New Line
+    two options: either use \n or << endl.
+    endl causes the buffer to flush, so to write
+    everything that hasn't been written yet to file.
+    \n does not.
+
+
+
+==================
+VARIABLES
+==================
+Variable names
+    The variable names are case sensitive.
+
+Variable declaration
+    Doesn't need to be in the beginning of a function.
+    You apparently can define new variables anytime.
+
+Strings
+    Strings are compound types. (As opposed to fundamental types.)
+
+
+Literal constants in other bases
+    C++ allows the use of octal numbers (base 8) and hexadecimal numbers (base 16) as literal constants. For octal literals, the digits are preceded with a 0 (zero) character. And for hexadecimal, they are preceded by the characters 0x (zero, x). For example, the following literal constants are all equivalent to each other:
+
+    75         // decimal
+    0113       // octal
+    0x4b       // hexadecimal  
+
+
+Increment and Decrement (++, --)
+    x++ : first evaluate expression, then increment x
+    ++x : first increment x, then evaluate expression
+    Example 1: x = 3; y = ++x; // x contains 4, y contains 4
+    Example 2: x = 3; y = x++; // x contains 4, y contains 3
+
+
