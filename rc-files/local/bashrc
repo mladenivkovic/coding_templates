@@ -21,6 +21,9 @@ COL_YELLOW=$ESC_SEQ"33;01m"
 COL_BLUE=$ESC_SEQ"34;01m"
 COL_MAGENTA=$ESC_SEQ"35;01m"
 COL_CYAN=$ESC_SEQ"36;01m"
+COL_CYAN_ITALIC=$ESC_SEQ"36;03m"
+COL_NORMAL_ITALIC=$ESC_SEQ"39;03m"
+COL_DARK_ITALIC=$ESC_SEQ"2;03m"
 
 
 
@@ -33,9 +36,9 @@ COL_CYAN=$ESC_SEQ"36;01m"
 #=================
 
 # Greetings
-echo -e "$COL_BLUE"" Good luck and have fun!" "$COL_RESET"
-echo " type 'showvars', 'showaliases' and 'showfuncs' to see variables," 
-echo " aliases and functions defined in the ~/.bashrc file."
+echo -e "$COL_CYAN_ITALIC""  Good luck and have fun!" "$COL_RESET"
+echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to see variables,\n  aliases and functions defined in the ~/.bashrc file." "$COL_RESET"
+
 
 
 
@@ -102,7 +105,7 @@ alias l='ls -CF'
 
 export NEWLINE=$'\n'
 #export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
-export PS1="\[\e[40m\]\A [\u@\h] - \W \[\e[m\] ${NEWLINE}  "
+export PS1="\[\e[40;34m\]\A [\u@\h] - \W \[\e[m\] ${NEWLINE}  "
 
 
 

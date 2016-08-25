@@ -2,3 +2,103 @@
 if [ -f ~/.bashrc ]; then
         . ~/.bashrc
 fi
+
+
+
+#=================
+# COLORS
+#=================
+
+    ESC_SEQ="\x1b["
+    COL_RESET=$ESC_SEQ"39;49;00m"
+    #COL_RED=$ESC_SEQ"31;05m"
+    #COL_GREEN=$ESC_SEQ"32;055555m"
+    COL_GREEN_ITALIC=$ESC_SEQ"32;03m"
+    #COL_YELLOW=$ESC_SEQ"33;05m"
+    #COL_BLUE=$ESC_SEQ"34;05m"
+    #COL_MAGENTA=$ESC_SEQ"35;05m"
+    COL_CYAN=$ESC_SEQ"36;03m"
+    COL_NORMAL_ITALIC=$ESC_SEQ"39;03m"
+
+#==================
+# GREETING MESSAGE
+#==================
+
+    echo -e "$COL_GREEN_ITALIC"" Good luck and have fun!" "$COL_RESET"
+    echo -e "$COL_NORMAL_ITALIC"" type 'showvars', 'showaliases' and 'showfuncs' to see variables," 
+    echo -e " aliases and functions defined in the ~/.bashrc file.""$COL_RESET" 
+
+
+
+#=================
+# TODO AT LOGIN
+#=================
+
+
+# --- zbox stuff
+
+    if [[ "$HOSTNAME" == 'f1' ]]; then
+        # automatically loading modules if on zbox: hostname=f1
+        #enter here modules to be loaded/removed
+        module rm gcc
+        module switch mpi mpi/intel/5.0.3.048
+        module switch intel/2013 intel/2015
+        echo -e "$COL_CYAN" "Modules configured according to ~/.bashrc file" "$COL_RESET"
+
+        # python
+        #export PATH=/home/ics/volker/Anaconda/bin:$PATH
+        VIRTUAL_ENV_DISABLE_PROMPT=1 source /zbox/opt/Enthought/Canopy_64bit/User/bin/activate 
+        #source /zbox/opt/Enthought/Canopy_64bit/User/bin/activate
+        export LIBRARY_PATH=/zbox/opt/Enthought/Canopy_64bit/User/lib:$LIBRARY_PATH
+    fi
+
+
+
+# --- adding programs to path
+
+    export PATH="/home/uzh/mivkov/programme/bin:"$PATH # vim, ffmpeg
+    export PATH="/home/uzh/mivkov/programme/include:"$PATH
+    export PATH="/home/uzh/mivkov/programme/lib:"$PATH
+    export PATH="/home/uzh/mivkov/programme/share/ffmpeg:"$PATH
+
+    # for ffmpeg to work
+    export LD_LIBRARY_PATH="/home/uzh/mivkov/programme/lib:"LD_LIBRARY_PATH
+
+
+
+
+#===================================
+# COLOR SUPPORT FOR INBUILT PROGRAMS
+#===================================
+
+    # enable color support of ls and also add handy aliases
+    if [ -x /usr/bin/dircolors ]; then
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        #alias dir='dir --color=auto'
+        #alias vdir='vdir --color=auto'
+
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
+
+
+
+
+
+#=================
+#PERSONAL ALIASES
+#=================
+
+    alias ..='cd ..'
+    alias ll='ls -lh'
+    alias la='ls -a'
+
+    alias zbox='ssh -2Y -i ~/.ssh/forzbox zbox'
+
+    #self-installed programs
+    alias vim='/home/uzh/mivkov/programme/bin/vim'
+    alias ffmpeg='/home/uzh/mivkov/programme/bin/ffmpeg'
+
+

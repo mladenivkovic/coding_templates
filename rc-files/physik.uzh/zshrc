@@ -1,8 +1,12 @@
-setopt inc_append_history
-
 # I'M NOT USING ZSH ANYMORE. THE NEXT TWO LINES SWITCH TO BASH AS
 # DEFAULT. EVERYTHING ELSE IN THE .RC FILE IS COMMENTED OUT.
 
+
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;03;02m"
+
+echo -e $COL_RED ".zshrc: switching to bash." $COL_RESET
 export SHELL=/bin/bash
 exec /bin/bash --login
 
@@ -11,6 +15,7 @@ exec /bin/bash --login
 
 
 
+#setopt inc_append_history
 #
 ##=================
 ## COLORS
