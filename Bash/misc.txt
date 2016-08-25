@@ -7,3 +7,10 @@ find /path/to/dir/ -name '*.txt' -exec wc -l {} \; | awk '{total += $1} END{prin
 
 2) sed remove all white space in the beginning of the line:
 sed -e "s/^[ \t]*//" file.txt
+
+
+3) Cowsay Fortunes
+while true; do clear; echo "\\\ COWSAYS WISDOMS ///";  fortune|cowsay; sleep 15s; done
+
+4) Open files with standard program:
+    xdg-open filename.xxx

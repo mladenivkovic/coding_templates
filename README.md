@@ -19,7 +19,7 @@ In the near future, probably Java, C and C++ will join the ranks as well as new 
 
 ### Contribution guidelines ###
 
--   No contributions from other people are planned. If you want to contribute, contact me. (Why would anyone want that.)
+-   No contributions from other people are planned. If you want to contribute, contact me. 
 
 ### Who do I talk to? ###
 

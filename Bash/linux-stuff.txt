@@ -10,3 +10,22 @@ Notes on Linux Stuff
     sensors         hardware temperature, fans
     xrandr          screen setup
     
+    
+    
+2) Ubuntu Stuff
+
+2.1) Soundprobleme
+    If you are using Ubuntu 12.04.3 LTS (Precise Pangolin) or later, 
+    try this first: 
+
+    killall pulseaudio; rm -r ~/.config/pulse/* ; rm -r ~/.pulse*; ~/.config/pulse
+    wait ten seconds, then run this: 
+
+    pulseaudio -k 
+    
+    
+2.2) Brightness
+    sudo setpci -s 00:02.0 F4.B:FF
+
+2.3) Open files with standard program:
+    xdg-open filename.xxx
