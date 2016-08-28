@@ -112,16 +112,32 @@ Sonstiger text: Bla blablabla blabla bla. Blabla bla. Blablablabal basdiga asdif
 \clearpage
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Kapitel 1}
 \subsection{Unterkapitel 1.1}
 \subsubsection{Unterunterkapitel 1.1.1}
 
+
 %
 \piccaption{Darstellung des Zahlenbereichs des Zweierkomplements mit acht Stellen\label{fig:tabelle_zweierkomplement}}
 \parpic[r]{%
-  \fbox{
-    \includegraphics[width = 5.5cm, keepaspectratio]{images/tabelle_zweierkomplement.png}
-  }
+	\fbox{
+		\includegraphics[width = 3.5cm, keepaspectratio]{images/random_image.png}
+	}
 }
 %
 Die gängigste Form der Zahlensysteme sind Stellenwertsysteme. Eine Zahl $a$ wird in Form einer Reihe von Ziffern $z_i$ mit dazugehöriger Potenz der Basis $b^i$ dargestellt. Der Wert der Zahl ergibt sich dann als Summe der Werte aller Einzelstellen: $a = \sum\limits_{i}z_ib^i$.
@@ -152,22 +168,34 @@ $a$ & $b$ & $a$ $\wedge$ $b$ & $a$ & $b$ & $a$ $\vee$ $b$ & $a$ & $\bar{a}$ & $a
 
 
 
+
+
+
+
+
+
+
+
+
+
 %-----------------------------
 \section{Zwei Bilder}
 
 \begin{figure}[h!]
-\centering
-  \minipage{0.3\textwidth}
-    \fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/rsflipflop.png}}%
-    \caption{RS-Flipflop}%
-    \label{fig:rsflipflop}
-  \endminipage\hspace{1cm}   
-%
-  \minipage{0.4\textwidth}
-    \fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/rsflipfloptakt.png}}%
-    \caption{getaktetes RS-Flipflop}%
-    \label{fig:rsflipfloptakt}
-  \endminipage
+	\centering
+	\minipage{0.3\textwidth}
+	\centering
+	\fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/random_image.png}}%
+	\caption{RS-Flipflop}%
+	\label{fig:rsflipflop}
+	\endminipage\hspace{1cm}   
+	%
+	\minipage{0.4\textwidth}
+	\centering
+	\fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/random_image_2.png}}%
+	\caption{getaktetes RS-Flipflop}%
+	\label{fig:rsflipfloptakt}
+	\endminipage
 \end{figure}
 
 Dabei müssen wir eine Nebenbedingung $R \wedge S = 0$ setzen - $R$ und $S$ dürfen niemals gleichzeitig $= 1$ sein. In der Realisierung, dargestellt in Abb. \ref{fig:rsflipflop}, führt dies zu oszillationen. 
