@@ -19,4 +19,5 @@ git checkout "COMMIT_ID" -- somefile.txt
 git diff-tree --no-commit-id --name-only -r "COMMIT_ID"
     show which files were included in commit 
 
-
+git diff HEAD^^ HEAD main.c
+    compare versions of files. Here: third to last commit with last commit.
