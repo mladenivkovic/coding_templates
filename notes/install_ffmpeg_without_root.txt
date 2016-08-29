@@ -1,5 +1,5 @@
 1) install YASM:
-    Download:
+    Download: http://yasm.tortall.net/Download.html
     ./autogen.sh --prefix=/home/uzh/mivkov/programme/
     ./configure --prefix=/home/uzh/mivkov/programme/
     make
@@ -7,7 +7,7 @@
 
 2) install x264
 
-    Download:
+    Download: http://www.videolan.org/developers/x264.html
     cd x264-blablabla
     ./configure --enable-static --enable-shared --prefix=/home/uzh/mivkov/programme
     make
