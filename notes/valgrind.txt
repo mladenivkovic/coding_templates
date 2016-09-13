@@ -1,0 +1,21 @@
+http://valgrind.org/docs/manual/manual.html
+
+
+usage: 
+valgind [options] execfile arg1 ... argn
+
+Works in sbatch files:
+
+example:
+    srun -n 16 valgrind ./ramses namelist.nml
+
+
+
+Options:
+
+    --tool=memcheck
+        Check for memory bugs. Works with MPI stuff.
+        This is the default option.
+
+    --gen-suppressions=yes
+        Suppress errors of generic libraries (e.g. pre-installed C libraries)
