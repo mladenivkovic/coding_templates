@@ -34,6 +34,22 @@
 \usepackage{csquotes} %recommended when using babel and biblatex
 
 
+% Text in Boxen
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{exampledefault}{%
+	rightline=true,innerleftmargin=10,innerrightmargin=10,
+	frametitlerule=true,frametitlerulecolor=green,
+	frametitlebackgroundcolor=yellow,
+	frametitlerulewidth=2pt}
+\mdfdefinestyle{simple}{%
+	%rightline=true,
+	innerleftmargin=10,
+	innerrightmargin=10,
+	%frametitlerule=true,
+	%frametitlerulecolor=black,
+	frametitlebackgroundcolor=lightgray,
+	frametitlerulewidth=2
+	}
 
 %--------------------------------------------
 % NEUE BEFEHLE
@@ -281,6 +297,24 @@ Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsigna
 
 
 
+
+
+
+
+
+
+\section{Text in Boxen}
+
+\begin{mdframed}[style=exampledefault,frametitle={Braucht package mdframed.}]
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta lectus nec ante convallis lacinia. Nunc lobortis eu lacus nec euismod. Mauris at dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas luctus sapien ac venenatis. Sed maximus pellentesque arcu non ultrices. Aliquam erat volutpat. Nam pharetra orci in sem consequat, a dictum metus eleifend. Morbi non odio libero. Morbi porttitor in purus quis commodo. Aliquam erat volutpat. Nunc vitae arcu tempus, aliquet elit sit amet, rutrum diam. Curabitur imperdiet elementum iaculis. Vestibulum suscipit interdum libero, id ultrices est semper vitae.
+\end{mdframed}
+
+
+\begin{mdframed}[style=simple,frametitle={Mein style.}]
+
+In sed lacus malesuada, euismod mauris sit amet, lobortis metus. Maecenas iaculis ac mauris quis semper. Donec eget eros scelerisque, pellentesque nisl non, fermentum velit. Aliquam pharetra dolor risus, at tristique urna suscipit ut. Ut sit amet placerat mi. Maecenas felis felis, pharetra in tellus eget, blandit luctus nunc. Nunc mattis tortor vel nibh sollicitudin, id pulvinar quam accumsan. Nullam id risus id ipsum sollicitudin molestie ut hendrerit augue. Sed sit amet pharetra est, at interdum enim. Phasellus eget arcu vitae mauris lacinia tristique eu at nisl. Nam elementum vel mauris non aliquet. Morbi vel felis lobortis, pulvinar urna ut, venenatis nulla. Aliquam euismod eleifend est, consequat laoreet lorem posuere et. Fusce lectus erat, dapibus rhoncus tincidunt vel, porta quis libero. 
+
+\end{mdframed}
 
 
 
