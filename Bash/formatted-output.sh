@@ -101,3 +101,15 @@ Triangle 13  red 20 \
 Oval 204449 "dark blue" 65.656 \
 Square 3145 orange .7
 
+
+
+
+echo ""
+echo ""
+echo ""
+echo ""
+echo "OTHER PRINTF POSSIBILITIES"
+echo "Save printf output into variable"
+echo "printf -v newvar #format \$oldvar"
+echo "example: i=50; printf -v j %05d \$i; echo \$j"
+i=50; printf -v j %05d $i; echo $j
