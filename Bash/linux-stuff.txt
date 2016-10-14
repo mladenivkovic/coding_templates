@@ -9,10 +9,11 @@ Notes on Linux Stuff
     df -h           file system disk space usage
     sensors         hardware temperature, fans
     xrandr          screen setup
+    fdisk -l        display partitions 
     
     
     
-2) Ubuntu Stuff
+2) Ubuntu specific Stuff
 
 2.1) Soundprobleme
     If you are using Ubuntu 12.04.3 LTS (Precise Pangolin) or later, 
@@ -29,3 +30,13 @@ Notes on Linux Stuff
 
 2.3) Open files with standard program:
     xdg-open filename.xxx
+
+
+3) mount usb
+    sudo fdisk -l                   # to find partition name
+    sudo mkdir /media/usb           # create mount point
+    sudo mount /dev/sdb1 /media/usb # mount partition
+    
+    when you're done:
+    sudo umount /media/usb          # unmount
+
