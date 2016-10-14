@@ -14,6 +14,11 @@
 %nohyperref, % Uncomment to not load the hyperref package
 %headsepline, % Uncomment to get a line under the header
 %]{scrartcl or scrreprt or scrbook} % The class file specifying the document structure
+
+%-----------------------------------------------
+% LOADING PACKAGES
+%-----------------------------------------------
+
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
@@ -34,7 +39,12 @@
 \usepackage{csquotes} %recommended when using babel and biblatex
 
 
-% Text in Boxen
+
+
+%-----------------------------------------------
+% TEXT IN BOXEN
+%-----------------------------------------------
+
 \usepackage[framemethod=TikZ]{mdframed}
 \mdfdefinestyle{exampledefault}{%
 	rightline=true,innerleftmargin=10,innerrightmargin=10,
@@ -75,6 +85,21 @@
 
 % partial diff operator
 \newcommand{\del}{\partial}
+
+
+%-----------------------------------------------
+% TITEL FORMATIEREN
+%-----------------------------------------------
+
+
+% Set fonts of document parts
+\setkomafont{title}{\rmfamily\bfseries\boldmath}
+\addtokomafont{section}{\rmfamily\bfseries\boldmath}
+\addtokomafont{subsection}{\rmfamily\bfseries\boldmath}
+\addtokomafont{subsubsection}{\rmfamily\bfseries\boldmath}
+\addtokomafont{disposition}{\rmfamily} % table of contents and stuff
+\setkomafont{descriptionlabel}{\rmfamily\bfseries\boldmath}
+
 
 %--------------------------------------------
 %--------------------------------------------
