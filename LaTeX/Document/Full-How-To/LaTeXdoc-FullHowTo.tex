@@ -38,8 +38,13 @@
 \addbibresource{references.bib}
 \usepackage{csquotes} %recommended when using babel and biblatex
 
+%glossary
+%\usepackage[toc,acronyms]{glossaries} % glossary. Set after usepackage{hyperref}
+\usepackage{glossaries} % glossary. Set after usepackage{hyperref}
+\makeglossaries
 
-
+% IMPORTANT NOTE:
+% Don't forget to recompile the glossary and the bibliography first if you want them to show up!
 
 %-----------------------------------------------
 % TEXT IN BOXEN
@@ -118,6 +123,22 @@
 %\pagestyle{headings} % Überschrift an jeder Seite
 
 %\usepackage{chngcntr} \counterwithout{figure}{section} % Ganzzahlige Bildnummerierungen, Kapitelunabhängig
+
+
+
+%-------------
+% Set paper margins
+%-------------
+
+%\usepackage{geometry}
+%\geometry{
+%	a4paper,
+%	total={170mm,257mm},
+%	left=20mm,
+%	top=20mm,
+%}
+
+
 
 
 % Set fonts of document parts
@@ -347,7 +368,10 @@ In sed lacus malesuada, euismod mauris sit amet, lobortis metus. Maecenas iaculi
 \section{Bibliographie und Zitate}
 Einstein said something important\cite{einstein} and so did Dirac \cite{dirac}.
 
+
 So they both said something important \cite{dirac,einstein}.
+
+Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 
 
 \section{Mathematik und Symbole}
@@ -616,6 +640,45 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
 %\printbibliography[heading=bibintoc,title={Set some title instead of "References"}]
 %if heading=bibintoc: set references in table of contents
 
+
+
+
+
+
+
+
+
+%------------
+%Glossary
+%------------
+
+
+\newglossaryentry{computer}
+{
+	name=computer,
+	description={is a programmable machine that receives input,
+		stores and manipulates data, and provides
+		output in a useful format}
+}
+
+
+\newglossaryentry{real number}
+{
+	name={real number},
+	description={include both rational numbers, such as $42$ and 
+		$\frac{-23}{129}$, and irrational numbers, 
+		such as $\pi$ and the square root of two; or,
+		a real number can be given by an infinite decimal
+		representation, such as $2.4871773339\ldots$ where
+		the digits continue in some way; or, the real
+		numbers may be thought of as points on an infinitely
+		long number line.},
+	symbol={\ensuremath{\mathbb{R}}}
+}
+
+
+%\glsaddall
+\printglossary[title=My Glossary, toctitle=Glossary Title in ToC ]
 
 
 \end{document}
