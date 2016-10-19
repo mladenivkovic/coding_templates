@@ -9,3 +9,9 @@
 *.run.xml
 *blx.bib
 *.blg
+*.acn
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
