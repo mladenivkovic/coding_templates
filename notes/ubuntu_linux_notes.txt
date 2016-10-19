@@ -1,0 +1,62 @@
+=====================
+Behind the curtains
+=====================
+
+
+
+
+X-Window-System
+    Sorgt für die graphische Benutzeroberfläche:
+    x-Server kümmert sich um Steuerung der angeschlossenen Eingabegeräte und
+    die Bildschirmausgabe;
+    x-Clients sind Programme, die man auf der GUI sehen kann
+
+
+
+
+
+
+============
+GLOSSAR
+============
+
+Daemon
+    Ein im Hintergrund ablaufender Dienst.
+
+Debian
+    Eine (die älteste) Linux-Distribution.
+
+Distribution
+    Summe von Softwareprodukten und mehr, die einen Rechner laufen lassen.
+    Unterscheiden sich nach Philosophie und Ausrichtung.
+
+Freie Software
+    "Offengelegte Software", der Veröffentlicher behält die intellektuellen
+    Rechte an der Software nicht. Ist nicht notwendig = kostenlose Software.
+
+GNU
+    Ein vollständig freies Betriebssystem, in Entwicklung seit 83.
+
+GNOME
+    Eine Arbeitsumgebung.
+
+GPL 
+    General Public Licence
+    Basis von Open Source. Jede GPL-Lizenzierte Software darf kopiert und
+    verändert werden, muss aber wieder unter der GPL lizenziert sein.
+
+Kernel
+    Basis und Kernkomponente eines Betriebssystems. Ist verantwortlich für 
+    grundlegende Aufgaben wie Prozess- und Speicherverwaltung sowie
+    Hardwareunterstützung.
+
+Linux
+    Ein Kernel, entwickelt von Linus Torvalds.
+
+Proprietäre Software
+    Software, deren Veröffentlicher die intellektuellen Rechte daran behält,
+    also nicht freie Software.
+
+UNIX
+    Ein Mehrbenutzer-Betriebssystem, entwickelt Anfang 70er. Ist in C
+    geschrieben. 
