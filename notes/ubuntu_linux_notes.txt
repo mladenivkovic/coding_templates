@@ -4,6 +4,9 @@ Behind the curtains
 
 
 
+Synaptic
+    Paketverwaltungsprogramm.
+    GUI-Variante von apt-get.
 
 X-Window-System
     Sorgt für die graphische Benutzeroberfläche:
@@ -60,3 +63,24 @@ Proprietäre Software
 UNIX
     Ein Mehrbenutzer-Betriebssystem, entwickelt Anfang 70er. Ist in C
     geschrieben. 
+
+
+
+
+
+==============
+Networking
+==============
+
+
+DHCP
+    Dynamic host configuration protocol
+    dynamische Zuweisung einer IP-Adresse etc an Computer in einem Netzwerk
+
+WEP
+    Wired equivalent privacy
+    überholter Verschlüsselungsalgorithmus
+
+
+WPA2
+        
