@@ -311,7 +311,7 @@ DeMorgan-Gesetz & $\overline{a\wedge b} = \bar{a} \vee \bar{b}$ (NAND)& $\overli
 
 
 %-----------------------------
-\section{Zwei Bilder}
+\section{Zwei Bilder, Spalten}
 
 \begin{figure}[h!]
 \centering
@@ -332,10 +332,33 @@ DeMorgan-Gesetz & $\overline{a\wedge b} = \bar{a} \vee \bar{b}$ (NAND)& $\overli
 
 Dabei müssen wir eine Nebenbedingung $R \wedge S = 0$ setzen - $R$ und $S$ dürfen niemals gleichzeitig $= 1$ sein. In der Realisierung, dargestellt in Abb. \ref{fig:rsflipflop}, führt dies zu oszillationen. 
 
-Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsignal mit einem UND-Gatter jeweils mit dem $R$- und $S$-Eingang zu verbinden (siehe Abb. \ref{fig:rsflipfloptakt}).
+Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsignal mit einem UND-Gatter jeweils mit dem $R$- und $S$-Eingang zu verbinden (siehe Abb. \ref{fig:rsflipfloptakt}).\\
 
 
 
+% first column
+\begin{minipage}[t]{0.5\textwidth}
+	This is the first column.\\
+	
+	This is still in the first column.
+	\begin{align}
+	a+b &= c\\
+	d+e &= e
+	\end{align}
+\end{minipage}
+%
+%No newline here!
+%
+%second column
+\begin{minipage}[t]{0.5\textwidth}
+	This is the second column.
+	
+	Blablabla.
+	\begin{align*}
+	a+b &= c\\
+	d+e &= e
+	\end{align*}
+\end{minipage}
 
 
 
@@ -555,7 +578,7 @@ In-line maths elements can be set with a different style: \(f(x) = \displaystyle
 \end{eqnarray*}
 
 
-
+Two columns: Version 1
 %two columns
 \begin{align}
 	\begin{split}
@@ -570,6 +593,29 @@ In-line maths elements can be set with a different style: \(f(x) = \displaystyle
 	\end{split}
 \end{align}
 
+Version 2:
+
+% first column
+\begin{minipage}[t]{0.4\textwidth}
+	This is the first column.\\
+	
+	This is still in the first column.
+	\begin{align}
+	a+b &= c\\
+	d+e &= e
+	\end{align}
+\end{minipage}
+%
+%No newline here!
+%
+%second column
+\begin{minipage}[t]{0.4\textwidth}
+	This is the second column.
+	\begin{align}
+	a+b &= c\\
+	d+e &= e
+	\end{align}
+\end{minipage}
 
 
 
