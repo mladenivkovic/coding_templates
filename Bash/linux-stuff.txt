@@ -39,4 +39,8 @@ Notes on Linux Stuff
     
     when you're done:
     sudo umount /media/usb          # unmount
+    
+
+4) What is where
+    /etc/fstab          File containing what/how to mount at startup
 

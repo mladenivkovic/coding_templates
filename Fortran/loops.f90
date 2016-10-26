@@ -62,6 +62,7 @@ program loops
     do 
         if (somelogical) then
             write(*, *) "Ending loop."
+            write(*, *) "Last counter:", counter
             exit
         else 
             if (counter < 5) then

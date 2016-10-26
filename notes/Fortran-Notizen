@@ -24,6 +24,10 @@ COMPILER
         
         Für OpenMP:
         -fopenmp
+        
+
+        -Wall   : warn all
+        -Wextra : exta warnings, even more than Wall
     
     INTEL
     ifort  -o exec-file.out dateiname.f90
