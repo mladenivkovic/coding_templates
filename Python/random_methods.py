@@ -64,3 +64,10 @@ print "    Shuffle:"
 print "    random.shuffle(mycolorlist)"
 random.shuffle(mycolorlist)
 print "   ",mycolorlist
+
+
+print ""
+print "    Create list of random numbers"
+mylist=[random.uniform(0.0,1) for i in range(5)]
+print "    mylist=[random.uniform(0.0,1) for i in range(5)]"
+print "    ",mylist
