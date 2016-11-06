@@ -10,6 +10,23 @@ Notes on Linux Stuff
     sensors         hardware temperature, fans
     xrandr          screen setup
     fdisk -l        display partitions 
+    blkid           IDs of partitions
+    inxi            Command line system information
+        -A          Audio card information
+        -c          availible color schemes
+        -C          Show full CPU output
+        -d          optical drive data
+        -D          full hard disk info
+        -F          Full output
+        -G          Graphic card information
+        -l          show partition labels
+        -m          memory (RAM) data
+        -M          machine data
+        -N          Network data
+        -o          unbounted partition information
+        -p          full partition information
+        -s          sensors data
+        -u          Show partition UUIDs
     
     
     
