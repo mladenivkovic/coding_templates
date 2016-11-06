@@ -1,13 +1,9 @@
 #!/usr/bin/python
 
-# This script will plot the clump(s) found by phew (output in file ../inputfiles/clumps_allinone.txt) and estimated clump sizes proportionally to the simulation dimension size = 1
-
+#Draw a circle that has radius exactly 0.5 on the axes
 
 from os import getcwd
-from sys import argv #command line arguments
-import matplotlib 
-matplotlib.use('Agg') #don't show anything unless I ask you to. So no need to get graphical all over ssh.
-import subprocess
+# from sys import argv #command line arguments
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -17,36 +13,15 @@ title='Proportional clump sizes to image/axis dimensions plot'
 workdir= str(getcwd())
 
 
-def extract_ascii_clumpfinder(filename):
+def get_data(inputfile):
     # Per default, I extract x and y coordinates.
-    # To change that, change the column numbers that awk reads in:
-    # x = $5, y = $6, z = $7
+    # x=4, y=5, z=6, mass=10
 
     print "extracting clumpfinder data"
-    # Extract x coordinates
-    awk_callmap = ['awk', ' NR > 1 { print $5 } ', getcwd()+'/'+filename]
-    p1 = subprocess.Popen(awk_callmap, stdout=subprocess.PIPE)
-    stdout_val = p1.communicate()[0]
-    p1.stdout.close()
-    xcoord = list(map(float, stdout_val.split())) #eingelesene Strings in Floats umwandeln
-    xcoord = np.array(xcoord)
-
-    # Extract y coordinates
-    awk_callmap = ['awk', ' NR > 1 { print $6 } ', getcwd()+'/'+filename]
-    p2 = subprocess.Popen(awk_callmap, stdout=subprocess.PIPE)
-    stdout_val = p2.communicate()[0]
-    p2.stdout.close()
-    ycoord = list(map(float, stdout_val.split())) #eingelesene Strings in Floats umwandeln
-    ycoord = np.array(ycoord)
-
-    # Extract mass
-    awk_callmap = ['awk', ' NR > 1 {print $11} ', getcwd()+'/'+filename]
-    p3 = subprocess.Popen(awk_callmap, stdout=subprocess.PIPE)
-    stdout_val = p3.communicate()[0]
-    p3.stdout.close()
-    mass = list(map(float, stdout_val.split())) #eingelesene Strings in Floats umwandeln
-    mass = np.array(mass) 
-    
+    data = np.loadtxt(inputfile,usecols=[4,5,10],skiprows=1)
+    xcoord=data[:,0]
+    ycoord=data[:,1]
+    mass=data[:,2]
     print "clumpfind data imported"
     return xcoord, ycoord, mass
 
@@ -54,14 +29,12 @@ def extract_ascii_clumpfinder(filename):
 
 
 def radius(mass):
-    
     #Calculating the area of the halo for the scatterplot, assuming halo has density 200. Comes from M_halo = 4/3 pi * r^3 * 200
     radius = np.zeros(len(mass))
     print "calculating clump area"
     for i in range(0, len(mass)):
         calc = (3 * mass[i] / 800.0 * np.pi) **(1./3)
         radius[i] = calc
-    #print radius
     return radius
 
 
@@ -73,53 +46,41 @@ def radius(mass):
 
 if __name__ == "__main__":
 
-    print "Creating figure"
 
-    # creating empty figure with 3 subplots
+
+    # Set point parameters : Circle with center on (1,1) and radius 0.5
+    x=[1]
+    y=[1]
+    r=[0.5]
+
+
+    plt.close('all') #safety measure
     fig = plt.figure(facecolor='white', figsize=(7,7))
-    #fig.suptitle(title, family='serif') 
-    ax1 = fig.add_subplot(111, aspect='equal', clip_on=True)
+    ax1 = fig.add_subplot(111, aspect='equal')
 
+    #Plot the data without size; Markers will be resized later
+    scat = ax1.scatter(x,y,s=0, alpha=0.5,clip_on=False)
 
-    #setting up an empty scatterplot for pixel reference
-    xedges=[0.000, 1.000]
-    yedges=[0.000, 1.000]
-    emptyscatter=ax1.scatter(xedges, yedges, s=0.0)
-    ax1.set_xlim(0.00,1.00)
-    ax1.set_ylim(0.00,1.00)   
+    #Set axes edges
+    ax1.set_xlim(0.00,2.00)
+    ax1.set_ylim(0.00,2.00)  
 
+    #Get grid
+    ax1.grid(True)
 
-    # Calculating the ratio of pixel-to-unit
-    
-    upright = ax1.transData.transform((1.0, 1.0))
-    lowleft = ax1.transData.transform((0.0,0.0))
-    x_to_pix_ratio = upright[0] - lowleft[0]
-    y_to_pix_ratio = upright[1] - lowleft[1]
-    # Take the mean value of the ratios because why not 
-    dist_to_pix_ratio = (x_to_pix_ratio + y_to_pix_ratio) / 2.0
+    # Draw figure
+    fig.canvas.draw()
 
-    print x_to_pix_ratio, y_to_pix_ratio 
-    
-    
-    #################################
-    # CLUMPFINDER DATA
-    # Extract clumpfinder data
-    fileloc='../inputfiles/clumps_allinone.txt'
-    x_clump, y_clump, mass_clump = extract_ascii_clumpfinder(fileloc)
-    
-    # Calculate radius
-    radius = radius(mass_clump)
-    # Calculate marker size
-    clumpsize = np.zeros(len(radius))
-    for i in range(0, len(radius)):
-        calc = (radius[i]*dist_to_pix_ratio)**2
-        clumpsize[i] = calc
+    # Calculate radius in pixels :
+    N=len(r)
+    rr_pix = (ax1.transData.transform(np.vstack([r, r]).T) -
+          ax1.transData.transform(np.vstack([np.zeros(N), np.zeros(N)]).T))
+    rpix, _ = rr_pix.T
         
-
-    # create the plot
-    ax1.scatter(x_clump, y_clump, s=clumpsize, alpha=0.6, lw=0)
-
-
+    
+    # Calculate and update size in points:
+    size_pt = (2*rpix/fig.dpi*72)**2
+    scat.set_sizes(size_pt)
 
     print "Figure created"
     
@@ -128,6 +89,7 @@ if __name__ == "__main__":
     fig_path = workdir+'/'+outputfilename+'.png'
     print "saving figure as"+fig_path
     plt.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=300)
+    plt.show()
     plt.close()
 
     print "done", outputfilename+".png"

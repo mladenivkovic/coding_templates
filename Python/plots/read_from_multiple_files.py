@@ -11,7 +11,6 @@
 
 
 import numpy as np
-import subprocess
 from os import getcwd, path, mkdir #get currend work dir, check if dir exists, make new dir
 from sys import argv # command line arguments
 from matplotlib import use

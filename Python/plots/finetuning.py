@@ -2,11 +2,8 @@
 # -*- coding: utf8 -*-
 # for more colormaps, see http://www.ctac.uzh.ch/dokuwiki/doku.php?id=colormaps
 
-from numpy import array, sqrt
+from numpy import array, sqrt,loadtxt
 from os import getcwd
-import subprocess
-import matplotlib 
-matplotlib.use('Agg') #don't show anything unless I ask you to. So no need to get graphical all over ssh.
 from matplotlib import pyplot
 from matplotlib.colors import LogNorm, Normalize
 from mpl_toolkits.axes_grid1 import make_axes_locatable, axes_size
@@ -27,12 +24,7 @@ def extract_ascii(filename):
     #auszulesen und allfällige Nullen in Werte != 0 zu verwandeln,
     #da die LogNorm keine Nullen handlen kann.
 
-    awk_callmap = ['awk', ' {print $3} ', getcwd()+'/'+filename]
-    p2 = subprocess.Popen(awk_callmap, stdout=subprocess.PIPE)
-    stdout_val = p2.communicate()[0]
-    p2.stdout.close()
-    data_map = list(map(float, stdout_val.split())) #eingelesene Strings in Floats umwandeln
-
+    data_map=loadtxt(filename,usecols=[2])
     #sortierte data_map erstellen um kleinsten Wert != 0 zu erhalten
     sorted_map= sorted(data_map)
     data_map = array(data_map)
