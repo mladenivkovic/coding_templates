@@ -23,7 +23,7 @@
 \usetikzlibrary{decorations.shapes}
 \usetikzlibrary{decorations.text}
 
-
+\usepackage{pgfplots}
 %%FIGUR
 %\begin{figure}[htbp]
 %\centering
@@ -340,6 +340,94 @@ node[above] {$\frac{\partial}{\partial x}$} (B);
 
 \vfill
 \newpage
+\section{Plots}
+Braucht \verb|\usepackage{pgfplots}|
+
+
+\fbox{
+\begin{tikzpicture}[xscale=1,yscale=0.8,samples=400]
+	\begin{axis}[
+	axis x line=bottom,axis y line=left,
+	xlabel = $x$,
+	ylabel = {$y$},
+	legend pos=north west,
+	]
+	
+	%red line
+	\addplot [
+	domain=-10:10, 
+	samples=400, 
+	color=red,
+	]
+	{-2*x^2 +3*x + 100};
+		\addlegendentry{$f(x)$}
+	
+	%Blue line
+	\addplot [
+	domain=-10:10, 
+	samples=400, 
+	color=blue,
+	]
+	{100*exp( (-x^2)/10)*sin(270*x)};
+		\addlegendentry{$g(x)$}
+	\end{axis};
+\end{tikzpicture}
+}
+
+\fbox{
+\begin{tikzpicture}[xscale=1,yscale=0.8,samples=400]
+	\begin{axis}[
+	ticks=none,
+	ymin=-1,
+	ymax=5,
+	xmin=-3,
+	xmax=5.2,
+	axis x line=bottom,axis y line=left,
+	xlabel = {$x$},
+	ylabel = {$y$},
+	legend pos=north east,			% legend location
+	every axis x label/.style={		% set nice axis labels
+		at={(ticklabel* cs:1.05)},
+		anchor=west,
+	},
+	every axis y label/.style={
+		at={(ticklabel* cs:1.05)},
+		anchor=south,
+	},
+	]
+	
+	%red line
+	\addplot [
+	domain=1:5, 
+	samples=400, 
+	color=red,
+	]
+	{1/x*cos(360*x)};
+	\addlegendentry{$1/x*cos(360*x)$}
+
+	%blue line
+	\addplot [
+	domain=-4:1, 
+	samples=400, 
+	color=blue,
+	]
+	{exp(-(x-1)};
+	\addlegendentry{$exp(-(x-1))$}
+	\end{axis};
+\end{tikzpicture}
+}
+
+
+
+
+
+
+
+
+
+
+\vfill
+\newpage
 \section{Meine Zeichnungen}
 \subsection{Praktikumsbericht Kern- und Teilchenphysik: Positronenvernichtung}
 \subsubsection{1}
@@ -569,7 +657,7 @@ node[above] {$\frac{\partial}{\partial x}$} (B);
 	   	%
 	   	%Pfeil EKDiskr-Koinzidenzeinheit
 	   	\draw[->, line width=1.5pt] (-3,-5.4) -- (-3,-6.6) -- (-1.8, -6.6);
-	   	%
+	   
 	   	% CDF
 	   	\node at (-7.5,0) [draw,thick, text width = 3cm, minimum height=1cm, fill=green!40, align=center] {Constant Fraction Diskriminator};
 	   	%
@@ -700,5 +788,15 @@ node[above] {$\frac{\partial}{\partial x}$} (B);
 \node[text width = 4.5cm, align=center] at (1.5, -1) {Processor distribution for a 'square' execution};
 \node[text width = 5cm, align=center] at (7, -1) {Processor distribution for a 'linear' execution};
 \end{tikzpicture}
+
+
+
+
+
+\subsection{Bachelor thesis}
+
+
+
+
 
 \end{document}

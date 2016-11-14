@@ -43,6 +43,16 @@
 \usepackage{glossaries} % glossary. Set after usepackage{hyperref}
 \makeglossaries
 
+%Pseudocode
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+
+
 % IMPORTANT NOTE:
 % Don't forget to recompile the glossary and the bibliography first if you want them to show up!
 
@@ -626,6 +636,62 @@ Version 2:
 
 
 
+
+
+
+
+
+
+
+%########################################################################
+%########################################################################
+%########################################################################
+\clearpage
+
+\section{Pseudocode}
+
+%\usepackage{algorithm}
+%\usepackage[noend]{algpseudocode}
+%\makeatletter
+%\def\BState{\State\hskip-\ALG@thistlm}
+%\makeatother
+
+%https://en.wikibooks.org/wiki/LaTeX/Algorithms
+
+\begin{algorithm}
+	\caption{My algorithm}\label{euclid}
+	\begin{algorithmic}[1]
+		\Procedure{Unbinding Routine}{}
+		\State $\textit{stringlen} \gets \text{length of }\textit{string}$
+		\State $i \gets \textit{patlen}$
+		
+		
+		\BState \emph{top}:
+		
+		\If {$i > \textit{stringlen}$} \Return false
+		\EndIf
+		\State $j \gets \textit{patlen}$
+		
+		
+		\BState \emph{other loop}:
+		
+		\While {$i < j$}:
+		\State $i \gets i+1$
+		\Comment This is a comment.
+		\ForAll{elements $ \in $ list}
+		\State Do something.
+		\EndFor
+		\EndWhile
+		
+		
+		\BState \emph{functions:}
+		\Function{myfunc}{x,y}
+		\State x = y-2
+		\Return x
+		\EndFunction
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
 
 
 

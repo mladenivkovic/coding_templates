@@ -3,10 +3,11 @@ Behind the curtains
 =====================
 
 
-
+ 
 Synaptic
     Paketverwaltungsprogramm.
     GUI-Variante von apt-get.
+    APT: advanced packaging tool
 
 X-Window-System
     Sorgt für die graphische Benutzeroberfläche:
@@ -14,7 +15,8 @@ X-Window-System
     die Bildschirmausgabe;
     x-Clients sind Programme, die man auf der GUI sehen kann
 
-
+Unity
+    Desktop environment.
 
 
 
@@ -81,6 +83,6 @@ WEP
     Wired equivalent privacy
     überholter Verschlüsselungsalgorithmus
 
-
 WPA2
-        
+    Security protocol and security configuration program to secure wireless
+    computer networks.

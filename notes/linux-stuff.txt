@@ -1,6 +1,9 @@
 Notes on Linux Stuff
 
-1) System Information
+1) COMMANDS
+
+1.1) System Information
+
     ifconfig        Network information / network interface
     cpuinfo         cpu info
     lscpu           cpu architecture
@@ -27,12 +30,25 @@ Notes on Linux Stuff
         -p          full partition information
         -s          sensors data
         -u          Show partition UUIDs
-    
-    
-    
-2) Ubuntu specific Stuff
 
-2.1) Soundprobleme
+1.2) mount usb
+    sudo fdisk -l                   # to find partition name
+    sudo mkdir /media/usb           # create mount point
+    sudo mount /dev/sdb1 /media/usb # mount partition
+    
+    when you're done:
+    sudo umount /media/usb          # unmount
+    
+
+2) What is where
+    /etc/fstab          File containing what/how to mount at startup
+   
+    /etc/apt/sources.list File containing all sources for packages
+    
+    
+3) Ubuntu specific Stuff
+
+3.1) Soundprobleme
     If you are using Ubuntu 12.04.3 LTS (Precise Pangolin) or later, 
     try this first: 
 
@@ -42,22 +58,11 @@ Notes on Linux Stuff
     pulseaudio -k 
     
     
-2.2) Brightness
+3.2) Brightness
     sudo setpci -s 00:02.0 F4.B:FF
 
-2.3) Open files with standard program:
+3.3) Open files with standard program:
     xdg-open filename.xxx
 
 
-3) mount usb
-    sudo fdisk -l                   # to find partition name
-    sudo mkdir /media/usb           # create mount point
-    sudo mount /dev/sdb1 /media/usb # mount partition
-    
-    when you're done:
-    sudo umount /media/usb          # unmount
-    
-
-4) What is where
-    /etc/fstab          File containing what/how to mount at startup
 
