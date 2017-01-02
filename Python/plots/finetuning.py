@@ -94,6 +94,8 @@ if __name__ == "__main__":
     ax1.axes.get_yaxis().set_ticks([0, data_map.shape[0]-1])
     #other tick parameters
     ax1.tick_params(axis='both',which='major',labelsize=15)
+    ax1.set_xticklabels([0, "", "","","",0.1])
+    ax1.set_yticklabels([0, "", "","","",0.1])
     
  
     divider1 = make_axes_locatable(ax1)
