@@ -30,7 +30,7 @@ source("file.R")      run this file
 READING AND WRITING 
 -------------------
 
-source("file.R")      run this file
+source("file.R")      load this file
 sink("record.lis")    store output from console to file
 sink()                write output to console again
 
