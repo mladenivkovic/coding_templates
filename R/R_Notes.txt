@@ -1,0 +1,42 @@
+=================
+   NOTES ON R
+=================
+
+
+GET HELP
+--------
+
+help.start()          Start the HTML help interface.
+help(somecmd)         get help
+?somecmd              get help
+
+
+
+OVERVIEW
+--------
+
+ls()                  show what objects (variables) are already taken
+rm(var_name)          remove an object
+rm(var1,var2)         remove multiple objects
+
+
+RUNNING SCRIPTS FROM FILES
+--------------------------
+
+source("file.R")      run this file
+
+
+
+READING AND WRITING 
+-------------------
+
+source("file.R")      run this file
+sink("record.lis")    store output from console to file
+sink()                write output to console again
+
+
+
+MISCELANNEOUS NOTES
+-------------------
+
+R is case sensitive.
