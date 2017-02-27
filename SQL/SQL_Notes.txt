@@ -1,0 +1,9 @@
+=============
+SQL NOTES
+=============
+
+
+
+SELECT *something*                  evalate expression *something*
+SELECT 'some string'                evaluate/print string
+SELECT 'string' AS "column name"    name the column
