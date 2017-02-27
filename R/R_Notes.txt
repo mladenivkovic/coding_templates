@@ -40,3 +40,6 @@ MISCELANNEOUS NOTES
 -------------------
 
 R is case sensitive.
+
+Vectors must have their values all of the same mode. Thus any given vector must 
+be unambiguously either logical, numeric, complex, character or raw.

@@ -20,7 +20,7 @@ print.noquote(' ' )
 
 
 
-#Assignment
+print("Assigning Vectors")
 
 x <- c(11.1, 22.2, 33.3, 44.4)  #assign vector to x
 c(55.5, 66.6, 77.7, 88.8) -> y
@@ -53,11 +53,37 @@ print.noquote('')
 
 
 
+###########################################
+print("Handling vectors")
 
+print("x")
+x<-1:10
+x
+x[(1:5)]    # from element 1 to 5
+x[-(3:7)]   # all but elements 3 to 7
+x[8]<- -1
+x
+z<-c(1:3, NA,NaN) # fourth element saved as not assigned, fifth is not a number
+z
+is.na(z)      # logical array; true if element of Z is NA or NaN
+is.nan(z)     # logical array; true if element of Z is NaN
 
+print.noquote('')
+print.noquote('')
+print.noquote('')
 
 ###########################################
 print("Vector arithmetic")
+
+x <- c(11.1, 22.2, 33.3, 44.4)
+y <- c(55.5, 66.6, 77.7, 88.8) 
+
+print("x")
+x
+print("y")
+y
+
+
 
 print.noquote('')
 
@@ -114,14 +140,14 @@ print.noquote('')
 print("sum(v)")
 sum(v)
 
-print.noquote('')
-print.noquote('')
-print.noquote('')
-print.noquote('')
-print.noquote('')
-print.noquote('')
-print.noquote('')
-print.noquote('')
+#print.noquote('')
+#print.noquote('')
+#print.noquote('')
+#print.noquote('')
+#print.noquote('')
+#print.noquote('')
+#print.noquote('')
+#print.noquote('')
 
 
 print.noquote('')
@@ -136,3 +162,36 @@ sqrt(-17)
 print.noquote('')
 print("sqrt(-17+0i)")
 sqrt(-17+0i)
+
+
+
+print.noquote('')
+print.noquote('')
+print.noquote('')
+
+
+
+######################################
+
+print("Logicals")
+
+a <- 2
+b <- 3
+
+a > b
+a < b
+a == b
+a != b
+a >= b
+a <= b
+
+print.noquote('')
+
+t <- a < b
+f <- a > b
+
+t & f   # AND
+t | f   # OR
+!t      # NOT
+!f      # NOT
+
