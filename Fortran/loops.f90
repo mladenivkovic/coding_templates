@@ -91,8 +91,19 @@ program loops
     end do
 
 
+    write(*,*)
+    write(*,*)
+    write(*,*)  "do while does not run even once if "
+    write(*,*)  "the condition is not met at the first time:"
 
+    counter=10
+    do while(counter<0)
+        write(*,*) "counter is now:", counter
+        counter = counter + 1
+    end do
 
+    write(*,*) "Counter is after loop:", counter
+    write(*,*) "Counter was before loop:   10"
 
 
 
