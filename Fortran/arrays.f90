@@ -1,5 +1,6 @@
 program array_quickie
 ! A quick template to create and print arrays and allocatable arrays.
+! IMPORTANT!!!!!!!!
 ! Execute with a.out < ./inputfiles/arrayinput.txt
 
 
@@ -255,6 +256,9 @@ program array_quickie
     print*, ' '
 
     write(*, '(A, I3)') "  Length of an array: size(OneDimArray) = ", size(OneDimArray)
+    print*, ' '
+
+    write(*, '(A, I3)') "  Maximal value of an array: maxval(OneDimArray) = ", maxval(OneDimArray)
     print*, ' '
 
 
