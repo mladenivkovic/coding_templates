@@ -1,5 +1,7 @@
+#==================================================================
 # I'M NOT USING ZSH ANYMORE. THE NEXT TWO LINES SWITCH TO BASH AS
 # DEFAULT. EVERYTHING ELSE IN THE .RC FILE IS COMMENTED OUT.
+#==================================================================
 
 
 ESC_SEQ="\x1b["
@@ -59,7 +61,8 @@ exec /bin/bash --login
 #    module switch mpi mpi/intel/5.0.3.048
 #    module switch intel/2013 intel/2015
 #    echo -e "$COL_GREEN" "Modules configured according to ~/.zshrc file" "$COL_RESET"
-#    export PATH=/home/ics/volker/Anaconda/bin:$PATH
+#export PATH=/home/ics/volker/Anaconda/bin:$PATH
+#alias python=/home/ics/volker/Anaconda/bin/python
 #fi
 #
 #export PATH="/home/uzh/mivkov/programme/bin:"$PATH # vim, ffmpeg

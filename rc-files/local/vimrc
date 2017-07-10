@@ -82,6 +82,7 @@ let g:indentLine_char = '|'
 
 
 "==========================================================
+"END OF PLUGINS
 "==========================================================
 
 
@@ -93,14 +94,29 @@ let g:indentLine_char = '|'
 "=================
 
 " Set solarised color scheme
-syntax on
-set t_Co=256 
-set background=dark
+syntax enable
+set t_Co=16
+"set background=dark
+set background=light
 let g:solarized_termcolors=16
+let g:solarized_termtrans=1
 colorscheme solarized
 
 " Set highlight colors for brackets/braces/parenthesis matching
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -127,11 +143,28 @@ noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"====================
 " STATUS LINE
+"====================
 
 " First define new highlight groups
 "hi User1 ctermbg=223 ctermfg=23
-hi User1 ctermbg=blue
+"hi User1 ctermbg=blue
+hi User1 ctermbg=none
 " it uses the solarised colors if =none 
 "guibg=green guifg=white for GUI, which I don't use...
 
@@ -139,7 +172,7 @@ hi User1 ctermbg=blue
 
 set laststatus=2                "status line permanently on
 
-set statusline=%*              "add personal highlighting
+set statusline=%*               "add personal highlighting
                                 "specified in hi User1 ctermbg...
 "set statusline+=%<\            " cut at start
 "set statusline+=%t              "tail of the filename
@@ -148,12 +181,22 @@ set statusline=%*              "add personal highlighting
 "set statusline+=%h             "help file flag
 set statusline+=%m              "modified flag
 set statusline+=%r              "read only flag
-set statusline+=%-40f\                    " path
+set statusline+=%F                    " path
+let emptyspace='    '
+set statusline+=%{emptyspace}
+set statusline+=@%{hostname()}
 "set statusline+=%y             "filetype
 set statusline+=%=              "left/right separator
 set statusline+=Col\ %c,\       "cursor column
 set statusline+=Lin\ %l/%L  "cursor line/total lines
 set statusline+=\ %P        "percent through file 
+
+
+
+
+
+
+
 
 
 
@@ -175,6 +218,13 @@ set incsearch
 
 " Highlight things that we find with the search
 set hlsearch
+
+
+
+
+
+
+
 
 
 
@@ -211,6 +261,23 @@ set backspace=indent,eol,start
 
 
 
+" tab completion 
+set wildmode=longest,list ",full
+set wildmenu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "=================
 " SYNTAX AND TABS
 "=================
@@ -241,14 +308,6 @@ let fortran_more_precise=1
 let fortran_do_enddo=1
 "=================
 "=================
-
-
-
-"=================
-"=================
-
-
-
 
 
 

@@ -4,7 +4,7 @@
 # there is more in the ~/.profile file.
 
 
-export TERM=xterm
+export TERM=xterm-256color
 
 
 #=================
@@ -89,7 +89,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 
-
+alias e='exit'
 
 
 
@@ -105,7 +105,14 @@ alias l='ls -CF'
 
 export NEWLINE=$'\n'
 #export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
-export PS1="\[\e[40;34m\]\A [\u@\h] - \W \[\e[m\] ${NEWLINE}  "
+
+#FOR SOLARIZED DARK
+#PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
+#export PS1="$PS1"'  ' # space arount newline did something weird with colors.
+
+#FOR SOLARIZED LIGHT
+PS1="\[\e[34;47m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
+export PS1="$PS1"'  ' # space arount newline did something weird with colors.
 
 
 
@@ -128,13 +135,16 @@ PATH="/home/mivkov/UZH/High_Performance_Computing/hydro/Py:"$PATH
 #SSH
 alias ela='ssh -2Y stud01@ela.cscs.ch'
 alias dora='ssh -2Yt stud01@ela.cscs.ch ssh -2Y dora'
-alias linux.physik='ssh mivkov@linux.physik.uzh.ch'
+alias linux.physik='ssh -2Y mivkov@linux.physik.uzh.ch'
 alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
 alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y zbox'
+alias ds='ssh -2Yt mivkov@linux.physik.uzh.ch ssh -i .ssh/data_science esc403.clusters.s3it.uzh.ch'
+alias f2='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y f2'
 
 
 #directory shortcuts
 alias ..='cd ..'
+alias ~='cd ~'
 alias pj='cd ~/Coding/projekte' # go to projects
 alias templ='cd ~/Coding/coding_templates' #go to templates
 alias t=templ
@@ -143,8 +153,8 @@ alias pt='cd ~/Coding/coding_templates/Python' # go to python templates
 alias ppt='cd ~/Coding/coding_templates/Python/plots' # go to python plot templates
 alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
 alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
-
-
+alias f='cd ~/UZH/Formelsammlung'
+alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
 
 
 
@@ -209,6 +219,27 @@ alias disk=space
 
 
 
+#=====================
+# PYTHON
+#=====================
+
+export PYTHONPATH="/home/mivkov/Coding/projekte/Python/modules/physics:"${PYTHONPATH}
+export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
+##
+
+
+
+#=====================
+# Other RC files
+#=====================
+
+#include ramses shortcuts
+if [ -f ~/.bash_ramses ]; then
+    . ~/.bash_ramses
+fi
+
+
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -234,4 +265,7 @@ alias disk=space
 #  fi
 #fi
 
+
+#For modules
+#. /etc/profile.d/modules.sh
 

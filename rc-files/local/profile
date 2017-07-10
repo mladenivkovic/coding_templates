@@ -22,5 +22,8 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 
+
+
+
 # set environment vars for Intel Fortran Compiler
-source /opt/intel/bin/compilervars.sh intel64
+alias intel="source /opt/intel/compilers_and_libraries_2016/linux/bin/compilervars.sh intel64"

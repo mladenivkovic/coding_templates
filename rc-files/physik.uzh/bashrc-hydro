@@ -1,0 +1,13 @@
+# This is a .bashrc file that contains only stuff for the hydro code (hpc).
+# It is called in the .bashrc file.
+
+    alias hy='cd /zbox/user/mivkov/hydro'
+    alias hs='cd /zbox/user/mivkov/hydro/HYDRO/F90/MPI/Src'
+    alias he='cd /zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/parallel_code/'
+    alias cph='cp /zbox/user/mivkov/hydro/HYDRO/F90/MPI/Src/hydro_mpi /zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/parallel_code/'
+    export HEX='/zbox/user/mivkov/hydro/HYDRO/F90/MPI/exec/'
+    alias goh='sbatch job-hydro.slm'
+    
+    alias sc='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/Src '
+    alias se='cd /zbox/user/mivkov/hydro/HYDRO/F90/Scalingtests/exec ' 
+
