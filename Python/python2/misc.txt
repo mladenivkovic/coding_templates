@@ -1,0 +1,12 @@
+Miscellanious Stuff/Tricks
+
+1) Reading in data from multiple files, while some files may contain no lines:
+
+        temp_data_int=np.loadtxt(inputfile, dtype='int', skiprows=1, usecols=[0,2])
+
+        if(temp_data_int.shape[0]>0):
+            if 'data_int' in locals():
+                data_int= np.vstack((data_int, temp_data_int))
+            else:
+                data_int = temp_data_int
+

@@ -1,0 +1,2 @@
+#      nx      ny   nproc nproc_x nproc_y
+      200     200       8       2       4

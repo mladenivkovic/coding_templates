@@ -1,2 +1,3 @@
 *.pyc
 *.png
+python3/__pycache__/

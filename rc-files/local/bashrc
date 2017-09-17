@@ -168,7 +168,15 @@ PATH="/home/mivkov/Skripte/execs_included_in_path:"$PATH
 # Add intel (fortran) compiler to path var
 PATH="/opt/intel/bin:"$PATH
 # add HPC python scripts
-PATH="/home/mivkov/UZH/High_Performance_Computing/hydro/Py:"$PATH
+#PATH="/home/mivkov/UZH/High_Performance_Computing/hydro/Py:"$PATH
+
+
+
+#disable vim C-s freezeout (solve with C-q)
+stty -ixon
+
+
+
 
 
 
@@ -194,18 +202,18 @@ alias pj='cd ~/Coding/projekte' # go to projects
 alias templ='cd ~/Coding/coding_templates' #go to templates
 alias t=templ
 alias ft='cd ~/Coding/coding_templates/Fortran' # go to fortran templates
-alias pt='cd ~/Coding/coding_templates/Python' # go to python templates
-alias ppt='cd ~/Coding/coding_templates/Python/plots' # go to python plot templates
+alias pt='cd ~/Coding/coding_templates/Python/python3' # go to python templates
+alias ppt='cd ~/Coding/coding_templates/Python/python3/plots' # go to python plot templates
 alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
 alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
 alias f='cd ~/UZH/Formelsammlung'
-alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
+#alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
 
 
 
-
+#Others
 alias e='exit'
-
+alias python=python3
 
 
 
