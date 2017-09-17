@@ -41,9 +41,9 @@ Notes on Linux Stuff
     
 
 2) What is where
-    /etc/fstab          File containing what/how to mount at startup
+    /etc/fstab              File containing what/how to mount at startup
    
-    /etc/apt/sources.list File containing all sources for packages
+    /etc/apt/sources.list   File containing all sources for packages
     
     
 3) Ubuntu specific Stuff

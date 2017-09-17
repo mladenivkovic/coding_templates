@@ -51,6 +51,8 @@ v:w Test	Schreibe die Auswahl in Datei Test
 m<letter>   erstellt Markierung an dieser Stelle
 '<letter>   gehe zur Markierung
 ~           Gross- zu Kleinbuchstaben umwandeln und umgekehrt
+ctrl+s      "Freeze out"
+ctrl+q      Kill "Freeze out"
 
 SUCHEN
 /wort		Sucht Wort

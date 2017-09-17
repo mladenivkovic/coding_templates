@@ -1,0 +1,23 @@
+This is some useless file to be used with the sed.sh script.
+It contains no real information.
+
+
+
+This is a line that contains the keyword print, 
+but doesn't start with it.
+
+print "a[1]", a[1]
+print "a[:,1]", a[:,1]
+print "a[-1]", a[-1]
+print "a[:,-1]", a[:,-1]
+
+
+print ""
+print ""
+print "Initiating Arrays"
+print ""
+print "np.zeros((2,3))"
+print np.zeros((2,3))
+
+
+
