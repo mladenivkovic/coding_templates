@@ -19,4 +19,8 @@ NOTES
 
 Variable names are case sensitive.
 
+Declarations don't need to be at the beginning of a function, they can be
+everywhere in the code.
 
+char assignment:
+    needs apostrophe ',quote marks " don't work

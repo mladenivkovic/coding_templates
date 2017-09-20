@@ -1,5 +1,5 @@
 /* 
- * Write some comments in here.
+ * A program to show the value limits of different types.
  */
 
 
