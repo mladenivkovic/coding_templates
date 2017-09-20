@@ -73,8 +73,6 @@ main(void)
 
 
 
-
-
     printf("\n");
     printf(" -------------------\n");
     printf(" Floats and Doubles\n");
@@ -84,6 +82,25 @@ main(void)
     printf(" maximum value for a double %*.4le\n", 40, DBL_MAX); 
     printf(" maximum value for a long double %*.4Le\n", 35, LDBL_MAX); 
     printf(" (Most negative values of float types are just the negative value of\n the maximum value.)\n");
+
+
+
+
+
+    printf("\n");
+    printf(" -------------------\n");
+    printf(" Sizes \n");
+    printf(" -------------------\n");
+
+    printf(" size of char       : %lu\n", sizeof(char));
+    printf(" size of signed char: %lu\n", sizeof(signed char));
+    printf(" size of short      : %lu\n", sizeof(short));
+    printf(" size of int        : %lu\n", sizeof(int));
+    printf(" size of long       : %lu\n", sizeof(long));
+    printf(" size of long long  : %lu\n", sizeof(long long));
+    printf(" size of float      : %lu\n", sizeof(float));
+    printf(" size of double     : %lu\n", sizeof(double));
+    printf(" size of long double: %lu\n", sizeof(long double));
 
 
     return(0);
