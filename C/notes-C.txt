@@ -1,0 +1,22 @@
+
+LIBRARIES
+===========
+
+
+#include <stdio.h>      /* input, output    */
+#include <math.h>       /* math library     */
+
+
+
+#include <limits.h>     /* limits of data types */
+
+
+NOTES
+===========
+
+#define NAME value 
+    Preprocessing directive: Replaces all instances of NAME with value.
+
+Variable names are case sensitive.
+
+
