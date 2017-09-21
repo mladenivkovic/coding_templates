@@ -292,10 +292,21 @@ set grepprg=grep\ -nH\ $*
 " Who doesn't like autoindent?
 set autoindent
 
-" tab configs
+" default tab configs
 set tabstop=2
 set expandtab
 set shiftwidth=4
+
+" Filetype specific indents:
+" To see available filetypes: :setfiletype ctrl+D
+" tabs for c, fortran, bash files, 2 spaces
+autocmd Filetype c, cpp setlocal ts=2 sw=2 expandtab
+autocmd Filetype fortran setlocal ts=2 sw=2 expandtab
+
+" for python files, 4 spaces
+autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
+
+
 
 " tab and backspace are smart
 set smarttab                  
