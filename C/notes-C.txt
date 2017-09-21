@@ -24,3 +24,9 @@ everywhere in the code.
 
 char assignment:
     needs apostrophe ',quote marks " don't work
+
+booleans:
+    There are no custom built-in boolean types. Use int instead. (There is
+    however a <stdbool.h> in C99...)
+    This works: int i = 1; then !i = 0; !(!i) = 1
+    REMEMBER: true = 1; false = 0
