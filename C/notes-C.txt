@@ -29,4 +29,17 @@ booleans:
     There are no custom built-in boolean types. Use int instead. (There is
     however a <stdbool.h> in C99...)
     This works: int i = 1; then !i = 0; !(!i) = 1
-    REMEMBER: true = 1; false = 0
+    REMEMBER: true = 1 (!= 0); false = 0 
+
+scope of names:
+    imagine following scenario:
+        int one(blabla){...};
+        int two(int one, ...){...};
+        int main(void){...};
+
+        then main can access one and two, one can access two, but two can't
+        access one because "one" is also used as a formal parameter name in the
+        function two.
+
+arrays
+    arrays are not passed as a copy, but as pointers!
