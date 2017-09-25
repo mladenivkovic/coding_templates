@@ -1,11 +1,14 @@
 /* 
- * Write some comments in here.
+ * Pointy stuff.
  */
 
 
 
 #include <stdio.h>      /* input, output    */
+#include <string.h>
 
+
+void select_sort_str(char *list[], int n);
 
 
 int
@@ -43,6 +46,87 @@ main(void)
   printf("Pointer p         float n        \n");
   printf("%7.3f           %7.3f       \n", *p, n);
 
+
+
+
+
+
+  // arrays of pointers
+  char original[5][10] = { "alpha", "whiskey", "tango", "foxtrott", "bravo"};
+  char *alpha_sort[5];
+
+  for (int i = 0; i<5; i++)
+    alpha_sort[i] = original[i]; //copies address only!!!!
+
+  printf("\n BEFORE \n");
+  for (int i = 0; i<5; i++)
+    printf("%s\n",alpha_sort[i]);
+
+
+  //sort it alphabetically
+  select_sort_str( alpha_sort, 5);
+
+
+  printf("\n AFTER \n");
+  for (int i = 0; i<5; i++)
+    printf("%s\n",alpha_sort[i]);
+
+  for (int i = 0; i<5; i++)
+    printf("%s\n",original[i]);
+
   return(0);
 }
+
+
+
+
+
+void select_sort_str(char *list[], int n){
+  
+  // Sort the elements of *list[] alphabetically.
+  int i;
+
+  // declare function you need in for loop
+  void find_next_str(char *list[], int imin, int imax);
+
+  for (i = 0; i < n; i++){
+    find_next_str(list, i, n);
+  }
+  
+}
+
+
+void find_next_str(char *list[], int imin, int imax){
+    // finds the string that comes next in alphabetical order between
+    // the indices imin, imax
+    // Used in select_sort_str: The lowest is sorted out, imin raised.
+
+
+    int ismallest = imin;   // initialize smallest value
+    char *temp;
+
+    /*printf("Started with: %s, imin %d\n", list[ismallest], imin);*/
+
+    for (int i = imin; i<imax; i++){
+      // loop through remainder of array, find smallest int.
+      if (strcmp(list[i],list[ismallest]) < 0) // compare which one comes earlier.
+                                               // from string.h lib
+        ismallest = i;
+    }
+
+    /*printf("Ended with: %s\n", list[ismallest]);*/
+
+
+
+    if (ismallest > imin){
+      temp = list[ismallest];         // store smallest value
+      list[ismallest] = list[imin];   // overwrite position of smallest value
+      list[imin] = temp;              // put smallest value in sorted place
+    }
+  }
+
+
+
+
+
 

@@ -47,3 +47,28 @@ arrays
 Strings
     C implements strings as arrays of chars.
     The "\0" character marks the end of a string.
+
+Functions
+    You can't define functions within functions, but you can declare them.
+    So this:
+        int main(void) {
+            ...
+        }
+        void somefunc1(void) { 
+            void somefunc2 (void){
+            ...
+            } 
+        ...
+        }
+    doesn't work; but this will:
+        int main(void) {
+        ...
+        }
+        void somefunc1(void) { 
+            void somefunc2 (void);
+            ... 
+            }
+        void somefunc2(void) {
+        ...
+        }  
+

@@ -73,6 +73,17 @@ main(void)
   else
     printf("str1 is not alphabetially earlier than str2, but it should be\n");
 
+
+  // better way of comparing strings:
+  // --------------------------------
+
+  if (strcmp(str1,str2) < 0 )
+    printf("str1 is alphabetically earlier than str2. \n");
+  else if (strcmp(str1,str2) == 0 )
+    printf("str1 and str2 are the same. \n");
+  else
+    printf("str1 is not alphabetially earlier than str2\n");
+
   return(0);
 }
 
