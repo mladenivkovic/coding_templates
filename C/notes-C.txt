@@ -43,3 +43,7 @@ scope of names:
 
 arrays
     arrays are not passed as a copy, but as pointers!
+
+Strings
+    C implements strings as arrays of chars.
+    The "\0" character marks the end of a string.
