@@ -14,6 +14,18 @@ void print_iarr(long unsigned len, int *x);
 void print_inarr(long unsigned len, int *x);
 
 
+
+
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+
+
+
+
 int
 main(void)    
 {
@@ -21,6 +33,14 @@ main(void)
   // array declaration possibilities
   double x[8];
   int y[] = {4, 7, 8, 9};
+
+  //multidimensional
+  int multi[3][2] = { {11, 12}, {21, 22}, {31, 32} };
+
+
+
+
+
 
 
   // printing arrays
@@ -30,13 +50,38 @@ main(void)
   }
   printf("\n");
 
+
+
   print_farr(sizeof(x)/sizeof(x[0]),x);
 
   print_inarr(sizeof(y)/sizeof(y[0]),y);
   
 
+
+  //multidimensional
+  print_iarr(sizeof(multi[0])/sizeof(multi[0][0]), multi[0]);
+
+  for (int j = 0; j < 3; j++){
+    printf("%10d ", multi[j][0]);
+  }
+  printf("\n");
+
+
+
+
+
+
   return(0);
 }
+
+
+
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
 
 
 
