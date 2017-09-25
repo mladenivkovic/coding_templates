@@ -15,3 +15,6 @@
 *.gls
 *.glsdefs
 *.ist
+*.nav
+*.snm
+*.vrb
