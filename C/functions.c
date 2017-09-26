@@ -6,7 +6,6 @@
 #define PI 3.14159
 
 
-
 // Declare functions that will be defined after main:
 void print_useless_shit(void);
 void compute_and_print_area(double radius);
@@ -14,7 +13,7 @@ double circumference(double radius);
 double cylinder_volume(double radius, double height);
 void output_values_with_pointers(double num, char *signp, int *wholep, int *fracp);
 void passing_output_parameters_as_arguments(double num, char *signp, int *wholep, int *fracp);
-
+int fibonacci(int n);
 
 
 
@@ -44,12 +43,24 @@ int main(void){
   passing_output_parameters_as_arguments(somenumber, &sign, &wholepart, &fracpart);
   printf("%c%6d.%6d\n", sign, wholepart, fracpart );
 
+
+
+  
+  /*int *counter;*/
+
+  int n = 12;
+  int fib = fibonacci(n);
+  printf("Fibonacci nr %d : %d\n", n, fib);
+
+
+
   return(0);
 }
 
-//================================
-//================================
-//================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
 
 
 void print_useless_shit(void)
@@ -151,4 +162,62 @@ void passing_output_parameters_as_arguments(double num, char *signp, int *wholep
 
 
 }
+
+
+
+
+//================================
+//================================
+//================================
+
+int fibonacci(int n){
+  // Determine the n-th fibonacci number recursively.
+  // This is just an auxilliary function to keep the code clean.
+  // The actual computation happens with compute_fibonacci(n)
+
+  int result;
+  int previous = 0;
+
+  int compute_fibonacci(int n, int *previous);
+
+  if (n > 1){
+    result = compute_fibonacci(n, &previous);
+    return result;
+    }
+  else if (n < 1){
+    printf("Something went wrong.\n");
+    return 0;
+    }
+  else{
+    return 1;
+    }
+
+}
+
+
+
+int compute_fibonacci(int n, int *previous){
+
+  int step,result;
+
+  if (n > 1){
+    step = compute_fibonacci(n - 1, previous);
+    result = step + *previous;
+    *previous = step;
+    return result;
+    }
+  else if (n < 1){
+    printf("Something went wrong.\n");
+    return 0;
+    }
+  else{
+    /**previous = 0; // not necessary...*/
+    return 1;
+    }
+
+}
+
+
+
+
 
