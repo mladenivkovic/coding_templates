@@ -1,0 +1,30 @@
+USING THE GDB TO DEBUG
+
+
+    1)  Compile with the -g flag.
+    2)  gdb a.out
+    3)  break line_number to insert a manual break where to stop
+    4)  Shortcuts of Common Commands:
+            enter   repeat last command
+            bt      backtrace
+            l       list (show program)
+            p       print
+            n       execute next line
+            s       execute next step (even more anal than n)
+            c       continue
+
+
+
+
+
+
+
+
+
+
+
+
+C specific stuff
+
+
+FORTRAN specific stuff
