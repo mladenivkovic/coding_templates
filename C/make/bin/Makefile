@@ -10,8 +10,7 @@
 
 EXEC=my_program		#executable name
 IDIR=../include 	#include headers from this directory
-SRCDIR=../src 		#include .c files from this directory
-
+#DONT FUCK AROUND WITH SRCDIR, IT DOESN'T WORK
 
 
 
@@ -21,10 +20,10 @@ SRCDIR=../src 		#include .c files from this directory
 
 
 #Compiler to use
-CC=gcc
+CC=gcc -I$(IDIR)
 
 # flags for gfortran compiler
-CFLAGS= -g -O1 -Wall -I$(IDIR) 	# debug
+CFLAGS= -g -O1 -Wall           	# debug
 #CFLAGS= -O3 -I$(IDIR)	  		# performance
 
 
@@ -34,19 +33,13 @@ CFLAGS= -g -O1 -Wall -I$(IDIR) 	# debug
 #==================================
 
 #include paths. Will be followed in that order.
-VPATH = $(IDIR):$(SRCDIR):
+VPATH = $(IDIR):../src
 
 SOURCES=$(wildcard *.c)
-#SOURCES= main_program.c readparams.c commons.c
-#SOURCES = $(patsubst %,$(SRCDIR)/%,$(_SOURCES))
 
-
-#HEADERS = $(patsubst &,$(ODIR)/%,%.h)
 HEADERS = %.h
 
-
-OBJECTS=%.o
-#OBJECTS = $(patsubst %.c,%.o,`%.c`)
+OBJECTS = $(notdir $(patsubst %.c, %.o, $(wildcard ../src/*.c)))
 
 
 
@@ -56,7 +49,8 @@ OBJECTS=%.o
 
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $(notdir $@) $<
+	$(info $@)
 #	-c : compile and assemble, but do not link
 
 $(EXEC): $(OBJECTS)
