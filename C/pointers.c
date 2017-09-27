@@ -74,6 +74,15 @@ main(void)
   for (int i = 0; i<5; i++)
     printf("%s\n",original[i]);
 
+
+
+  printf("\n\n\n");
+  int *somep;
+  if (somep==NULL)
+    printf("Unallocated pointers are NULL\n");
+  else
+    printf("Unallocated pointers are not NULL\n");
+
   return(0);
 }
 
