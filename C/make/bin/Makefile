@@ -8,8 +8,8 @@
 # COMPILATION TIME PARAMETERS
 #==================================
 
-EXEC=my_program		#executable name
-IDIR=../include 	#include headers from this directory
+EXEC=my_program #executable name
+IDIR=../include #include headers from this directory
 #DONT FUCK AROUND WITH SRCDIR, IT DOESN'T WORK
 
 
@@ -23,8 +23,8 @@ IDIR=../include 	#include headers from this directory
 CC=gcc -I$(IDIR)
 
 # flags for gfortran compiler
-CFLAGS= -g -O1 -Wall           	# debug
-#CFLAGS= -O3 -I$(IDIR)	  		# performance
+CFLAGS= -g -Wall # debug
+#CFLAGS= -O3  		 # performance
 
 
 
