@@ -1,10 +1,14 @@
 /* 
- * Write some comments in here.
+ * New types and structs.
  */
 
 
 
 #include <stdio.h>      /* input, output    */
+#include <string.h>    // strcpy()
+
+#define STRINGSIZE 30
+
 
 
 // enumerated type
@@ -15,31 +19,94 @@ typedef enum
   student;
 
 
+
+// struct type
+typedef struct {
+  char name[STRINGSIZE];    // name of planet
+  double diameter;          // diameter in km
+  int moons;                // # of moons
+  double orbit_time;        // orbit around sun in yrs
+  double rotation_time;     // time for one revolution in hrs
+} planet;
+
+
+
+
+// functions using new types
+void printplanet(planet p){
+  printf("Name:          %s\n", p.name);
+  printf("Diameter:      %f\n", p.diameter);
+  printf("Moons:         %d\n", p.moons);
+  printf("Orbit time:    %f\n", p.rotation_time);
+  printf("Rotation time: %f\n", p.orbit_time);
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 int
 main(void)    
 {
 
-    int result;
-    student teststudent;
 
-    switch (teststudent) {
-      case student_id:
-        result=234872;
-        break;
-      
-      case grade:
-        result=4;
-        break;
+    // type enum
 
-      case income:
-        result=20000;
-        break;
+  printf("\n ENUM TYPES\n\n");
+  int result;
+  student teststudent;
+
+  switch (teststudent) {
+    case student_id:
+      result=234872;
+      break;
     
-      default:
-        result=0;
-    }  
+    case grade:
+      result=4;
+      break;
 
-    printf("result: %d\n", result);
+    case income:
+      result=20000;
+      break;
+  
+    default:
+      result=0;
+  }  
+
+  printf("enum result: %d\n", result);
+
+
+  printf("\n\n\n STRUCT TYPES\n\n");
+  
+
+  // struct type
+  planet jupiter = {"Jupiter", 142800, 16, 11.9, 9.925};
+  planet earth;
+  strcpy(earth.name,"Earth");
+  earth.diameter = 6371;
+  earth.moons = 1;
+  earth.orbit_time = 1;
+  earth.rotation_time = 24;
+
+  printf("%s\n", jupiter.name);
+  printf("%f\n", jupiter.diameter);
+  printf("%s\n", earth.name);
+  printf("%f\n", earth.diameter);
+
+  // Assigning whole structs to others works
+  earth = jupiter;
+  printf("%s\n", earth.name);
+  printf("%f\n", earth.diameter);
+
+
+
+  //using functions
+  printplanet(jupiter);
 
   return(0);
 }
