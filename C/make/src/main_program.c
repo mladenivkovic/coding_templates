@@ -5,16 +5,14 @@
 
 
 #include <stdio.h>         /* input, output    */
-#include "readparams.h"
+#include "init.h"
 #include "commons.h"
 
-void
+int
 main(int argc, char * argv[])    
 {
 
-  int exit;
-
-  readparams(argc, argv);
+  initialise(argc, argv);
 
   printf("\nNx : %d \nNy : %d  \ndx : %f  \ndy : %f \n",  Nx,Ny,dx,dy);
   return(0);

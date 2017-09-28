@@ -12,7 +12,10 @@ EXEC=my_program #executable name
 IDIR=../include #include headers from this directory
 #DONT FUCK AROUND WITH SRCDIR, IT DOESN'T WORK
 
+NDIM=2
 
+# Define compile time variables to be passed on
+DEFINES=-DNDIM=$(NDIM)
 
 #==================================
 # COMPILER OPTIONS AND DIRECTIVES
@@ -20,10 +23,10 @@ IDIR=../include #include headers from this directory
 
 
 #Compiler to use
-CC=gcc -I$(IDIR)
+CC=gcc -I$(IDIR) $(DEFINES)
 
 # flags for gfortran compiler
-CFLAGS= -g -Wall # debug
+CFLAGS= -g -O0 -Wall # debug
 #CFLAGS= -O3  		 # performance
 
 

@@ -1,22 +1,20 @@
-/* 
- * reading parameters from parameters file
+/*
+ * INITIALISATION AND SET UP
  */
-
 
 
 #include <stdio.h>      /* input, output    */
 #include <string.h>     /* string manipulation */
-#include <stdlib.h>     /* some other string manipulation */
+#include <stdlib.h>     /* some other string manipulation, alloc */
 #include "commons.h"
+#include "init.h"
 
 
-void readparams(int argc, char * argv[]) // to pass on param file as cmd line arg
+void readparams(int argc, char *argv[]) // to pass on param file as cmd line arg
 {
-
-  /*int Nx_read = 0;*/
-  /*int Ny_read = 0;*/
-  /*double dx_read = 0;*/
-  /*double dy_read = 0;*/
+  /* 
+   * reading parameters from parameters file
+   */
 
 
   if (argc!=2)
@@ -90,4 +88,58 @@ void readparams(int argc, char * argv[]) // to pass on param file as cmd line ar
 
 
 }
+
+
+
+
+
+void initialise(int argc, char *argv[]){
+  /*
+   * Set everything up.
+   */
+
+
+  //read params
+  readparams(argc, argv);
+
+  // Nx = Ny = Nz initially
+  grid = calloc(Nx*Ny*Nz, sizeof(int)); 
+  
+
+
+  // fill array with random shit to test
+  void fillarray(int *arr);
+
+  fillarray(grid);
+
+}
+
+
+
+
+
+
+
+
+
+void fillarray(int *arr){
+  // fill array with random shit to test
+
+  int i, j, k;
+  int index;
+
+  for (k = 0; k<Nz; k++){
+    printf("\n\n\n z = %d \n\n", k);
+    for (j = 0; j<Ny; j++){
+      for (i = 0; i<Nx; i++){
+        index=getiind(i,j,k);
+        arr[index] = i + 10*j + 100*k;
+        printf(" %5d ", arr[getiind(i,j,k)]);
+      }
+    printf("\n");
+    }
+  }
+
+}
+
 

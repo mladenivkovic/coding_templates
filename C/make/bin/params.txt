@@ -1,6 +1,6 @@
 // Grid params
-Nx : 1600;
-Ny : 400;
+Nx : 10;
+Ny : 5;
 
 // Integration params
 dt : 1; 

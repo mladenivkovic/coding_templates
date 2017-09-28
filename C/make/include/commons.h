@@ -6,8 +6,8 @@
 
 // VARIABLES
 
-extern int    Nx, Ny;
-extern double dx, dy;
+extern int    Nx, Ny, Nz;
+extern double dx, dy, dz;
 
 extern const double pi;
 extern const double c;
@@ -16,9 +16,12 @@ extern const double c;
 extern int verbose; //verbose = false by default
 
 
+// Arrays
+
+extern int *grid;
 
 
 
 // FUNCITONS
-extern void sayyes(void);
 
+extern int getiind( int x, ...);
