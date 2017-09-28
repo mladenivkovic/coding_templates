@@ -102,7 +102,7 @@ void initialise(int argc, char *argv[]){
   //read params
   readparams(argc, argv);
 
-  // Nx = Ny = Nz initially
+  // Nx = Ny = Nz = 1 initially
   grid = calloc(Nx*Ny*Nz, sizeof(int)); 
   
 
