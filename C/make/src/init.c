@@ -128,6 +128,8 @@ void fillarray(int *arr){
   int i, j, k;
   int index;
 
+
+  //fill up array and print it
   for (k = 0; k<Nz; k++){
     printf("\n\n\n z = %d \n\n", k);
     for (j = 0; j<Ny; j++){
