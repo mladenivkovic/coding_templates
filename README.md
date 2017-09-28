@@ -3,19 +3,25 @@
 
 ### What is this repository for? ###
 
-This repository contains templates for various coding languages.
+This repository contains templates for various coding languages and a bit of other stuff like notes or "runtime configuration files" like .bashrc and .vimrc. More will follow.
+
 So far, it contains some templates for:
 
 -   Bash
+- 	C, C++
 -   Fortran
--   Python
+-   Python 2 and 3 (although python 2 won't be updated anymore)
 -   LaTeX
+-	rc files
 
-In the near future, probably Java, C and C++ will join the ranks as well as new templates to the already existing languages.
+
+
+Others might be added as soon as I need to learn them :)
+
 
 ### How do I get set up? ###
 
--   No setup needed. You just need to be able to run bash, python and to compile fortran programs. 
+-   No setup needed. You just need to be able to run bash, python or to compile the programs written in C, C++, Fortran or LaTeX.
 
 ### Contribution guidelines ###
 
@@ -23,4 +29,4 @@ In the near future, probably Java, C and C++ will join the ranks as well as new 
 
 ### Who do I talk to? ###
 
--   Me: mladen.SPAMivkovic ( at ) uzh DOT ch. [remove SPAM]
+-   Me: mladen.SPAMivkovic ( at ) hotmail DOT com. [remove SPAM]
