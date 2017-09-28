@@ -289,8 +289,13 @@ export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/
 #=====================
 
 #include ramses shortcuts
-if [ -f ~/.bash_ramses ]; then
-    . ~/.bash_ramses
+if [ -f ~/.bashrc_ramses ]; then
+    . ~/.bashrc_ramses
+fi
+
+#openMP stuff
+if [ -f ~/.bashrc_openmp ]; then
+    . ~/.bashrc_openmp
 fi
 
 
