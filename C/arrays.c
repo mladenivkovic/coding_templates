@@ -5,7 +5,7 @@
 
 
 #include <stdio.h>      /* input, output    */
-
+#include <stdlib.h>     /* used for allocation stuff */
 
 
 void print_farr(long unsigned len, double *x);
@@ -69,6 +69,29 @@ main(void)
 
 
 
+  // dynamic allocation
+  int *dynarr;
+  int array_x_size = 10;
+  int array_y_size = 12;
+
+  dynarr = (int *)calloc(array_x_size, sizeof(int));
+  
+  printf("\nDynamically allocated array\n");
+  for (int k = 0; k < array_x_size; k++){
+    dynarr[k]=k*k;
+    printf("%5d", dynarr[k]);
+  }
+  printf("\n");
+
+
+  //deallocate
+  free(dynarr);
+
+  printf("\nMemory is free, but probably not overwritten yet:\n");
+  for (int k = 0; k < array_x_size; k++){
+    printf("%5d", dynarr[k]);
+  }
+  printf("\n");
 
 
   return(0);
