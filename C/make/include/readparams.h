@@ -4,4 +4,4 @@
 
 
 
-extern int readparams(int argc, char * argv[]);
+extern void readparams(int argc, char * argv[]);

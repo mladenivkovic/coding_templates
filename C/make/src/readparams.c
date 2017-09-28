@@ -10,7 +10,7 @@
 #include "commons.h"
 
 
-int readparams(int argc, char * argv[]) // to pass on param file as cmd line arg
+void readparams(int argc, char * argv[]) // to pass on param file as cmd line arg
 {
 
   /*int Nx_read = 0;*/
@@ -23,7 +23,7 @@ int readparams(int argc, char * argv[]) // to pass on param file as cmd line arg
   {
     // check if called correctly
     printf("ERROR: Usage ./my_program params.txt\n");
-    return 1;
+    exit(1);
   }
   else
   {
@@ -34,7 +34,7 @@ int readparams(int argc, char * argv[]) // to pass on param file as cmd line arg
     // check if file exists
     if (params == NULL) { 
       printf("Error: file '%s' not found.\n", argv[1]);
-      return 1;
+      exit(1);
     }
 
     char varname[80] ;
@@ -89,6 +89,5 @@ int readparams(int argc, char * argv[]) // to pass on param file as cmd line arg
   }
 
 
-  return 0;
 }
 
