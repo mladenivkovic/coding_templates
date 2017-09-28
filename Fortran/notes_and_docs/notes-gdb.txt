@@ -2,22 +2,23 @@ USING THE GDB TO DEBUG
 
 
     1)  Compile with the -g flag.
+
     2)  gdb a.out
-    3)  break line_number to insert a manual break where to stop
+        gdb --args executablename arg1 arg2 arg3
+    
+    3)  break line_number           to insert a manual break where to stop
+        break filename:function     to insert a manual break at function
+                                    in filename (no path before filename)
+        break filename:line_nr      to insert manual break at line in file
+
     4)  Shortcuts of Common Commands:
             enter   repeat last command
             bt      backtrace
             l       list (show program)
-            p       print
+            p       print:      variables, functions...
             n       execute next line
             s       execute next step (even more anal than n)
             c       continue
-
-
-
-
-    Running with cmdline args:
-        gdb --args executablename arg1 arg2 arg3
 
 
 
