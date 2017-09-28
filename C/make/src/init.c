@@ -49,7 +49,7 @@ void readparams(int argc, char *argv[]) // to pass on param file as cmd line arg
     // returns 0 if EoF is reached.
 
     {
-      sscanf(tempbuff, "%15s : %15[^;];", varname, varvalue);
+      sscanf(tempbuff, "%20s : %56[^;];", varname, varvalue);
       // reads formatted input from a string, writes it in
       // the variables given after the format string.
       // The format used is <string> separator <:> <string> ends with <;>
@@ -63,11 +63,17 @@ void readparams(int argc, char *argv[]) // to pass on param file as cmd line arg
       else if (strcmp(varname,"Ny")==0) {
         Ny = atoi(varvalue);
       }
+      else if (strcmp(varname,"Nz")==0) {
+        Nz = atoi(varvalue);
+      }
       else if (strcmp(varname,"dx")==0) {
         dx = atof(varvalue);
       }
       else if (strcmp(varname,"dy")==0) {
         dy = atof(varvalue);
+      }
+      else if (strcmp(varname,"dz")==0) {
+        dz = atof(varvalue);
       }
       else if (strcmp(varname, "//")==0) {
         // ignore comments
@@ -108,8 +114,8 @@ void initialise(int argc, char *argv[]){
 
 
   // fill array with random shit to test
-  void fillarray(int *arr);
 
+  void fillarray(int *arr);
   fillarray(grid);
 
 }

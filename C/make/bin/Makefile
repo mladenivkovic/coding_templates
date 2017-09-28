@@ -12,7 +12,7 @@ EXEC=my_program #executable name
 IDIR=../include #include headers from this directory
 #DONT FUCK AROUND WITH SRCDIR, IT DOESN'T WORK
 
-NDIM=2
+NDIM=3
 
 # Define compile time variables to be passed on
 DEFINES=-DNDIM=$(NDIM)

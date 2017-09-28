@@ -33,9 +33,10 @@ int getiind(int x, ...){
 
   va_list ap;
   int temp;
-  int y, z;
+  int y = 0, z = 0;
 
   va_start(ap,x);
+
   temp = va_arg(ap, int);
   if (temp){
     y = temp;
@@ -54,8 +55,8 @@ int getiind(int x, ...){
 #if NDIM == 1
   y = 0;
 #endif
-    int result;
-    result = x + Ny * y + Nz * z;
+
+    int result = x + Ny * y + Nz * z;
     return (result);
   }
 

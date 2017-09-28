@@ -6,4 +6,3 @@
 
 extern void readparams(int argc, char *argv[]);
 extern void initialise(int argc, char *argv[]);
-extern void fillarray(int *arr);
