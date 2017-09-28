@@ -16,7 +16,8 @@ USING THE GDB TO DEBUG
 
 
 
-
+    Running with cmdline args:
+        gdb --args executablename arg1 arg2 arg3
 
 
 
