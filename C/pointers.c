@@ -1,11 +1,13 @@
 /* 
  * Pointy stuff.
+ * Ignore warnings that format specifiers expect something different
  */
 
 
 
 #include <stdio.h>      /* input, output    */
 #include <string.h>
+#include <stdlib.h>     /* allocation stuff */
 
 
 void select_sort_str(char *list[], int n);
@@ -82,6 +84,44 @@ main(void)
     printf("Unallocated pointers are NULL\n");
   else
     printf("Unallocated pointers are not NULL\n");
+
+
+
+
+
+
+  // dynamic allocation
+  printf("\n\n\n");
+  printf("Dynamic allocation\n\n");
+  
+  int *intp;
+  char *charp;
+
+  //allocate memory for pointers to point to
+  intp = (int *)malloc(sizeof (int));
+  charp = (char *)malloc(sizeof (char));
+
+  printf("Allocated new memory place\n");
+  printf("intp:  %10d, charp:  %10d\n", intp, charp);
+  printf("*intp: %10d, *charp: %10c\n\n", *intp, *charp);
+
+  //fill the memory up
+  *intp = 3;
+  *charp = 'c';
+
+  printf("Assigned values to new memory place:\n");
+  printf("intp:  %10d, charp:  %10d\n", intp, charp);
+  printf("*intp: %10d, *charp: %10c\n\n", *intp, *charp);
+
+
+  //deallocate
+  free(intp);
+  free(charp);
+
+  printf("Deallocated:\n");
+  printf("intp:  %10d, charp:  %10d\n", intp, charp);
+  printf("*intp: %10d, *charp: %10c\n\n", *intp, *charp);
+
 
   return(0);
 }
