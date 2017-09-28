@@ -11,7 +11,9 @@ USING THE GDB TO DEBUG
                                     in filename (no path before filename)
         break filename:line_nr      to insert manual break at line in file
 
-    4)  Shortcuts of Common Commands:
+    4)  type "run"
+
+    5)  Shortcuts of Common Commands:
             enter   repeat last command
             bt      backtrace
             l       list (show program)
