@@ -10,7 +10,9 @@
 
 
 
-
+void thread_numbers(void);
+void nested_threads(void);
+void sync(void);
 
 
 int
@@ -18,16 +20,48 @@ main(void)
 {
 
 
+  /*manipulate thread numbers*/
+  thread_numbers();
 
-  printf("Num_threads=2\n");
+  /*nested threads*/
+  /*it's still 2 threads as set before*/
+  nested_threads();
+
+
+
+
+  return(0);
+}
+
+
+
+
+
+
+
+
+
+
+/*======================================================*/
+/*======================================================*/
+/*======================================================*/
+
+
+void
+thread_numbers(void){
+
+  printf("=============================\n");
+  printf("Thread number manipulation\n");
+  printf("=============================\n");
+
+
+
 #pragma omp parallel num_threads(2)
   {
-
+  printf("Num_threads=2\n");
   int tid = omp_get_thread_num();
-  
   printf("Hello from proc %d\n", tid);
   }
-
 
 
 
@@ -39,8 +73,7 @@ main(void)
   }
 
 
-
-  // alternate version
+  /*alternate version*/
   printf("Num_threads=2 again\n");
   omp_set_num_threads(2);
 #pragma omp parallel
@@ -50,15 +83,34 @@ main(void)
   }
 
 
+  printf("\n\n");
 
-  // nested threads
-  // it's still 2 threads as set before
-  printf("\nNested parallel regions\n");
+}
+
+
+
+
+
+/*======================================================*/
+/*======================================================*/
+/*======================================================*/
+
+
+
+void
+nested_threads(void){
+
+  printf("=============================\n");
+  printf("Nested parallel regions \n");
+  printf("=============================\n");
+
+
   int id, id2;
+
 #pragma omp parallel private(id,id2)
   {
     id = omp_get_thread_num();
-    //start nested parallel region
+    /*start nested parallel region*/
     #pragma omp parallel num_threads(2) private(id2)
       {
         id2=omp_get_thread_num();
@@ -66,6 +118,26 @@ main(void)
       }
   }
 
-  return(0);
+
+
 }
 
+
+
+/*======================================================*/
+/*======================================================*/
+/*======================================================*/
+
+void
+sync(void){
+
+  /*blabla*/
+
+}
+
+
+
+
+/*======================================================*/
+/*======================================================*/
+/*======================================================*/
