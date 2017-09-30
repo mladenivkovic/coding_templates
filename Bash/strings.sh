@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+mystring="This is a string of mine."
+filename="somefile.txt"
+
+
+
+echo "mystring = " $mystring
+echo Sting length: ${#mystring}
+
+
+echo extract filename: ${filename%.*txt}
+
