@@ -17,6 +17,15 @@ int
 main(void)    
 {
 
+#pragma omp parallel
+  {
+
+
+
+  }
+#pragma end parallel
+
+
   return(0);
 }
 

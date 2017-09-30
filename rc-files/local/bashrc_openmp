@@ -2,3 +2,9 @@
 
 #define how many threads you want
 export OMP_NUM_THREADS=4
+
+#allow to switch number of threads
+export OMP_DYNAMIC=true
+
+#allow nested parallel regions
+export OMP_NESTED=true
