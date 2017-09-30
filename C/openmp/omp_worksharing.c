@@ -67,7 +67,6 @@ main(void)
       summe = summe + sourcearray[j];
     }
   
-#pragma omp end for
 
 
     if (id == 0){
@@ -78,7 +77,6 @@ main(void)
 
 
   }
-#pragma end parallel
 
 
   return(0);
