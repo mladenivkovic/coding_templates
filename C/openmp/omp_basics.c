@@ -64,7 +64,6 @@ main(void)
 
 }
 // end parallel region
-#pragma end parallel
 
 
   return(0);

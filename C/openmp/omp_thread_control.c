@@ -27,7 +27,6 @@ main(void)
   
   printf("Hello from proc %d\n", tid);
   }
-#pragma end parallel
 
 
 
@@ -38,7 +37,6 @@ main(void)
   int tid = omp_get_thread_num();
   printf("Hello from proc %d\n", tid);
   }
-#pragma end parallel
 
 
 
@@ -50,7 +48,6 @@ main(void)
   int tid = omp_get_thread_num();
   printf("Hello from proc %d\n", tid);
   }
-#pragma end parallel
 
 
 
@@ -67,9 +64,7 @@ main(void)
         id2=omp_get_thread_num();
         printf("Hey from thread %d.%d!\n", id, id2);
       }
-    #pragma end parallel
   }
-#pragma end parallel
 
   return(0);
 }

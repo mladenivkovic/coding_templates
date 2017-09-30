@@ -49,7 +49,6 @@ main(void)
 
 }
 // end parallel region
-#pragma end parallel
 
 
 
@@ -65,7 +64,7 @@ main(void)
     printf("\n\n Conditional parallel region: In parallel? = %d\n", inpar);
 
 }
-#pragma end parallel
+
   return(0);
 }
 

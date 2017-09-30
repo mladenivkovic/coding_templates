@@ -72,7 +72,6 @@ main(void)
     printf(" s became = %d;\n", s);
 
   }
-#pragma end parallel
 
 
   return(0);

@@ -23,7 +23,6 @@ main(void)
 
 
   }
-#pragma end parallel
 
 
   return(0);
