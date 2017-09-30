@@ -1,0 +1,28 @@
+#!/bin/bash
+# compiles a given .c file for openMP.
+# also takes filename without .c as argument. Both work.
+# ./com some_file.c or ./com some_file both work.
+# If compilation was successful, it will be executed.
+
+
+if [[ $# == 0 ]]; then
+    echo "no arguments given. Can't handle that."
+    exit
+else
+    filename=$1;
+    exec=${filename%.*c}    #remove suffix, if it exists
+
+    filename="$exec".c      #add .c suffix in case it wasn't there
+    exec="$exec"exe         #add .exe suffix
+
+    echo "---now compiling" "$filename"
+
+    if gcc -fopenmp -o "$exec" "$filename" -g ; then
+        ./"$exec";
+    else
+        exit;
+    fi
+
+fi
+
+exit
