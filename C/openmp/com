@@ -17,9 +17,18 @@ else
     filename="$exec".c      #add .c suffix in case it wasn't there
     exec="$exec".exe         #add .exe suffix
 
-    echo "---now compiling" "$filename"
+    echo -e "\x1b[32;01m" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" "\x1b[39;49;00m"
+    echo -e "\x1b[32;01m" "~~~~ now compiling" "$filename" "~~~""\x1b[39;49;00m"
+    echo -e "\x1b[32;01m" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" "\x1b[39;49;00m"
 
-    if gcc -fopenmp -o "$exec" "$filename" -g ; then
+    if gcc -g -Wall -fopenmp -o "$exec" "$filename" ; then
+    #if gcc -g -Wall -Werror -fopenmp -o "$exec" "$filename" ; then
+        # -Werror: treat warnings ar errors, so don't run the execfile
+
+        echo -e "\x1b[32;01m" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" "\x1b[39;49;00m"
+        echo -e "\x1b[32;01m" "~~~~~~~~~~ PROGRAM STARTING ~~~~~~~~~~~~~~" "\x1b[39;49;00m" 
+        echo -e "\x1b[32;01m" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" "\x1b[39;49;00m" 
+
         ./"$exec";
     else
         exit;
