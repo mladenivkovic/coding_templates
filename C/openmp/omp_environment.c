@@ -52,6 +52,20 @@ main(void)
 #pragma end parallel
 
 
+
+
+  // conditional parallel region
+  
+  int n = 10000;
+
+#pragma omp parallel if (n > 100)
+{
+  
+    inpar = omp_in_parallel();          // is in parallel region?
+    printf("\n\n Conditional parallel region: In parallel? = %d\n", inpar);
+
+}
+#pragma end parallel
   return(0);
 }
 
