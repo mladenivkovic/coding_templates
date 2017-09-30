@@ -13,7 +13,7 @@ else
     exec=${filename%.*c}    #remove suffix, if it exists
 
     filename="$exec".c      #add .c suffix in case it wasn't there
-    exec="$exec"exe         #add .exe suffix
+    exec="$exec".exe         #add .exe suffix
 
     echo "---now compiling" "$filename"
 
