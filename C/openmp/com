@@ -21,6 +21,8 @@ else
     echo -e "\x1b[32;01m" "~~~~ now compiling" "$filename" "~~~""\x1b[39;49;00m"
     echo -e "\x1b[32;01m" "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" "\x1b[39;49;00m"
 
+    echo "    gcc -g -Wall -fopenmp -o " "$exec" "$filename" 
+
     if gcc -g -Wall -fopenmp -o "$exec" "$filename" ; then
     #if gcc -g -Wall -Werror -fopenmp -o "$exec" "$filename" ; then
         # -Werror: treat warnings ar errors, so don't run the execfile
