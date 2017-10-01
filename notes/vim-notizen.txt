@@ -1,6 +1,8 @@
 		VIM-NOTIZEN
 
+============
 EINFÜGEN
+============
 i		    einfügen vor dem Cursor (insert)
 I           am Anfang der Zeile einfügen
 a           einfügen nach dem Cursor (append)
@@ -9,7 +11,13 @@ o		    In neuer Zeile darunter einfügen
 O           In neuer Zeile drüber einfügen
 "*p         Aus Systemclipboard einfügen
 
+
+
+
+
+============
 BEWEGEN
+============
 2w 		    um 2 Wörter nach vorne zu springen
 0		    Zum Zeilenanfang (Zahl Null)
 gg		    Zum Dateianfang gehen
@@ -19,7 +27,30 @@ ctrl+o		Zur vorherigen Position
 ctrl+i		Zurück zur weiteren Position (undo ctrl+o)
 
 
+
+H           move to top of screen
+M           move to middle of screen
+L           move to bottom of screen
+
+zz          scroll the line with the cursor to the center of the screen
+zt          scroll the line with the cursor to the top
+zb          scroll the line with the cursor to the bottom
+
+Ctrl-D      move half-page down
+Ctrl-U      move half-page up
+Ctrl-B      page up
+Ctrl-F      page down
+Ctrl-O      jump to last (older) cursor position
+Ctrl-I      jump to next cursor position (after Ctrl-O)
+Ctrl-Y      move view pane up
+Ctrl-E      move view pane down
+
+
+
+
+=============
 LÖSCHEN
+=============
 x			lösche Zeichen unter dem Cursor
 dd			lösche ganze Zeile
 d5w			lösche die nächsten 5 Wörter
@@ -34,7 +65,12 @@ td$         Lösche bis zum Ende der Zeile, speichere im Buffer t
 tp          paste aus Buffer t
 
 
+
+
+=================
 VERSCHIEDENES
+=================
+
 u			undo
 ctrl+R		redo
 y 			kopieren (mit v auswählen)
@@ -54,7 +90,11 @@ m<letter>   erstellt Markierung an dieser Stelle
 ctrl+s      "Freeze out"
 ctrl+q      Kill "Freeze out"
 
+
+
+===================
 SUCHEN
+===================
 /wort		Sucht Wort
 n			nächster Eintrag
 N			vorheriger Eintrag
