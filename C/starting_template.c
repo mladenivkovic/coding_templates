@@ -5,7 +5,7 @@
 
 
 #include <stdio.h>      /* input, output    */
-#include <math.h>       /* math library     */
+#include <math.h>       /* math library; compile with -lm     */
 
 
 
