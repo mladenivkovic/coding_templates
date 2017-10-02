@@ -53,6 +53,10 @@ main(void)
 
 
 
+
+
+
+
 void forloop(void){
 
 
@@ -78,8 +82,6 @@ void forloop(void){
 
 
 
-
-
   /*============*/
   /*measure time*/
   /*============*/
@@ -87,7 +89,7 @@ void forloop(void){
   start=clock();
   
   for (i=0; i<N; i++){
-    sourcearray[i] = ((double) (i)) * ((double) i)/2.2034872;
+    sourcearray[i] = ((double) (i)) * ((double) (i))/2.2034872;
   }
 
   end = clock();
@@ -112,25 +114,20 @@ void forloop(void){
     /*time measurement*/
     starttime_omp=omp_get_wtime();
 
-    int procs, maxt;
+    int procs, maxt, nt, id;
 
     procs = omp_get_num_procs();        // number of processors in use
     maxt = omp_get_max_threads();       // max available threads
+    nt = omp_get_num_threads();
+    id = omp_get_thread_num();
 
-
-    int nthreadss = omp_get_num_threads();
-    int id = omp_get_thread_num();
     printf("num threads forloop %d from id %d, procs: %d, maxthrds: %d\n", nthreadss, id, procs, maxt);
-
-
 
 
 #pragma omp for  
     for (i=0; i<N; i++){
-      sourcearray[i] = ((double) (i)) * ((double) i)/2.2034872;
+      sourcearray[i] = ((double) (i)) * ((double) (i))/2.2034872;
     }
-
-
 
 
     endtime_omp = omp_get_wtime();
