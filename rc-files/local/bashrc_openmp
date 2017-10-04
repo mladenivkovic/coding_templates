@@ -4,7 +4,7 @@
 export OMP_NUM_THREADS=4
 
 #allow to switch number of threads
-export OMP_DYNAMIC=true
+export OMP_DYNAMIC=false
 
 #allow nested parallel regions
 export OMP_NESTED=true
