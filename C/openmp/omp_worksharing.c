@@ -30,7 +30,7 @@ main(void)
   forloop();
 
   /* for loop for reduction */
-  /*reduction();*/
+  reduction();
 
   /* different scheduling */
   /*scheduling();*/
@@ -76,6 +76,9 @@ void forloop(void){
   double cpu_time_used;
 
   static double sourcearray[N];
+  /* ignore "variable is set but not used" warning.*/
+  /* Means that I only use sourcearray[i] =... ,*/
+  /* but never x = ... sourcearray[i] ...*/
 
 
 
@@ -107,22 +110,14 @@ void forloop(void){
   /*parallel region*/
   /*===============*/
 
-#pragma omp parallel
-  {
+#pragma omp parallel num_threads(4)
 
+  /*need to specify num_threads, when OMP_DYNAMIC=true to make sure 4 are used.*/
+  {
+  
     double starttime_omp, endtime_omp;
     /*time measurement*/
     starttime_omp=omp_get_wtime();
-
-    int procs, maxt, nt, id;
-
-    procs = omp_get_num_procs();        // number of processors in use
-    maxt = omp_get_max_threads();       // max available threads
-    nt = omp_get_num_threads();
-    id = omp_get_thread_num();
-
-    printf("num threads forloop %d from id %d, procs: %d, maxthrds: %d\n", nthreadss, id, procs, maxt);
-
 
 #pragma omp for  
     for (i=0; i<N; i++){
@@ -133,15 +128,15 @@ void forloop(void){
     endtime_omp = omp_get_wtime();
     cpu_time_used = ((endtime_omp - starttime_omp)) ;
 
-/*#pragma omp master*/
-/*    {*/
-/*      [> print time used <]*/
-/*      [> only thread 0 does this <]*/
-/*      int nthreads = omp_get_num_threads();*/
-/*      printf("Parallel needed %lf s with %d threads\n", cpu_time_used, nthreads);*/
-/*    }*/
+#pragma omp master
+    {
+      /*[> print time used          <]*/
+      /*[> only thread 0 does this  <]*/
+      int nthreads = omp_get_num_threads();
+      printf("Parallel needed %lf s with %d threads\n", cpu_time_used, nthreads);
+    }
 
-  } /* end parallel region */
+  }  /*end parallel region */
 
 
 }
@@ -171,7 +166,7 @@ void reduction(void){
   /*====================================================*/
 
 
-  printf("=====================\n");
+  printf("\n\n=====================\n");
   printf("REDUCTION\n");
   printf("=====================\n\n");
 
