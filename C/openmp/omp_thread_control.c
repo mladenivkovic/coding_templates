@@ -16,6 +16,7 @@ void mutex(void);
 void barrier(void);
 void master_single(void);
 void locks(void);
+void force_update(void);
 
 
 int
@@ -43,6 +44,10 @@ main(void)
 
   /* lock data */
   locks();
+
+  /* force update of a variable */
+  force_update();
+
 
 
   return(0);
@@ -520,6 +525,36 @@ void locks(void){
 
 
 
+void force_update(void){
+
+
+  printf("\n\n=============================\n");
+  printf("Force update\n");
+  printf("=============================\n");
+
+  int some_shared_var = 0;
+
+#pragma omp parallel
+  {
+
+    int id = omp_get_thread_num();
+
+#pragma omp single
+    some_shared_var += 10;
+
+/* I recommend using a barrier here just to make sure */
+
+#pragma omp flush(some_shared_var)
+
+  printf("Thread %d now has some shared var = %d\n", id, some_shared_var);
+
+
+  } /* end parallel region */
+
+
+
+
+}
 
 
 
