@@ -542,8 +542,10 @@ void force_update(void){
 #pragma omp single
     some_shared_var += 10;
 
-/* I recommend using a barrier here just to make sure */
-
+/* I recommend using a barrier here just to make sure        */
+/* the flush operation does not actually synchronize         */
+/* different threads. It just ensures that a thread’s values */
+/* are made consistent with main memory.                     */
 #pragma omp flush(some_shared_var)
 
   printf("Thread %d now has some shared var = %d\n", id, some_shared_var);
@@ -564,27 +566,6 @@ void force_update(void){
 /*======================================================*/
 /*======================================================*/
 
-
-
-
-
-
-
-
-/*======================================================*/
-/*======================================================*/
-/*======================================================*/
-
-
-
-
-
-
-
-
-/*======================================================*/
-/*======================================================*/
-/*======================================================*/
 
 
 
