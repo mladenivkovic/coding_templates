@@ -11,8 +11,7 @@ if [[ $# == 0 ]]; then
 else
     filename=$1;
     exec=${filename%.*c}    #remove suffix, if it exists
-    exec=${filename%.}      #remove . if it exists
-    echo $exec
+    exec=${exec%.}      #remove . if it exists
 
     filename="$exec".c      #add .c suffix in case it wasn't there
     exec="$exec".exe         #add .exe suffix
