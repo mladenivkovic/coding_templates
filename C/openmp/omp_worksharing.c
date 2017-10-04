@@ -1,5 +1,6 @@
 /* 
- * Write some comments in here.
+ * Worksharing manual.
+ * The heart of parallelism.
  * compile with -fopenmp flag (gcc)
  */
 
@@ -17,7 +18,7 @@
 void forloop(void);
 void reduction(void);
 void scheduling(void);
-
+void sections(void);
 
 
 
@@ -33,9 +34,11 @@ main(void)
   reduction();
 
   /* different scheduling */
-  /*scheduling();*/
+  scheduling();
 
 
+  /* sections baby */
+  sections();
 
 
   return(0);
@@ -283,18 +286,7 @@ void scheduling(void){
   /* set up */
   /*========*/
 
-  int nsmall = 12;
-  int smallarray[nsmall];
-
-  for (int i=0; i<nsmall; i++){
-    smallarray[i] = i*i+3;
-  }
-
-  long produkt = 1;
-
-
-
-
+  int niter = 8;
 
 
 
@@ -302,49 +294,141 @@ void scheduling(void){
   /*parallel region*/
   /*===============*/
 
-  printf("\nNon-scheduled reduced loop\n");
 #pragma omp parallel
   {
     int id = omp_get_thread_num();
-    int nthreads = omp_get_num_threads();
 
-#pragma omp for reduction(* : produkt)    
-    for (int i = 0; i<nsmall; i++){
-      printf("ID %d has index %d, value %d\n", id, i, smallarray[i]);
-      produkt = produkt * smallarray[i];
+
+
+    /*=================== */
+    /* DEFAULT            */
+    /*=================== */
+
+#pragma omp for 
+    for (int i = 0; i<niter; i++){
+      printf("Schedule: None     ID %d has index %2d\n", id, i);
     }
 
-    /*Print result*/
-    if (id == 0){
-      printf("Product is: %ld\n\n Static scheduled reduced loop\n", produkt);
-    }
-    
-    /*reset produkt*/
+
+
+
+    /*=================== */
+    /* STATIC             */
+    /*=================== */
+
 
   /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
 
+#pragma omp single
+    printf("\n\n");
 
-#pragma omp master /*only thread 0 does stuff*/
-    {  
-      produkt = 1;
-    }
-#pragma omp for reduction(* : produkt) schedule(static,nsmall/nthreads)
-    for (int i = 0; i<nsmall; i++){
-      printf("ID %d has index %d, value %d\n", id, i, smallarray[i]);
-      produkt = produkt * smallarray[i];
+#pragma omp for schedule(static)
+    for (int i = 0; i<niter; i++){
+      printf("Schedule: static   ID %d has index %2d\n", id, i);
     }
 
 
 
 
-    if (id == 0){
-      printf("Product is: %ld\n\n Static scheduled reduced loop\n", produkt);
+
+
+    /*=================== */
+    /* DYNAMIC            */
+    /*=================== */
+
+  /*Tell threads to wait for all to arrive here*/
+#pragma omp barrier
+
+#pragma omp single
+    printf("\n\n");
+
+#pragma omp for schedule(dynamic)
+    for (int i = 0; i<niter; i++){
+      printf("Schedule: dynamic  ID %d has index %2d\n", id, i);
     }
-    
+
+
+
+
+
+    /*=================== */
+    /* GUIDED             */
+    /*=================== */
+
+
+  /*Tell threads to wait for all to arrive here*/
+#pragma omp barrier
+
+#pragma omp single
+    printf("\n\n");
+
+#pragma omp for schedule(guided)
+    for (int i = 0; i<niter; i++){
+      printf("Schedule: guided   ID %d has index %2d\n", id, i);
+    }
+
+  } /* end parallel region */
+}
+
+
+
+/*=============================================================*/
+/*=============================================================*/
+/*=============================================================*/
+
+
+
+
+
+void sections(void){
+
+
+  printf("\n\n\n=====================\n");
+  printf("SECTIONS\n");
+  printf("=====================\n");
+
+  
+
+#pragma omp parallel
+  {
+
+  int id = omp_get_thread_num();
+
+    #pragma omp sections
+    {
+      #pragma omp section
+      {
+        printf("Thread %d did the first section.\n",id);
+      }
+
+      #pragma omp section
+      {
+        printf("Thread %d did the second section.\n",id);
+      }
+
+      #pragma omp section
+      {
+        printf("Thread %d did the third section.\n",id);
+      }
+
+      #pragma omp section
+      {
+        printf("Thread %d did the fourth section.\n",id);
+      }
+
+
+
+
+    }
+
+
 
   } /* end parallel region */
 
- 
+
+
+
 
 }
+
