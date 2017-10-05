@@ -1,0 +1,15 @@
+(lp0
+S'Johnny B. Goode'
+p1
+aI21
+aF1.89234e-07
+a(I7
+I3
+tp2
+a(lp3
+S'2'
+p4
+aI4
+aS'c'
+p5
+aa.
