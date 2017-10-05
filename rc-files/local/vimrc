@@ -16,13 +16,19 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'       "vundle - vim plugin manager
+Plugin 'VundleVim/Vundle.vim'               "vundle - vim plugin manager
 
-Plugin 'scrooloose/nerdcommenter'   "sexy commenting
+Plugin 'scrooloose/nerdcommenter'           "sexy commenting
 
-Plugin 'Yggdroot/indentLine'        "indentation lines for loops 
+Plugin 'Yggdroot/indentLine'                "indentation lines for loops 
 
-Plugin 'scrooloose/nerdtree'        "file tree
+Plugin 'scrooloose/nerdtree'                "file tree
+
+Plugin 'Valloric/YouCompleteMe'             "auto completion
+
+Plugin 'jnurmine/Zenburn'                   "colorscheme
+
+Plugin 'altercation/vim-colors-solarized'   "colorscheme
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
@@ -80,6 +86,8 @@ let g:NERDCommentEmptyLines=1
 let g:NERDDefaultAlign = 'left'
 
 
+
+
 "===============
 "=== INDENT LINE
 "===============
@@ -96,6 +104,21 @@ let g:indentLine_char = '|'
 map <C-n> :NERDTreeToggle<CR>
 
 
+
+"==================
+" === YouCompleteMe
+"==================
+
+" made this file myself. Sources: 
+" https://github.com/rasendubi/dotfiles/blob/master/.vim/.ycm_extra_conf.py,
+" http://www.alexeyshmalko.com/2014/youcompleteme-ultimate-autocomplete-plugin-for-vim/
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+
+let g:ycm_python_binary_path = '/usr/bin/python3'
+
+let g:ycm_auto_trigger = 1 "trigger after X characters
+
+
 "==========================================================
 "END OF PLUGINS
 "==========================================================
@@ -110,12 +133,13 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Set solarised color scheme
 syntax enable
-set t_Co=16
+set t_Co=16 "remove for zenburn
 "set background=dark
-set background=light
+"set background=light
 let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 colorscheme solarized
+"colors zenburn
 
 " Set highlight colors for brackets/braces/parenthesis matching
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
@@ -266,7 +290,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " enable 'intelligent' pasting
-set paste
+"set paste " conflicts with YouCompleteMe
 
 " enable copypasting between sessions
 set clipboard=unnamedplus
