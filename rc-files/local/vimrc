@@ -30,6 +30,8 @@ Plugin 'jnurmine/Zenburn'                   "colorscheme
 
 Plugin 'altercation/vim-colors-solarized'   "colorscheme
 
+Plugin 'jiangMiao/auto-pairs'               "autocomplete parentheses
+
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
 
@@ -330,6 +332,10 @@ set grepprg=grep\ -nH\ $*
 
 " Who doesn't like autoindent?
 set autoindent
+
+" Allow to store file specific options as comments in file
+set modeline
+set modelines=5
 
 " default tab configs
 set tabstop=4
