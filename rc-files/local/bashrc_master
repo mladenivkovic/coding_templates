@@ -1,0 +1,84 @@
+echo "Importing master thesis stuff."
+
+
+#=========================
+# ENVIRONMENT VARIABLES
+#=========================
+
+export MA='/home/mivkov/UZH/Masterarbeit/masterarbeit'
+export SCR='$MA/scripts'
+
+
+
+
+#=========================
+# Dir aliases
+#=========================
+
+alias ma='cd /home/mivkov/UZH/Masterarbeit/masterarbeit/'
+alias scr='cd "$MA"/scripts'
+
+alias pa='cd "$MA"/project/ramses/patch/unbinding'
+alias m='cd "$MA"/project/mergertree'
+
+alias exec='cd "$MA"/exec'
+alias te='cd "$MA"/exec/testing'
+alias two='cd "$MA"/exec/dice_two'
+alias sub='cd "$MA"/exec/dice_sub'
+alias cos='cd "$MA"/exec/cosmo'
+
+alias mk='cd "$MA"/project/ramses/bin_unbinding'
+#alias mkc='cd "$MA"/project/ramses/bin_clean'
+alias mkd='cd "$MA"/project/ramses/bin_dice'
+#alias mki='cd "$MA"/project/ramses/bin_dice_intel'
+#alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
+
+
+
+
+#=========================
+# Command aliases
+#=========================
+
+
+#-----------------
+# Copying stuff
+#-----------------
+alias cpr='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
+alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-dice "$MA"/exec'
+
+
+#-------------------
+# Script shortcuts
+#-------------------
+
+alias u=unbindingplot
+alias pp=plot_particles
+alias r=reportplot
+
+#-----------------
+# Running stuff
+#-----------------
+
+alias rmlog='rm -i *.log'
+alias go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+alias god='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+#alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+#alias goto='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-old unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
+#alias goo='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen-old unbinding.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
+#alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+#alias goi='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-intel unbinding-dice.nml 2>"$DATE"_error-intel.log | tee run"$DATE"-intel.log'
+#alias gom='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi.log'
+#alias gomo='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi-old unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi-old.log'
+#alias gor='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-reltest unbinding-dice.nml 2>"$DATE"_error-reltest.log | tee run"$DATE"-reltest.log'
+
+
+
+
+
+
+#=========================
+# PATH
+#=========================
+export PATH="$PATH":"$MA"/scripts        #add python and bash script dir
+export PATH="$PATH":"$MA"/src/dice/bin/bin  #add dice

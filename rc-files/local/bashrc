@@ -209,12 +209,13 @@ alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
 alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
 alias f='cd ~/UZH/Formelsammlung'
 #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
-
+alias d='cd ~/Documents/Texte/diary'
 
 
 #Others
 alias e='exit'
 alias python=python3
+alias refresh='source ~/.bashrc'
 
 
 
@@ -289,13 +290,18 @@ export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/
 #=====================
 
 #include ramses shortcuts
-if [ -f ~/.bashrc_ramses ]; then
-    . ~/.bashrc_ramses
-fi
+#if [ -f ~/.bashrc_ramses ]; then
+#    . ~/.bashrc_ramses
+#fi
 
 #openMP stuff
 if [ -f ~/.bashrc_openmp ]; then
     . ~/.bashrc_openmp
+fi
+
+#masterarbeit stuff
+if [ -f ~/.bashrc_openmp ]; then
+    . ~/.bashrc_master
 fi
 
 
