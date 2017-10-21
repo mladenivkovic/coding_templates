@@ -6,7 +6,7 @@ echo "Importing master thesis stuff."
 #=========================
 
 export MA='/home/mivkov/UZH/Masterarbeit/masterarbeit'
-export SCR='$MA/scripts'
+export SCR="$MA"/scripts
 
 
 
@@ -18,7 +18,7 @@ export SCR='$MA/scripts'
 alias ma='cd /home/mivkov/UZH/Masterarbeit/masterarbeit/'
 alias scr='cd "$MA"/scripts'
 
-alias pa='cd "$MA"/project/ramses/patch/unbinding'
+alias pa='cd "$MA"/project/ramses/patch/unbinding_patch'
 alias m='cd "$MA"/project/mergertree'
 
 alias exec='cd "$MA"/exec'
@@ -28,7 +28,7 @@ alias sub='cd "$MA"/exec/dice_sub'
 alias cos='cd "$MA"/exec/cosmo'
 
 alias mk='cd "$MA"/project/ramses/bin_unbinding'
-#alias mkc='cd "$MA"/project/ramses/bin_clean'
+alias mkc='cd "$MA"/project/ramses/bin_clean'
 alias mkd='cd "$MA"/project/ramses/bin_dice'
 #alias mki='cd "$MA"/project/ramses/bin_dice_intel'
 #alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
@@ -46,6 +46,7 @@ alias mkd='cd "$MA"/project/ramses/bin_dice'
 #-----------------
 alias cpr='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
 alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-dice "$MA"/exec'
+alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
 
 
 #-------------------
@@ -54,19 +55,19 @@ alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-dice "$MA"/exec'
 
 alias u=unbindingplot
 alias pp=plot_particles
-alias r=reportplot
+alias r=ramsesplot
 
 #-----------------
 # Running stuff
 #-----------------
 
 alias rmlog='rm -i *.log'
-alias go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+alias  go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 alias god='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 #alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 #alias goto='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-old unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
 #alias goo='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen-old unbinding.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
-#alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 #alias goi='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-intel unbinding-dice.nml 2>"$DATE"_error-intel.log | tee run"$DATE"-intel.log'
 #alias gom='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi.log'
 #alias gomo='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi-old unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi-old.log'
