@@ -26,11 +26,16 @@ Plugin 'scrooloose/nerdtree'                "file tree
 
 Plugin 'Valloric/YouCompleteMe'             "auto completion
 
-Plugin 'jnurmine/Zenburn'                   "colorscheme
+"Plugin 'jnurmine/Zenburn'                   "colorscheme
 
 Plugin 'altercation/vim-colors-solarized'   "colorscheme
 
 Plugin 'jiangMiao/auto-pairs'               "autocomplete parentheses
+
+Plugin 'tmhedberg/SimpylFold'               "folding plugin
+
+Plugin 'Konfekt/FastFold'                   "fasten up folding/when writing
+
 
 "" The following are examples of different formats supported.
 "" Keep Plugin commands between vundle#begin/end.
@@ -121,6 +126,29 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_auto_trigger = 1 "trigger after X characters
 
 
+
+
+
+"====================
+" === SimplyFold
+"====================
+let g:SimpylFold_docstring_preview=1
+
+
+
+
+"====================
+" === FastFold
+"====================
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
+
+
+
+
 "==========================================================
 "END OF PLUGINS
 "==========================================================
@@ -171,8 +199,14 @@ set relativenumber
 
 " line wrap and other stuff
 set linebreak
-set wrap
 set nolist
+
+" this enables "visual" wrapping
+set wrap
+
+" this turns off physical line wrapping (ie: automatic insertion of newlines)
+set textwidth=0 
+set wrapmargin=0
 
 " line wrap with indent kept
 set breakindent  
@@ -182,7 +216,6 @@ noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
-
 
 
 
@@ -309,6 +342,36 @@ set wildmenu
 
 
 
+"===================
+" FOLDING
+"===================
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Set fold methods for every file type only! 
+let g:vimsyn_folding='af'
+let g:tex_fold_enabled=1
+let g:python_folding = 1
+let g:fortran_folding = 1
+let g:bash_folding = 1
+let g:c_folding = 1
+"let g:xml_syntax_folding = 1
+"let g:php_folding = 1
+"let g:perl_fold = 1
+
+
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" Save/autoload folding when writing/loading file
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* loadview
+augroup END
 
 
 
@@ -324,7 +387,7 @@ set wildmenu
 "=================
 
 " Needed for Syntax Highlighting and stuff
-"filetype on " doesn't work with vundle
+filetype on " doesn't work with vundle
 filetype plugin on "needed for plugins: nerdcommenter
 filetype indent on "needed by  plugin slim
 syntax enable
@@ -338,19 +401,20 @@ set modeline
 set modelines=5
 
 " default tab configs
-set tabstop=4
-set expandtab
-set shiftwidth=4
+"set tabstop=2
+"set expandtab
+"set shiftwidth=2
 
 " Filetype specific indents:
 " To see available filetypes: :setfiletype ctrl+D
-" tabs for c, fortran, bash files, 2 spaces
-autocmd Filetype c        setlocal ts=2 sw=2 expandtab
-autocmd Filetype cpp      setlocal ts=2 sw=2 expandtab
-autocmd Filetype fortran  setlocal ts=2 sw=2 expandtab
-
-" for python files, 4 spaces
-autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
+" tabs for c, fortran, bash files, 2 spaces: moved to .vim/after/
+"autocmd FileType c        setlocal ts=2 sw=2 expandtab
+"autocmd FileType cpp      setlocal ts=2 sw=2 expandtab
+"autocmd FileType fortran  setlocal ts=2 sw=2 expandtab
+"
+"" for python files, 4 spaces
+"autocmd FileType python setlocal ts=4 sw=4 sts=0 expandtab
+"autocmd FileType sh setlocal ts=4 sw=4 sts=0 expandtab
 
 
 

@@ -18,8 +18,11 @@ export SCR="$MA"/scripts
 alias ma='cd /home/mivkov/UZH/Masterarbeit/masterarbeit/'
 alias scr='cd "$MA"/scripts'
 
-alias pa='cd "$MA"/project/ramses/patch/unbinding_patch'
+alias pa='cd "$MA"/project/ramses/patch/mergertree'
+#alias pa='cd "$MA"/project/ramses/patch/unbinding_patch'
 alias m='cd "$MA"/project/mergertree'
+alias mb='cd "$MA"/project/mergertree/bin/'
+alias ms='cd "$MA"/project/mergertree/src'
 
 alias exec='cd "$MA"/exec'
 alias te='cd "$MA"/exec/testing'
@@ -27,7 +30,8 @@ alias two='cd "$MA"/exec/dice_two'
 alias sub='cd "$MA"/exec/dice_sub'
 alias cos='cd "$MA"/exec/cosmo'
 
-alias mk='cd "$MA"/project/ramses/bin_unbinding'
+alias mk='cd "$MA"/project/ramses/bin_merger'
+#alias mk='cd "$MA"/project/ramses/bin_unbinding'
 alias mkc='cd "$MA"/project/ramses/bin_clean'
 alias mkd='cd "$MA"/project/ramses/bin_dice'
 #alias mki='cd "$MA"/project/ramses/bin_dice_intel'
@@ -44,9 +48,17 @@ alias mkd='cd "$MA"/project/ramses/bin_dice'
 #-----------------
 # Copying stuff
 #-----------------
-alias cpr='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
-alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-dice "$MA"/exec'
+#alias cpr='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
+#alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-dice "$MA"/exec'
+#alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
+alias cpr='cp "$MA"/project/ramses/bin_merger/ramses3d-merger "$MA"/exec'
+alias cpu='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
+alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-merger-dice "$MA"/exec'
 alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
+
+
+
+
 
 
 #-------------------
@@ -56,6 +68,9 @@ alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
 alias u=unbindingplot
 alias pp=plot_particles
 alias r=ramsesplot
+alias tp=testplot
+
+alias upr=update_ramses.sh
 
 #-----------------
 # Running stuff
@@ -65,7 +80,9 @@ alias rmlog='rm -i *.log'
 alias  go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 alias god='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-#alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice-big.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run"$DATE".log'
 #alias goto='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-old unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
 #alias goo='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen-old unbinding.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
 #alias goi='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-intel unbinding-dice.nml 2>"$DATE"_error-intel.log | tee run"$DATE"-intel.log'
@@ -83,3 +100,5 @@ alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$D
 #=========================
 export PATH="$PATH":"$MA"/scripts        #add python and bash script dir
 export PATH="$PATH":"$MA"/src/dice/bin/bin  #add dice
+export PATH="$PATH":"$MA"/scripts/unb
+#export PATH="$PATH":'/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/programs/scripts'
