@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/exec/cosmo2/output_00011'
+let g:netrw_dirhist_2='/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/exec/test_big_nompi_old'
+let g:netrw_dirhist_3='/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/programs/scripts'
+let g:netrw_dirhist_4='/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/files/results/dice-two/binning/lin'
