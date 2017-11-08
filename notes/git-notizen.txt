@@ -21,3 +21,16 @@ git diff-tree --no-commit-id --name-only -r "COMMIT_ID"
 
 git diff HEAD^^ HEAD main.c
     compare versions of files. Here: third to last commit with last commit.
+
+
+contributing to a project:
+  (- fork the project)
+  (- create a new branch)
+  (- switch to new branch: 
+        git branch some-name)
+    - update branch to master
+        git fetch master
+    - do your things
+    - push changes to your remote
+        git push origin branchname
+    - create a pull request online
