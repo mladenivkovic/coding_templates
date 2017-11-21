@@ -25,3 +25,5 @@ print(sympy.diff(sympy.sin(x), x))
 print()
 print("Integrate")
 print(sympy.integrate(x**2,(x,a,b)))
+
+

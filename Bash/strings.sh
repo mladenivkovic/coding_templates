@@ -15,3 +15,5 @@ echo extract filename: ${filename%.*txt}
 
 echo extract suffix: ${filename#somefile}
 
+
+echo everything after keyword string: ${mystring#*string}
