@@ -29,6 +29,8 @@ alias te='cd "$MA"/exec/testing'
 alias two='cd "$MA"/exec/dice_two'
 alias sub='cd "$MA"/exec/dice_sub'
 alias cos='cd "$MA"/exec/cosmo'
+alias 2='cd "$MA"/exec/2merge'
+alias skip='cd "$MA"/exec/skipone'
 
 alias mk='cd "$MA"/project/ramses/bin_merger'
 #alias mk='cd "$MA"/project/ramses/bin_unbinding'
@@ -37,6 +39,7 @@ alias mkd='cd "$MA"/project/ramses/bin_dice'
 #alias mki='cd "$MA"/project/ramses/bin_dice_intel'
 #alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
 
+alias ramses='cd $MA/src/ramses/'
 
 
 
@@ -101,4 +104,5 @@ alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger merger.nml 2>"
 export PATH="$PATH":"$MA"/scripts        #add python and bash script dir
 export PATH="$PATH":"$MA"/src/dice/bin/bin  #add dice
 export PATH="$PATH":"$MA"/scripts/unb
+export PATH="$PATH":"$MA"/project/mergertree/bin #add mergertree program
 #export PATH="$PATH":'/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/programs/scripts'

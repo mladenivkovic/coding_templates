@@ -167,9 +167,8 @@ export PS1="$PS1"'  ' # space arount newline did something weird with colors.
 PATH="/home/mivkov/Skripte/execs_included_in_path:"$PATH
 # Add intel (fortran) compiler to path var
 PATH="/opt/intel/bin:"$PATH
-# add HPC python scripts
-#PATH="/home/mivkov/UZH/High_Performance_Computing/hydro/Py:"$PATH
-
+#add local bin
+PATH="/home/mivkov/local/bin:"$PATH
 
 
 #disable vim C-s freezeout (solve with C-q)
