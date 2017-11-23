@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     print( '' )
     print("Beliebig viele Argumente")
-    anyargs(3, 7, 'hehe', d=1, e=2)
+    anyargs(3, 7, sumdiff1, 'hehe', d=1, e=2)
 
 
 #-------------------------
