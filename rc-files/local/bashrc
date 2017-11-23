@@ -150,13 +150,14 @@ LS_COLORS=$LS_COLORS:'di=1;34:' ; export LS_COLORS
 export NEWLINE=$'\n'
 #export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
 
-#FOR SOLARIZED DARK
+#FOR  DARK THEME
 #PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-#export PS1="$PS1"'  ' # space arount newline did something weird with colors.
+PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
+export PS1="$PS1"'  ' # space around newline did something weird with colors.
 
-#FOR SOLARIZED LIGHT
-PS1="\[\e[34;47m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-export PS1="$PS1"'  ' # space arount newline did something weird with colors.
+#FOR  LIGHT THEME
+#PS1="\[\e[34;47m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
+#export PS1="$PS1"'  ' # space arount newline did something weird with colors.
 
 
 

@@ -26,9 +26,11 @@ Plugin 'scrooloose/nerdtree'                "file tree
 
 Plugin 'Valloric/YouCompleteMe'             "auto completion
 
-"Plugin 'jnurmine/Zenburn'                   "colorscheme
-
 Plugin 'altercation/vim-colors-solarized'   "colorscheme
+
+Plugin 'chriskempson/base16-vim'
+
+Plugin 'maxst/flatcolor'                    "colorscheme
 
 Plugin 'jiangMiao/auto-pairs'               "autocomplete parentheses
 
@@ -161,15 +163,20 @@ let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 " COLORS
 "=================
 
-" Set solarised color scheme
+"" Set solarised color scheme
 syntax enable
 set t_Co=16 "remove for zenburn
 "set background=dark
 "set background=light
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
-colorscheme solarized
-"colors zenburn
+"let g:solarized_termcolors=16
+"let g:solarized_termtrans=1
+"colorscheme solarized
+"
+" flatcolor
+"let g:flatcolor_termcolors=16
+"colorscheme flatcolor 
+
+
 
 " Set highlight colors for brackets/braces/parenthesis matching
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
@@ -201,7 +208,7 @@ set relativenumber
 set linebreak
 set nolist
 
-" this enables "visual" wrapping
+" this enables 'visual' wrapping
 set wrap
 
 " this turns off physical line wrapping (ie: automatic insertion of newlines)
