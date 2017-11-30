@@ -4,62 +4,61 @@
 # there is more in the ~/.profile file.
 
 
-export TERM=xterm-256color
 
 
 #=================
 # COLORS
 #=================
 
-# Colors for echo output.
-# Use with echo -e "$COL_NAME" Your text here "$COL_RESET"
-ESC_SEQ="\x1b["
-COL_RESET=$ESC_SEQ"39;49;00m"
-COL_RED=$ESC_SEQ"31;01m"
-COL_GREEN=$ESC_SEQ"32;01m"
-COL_YELLOW=$ESC_SEQ"33;01m"
-COL_BLUE=$ESC_SEQ"34;01m"
-COL_MAGENTA=$ESC_SEQ"35;01m"
-COL_CYAN=$ESC_SEQ"36;01m"
-COL_CYAN_ITALIC=$ESC_SEQ"36;03m"
-COL_NORMAL_ITALIC=$ESC_SEQ"39;03m"
-COL_DARK_ITALIC=$ESC_SEQ"2;03m"
+    # Colors for echo output.
+    # Use with echo -e "$COL_NAME" Your text here "$COL_RESET"
+    ESC_SEQ="\x1b["
+    COL_RESET=$ESC_SEQ"39;49;00m"
+    COL_RED=$ESC_SEQ"31;01m"
+    COL_GREEN=$ESC_SEQ"32;01m"
+    COL_YELLOW=$ESC_SEQ"33;01m"
+    COL_BLUE=$ESC_SEQ"34;01m"
+    COL_MAGENTA=$ESC_SEQ"35;01m"
+    COL_CYAN=$ESC_SEQ"36;01m"
+    COL_CYAN_ITALIC=$ESC_SEQ"36;03m"
+    COL_NORMAL_ITALIC=$ESC_SEQ"39;03m"
+    COL_DARK_ITALIC=$ESC_SEQ"2;03m"
 
 
-#Blue = 34
-#Green = 32
-#Light Green = 1;32
-#Cyan = 36
-#Red = 31
-#Purple = 35
-#Brown = 33
-#Yellow = 1;33
-#white = 1;37
-#Light Grey = 0;37
-#Black = 30
-#Dark Grey= 1;30
+    #Blue = 34
+    #Green = 32
+    #Light Green = 1;32
+    #Cyan = 36
+    #Red = 31
+    #Purple = 35
+    #Brown = 33
+    #Yellow = 1;33
+    #white = 1;37
+    #Light Grey = 0;37
+    #Black = 30
+    #Dark Grey= 1;30
 
 
-#0   = default colour
-#1   = bold
-#4   = underlined
-#5   = flashing text
-#7   = reverse field
-#40  = black background
-#41  = red background
-#42  = green background
-#43  = orange background
-#44  = blue background
-#45  = purple background
-#46  = cyan background
-#47  = grey background
-#100 = dark grey background
-#101 = light red background
-#102 = light green background
-#103 = yellow background
-#104 = light blue background
-#105 = light purple background
-#106 = turquoise background
+    #0   = default colour
+    #1   = bold
+    #4   = underlined
+    #5   = flashing text
+    #7   = reverse field
+    #40  = black background
+    #41  = red background
+    #42  = green background
+    #43  = orange background
+    #44  = blue background
+    #45  = purple background
+    #46  = cyan background
+    #47  = grey background
+    #100 = dark grey background
+    #101 = light red background
+    #102 = light green background
+    #103 = yellow background
+    #104 = light blue background
+    #105 = light purple background
+    #106 = turquoise background
 #
 
 
@@ -71,9 +70,9 @@ COL_DARK_ITALIC=$ESC_SEQ"2;03m"
 # GREETING MESSAGE
 #=================
 
-# Greetings
-echo -e "$COL_CYAN_ITALIC""  Good luck and have fun!" "$COL_RESET"
-echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to see variables,\n  aliases and functions defined in the ~/.bashrc file." "$COL_RESET"
+    # Greetings
+    echo -e "$COL_CYAN_ITALIC""  Good luck and have fun!" "$COL_RESET"
+    echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to see variables,\n  aliases and functions defined in the ~/.bashrc file." "$COL_RESET"
 
 
 
@@ -86,97 +85,64 @@ echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to s
 #=================
 
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+    # don't put duplicate lines or lines starting with space in the history.
+    # See bash(1) for more options
+    HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+    # append to the history file, don't overwrite it
+    shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-
+    # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+    HISTSIZE=2000
+    HISTFILESIZE=10000
 
 
 
 
 
-#===================================
-# COLOR SUPPORT FOR INBUILT PROGRAMS
-#===================================
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alh'
-alias la='ls -A'
-alias l='ls -CF'
-
-
-
-#ls coloring
-#di = directory
-#fi = file
-#ln = symbolic link
-#pi = fifo file
-#so = socket file
-#bd = block (buffered) special file
-#cd = character (unbuffered) special file
-#or = symbolic link pointing to a non-existent file (orphan)
-#mi = non-existent file pointed to by a symbolic link (visible when you type ls -l)
-#ex = file which is executable (ie. has 'x' set in permissions).
-#*.rpm = files with the ending .rpm
-LS_COLORS=$LS_COLORS:'di=1;34:' ; export LS_COLORS
 
 #============================
 # VARIABLES
 #============================
 
+    #---------------------
+    # PROMPT
+    #---------------------
 
-#Prompt: (The thing that is before where you type in your commands)
+    export NEWLINE=$'\n'
+    #export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
 
-export NEWLINE=$'\n'
-#export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
+    #FOR  DARK THEME
+    #PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
+    PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
+    export PS1="$PS1"'  ' # space around newline did something weird with colors.
 
-#FOR  DARK THEME
-#PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
-export PS1="$PS1"'  ' # space around newline did something weird with colors.
-
-#FOR  LIGHT THEME
-#PS1="\[\e[34;47m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-#export PS1="$PS1"'  ' # space arount newline did something weird with colors.
-
-
-
-# PATH VARIABLE
-
-# Add executables from /home/mivkov/Skripte/execs_included_in_path
-# to $PATH variable
-PATH="/home/mivkov/Skripte/execs_included_in_path:"$PATH
-# Add intel (fortran) compiler to path var
-PATH="/opt/intel/bin:"$PATH
-#add local bin
-PATH="/home/mivkov/local/bin:"$PATH
+    #FOR  LIGHT THEME
+    #PS1="\[\e[34;47m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
+    #export PS1="$PS1"'  ' # space arount newline did something weird with colors.
 
 
-#disable vim C-s freezeout (solve with C-q)
-stty -ixon
+    #----------------
+    # PATH VARIABLE
+    #----------------
+
+    # Add executables from /home/mivkov/Skripte/execs_included_in_path
+    # to $PATH variable
+    PATH="/home/mivkov/Skripte/execs_included_in_path:"$PATH
+    # Add intel (fortran) compiler to path var
+    PATH="/opt/intel/bin:"$PATH
+    #add local bin
+    PATH="/home/mivkov/local/bin:"$PATH
 
 
 
+
+
+    #------------
+    # Others
+    #------------
+
+    export TERM=xterm-256color
 
 
 
@@ -184,38 +150,72 @@ stty -ixon
 # ALIASES
 #============================
 
-#SSH
-alias ela='ssh -2Y stud01@ela.cscs.ch'
-alias dora='ssh -2Yt stud01@ela.cscs.ch ssh -2Y dora'
-alias linux.physik='ssh -2Y mivkov@linux.physik.uzh.ch'
-alias phy='ssh -2Y mivkov@linux.physik.uzh.ch'
-alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
-alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y zbox'
-alias ds='ssh -2Yt mivkov@linux.physik.uzh.ch ssh -i .ssh/data_science esc403.clusters.s3it.uzh.ch'
-alias f2='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y f2'
+    #----------
+    # SSH
+    #----------
+
+    alias linux.physik='ssh -2Y mivkov@linux.physik.uzh.ch'
+    alias phy='ssh -2Y mivkov@linux.physik.uzh.ch'
+    #alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
+    #alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y zbox'
+    #alias ds='ssh -2Yt mivkov@linux.physik.uzh.ch ssh -i .ssh/data_science esc403.clusters.s3it.uzh.ch'
+    #alias f2='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y f2'
+
+    #---------------------
+    # directory shortcuts
+    #---------------------
+
+    alias ..='cd ..'
+    alias ~='cd ~'
+    alias pj='cd ~/Coding/projekte' # go to projects
+    alias templ='cd ~/Coding/coding_templates' #go to templates
+    alias t=templ
+    alias ft='cd ~/Coding/coding_templates/Fortran' # go to fortran templates
+    alias pt='cd ~/Coding/coding_templates/Python/python3' # go to python templates
+    alias ct='cd ~/Coding/coding_templates/C' # go to C templates
+    alias ppt='cd ~/Coding/coding_templates/Python/python3/plots' # go to python plot templates
+    alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
+    alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
+    alias f='cd ~/UZH/Formelsammlung'
+    #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
+    alias d='cd ~/Documents/Texte/diary'
 
 
-#directory shortcuts
-alias ..='cd ..'
-alias ~='cd ~'
-alias pj='cd ~/Coding/projekte' # go to projects
-alias templ='cd ~/Coding/coding_templates' #go to templates
-alias t=templ
-alias ft='cd ~/Coding/coding_templates/Fortran' # go to fortran templates
-alias pt='cd ~/Coding/coding_templates/Python/python3' # go to python templates
-alias ct='cd ~/Coding/coding_templates/C' # go to C templates
-alias ppt='cd ~/Coding/coding_templates/Python/python3/plots' # go to python plot templates
-alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
-alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
-alias f='cd ~/UZH/Formelsammlung'
-#alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
-alias d='cd ~/Documents/Texte/diary'
+    #---------
+    # Others
+    #---------
+
+    alias e='exit'
+    alias python=python3
+    alias refresh='source ~/.bashrc'
 
 
-#Others
-alias e='exit'
-alias python=python3
-alias refresh='source ~/.bashrc'
+
+
+    #-----------------------------------
+    # COLOR SUPPORT FOR INBUILT PROGRAMS
+    #-----------------------------------
+
+    # enable color support of ls and also add handy aliases
+    if [ -x /usr/bin/dircolors ]; then
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        #alias dir='dir --color=auto'
+        #alias vdir='vdir --color=auto'
+
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
+
+    # some more ls aliases
+    alias ll='ls -alh'
+    alias la='ls -A'
+    alias l='ls -CF'
+
+
+
+
 
 
 
@@ -224,52 +224,52 @@ alias refresh='source ~/.bashrc'
 #===========================
 
 
-#===========================
-#functions to show specified content of ~/.bashrc file
+    #===========================
+    #functions to show specified content of ~/.bashrc file
 
-function showaliases { #function to print all my self defined aliases in the ~/.SHELLrc file.
-    shell_in_use=$0
-    echo " "
-    echo "Printing all aliases defined in the ".$shell_in_use"rc file:"
-    echo " "
-    sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*alias'
-    echo " "
-}
+    function showaliases { #function to print all my self defined aliases in the ~/.SHELLrc file.
+        shell_in_use=$0
+        echo " "
+        echo "Printing all aliases defined in the ".$shell_in_use"rc file:"
+        echo " "
+        sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*alias'
+        echo " "
+    }
 
-function showvars { #function to print all my self defined and exported variables in the ~/.SHELLrc file.
-    shell_in_use=$0
-    echo " "
-    echo "Printing all exported variables defined in the ".$shell_in_use"rc file:"
-    echo " "
-    sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*export'
-    echo " "
-}
+    function showvars { #function to print all my self defined and exported variables in the ~/.SHELLrc file.
+        shell_in_use=$0
+        echo " "
+        echo "Printing all exported variables defined in the ".$shell_in_use"rc file:"
+        echo " "
+        sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*export'
+        echo " "
+    }
 
-function showfuncs { #function to print all my self defined functions in the ~/.bashrc file.
-    shell_in_use=$0
-    echo " "
-    echo "Printing all functions defined in the ".$shell_in_use"rc file:"
-    echo " "
-    sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*function'
-    echo " "
-}
+    function showfuncs { #function to print all my self defined functions in the ~/.bashrc file.
+        shell_in_use=$0
+        echo " "
+        echo "Printing all functions defined in the ".$shell_in_use"rc file:"
+        echo " "
+        sed -e 's/^\s*//' -e '/^$/d' $HOME/."$shell_in_use"rc | egrep '^[[:blank:]]*function'
+        echo " "
+    }
 
-#===========================
+    #===========================
 
 
-function space { # Zeigt Grösse des Arbeitsverzeichnisses
-    echo "Arbeitsverzeichnis: " $PWD
-    echo "Grösse des Arbeitsverzeichnisses " `du -h 2>>/dev/null | tail -n1`
-    echo "Benutze du -h für weitere Informationen."
+    function space { # Zeigt Grösse des Arbeitsverzeichnisses
+        echo "Arbeitsverzeichnis: " $PWD
+        echo "Grösse des Arbeitsverzeichnisses " `du -h 2>>/dev/null | tail -n1`
+        echo "Benutze du -h für weitere Informationen."
 
-    echo ""
-    echo "Informationen zur Hauptpartition:"
-    df -h | head -n1
-    df -h | grep nvme0n1p5 --colour=never
-    echo "Benutze df -h für weitere Informationen."
-}
+        echo ""
+        echo "Informationen zur Hauptpartition:"
+        df -h | head -n1
+        df -h | grep nvme0n1p5 --colour=never
+        echo "Benutze df -h für weitere Informationen."
+    }
 
-alias disk=space
+    alias disk=space
 
 
 
@@ -279,9 +279,8 @@ alias disk=space
 # PYTHON
 #=====================
 
-export PYTHONPATH="/home/mivkov/Coding/projekte/Python/modules/physics:"${PYTHONPATH}
-export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
-##
+    export PYTHONPATH="/home/mivkov/Coding/projekte/Python/modules/physics:"${PYTHONPATH}
+    export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
 
 
 
@@ -289,22 +288,46 @@ export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/
 # Other RC files
 #=====================
 
-#include ramses shortcuts
-#if [ -f ~/.bashrc_ramses ]; then
-#    . ~/.bashrc_ramses
-#fi
+    #include ramses shortcuts
+    #if [ -f ~/.bashrc_ramses ]; then
+    #    . ~/.bashrc_ramses
+    #fi
 
-#openMP stuff
-if [ -f ~/.bashrc_openmp ]; then
-    . ~/.bashrc_openmp
-fi
+    #openMP stuff
+    if [ -f ~/.bashrc_openmp ]; then
+        . ~/.bashrc_openmp
+    fi
 
-#masterarbeit stuff
-if [ -f ~/.bashrc_openmp ]; then
-    . ~/.bashrc_master
-fi
+    #masterarbeit stuff
+    if [ -f ~/.bashrc_master ]; then
+        . ~/.bashrc_master
+    fi
 
 
+
+
+
+#====================
+# MISC
+#====================
+
+    #ls coloring
+    #di = directory
+    #fi = file
+    #ln = symbolic link
+    #pi = fifo file
+    #so = socket file
+    #bd = block (buffered) special file
+    #cd = character (unbuffered) special file
+    #or = symbolic link pointing to a non-existent file (orphan)
+    #mi = non-existent file pointed to by a symbolic link (visible when you type ls -l)
+    #ex = file which is executable (ie. has 'x' set in permissions).
+    #*.rpm = files with the ending .rpm
+    #LS_COLORS=$LS_COLORS:'di=1;34:' ; export LS_COLORS
+
+
+    #disable vim C-s freezeout (solve with C-q)
+    #stty -ixon
 
 
 # Add an "alert" alias for long running commands.  Use like so:

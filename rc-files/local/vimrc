@@ -1,194 +1,8 @@
-"==========================================================
-"=== PLUGINS ==============================================
-"==========================================================
-"
-"===========================
-"VUNDLE - vim Plugin manager
-"===========================
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'               "vundle - vim plugin manager
-
-Plugin 'scrooloose/nerdcommenter'           "sexy commenting
-
-Plugin 'Yggdroot/indentLine'                "indentation lines for loops 
-
-Plugin 'scrooloose/nerdtree'                "file tree
-
-Plugin 'Valloric/YouCompleteMe'             "auto completion
-
-Plugin 'altercation/vim-colors-solarized'   "colorscheme
-
-Plugin 'chriskempson/base16-vim'
-
-Plugin 'maxst/flatcolor'                    "colorscheme
-
-Plugin 'jiangMiao/auto-pairs'               "autocomplete parentheses
-
-Plugin 'tmhedberg/SimpylFold'               "folding plugin
-
-Plugin 'Konfekt/FastFold'                   "fasten up folding/when writing
-
-
-"" The following are examples of different formats supported.
-"" Keep Plugin commands between vundle#begin/end.
-
-"" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-
-"" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-
-"" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-
-"" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-
-"" The sparkup vim script is in a subdirectory of this repo called vim.
-"" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-"" Install L9 and avoid a Naming conflict if you've already installed a
-"" different version somewhere else.
-"Plugin 'ascenator/L9', {'name': 'newL9'}
-
-"" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-
-
-
-
-
-
-"==================
-" === NERDCOMMENTER
-"==================
-
-let mapleader = ","
-
-"comment empty lines as well
-let g:NERDCommentEmptyLines=1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-
-
-
-"===============
-"=== INDENT LINE
-"===============
-
-let g:indentLine_char = '|'
-
-
-
-
-"==================
-" === NERDCOMMENTER
-"==================
-
-map <C-n> :NERDTreeToggle<CR>
-
-
-
-"==================
-" === YouCompleteMe
-"==================
-
-" made this file myself. Sources: 
-" https://github.com/rasendubi/dotfiles/blob/master/.vim/.ycm_extra_conf.py,
-" http://www.alexeyshmalko.com/2014/youcompleteme-ultimate-autocomplete-plugin-for-vim/
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
-
-let g:ycm_python_binary_path = '/usr/bin/python3'
-
-let g:ycm_auto_trigger = 1 "trigger after X characters
-
-
-
-
-
-"====================
-" === SimplyFold
-"====================
-let g:SimpylFold_docstring_preview=1
-
-
-
-
-"====================
-" === FastFold
-"====================
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-
-
-
-
-
-"==========================================================
-"END OF PLUGINS
-"==========================================================
-
-
-
-
-
-"=================
-" COLORS
-"=================
-
-"" Set solarised color scheme
-syntax enable
-set t_Co=16 "remove for zenburn
-"set background=dark
-"set background=light
-"let g:solarized_termcolors=16
-"let g:solarized_termtrans=1
-"colorscheme solarized
-"
-" flatcolor
-"let g:flatcolor_termcolors=16
-"colorscheme flatcolor 
-
-
-
-" Set highlight colors for brackets/braces/parenthesis matching
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
-
-
-
-
-
-
-
-
-
+"================
+" PLUGINS
+"================
+    "must be first.
+    source ~/.vimrc_plugins
 
 
 
@@ -197,87 +11,63 @@ hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
 
 "=================
-" GUI
+" VIM GENERAL
 "=================
 
-"Line Numbers
-set number
-set relativenumber
+    " Enable mouse support in console
+    set mouse=a
 
-" line wrap and other stuff
-set linebreak
-set nolist
+    " set backup
+    set backup
+    set backupdir=~/.vim/backup
+    set directory=~/.vim/tmp
 
-" this enables 'visual' wrapping
-set wrap
+    " Split screen navigation key mapping change
+    nnoremap <C-J> <C-W><C-J>
+    nnoremap <C-K> <C-W><C-K>
+    nnoremap <C-L> <C-W><C-L>
+    nnoremap <C-H> <C-W><C-H>
 
-" this turns off physical line wrapping (ie: automatic insertion of newlines)
-set textwidth=0 
-set wrapmargin=0
+    " enable 'intelligent' pasting
+    "set paste " conflicts with YouCompleteMe
 
-" line wrap with indent kept
-set breakindent  
+    " enable copypasting between sessions
+    set clipboard=unnamedplus
 
-" moving along visual lines, not physical lines
-noremap  <buffer> <silent> k gk
-noremap  <buffer> <silent> j gj
-noremap  <buffer> <silent> 0 g0
-noremap  <buffer> <silent> $ g$
+    " make backspace work 'normally'
+    set backspace=indent,eol,start 
 
+    " tab completion in command line
+    set wildmode=longest,list ",full
+    set wildmenu
 
+    "Line Numbers
+    set number
+    set relativenumber
 
+    " this enables 'visual' wrapping
+    set wrap
 
+    " line wrap and other stuff
+    set linebreak
+    set nolist
 
+    " this turns off physical line wrapping (ie: automatic insertion of newlines)
+    set textwidth=0 
+    set wrapmargin=0
 
+    " line wrap with indent kept
+    set breakindent  
 
+    " moving along visual lines, not physical lines
+    noremap  <buffer> <silent> k gk
+    noremap  <buffer> <silent> j gj
+    noremap  <buffer> <silent> 0 g0
+    noremap  <buffer> <silent> $ g$
 
-
-
-
-
-
-
-
-"====================
-" STATUS LINE
-"====================
-
-" First define new highlight groups
-"hi User1 ctermbg=223 ctermfg=23
-"hi User1 ctermbg=blue
-hi User1 ctermbg=none
-" it uses the solarised colors if =none 
-"guibg=green guifg=white for GUI, which I don't use...
-
-" Now add what you want
-
-set laststatus=2                "status line permanently on
-
-set statusline=%*               "add personal highlighting
-                                "specified in hi User1 ctermbg...
-"set statusline+=%<\            " cut at start
-"set statusline+=%t              "tail of the filename
-"set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
-"set statusline+=%{&ff}]        "file format
-"set statusline+=%h             "help file flag
-set statusline+=%m              "modified flag
-set statusline+=%r              "read only flag
-set statusline+=%F                    " path
-let emptyspace='    '
-set statusline+=%{emptyspace}
-set statusline+=@%{hostname()}
-"set statusline+=%y             "filetype
-set statusline+=%=              "left/right separator
-set statusline+=Col\ %c,\       "cursor column
-set statusline+=Lin\ %l/%L  "cursor line/total lines
-set statusline+=\ %P        "percent through file 
-
-
-
-
-
-
-
+    " Allow to store file specific options as comments in file
+    set modeline
+    set modelines=5
 
 
 
@@ -290,61 +80,15 @@ set statusline+=\ %P        "percent through file
 " SEARCHING
 "=================
 
+    " Ignoring case
+    set ignorecase
 
-" Ignoring case
-set ignorecase
+    " Incremental searching
+    set incsearch
 
-" Incremental searching
-set incsearch
+    " Highlight things that we find with the search
+    set hlsearch
 
-" Highlight things that we find with the search
-set hlsearch
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"=================
-" VIM GENERAL
-"=================
-
-" Enable mouse support in console
-set mouse=a
-
-" set backup
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
-
-" Split screen navigation key mapping change
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" enable 'intelligent' pasting
-"set paste " conflicts with YouCompleteMe
-
-" enable copypasting between sessions
-set clipboard=unnamedplus
-
-" make backspace work 'normally'
-set backspace=indent,eol,start 
-
-
-
-" tab completion 
-set wildmode=longest,list ",full
-set wildmenu
 
 
 
@@ -353,32 +97,32 @@ set wildmenu
 " FOLDING
 "===================
 
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
+    " Enable folding
+    set foldmethod=indent
+    set foldlevel=99
 
-" Set fold methods for every file type only! 
-let g:vimsyn_folding='af'
-let g:tex_fold_enabled=1
-let g:python_folding = 1
-let g:fortran_folding = 1
-let g:bash_folding = 1
-let g:c_folding = 1
-"let g:xml_syntax_folding = 1
-"let g:php_folding = 1
-"let g:perl_fold = 1
+    " Set fold methods for every file type only! 
+    let g:vimsyn_folding='af'
+    let g:tex_fold_enabled=1
+    let g:python_folding = 1
+    let g:fortran_folding = 1
+    let g:bash_folding = 1
+    let g:c_folding = 1
+    "let g:xml_syntax_folding = 1
+    "let g:php_folding = 1
+    "let g:perl_fold = 1
 
 
 
-" Enable folding with the spacebar
-nnoremap <space> za
+    " Enable folding with the spacebar
+    nnoremap <space> za
 
-" Save/autoload folding when writing/loading file
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* loadview
-augroup END
+    " Save/autoload folding when writing/loading file
+    augroup remember_folds
+      autocmd!
+      autocmd BufWinLeave *.* mkview
+      autocmd BufWinEnter *.* loadview
+    augroup END
 
 
 
@@ -393,49 +137,83 @@ augroup END
 " SYNTAX AND TABS
 "=================
 
-" Needed for Syntax Highlighting and stuff
-filetype on " doesn't work with vundle
-filetype plugin on "needed for plugins: nerdcommenter
-filetype indent on "needed by  plugin slim
-syntax enable
-set grepprg=grep\ -nH\ $*
+    " Needed for Syntax Highlighting and stuff
+    filetype on 
+    filetype plugin on "needed for plugins: nerdcommenter
+    filetype indent on "needed by  plugin slim
 
-" Who doesn't like autoindent?
-set autoindent
+    syntax enable
+    set t_Co=16
+    set grepprg=grep\ -nH\ $*
 
-" Allow to store file specific options as comments in file
-set modeline
-set modelines=5
+    " Who doesn't like autoindent?
+    set autoindent
 
-" default tab configs
-"set tabstop=2
-"set expandtab
-"set shiftwidth=2
+    " tab and backspace are smart
+    set smarttab                  
+    set expandtab
 
-" Filetype specific indents:
-" To see available filetypes: :setfiletype ctrl+D
-" tabs for c, fortran, bash files, 2 spaces: moved to .vim/after/
-"autocmd FileType c        setlocal ts=2 sw=2 expandtab
-"autocmd FileType cpp      setlocal ts=2 sw=2 expandtab
-"autocmd FileType fortran  setlocal ts=2 sw=2 expandtab
-"
-"" for python files, 4 spaces
-"autocmd FileType python setlocal ts=4 sw=4 sts=0 expandtab
-"autocmd FileType sh setlocal ts=4 sw=4 sts=0 expandtab
+
+    " Fortran highlighting
+    let fortran_free_source=1
+    let fortran_have_tabs=1
+    let fortran_more_precise=1
+    let fortran_do_enddo=1
 
 
 
-" tab and backspace are smart
-set smarttab                  
-       
 
-" Fortran highlighting
-let fortran_free_source=1
-let fortran_have_tabs=1
-let fortran_more_precise=1
-let fortran_do_enddo=1
-"=================
-"=================
+
+
+
+"===============
+"HIGHLIGHTING
+"===============
+
+    " Set highlight colors for brackets/braces/parenthesis matching
+    hi MatchParen cterm=bold ctermbg=none ctermfg=red
+    hi Fold cterm=bold ctermbg=6 ctermfg=grey
+
+
+
+
+
+
+
+"===============
+" STATUS LINE
+"====================
+
+    " First define new highlight groups
+    "hi User1 ctermbg=223 ctermfg=23
+    "hi User1 ctermbg=blue
+    hi User1 ctermbg=none
+    " it uses the solarised colors if =none 
+    "guibg=green guifg=white for GUI, which I don't use...
+
+    " Now add what you want
+
+    set laststatus=2                "status line permanently on
+
+    set statusline=%*               "add personal highlighting
+                                    "specified in hi User1 ctermbg...
+    "set statusline+=%<\            " cut at start
+    "set statusline+=%t              "tail of the filename
+    "set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+    "set statusline+=%{&ff}]        "file format
+    "set statusline+=%h             "help file flag
+    set statusline+=%m              "modified flag
+    set statusline+=%r              "read only flag
+    set statusline+=%F                    " path
+    let emptyspace='    '
+    set statusline+=%{emptyspace}
+    set statusline+=@%{hostname()}
+    "set statusline+=%y             "filetype
+    set statusline+=%=              "left/right separator
+    set statusline+=Col\ %c,\       "cursor column
+    set statusline+=Lin\ %l/%L  "cursor line/total lines
+    set statusline+=\ %P        "percent through file 
+
 
 
 
