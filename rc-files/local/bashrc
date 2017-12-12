@@ -128,11 +128,15 @@
 
     # Add executables from /home/mivkov/Skripte/execs_included_in_path
     # to $PATH variable
-    PATH="/home/mivkov/Skripte/execs_included_in_path:"$PATH
+    PATH="$HOME"/"Skripte/bins_to_include_in_path:"$PATH
     # Add intel (fortran) compiler to path var
-    PATH="/opt/intel/bin:"$PATH
+    #PATH="/opt/intel/bin:"$PATH
     #add local bin
-    PATH="/home/mivkov/local/bin:"$PATH
+    PATH="$HOME""/local/bin:"$PATH
+
+    #add downloaded programs
+    PATH="$HOME""/Programme:"$PATH
+    PATH="$HOME""/Programme/briss-0.9":"$PATH"
 
 
 
