@@ -183,6 +183,8 @@
     alias f='cd ~/UZH/Formelsammlung'
     #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
     alias d='cd ~/Documents/Texte/diary'
+    alias papers='cd ~/UZH/Papers'
+    alias plg='cd ~/Coding/Playground'
 
 
     #---------
@@ -307,6 +309,11 @@
         . ~/.bashrc_master
     fi
 
+
+    #Computational Astrophysics
+    if [ -f ~/.bashrc_compast ]; then
+        . ~/.bashrc_compast
+    fi
 
 
 

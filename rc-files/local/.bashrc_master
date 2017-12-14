@@ -49,7 +49,7 @@ echo "Importing master thesis stuff."
     # Dir aliases
     #-------------------------
 
-    alias ma='cd /home/mivkov/UZH/Masterarbeit/masterarbeit/'
+    alias ma='cd "$MA"'
     alias scr='cd "$MA"/scripts'
 
     alias pa='cd "$MA"/project/ramses/patch/mergertree'
