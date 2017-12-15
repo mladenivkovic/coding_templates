@@ -100,11 +100,13 @@
     " Enable folding
     set foldmethod=indent
     set foldlevel=99
+    set foldenable
 
     " Set fold methods for every file type only! 
     let g:vimsyn_folding='af'
     let g:tex_fold_enabled=1
     let g:python_folding = 1
+    let python_folding = 1
     let g:fortran_folding = 1
     let g:bash_folding = 1
     let g:c_folding = 1

@@ -25,7 +25,7 @@
 
         Plugin 'jiangMiao/auto-pairs'               "autocomplete parentheses
 
-        Plugin 'tmhedberg/SimpylFold'               "folding plugin
+        "Plugin 'tmhedberg/SimpylFold'               "folding plugin
 
         Plugin 'Konfekt/FastFold'                   "fasten up folding/when writing
 
@@ -130,7 +130,7 @@
 " === SimplyFold
 "====================
         
-        let g:SimplyFold_docstring_preview=1
+        "let g:SimplyFold_docstring_preview=1
 
 
 
