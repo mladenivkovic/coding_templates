@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*-
 
 
+#========================
+# Dealing with lists
+#========================
+
+
+
 print( "" )
 print("===============")
 print("PYTHON LISTS" )
@@ -77,8 +83,8 @@ print("" )
 
 
 print("mylist.pop()                              pop last element. Can be stored in a variable.") 
-print("   ", mylist.pop() )      # 2; [8,7,6,5,4,4,3]
-print("    mylist = ", mylist )
+print("    mylist.pop()=", mylist.pop() )      # 2; [8,7,6,5,4,4,3]
+print("    mylist =", mylist )
 print("" )
 
 
@@ -91,6 +97,13 @@ print("" )
 
 print("len(mylist)", len(mylist) )
 print("" )
+
+
+print("a = [1, 2, 3]")
+print("b = [4, 5, 6]")
+a = [1, 2, 3]
+b = [4, 5, 6]
+print("a + b \t", a + b)
 
 
 
@@ -111,15 +124,15 @@ print("Accessing elements" )
 print("===================")
 print( "" )
 
-print("mylist = ", mylist )
-print("mylist[0] = ", mylist[0] )
-print("mylist[1] = ", mylist[1] )
-print("mylist[-1] = ", mylist[-1] )
-print("mylist[:] = ", mylist[:] )
-print("mylist[:4] = ", mylist[:4] )
-print("mylist[:-3] = ", mylist[:-3] )
-print("mylist[5:] = ", mylist[5:] )
-print("mylist[-2:] = ", mylist[-2:] )
+print("mylist = \t", mylist )
+print("mylist[0] = \t", mylist[0] )
+print("mylist[1] = \t", mylist[1] )
+print("mylist[-1] = \t", mylist[-1] )
+print("mylist[:] = \t", mylist[:] )
+print("mylist[:4] = \t", mylist[:4] )
+print("mylist[:-3] = \t", mylist[:-3] )
+print("mylist[5:] = \t", mylist[5:] )
+print("mylist[-2:] = \t", mylist[-2:] )
 
 
 
@@ -155,8 +168,8 @@ print("Here's the problem:")
 print("list1 = [1,2,3]")
 print("list2 = list1")
 print("list1.append(4)")
-print("list2 = ", list2)
-print("list2 is list1 = ", list2 is list1)
+print("list2 = \t", list2)
+print("list2 is list1 = \t", list2 is list1)
 
 
 print("")
@@ -174,10 +187,10 @@ import copy
 list3_3 = copy.deepcopy(list1)
 list1.append(5)
 
-print("list1 = ", list1)
-print("list3_1 = ", list3_1)
-print("list3_2 = ", list3_2)
-print("list3_3 = ", list3_3)
+print("list1 = \t", list1)
+print("list3_1 = \t", list3_1)
+print("list3_2 = \t", list3_2)
+print("list3_3 = \t", list3_3)
 
 
 
@@ -208,7 +221,7 @@ combined = list(zip(fields, data))
 
 
 
-print('fields = ["name", "surname", "age", "profession"]')
-print('data = ["John B.", "Goode", 21, "guitar player"]')
-print('combined = list(zip(fields, data))')
+print('fields =    ["name", "surname", "age", "profession"]')
+print('data =      ["John B.", "Goode", 21, "guitar player"]')
+print('combined =  list(zip(fields, data))')
 print("combined = ", combined)

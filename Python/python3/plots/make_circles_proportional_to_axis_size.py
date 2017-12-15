@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-#Draw a circle that has radius exactly 0.5 on the axes
+#=========================================================
+# Draw a circle that has radius exactly 0.5 on the axes
+#=========================================================
 
 from os import getcwd
 # from sys import argv #command line arguments
@@ -12,14 +14,10 @@ outputfilename = "plot_proportional_circles"
 title='Proportional clump sizes to image/axis dimensions plot'
 workdir= str(getcwd())
 
-########################################################################
-########################################################################
-########################################################################
-########################################################################
 
-
+#============================
 if __name__ == "__main__":
-
+#============================
 
 
     # Set point parameters : Circle with center on (1,1) and radius 0.5

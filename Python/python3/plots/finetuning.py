@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf8 -*-
+
+
+# ==============================================================================
+# Fine tuning a plot
 # for more colormaps, see http://www.ctac.uzh.ch/dokuwiki/doku.php?id=colormaps
+# ==============================================================================
 
 from numpy import array, sqrt,loadtxt
 from os import getcwd
@@ -18,7 +23,9 @@ workdir= str(getcwd())
 
 
 
+#================================
 def extract_ascii(filename):
+#================================
     #Der grösste Teil dieser Funkion ist unwichtig für die Vorlage.
     #Er bezieht sich hauptsächlich darauf, die Daten richtig
     #auszulesen und allfällige Nullen in Werte != 0 zu verwandeln,
@@ -53,25 +60,25 @@ def extract_ascii(filename):
     return data_map, minvalue, maxvalue, gridsize
 
 
-####################################################
-####################################################
-####################################################
-####################################################
-####################################################
 
 
 
-
+#================================
 if __name__ == "__main__":
+#================================
 
+    #----------------------------------------
     # get data_map from part2map .map file
+    #----------------------------------------
     print( "importing data" )
     data_map, minvalue, maxvalue, gridsize = extract_ascii(filename)
     print( "data imported" )
 
 
 
+    #----------------------------------------
     print( "creating figure" )
+    #----------------------------------------
 
     # instantiate new figure and axis objects
     fig = pyplot.figure(facecolor='white', figsize=(21,12), dpi=100)
@@ -79,7 +86,9 @@ if __name__ == "__main__":
 
 
 
+    #----------------------------------------
     # SUBPLOT 1
+    #----------------------------------------
     ax1 = fig.add_subplot(1,2,1)
 
     im1 = ax1.imshow(data_map, interpolation='kaiser', cmap='jet', norm=LogNorm(), origin="lower")
@@ -104,7 +113,9 @@ if __name__ == "__main__":
 
 
 
-    #SUBPLOT 2
+    #----------------------------------------
+    # SUBPLOT 2
+    #----------------------------------------
     ax2 = fig.add_subplot(1,2,2)
 
     im2 = ax2.imshow(data_map, interpolation='kaiser', cmap='gnuplot2', norm=LogNorm(), origin="lower")
@@ -130,7 +141,9 @@ if __name__ == "__main__":
 
     
 
-    #TWEAKING
+    #----------------------------------------
+    # TWEAKING
+    #----------------------------------------
 
     pyplot.figtext(.05, .07, 'gridsize='+str(int(gridsize))+r' $\times$ '+str(int(gridsize)), family='serif', size=16)
 
@@ -140,7 +153,7 @@ if __name__ == "__main__":
 
     fig_path = workdir+'/'+outputfilename+'.png'
     print( "saving figure as"+fig_path )
-    pyplot.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=100)
+    pyplot.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=300)
     pyplot.close()
 
     print( "done" )

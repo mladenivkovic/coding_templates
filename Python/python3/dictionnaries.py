@@ -39,3 +39,13 @@ print("d2.clear(); d2=", d2)
 print("Nenad in d2", "Nenad" in d2)
 
 
+
+print()
+
+d3={'a':1, 'b':2, 'c':'d'}
+d4={'a':3, 'b':2, 'd':'e'}
+
+print("d3={'a':1, 'b':2, 'c':'d'}")
+print("d4={'a':3, 'b':2, 'd':'e'}")
+print("d3.keys() & d4.keys()\t", d3.keys() & d4.keys())
+

@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
+#==========================================================================
 # This script plots all particles that are in clumps and mark the ones 
 # that were unbound. It makes 3 subplots,
 # one for each plane of coordinates: xy, yz and xz
-# 
+#==========================================================================
+
+
 from os import getcwd
-import matplotlib 
-matplotlib.use('Agg') #don't show anything unless I ask you to. So no need to get graphical all over ssh.
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties # for legend
@@ -20,7 +21,9 @@ fontP=FontProperties()
 fontP.set_size('xx-small') 
 
 
+#================
 def get_data():
+#================
 
     print( "Reading in data." )
 
@@ -40,22 +43,22 @@ def get_data():
 
 
 
-########################################################################
-########################################################################
-########################################################################
-########################################################################
-
-
+#===============================
 if __name__ == "__main__":
+#===============================
 
-# get data
+    #------------
+    # get data
+    #------------
     x_part, y_part, z_part, clumpid = get_data()
 
     
 
     print( "Creating figure" )
 
-# creating empty figure with 4 subplots
+    #----------------------------------------
+    # creating empty figure with 4 subplots
+    #----------------------------------------
     fig = plt.figure(facecolor='white', figsize=(20,8))
     fig.suptitle('Scatter plot 3D: halo & clumps',family='serif', size=20)
     ax1 = fig.add_subplot(141, projection='3d')
@@ -64,18 +67,40 @@ if __name__ == "__main__":
     ax4 = fig.add_subplot(144, projection='3d')
     
 
-#setting colorbar
-    fullcolorlist=['red', 'green', 'blue', 'gold', 'magenta', 'cyan','lime','saddlebrown','darkolivegreen','cornflowerblue','orange','dimgrey','navajowhite','black','darkslategray','mediumpurple','lightpink','mediumseagreen','maroon','midnightblue','silver']
+    #--------------------
+    # setting colorbar
+    #--------------------
+    fullcolorlist=['red', 
+            'green', 
+            'blue', 
+            'gold', 
+            'magenta', 
+            'cyan',
+            'lime',
+            'saddlebrown',
+            'darkolivegreen',
+            'cornflowerblue',
+            'orange',
+            'dimgrey',
+            'navajowhite',
+            'black',
+            'darkslategray',
+            'mediumpurple',
+            'lightpink',
+            'mediumseagreen',
+            'maroon',
+            'midnightblue',
+            'silver']
 
 
 
 
 
-##########################################
-##########################################
 
-# creating mock arrays for childre
-# get max id for children. (Here, they are sorted.)
+    #----------------------------------------------------
+    # creating mock arrays for childre
+    # get max id for children. (Here, they are sorted.)
+    #----------------------------------------------------
     maxc=clumpid[-1]
     children=range(1,maxc+1)
     # plot children
@@ -89,12 +114,39 @@ if __name__ == "__main__":
                 y.append(y_part[j])
                 z.append(z_part[j])
         
-        ax1.scatter(x,y,z,s=1,c=fullcolorlist[i+1], label='ptcls of child clump '+str(children[i]), lw=0, marker=',',depthshade=True)
-        ax2.scatter(x,y,z,s=1,c=fullcolorlist[i+1], label='ptcls of child clump '+str(children[i]), lw=0, marker=',',depthshade=True)
-        ax3.scatter(x,y,z,s=1,c=fullcolorlist[i+1], label='ptcls of child clump '+str(children[i]), lw=0, marker=',',depthshade=True)
-        ax4.scatter(x,y,z,s=1,c=fullcolorlist[i+1], label='ptcls of child clump '+str(children[i]), lw=0, marker=',',depthshade=True)
-#####################################
-# PLOT HALOS
+        ax1.scatter(x,y,z,
+                s=1,
+                c=fullcolorlist[i+1], 
+                label='ptcls of child clump '+str(children[i]), 
+                lw=0,
+                marker=',',
+                depthshade=True)
+        ax2.scatter(x,y,z,
+                s=1,
+                c=fullcolorlist[i+1], 
+                label='ptcls of child clump '+str(children[i]), 
+                lw=0,
+                marker=',',
+                depthshade=True)
+        ax3.scatter(x,y,z,
+                s=1,
+                c=fullcolorlist[i+1], 
+                label='ptcls of child clump '+str(children[i]), 
+                lw=0,
+                marker=',',
+                depthshade=True)
+        ax4.scatter(x,y,z,
+                s=1,
+                c=fullcolorlist[i+1], 
+                label='ptcls of child clump '+str(children[i]), 
+                lw=0,
+                marker=',',
+                depthshade=True)
+
+
+    #=================
+    # PLOT HALOS
+    #=================
     halo=0
     x=[]
     y=[]
@@ -105,13 +157,43 @@ if __name__ == "__main__":
             y.append(y_part[j])
             z.append(z_part[j])
 
-    ax1.scatter(x,y,z,s=1,c=fullcolorlist[0], label='ptcls of halo-namegiver '+str(halo), lw=0, marker=',',depthshade=True) 
-    ax2.scatter(x,y,z,s=1,c=fullcolorlist[0], label='ptcls of halo-namegiver '+str(halo), lw=0, marker=',',depthshade=True) 
-    ax3.scatter(x,y,z,s=1,c=fullcolorlist[0], label='ptcls of halo-namegiver '+str(halo), lw=0, marker=',',depthshade=True) 
-    ax4.scatter(x,y,z,s=1,c=fullcolorlist[0], label='ptcls of halo-namegiver '+str(halo), lw=0, marker=',',depthshade=True) 
+    ax1.scatter(x,y,z,
+            s=1,
+            c=fullcolorlist[0], 
+            label='ptcls of halo-namegiver '+str(halo), 
+            lw=0, 
+            marker=',',
+            depthshade=True) 
+    ax2.scatter(x,y,z,
+            s=1,
+            c=fullcolorlist[0], 
+            label='ptcls of halo-namegiver '+str(halo), 
+            lw=0, 
+            marker=',',
+            depthshade=True) 
+    ax3.scatter(x,y,z,
+            s=1,
+            c=fullcolorlist[0], 
+            label='ptcls of halo-namegiver '+str(halo), 
+            lw=0, 
+            marker=',',
+            depthshade=True) 
+    ax4.scatter(x,y,z,
+            s=1,
+            c=fullcolorlist[0], 
+            label='ptcls of halo-namegiver '+str(halo), 
+            lw=0, 
+            marker=',',
+            depthshade=True) 
 
 
     # print( ax1.azim, ax1.elev, ax1.dist )
+
+
+
+    #======================
+    # TWEAK PLOTS
+    #======================
 
     # move the 'camera'
     ax1.view_init(elev=15.,azim=-60)
@@ -139,8 +221,9 @@ if __name__ == "__main__":
 
 
 
-# # SET LEGEND
-
+    #--------------
+    # SET LEGEND
+    #--------------
  
     lgnd1=ax1.legend(loc=0, scatterpoints=1,prop=fontP, framealpha=0.5)
     lgnd2=ax2.legend(loc=0, scatterpoints=1,prop=fontP, framealpha=0.5)
@@ -154,18 +237,27 @@ if __name__ == "__main__":
 
 
 
-
-
-
     fig.tight_layout()
     plt.subplots_adjust(left=0.01, right=0.99, top=0.9, bottom=0.02,wspace=0.05)
     print( "Figure created" )
     
-    
+   
+
+
+
+
+
+
+
+
+
+    #===================
     # saving figure
+    #===================
+
     fig_path = workdir+'/'+outputfilename+'.png'
     print( "saving figure as "+fig_path )
-    plt.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=600)
+    plt.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=300)
     plt.close()
 
     print( "done", outputfilename+".png" )

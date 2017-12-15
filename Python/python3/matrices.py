@@ -33,7 +33,9 @@ print(c )
 
 print("" )
 print("" )
+print("=======================")
 print("MATRIX OPERATIONS" )
+print("=======================")
 print("" )
 
 print('a*B: MATRIX PRODUCT' )
@@ -73,7 +75,9 @@ print(np.matrix(np.zeros((3,4))) )
 
 print("" )
 print("" )
+print("========================================================")
 print("SOLVING EQUATION WITH MATRICES: NP.MATRIX AND NP.ARRAY" )
+print("========================================================")
 
 print("Ca = np.array([[-2,1],[0.5,2]])" )
 Ca = np.array([[-2,1],[0.5,2]])
@@ -144,7 +148,9 @@ print("" )
 
 
 print("" )
+print("=======================")
 print("SIZES AND DIMENSIONS" )
+print("=======================")
 print("" )
 print("B=" )
 print(B )

@@ -3,22 +3,37 @@
 import numpy as np
 import matplotlib as mpl
 
+
+
+#==============================
+# How to deal with functions
+#==============================
+
+
+#===============================
 def sumdiff1(a, b): 
+#===============================
     return a+b, a-b 
     
 
 #Mit vorgegebenen Standardwerten:
 
 #Ein gegebener Standardwert
+#===============================
 def sumdiff2(a, b = 0): 
+#===============================
     return a+b, a-b 
 
 #Mehrere
+#===============================
 def manyargs(a, b=1, c=2, d=3):
+#===============================
     return a*b-c*d 
 
 #Beliebig viele
+#===============================
 def anyargs(*args, **kwargs):
+#===============================
     """
     A function to demonstrate passing arbitrarily many arguments.
     Parameters:
@@ -37,16 +52,17 @@ def anyargs(*args, **kwargs):
     
     
 
-##################################
-##################################
-##################################
-##################################
-##################################
-
-#Fkt aus anderer Datei importieren
-
+#===============================
 if __name__ == "__main__":
+#===============================
+
+    #Fkt aus anderer Datei importieren
     from importmodul import weg, zeit
+
+
+    #-------------------------
+    # call your functions
+    #-------------------------
 
     retPair = sumdiff1(3,5) 
     retSum, retDiff = sumdiff1(3,5)
@@ -75,5 +91,4 @@ if __name__ == "__main__":
     anyargs(3, 7, sumdiff1, 'hehe', d=1, e=2)
 
 
-#-------------------------
 

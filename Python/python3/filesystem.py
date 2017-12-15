@@ -1,11 +1,18 @@
 #!/usr/bin/python3
 
+#==========================================================
 #This script shows how to deal with files on the filesystem.
+#==========================================================
 
 
 import os
 import fnmatch
 import shutil
+
+print("=================")
+print("Get information")
+print("=================")
+print()
 
 print("My current path:")
 print(os.getcwd())
@@ -35,6 +42,20 @@ print(inputfiles)
 
 
 
+
+
+
+
+
+
+
+
+
+print()
+print()
+print("=================")
+print("Interact")
+print("=================")
 
 print()
 print("Create directory if it doesn't exist already:")
@@ -72,7 +93,7 @@ print(file.read())
 print()
 
 
-input("The script has stopped so you can check out that the directory "+dirname+" and the file were created. Press any key to continue to delete them.")
+input("The script has stopped so you can check out that the directory './"+dirname+"/' and the file were created. Press any key to continue to delete them.")
 
 print()
 print("Now deleting file.")

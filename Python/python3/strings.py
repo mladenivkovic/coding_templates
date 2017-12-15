@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 
 
+#===============================
+# Working with strings
+#===============================
+
+
+
 mystring="Hallo. Das ist ein beliebiger String."
 
 print("")

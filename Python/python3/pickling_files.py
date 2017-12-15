@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-
+#=============================================
 # Pickling data
 # Store non-text (= binary) data in files
+# for easy read-in
+#=============================================
 
 
 import pickle

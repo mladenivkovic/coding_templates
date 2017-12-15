@@ -3,10 +3,12 @@
 import numpy as np
 import subprocess
 
-
+#===============================
 def get_data_loadtxt(filename):
+#===============================
 
-#http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
+    #http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
+
     print('' )
     print(" Extracting data from file with loadtxt" )
 
@@ -23,7 +25,9 @@ def get_data_loadtxt(filename):
 
 
 
+#===============================
 def get_data_awk(filename):
+#===============================
     # Extract the necessary data from mladen_masscomparison.txt file.
 
     print('' )
@@ -56,7 +60,9 @@ def get_data_awk(filename):
 
 
 
+#===============================
 if __name__ == "__main__":
+#===============================
     
     n1, i1, f1 = get_data_loadtxt('inputfiles/table.txt')
     print(('{0:8}{1:8}{2:8}'.format("names", n1[0], n1[-1])) )

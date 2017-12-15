@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
+#==========================================================
 # How to call shell commands and get output into the script
+#==========================================================
+
 import subprocess
 
 #cmd='ls ../inputfiles/mpi_multiple_files/output_00004.0*'

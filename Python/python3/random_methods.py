@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 
+
+#==================================================
 # A script to show the various possibilities
 # to get quasi-random values
 
 # DO NOT CALL THIS SCRIPT RANDOM.PY
-# https://docs.python.org/2/library/random.html
+# PYTHON WON'T FIND THE MODULE random OTHERWISE
+#==================================================
 
 import random 
 

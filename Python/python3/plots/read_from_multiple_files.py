@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+#================================================================
 # This script reads in input from multiple files.
 # In this case, the domain was split in 8 subdomains,
 # where each processor handled one subdomain and communicated
@@ -7,6 +8,7 @@
 # The domain is split in 2 x 4 parts in this case.
 # Every processor created its own output file, leaving us with
 # 8 files to read in and concatenate in different dimensions.
+#================================================================
 
 
 
@@ -14,26 +16,31 @@ import numpy as np
 import fnmatch
 from os import getcwd, path, mkdir,listdir #get currend work dir, check if dir exists, make new dir
 from sys import argv # command line arguments
-from matplotlib import use
-use('Agg') #don't show anything unless I ask you to. So no need to get graphical all over ssh.
 from matplotlib import pyplot
 from matplotlib.colors import LogNorm
 from mpl_toolkits.axes_grid1 import make_axes_locatable, axes_size
 
 
-
+#============================
 print( "Reading in data." )
+#============================
 
 inputfiles=[]
+
+# get all inputfiles
 fileloc='../inputfiles/mpi_multiple_files/'
 for filename in listdir(fileloc):
     if fnmatch.fnmatch(filename, 'output_00008*'):
         inputfiles.append(fileloc+filename)
 
-inputfiles.sort() #sort alphabetically!
+inputfiles.sort() #sort them alphabetically!
 
-nx_tot, ny_tot, nproc, nproc_x, nproc_y = np.loadtxt('../inputfiles/mpi_multiple_files/hydro_runinfo.txt',dtype='int', comments='#')
+# get meta information from another file
+nx_tot, ny_tot, nproc, nproc_x, nproc_y = \
+        np.loadtxt('../inputfiles/mpi_multiple_files/hydro_runinfo.txt',
+        dtype='int', comments='#')
 
+# read in data from all files
 for j in range(0, nproc_y):
     for i in range(0, nproc_x):
         inputfile = str(inputfiles[i+j*nproc_x])
@@ -51,6 +58,12 @@ for j in range(0, nproc_y):
         data = np.concatenate((data, data_x), axis=0)
 
 
+
+
+#================
+# Plotting
+#================
+
 #determining figure size (figsize)
 
 if (nx_tot > ny_tot):
@@ -58,13 +71,12 @@ if (nx_tot > ny_tot):
 else:
     bigger=ny_tot
 
+# calculate figure size based on read in array
 figwidth=float(nx_tot)/bigger*12.0
 figheight=float(ny_tot)/bigger*12.0
 
 
 
-
-#Plotting
 fig = pyplot.figure(facecolor='white', figsize=(figwidth+1, figheight+0.5), dpi=150) 
 ax = fig.add_subplot(1,1,1)
 #pyplot.tight_layout() #nice layout
@@ -95,15 +107,19 @@ fig.colorbar(im, cax=cax)
 
 
 
-workdir = str(getcwd())
 
+#==============
+# Save figure
+#==============
+
+workdir = str(getcwd())
 
 outputfilename = 'plot_read_from_multiple_files'
 extension = 'png'
 fig_path = workdir+'/'+outputfilename+'.'+extension
 
 print( "saving ", fig_path )
-pyplot.savefig(fig_path, format=extension, facecolor=fig.get_facecolor(), transparent=False, dpi=150)
+pyplot.savefig(fig_path, format=extension, facecolor=fig.get_facecolor(), transparent=False, dpi=300)
 pyplot.close()
 
 print( "done" )

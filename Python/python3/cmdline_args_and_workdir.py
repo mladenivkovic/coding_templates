@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
+#=====================================================================
 # give any amount of cmd line arguments. 
 # examlpe: python cmdline_args_and_workdir.py 2 34 53 f.235 hihihi
+#=====================================================================
 
 from os import getcwd
 import sys
