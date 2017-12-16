@@ -1,6 +1,6 @@
-/**/
-/** Demonstrates the usage of increment operators*/
-/**/
+//===================================================
+// Demonstrates the usage of increment operators
+//===================================================
 
 
 #include <stdio.h>

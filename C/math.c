@@ -1,6 +1,6 @@
-/*
-* How math is done.
-*/
+//====================
+// How math is done.
+//====================
 
 #include <stdio.h>
 #include <math.h>

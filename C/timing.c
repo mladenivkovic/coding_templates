@@ -1,6 +1,7 @@
-/* 
- * Write some comments in here.
- */
+//======================================
+// measure passed time
+// compile with -lm to include math lib
+//======================================
 
 
 
@@ -13,8 +14,9 @@
 #define N 100000000     // if sourcearray not static, I'll be overflowing the stack.
 
 
-int
-main(void)    
+//===================
+int main(void)    
+//===================
 {
 
   clock_t start, end;

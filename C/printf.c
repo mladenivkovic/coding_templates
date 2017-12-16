@@ -5,7 +5,9 @@
 #include <stdio.h>
 
 
+//=====================
 int main(void){
+//=====================
 
     short               someshort = -5;
     unsigned short      someushort = 7;
@@ -20,9 +22,9 @@ int main(void){
     long long           somellong = -8234;
     unsigned long long  someullong = 4325;
     
-    float                 somefloat = -2.4;
-    double                somedouble = -13.87;
-    long double           someldouble = -155.478;
+    float               somefloat = -2.4;
+    double              somedouble = -13.87;
+    long double         someldouble = -155.478;
 
     
 

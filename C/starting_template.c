@@ -1,7 +1,6 @@
-/* 
- * Write some comments in here.
- */
-
+//=======================================================
+// Write some comments in here.
+//=======================================================
 
 
 #include <stdio.h>      /* input, output    */
@@ -12,9 +11,9 @@
 #define PI 3.1415926
 
 
-
-int
-main(void)    
+//===================================
+int main(int argc, char *argv[])    
+//===================================
 {
 
   return(0);

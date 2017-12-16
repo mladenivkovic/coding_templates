@@ -1,6 +1,6 @@
-/* 
- * A program to show the value limits of different types.
- */
+//============================================================ 
+// A program to show the value limits of different types.
+//============================================================ 
 
 
 
@@ -10,9 +10,9 @@
 
 
 
-
-int
-main(void)    
+//==============
+int main(void)    
+//==============
 {
     printf("\n");
     printf(" -------------------\n");

@@ -1,14 +1,15 @@
-/*
- * Branches: if and switch
- */
+//==========================
+// Branches: if and switch
+//==========================
 
 
 #include <stdio.h>
 
-
+//=================
 int main(void)
+//=================
 {
-    char somechar;
+
     int true, false;
 
     false = 0;
@@ -77,9 +78,9 @@ int main(void)
 
     printf("\nSWITCH\n");
     
-    /*int watts_of_bulb =240;*/
+    //int watts_of_bulb =240;
     int watts_of_bulb =75;
-    /*int watts_of_bulb =40;*/
+    //int watts_of_bulb =40;
     int life;
 
     switch (watts_of_bulb)

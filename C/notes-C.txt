@@ -5,6 +5,7 @@ LIBRARIES
 
 #include <stdio.h>      /* input, output    */
 #include <math.h>       /* math library     */
+#include <stdlib.h>     /* calloc, malloc...*/
 
 
 
@@ -71,4 +72,9 @@ Functions
         void somefunc2(void) {
         ...
         }  
+
+
+
+calloc vs malloc:
+    calloc initiates array to zeros; malloc doesn't.
 

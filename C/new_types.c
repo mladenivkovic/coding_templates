@@ -1,6 +1,6 @@
-/* 
- * New types and structs.
- */
+//========================= 
+// New types and structs.
+//========================= 
 
 
 
@@ -10,8 +10,9 @@
 #define STRINGSIZE 30
 
 
-
+//====================
 // enumerated type
+//====================
 typedef enum 
   // enumeration constants must be indetifiers, they cannot be numeric,character,
   // or string literals
@@ -20,7 +21,14 @@ typedef enum
 
 
 
+
+
+
+
+
+//====================
 // struct type
+//====================
 typedef struct {
   char name[STRINGSIZE];    // name of planet
   double diameter;          // diameter in km
@@ -32,7 +40,14 @@ typedef struct {
 
 
 
+
+
+
+
+
+//===========================
 // functions using new types
+//===========================
 void printplanet(planet p){
   printf("Name:          %s\n", p.name);
   printf("Diameter:      %f\n", p.diameter);
@@ -47,11 +62,9 @@ void printplanet(planet p){
 
 
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-int
-main(void)    
+//====================
+int main(void)    
+//====================
 {
 
 

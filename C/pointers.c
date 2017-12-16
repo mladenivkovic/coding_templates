@@ -1,7 +1,7 @@
-/* 
- * Pointy stuff.
- * Ignore warnings that format specifiers expect something different
- */
+//====================================================================== 
+// Pointy stuff.
+// Ignore warnings that format specifiers expect something different
+//====================================================================== 
 
 
 
@@ -13,8 +13,13 @@
 void select_sort_str(char *list[], int n);
 
 
-int
-main(void)    
+
+
+
+
+//====================
+int main(void)    
+//====================
 {
 
   float *p;  // p is a POINTER VARIABLE of type "pointer to float".
@@ -130,7 +135,9 @@ main(void)
 
 
 
+//============================================
 void select_sort_str(char *list[], int n){
+//============================================
   
   // Sort the elements of *list[] alphabetically.
   int i;
@@ -145,7 +152,12 @@ void select_sort_str(char *list[], int n){
 }
 
 
+
+
+
+//===================================================
 void find_next_str(char *list[], int imin, int imax){
+//===================================================
     // finds the string that comes next in alphabetical order between
     // the indices imin, imax
     // Used in select_sort_str: The lowest is sorted out, imin raised.

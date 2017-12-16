@@ -1,6 +1,7 @@
-/* 
- * reading from and writing to file
- */
+//======================================
+// reading from and writing to file
+//======================================
+ 
 
 
 
@@ -8,9 +9,9 @@
 
 
 
-
-int
-main(void)    
+//=================
+int main(void)    
+//=================
 {
 
   // File pointer variables
@@ -18,14 +19,14 @@ main(void)
   FILE *infilep;
   FILE *outfilep;
 
-/*error: incompatible types when assigning to type ‘FILE {aka struct _IO_FILE}’ from type ‘FILE * {aka struct _IO_FILE *}’*/
-/*happens when you do FILE filepointer instead of FILE *filepointer*/
+  // error: incompatible types when assigning to type ‘FILE {aka struct _IO_FILE}’ from type ‘FILE * {aka struct _IO_FILE *}’*/
+  // happens when you do FILE filepointer instead of FILE *filepointer
 
   infilep = fopen("./input.txt", "r");      // read from file
   outfilep = fopen("./output.txt", "w");    // write to file
 
-/*warning: passing argument 2 of ‘fopen’ makes pointer from integer without a cast [-Wint-conversion]*/
-/*happens when you write 'r' or 'w' instead of "r" or "w"*/
+  // warning: passing argument 2 of ‘fopen’ makes pointer from integer without a cast [-Wint-conversion]
+  // happens when you write 'r' or 'w' instead of "r" or "w"
 
   double store_in_array[10][3];
   int i;
@@ -57,7 +58,7 @@ main(void)
 
   //cleanup
   fclose(infilep);
-  /*fclose(infile2p); // causes error if file not loaded properly */
+  //fclose(infile2p); // causes error if file not loaded properly */
   fclose(outfilep);
 
   return(0);

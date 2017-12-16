@@ -1,6 +1,6 @@
-/* 
- * Dealing with strings.
- */
+//============================ 
+// Dealing with strings.
+//============================ 
 
 
 
@@ -12,15 +12,16 @@
 
 
 
-int
-main(void)    
+//====================
+int main(void)    
+//====================
 {
 
   // Strings are arrays of chars
   char initv[20] = "Initial value";
 
   // Array of strings is multidim char array
-  // Don't forget to include space for the "\0" char!
+  // Don't forget to include space for the "\0" char, which marks the end of the string!
   char months_wrong[12][3] = { "Jan", "Feb", "Mar", "May", "Aug", "Jun", "Jul", "Sep", "Oct", "Nov", "Dec" };
   char months[12][4] = { "Jan", "Feb", "Mar", "May", "Aug", "Jun", "Jul", "Sep", "Oct", "Nov", "Dec" };
 
@@ -32,22 +33,28 @@ main(void)
   // only works with the library string.h
   char mysting[10];
   
+  //---------------------------------
   // string assignment
+  //---------------------------------
   strcpy(mysting, "Hi there!");  //copy string to string
   printf("%s \n", mysting);
 
   // DONT FORGET ABOUT OVERFLOWS!!!!!!
-  /*strcpy(mysting, "Hello there! This is an overflow.");  //overdo it*/
-  /*printf("%s \n", mysting);*/
+  // strcpy(mysting, "Hello there! This is an overflow.");  //overdo it
+  // printf("%s \n", mysting);
 
+  //---------------------------------
   //concatenate
+  //---------------------------------
   char concatenated[40] = "Concatenate: ";
   strcat(concatenated, initv);
   printf("%s \n", concatenated);
 
 
   
+  //---------------------------------
   //comparisons
+  //---------------------------------
   char str1[16] = "This is string 1";
   char str2[16] = "This is string 2";
 
@@ -74,8 +81,9 @@ main(void)
     printf("str1 is not alphabetially earlier than str2, but it should be\n");
 
 
+  //---------------------------------
   // better way of comparing strings:
-  // --------------------------------
+  //---------------------------------
 
   if (strcmp(str1,str2) < 0 )
     printf("str1 is alphabetically earlier than str2. \n");

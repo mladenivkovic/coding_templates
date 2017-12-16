@@ -1,13 +1,14 @@
-/* 
- * Using enum.
- */
+//================= 
+// Using enum.
+//================= 
+ 
 
 
 
 #include <stdio.h>      /* input, output    */
 
 
-enum week { sunday, monday, tuesday, wednesday, thursday, friday, saturday };
+enum week { monday, tuesday, wednesday, thursday, friday, saturday, sunday };
 
 
 //assign your own values
@@ -52,7 +53,7 @@ main(void)
 
   int tasks_pendent[5];
   workweekday tomorrow = thu;
-  tasks_pendent[thursday] = 7;
+  tasks_pendent[tomorrow] = 7;
 
 
 
