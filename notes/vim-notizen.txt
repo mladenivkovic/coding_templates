@@ -48,6 +48,22 @@ Ctrl-E      move view pane down
 
 
 
+
+============
+TABS
+============
+
+:tabe[dit] filename 	Open filename in a new tab
+ctrl-W T 	        Move current split window into its own tab
+:tabc[lose] 	        Close the current tab page and all its windows
+:tabo[nly] 	        Close all tabs apart from the current one
+gt 	                Move to next tab
+gT 	                Move to previous tab
+#gt 	                Move to tab number #
+:tabmove 	        Move current tab to the end
+:tabmove 0 	        Move current tab to the beginning
+:tabmove 1 	        Move current tab to become the 2nd tab
+
 =============
 LÖSCHEN
 =============

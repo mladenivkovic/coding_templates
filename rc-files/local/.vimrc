@@ -176,22 +176,25 @@
     hi MatchParen cterm=bold ctermbg=none ctermfg=red
     hi Fold cterm=bold ctermbg=6 ctermfg=grey
 
+    " Tab line highlighting for profile  'One Dark' 
+    hi TabLineFill ctermbg=Yellow ctermfg=DarkGrey
+    hi TabLine ctermfg=LightGrey ctermbg=DarkGrey cterm=bold
+    hi TabLineSel ctermfg=DarkGrey ctermbg=yellow cterm=bold
+   
+    "statusline 
+    hi StatusLine ctermbg=Black ctermfg=Grey 
+    "vertical split line
+    hi VertSplit ctermbg=Black ctermfg=DarkGrey
+    "horizontal split line
+    hi StatusLineNC ctermbg=Black ctermfg=DarkGrey
 
 
 
 
-
-
-"===============
+"====================
 " STATUS LINE
 "====================
 
-    " First define new highlight groups
-    "hi User1 ctermbg=223 ctermfg=23
-    "hi User1 ctermbg=blue
-    hi User1 ctermbg=none
-    " it uses the solarised colors if =none 
-    "guibg=green guifg=white for GUI, which I don't use...
 
     " Now add what you want
 

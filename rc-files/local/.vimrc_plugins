@@ -29,6 +29,7 @@
 
         Plugin 'Konfekt/FastFold'                   "fasten up folding/when writing
 
+        Plugin 'gcmt/taboo.vim'                     "tab goodies
 
         "" The following are examples of different formats supported.
         "" Keep Plugin commands between vundle#begin/end.
@@ -140,5 +141,26 @@
 
 
 
+"====================
+" === taboo.vim
+"====================
+
+        "Taboo is able to remember tab names when you save the current session
+        set sessionoptions+=tabpages,globals
+
+
+
+        "%f: the name of the first buffer open in the tab
+        "%a: the path relative to $HOME of the first buffer open in the tab
+        "%n: the tab number, but only on the active tab
+        "%N: the tab number on each tab
+        "%w: the number of windows opened into the tab, but only on the active tab
+        "%W: the number of windows opened into the tab, on each tab
+        "%u: same as %w, but using unicode characters
+        "%U: same as %W, but using unicode characters
+        "%m: the modified flag
+        "%p: the tab current working directory
+        "%P: the last component of the tab current working directory
         
+        let g:taboo_tab_format = " %N %f%m "
 
