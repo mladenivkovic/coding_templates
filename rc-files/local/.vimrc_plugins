@@ -86,7 +86,9 @@
 
         " Align line-wise comment delimiters flush left instead of following code indentation
         let g:NERDDefaultAlign = 'left'
-
+        
+        " Add your own custom formats or override the defaults
+        let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 
 
 
@@ -121,16 +123,6 @@
         let g:ycm_python_binary_path = '/usr/bin/python3'
 
         let g:ycm_auto_trigger = 1 "trigger after X characters
-
-
-
-
-
-"====================
-" === SimplyFold
-"====================
-        
-        "let g:SimplyFold_docstring_preview=1
 
 
 

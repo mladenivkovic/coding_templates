@@ -141,7 +141,7 @@
 
     " Needed for Syntax Highlighting and stuff
     filetype on 
-    filetype plugin on "needed for plugins: nerdcommenter
+    filetype plugin on "needed for plugins: nerdcommenter and to autoload .vim/after/ftplugin
     filetype indent on "needed by  plugin slim
 
     syntax enable
