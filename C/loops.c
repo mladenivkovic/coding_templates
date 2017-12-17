@@ -36,6 +36,11 @@ main(void)
 
 
 
+
+
+
+
+
   //=======================
   // FOR Loop
   //=======================
@@ -61,11 +66,24 @@ main(void)
   }
 
   printf("2.2 - Counter after loop: %d\n", counter);
-  printf("\n");
   ///////////////////////////////////////////////////////////////////
   // You're not using the return value of i, only its actual value -
   // therefore it makes no difference whether you use i++ or ++i !
   ///////////////////////////////////////////////////////////////////
+
+
+  for (i = 0; i<7; i++)
+  {
+    if (i == 5)
+    {
+      printf("2.3 - Found i=5; ending loop\n");
+      break;
+    }
+  }
+
+
+  printf("\n");
+
 
 
 

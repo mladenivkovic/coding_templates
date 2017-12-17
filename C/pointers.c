@@ -57,8 +57,10 @@ int main(void)
 
 
 
-
+  //=====================
   // arrays of pointers
+  //=====================
+  
   char original[5][10] = { "alpha", "whiskey", "tango", "foxtrott", "bravo"};
   char *alpha_sort[5];
 
@@ -94,8 +96,14 @@ int main(void)
 
 
 
+  
 
+
+
+  //=====================
   // dynamic allocation
+  //=====================
+  
   printf("\n\n\n");
   printf("Dynamic allocation\n\n");
   

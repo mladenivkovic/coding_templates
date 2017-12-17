@@ -1,6 +1,6 @@
-
+=============
 LIBRARIES
-===========
+=============
 
 
 #include <stdio.h>      /* input, output    */
@@ -12,6 +12,7 @@ LIBRARIES
 #include <limits.h>     /* limits of data types */
 
 
+===========
 NOTES
 ===========
 
@@ -77,4 +78,31 @@ Functions
 
 calloc vs malloc:
     calloc initiates array to zeros; malloc doesn't.
+
+
+
+
+=========================
+GCC Compiling flags
+=========================
+
+-0level
+    -O0 	optimization for compilation time (default), not execution time 	
+    -O1 or -O 	optimization for code size and execution time
+    -O2 	optimize more for code size and execution time
+    -O3 	optimize even more for code size and execution time 
+    -Os 	optimization for code size 	
+    -Ofast 	O3 with fast none accurate math calculations 
+    -Og     Optimize debugging experience. Enables optimizations that do not 
+               interfere with debugging.
+
+-Wall
+    This enables all the warnings about constructions that some users consider
+    questionable, and that are easy to avoid (or modify to prevent the 
+    warning), even in conjunction with macros. This also enables some 
+    language-specific warnings
+
+-Wextra
+    This enables some extra warning flags that are not enabled by -Wall
+
 

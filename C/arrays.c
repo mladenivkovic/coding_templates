@@ -91,22 +91,69 @@ int main(void)
   // calloc initializes array to zeros; malloc doesn't.
   dynarr = (int*)calloc(array_x_size, sizeof(int));
   
+  
+  
   printf("\nDynamically allocated array\n");
+
+
+
   for (int k = 0; k < array_x_size; k++){
     dynarr[k]=k*k;
     printf("%5d", dynarr[k]);
   }
+  
   printf("\n");
+
+
 
 
   //deallocate
   free(dynarr);
 
+
+
+
+  
   printf("\nMemory is free, but probably not overwritten yet:\n");
-  for (int k = 0; k < array_x_size; k++){
+  
+  for (int k = 0; k < array_x_size; k++)
+  {
     printf("%5d", dynarr[k]);
   }
+  
   printf("\n");
+
+
+
+
+
+
+  //========================
+  // Math with arrays
+  //========================
+
+  
+  printf("\nMath with arrays\n");
+
+  int z[] = {1, 2, 3, 4};
+  int z2[4];
+
+
+  // No way around it, need to do it
+  // element by element!
+
+  for (int i = 0; i<4; i++)
+  {
+    z2[i] = 2*z[i]+3;
+  }
+
+
+
+  for (int i = 0; i<4; i++)
+  {
+    printf("%d %d\n", z[i], z2[i]);
+  }
+
 
 
   return(0);
