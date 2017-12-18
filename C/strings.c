@@ -5,6 +5,7 @@
 
 
 #include <stdio.h>      /* input, output    */
+#include <stdlib.h>     /* atoi, atof       */
 #include <string.h>     /* string stuff     */
 
 
@@ -91,6 +92,52 @@ int main(void)
     printf("str1 and str2 are the same. \n");
   else
     printf("str1 is not alphabetially earlier than str2\n");
+
+
+
+
+
+
+  //---------------------------
+  // String conversions
+  //---------------------------
+  
+  int someint = 12312;
+  float somefloat = 8234.13920;
+  double somedouble = 1124081274102874124.4817091724;
+
+  char stringint[30];
+  char stringfloat[30];
+  char stringdouble[30];
+
+
+  sprintf(stringint, "%d", someint);
+  sprintf(stringfloat, "%f", somefloat);
+  sprintf(stringdouble, "%g", somedouble);
+
+
+  printf("\n String conversions \n");
+  printf("Nonstring to string \n");
+  printf("Int:     %10d\t ; String: %s\n", someint, stringint);
+  printf("Float:  %10f\t ; String: %s\n", somefloat, stringfloat);
+  printf("Double: %10g\t ; String: %s\n", somedouble, stringdouble);
+
+
+
+
+
+
+  printf("string to nonstring\n");
+
+  int secondint = atoi(stringint);
+  float secondfloat = atof(stringfloat);
+  
+
+  printf("Int:     %10d\t ; String: %s\n", secondint, stringint);
+  printf("Float:  %10f\t ; String: %s\n", secondfloat, stringfloat);
+
+
+
 
   return(0);
 }
