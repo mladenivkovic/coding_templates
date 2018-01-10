@@ -3,7 +3,7 @@
 //========================= 
 
 
-
+#include <stdlib.h>
 #include <stdio.h>      /* input, output    */
 #include <string.h>    // strcpy()
 
@@ -120,6 +120,58 @@ int main(void)
 
   //using functions
   printplanet(jupiter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //=================================
+  // WORKING WITH ARRAYS OF STRUCTS
+  //=================================
+
+
+
+  // define new struct
+  typedef struct {
+    int someint;
+    double somedouble;
+  } TEST;
+
+
+
+  // initialize new array of pointers to structs
+  int ntest = 3;
+  TEST ** testarr = malloc(ntest * sizeof(TEST*));
+
+  // fill array
+  for (int i = 0; i < ntest; i++){
+    TEST * newtest = malloc(sizeof(newtest));
+    newtest->someint = i;
+    newtest->somedouble = i*0.33;
+    testarr[i] = newtest;
+  }
+
+  // print
+  printf("\n\n\n");
+  for (int i = 0; i < ntest; i++){
+    printf("ARRAYTEST %d : %d %g\n", i, testarr[i]->someint, testarr[i]->somedouble);
+  }
+  printf("\n\n\n");
+
+
+
+
+
+
 
   return(0);
 }

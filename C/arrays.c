@@ -33,6 +33,9 @@ int main(void)
 //====================
 {
 
+
+
+
   //=================================
   // array declaration possibilities
   //=================================
@@ -42,6 +45,9 @@ int main(void)
 
   //multidimensional
   int multi[3][2] = { {11, 12}, {21, 22}, {31, 32} };
+
+
+
 
 
 
@@ -76,6 +82,16 @@ int main(void)
     printf("%10d ", multi[j][0]);
   }
   printf("\n");
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -122,6 +138,67 @@ int main(void)
   }
   
   printf("\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //=================================
+  // WORKING WITH ARRAYS OF STRUCTS
+  //=================================
+
+
+
+  // define new struct
+  typedef struct {
+    int someint;
+    double somedouble;
+  } TEST;
+
+
+
+  // initialize new array of pointers to structs
+  int ntest = 3;
+  TEST ** testarr = malloc(ntest * sizeof(TEST*));
+
+  // fill array
+  for (int i = 0; i < ntest; i++){
+    TEST * newtest = malloc(sizeof(newtest));
+    newtest->someint = i;
+    newtest->somedouble = i*0.33;
+    testarr[i] = newtest;
+  }
+
+  // print
+  printf("\n\n\n");
+  for (int i = 0; i < ntest; i++){
+    printf("STRUCT ARRAY TEST %d : %d %g\n", i, testarr[i]->someint, testarr[i]->somedouble);
+  }
+  printf("\n\n\n");
+
+
+
+
+
+
+
+
+
+
+
 
 
 

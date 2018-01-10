@@ -28,22 +28,22 @@ ctrl+i          Zurück zur weiteren Position (undo ctrl+o)
 
 
 
-H           move to top of screen
-M           move to middle of screen
-L           move to bottom of screen
+H               move to top of screen
+M               move to middle of screen
+L               move to bottom of screen
 
-zz          scroll the line with the cursor to the center of the screen
-zt          scroll the line with the cursor to the top
-zb          scroll the line with the cursor to the bottom
+zz              scroll the line with the cursor to the center of the screen
+zt              scroll the line with the cursor to the top
+zb              scroll the line with the cursor to the bottom
 
-Ctrl-D      move half-page down
-Ctrl-U      move half-page up
-Ctrl-B      page up
-Ctrl-F      page down
-Ctrl-O      jump to last (older) cursor position
-Ctrl-I      jump to next cursor position (after Ctrl-O)
-Ctrl-Y      move view pane up
-Ctrl-E      move view pane down
+Ctrl-D          move half-page down
+Ctrl-U          move half-page up
+Ctrl-B          page up
+Ctrl-F          page down
+Ctrl-O          jump to last (older) cursor position
+Ctrl-I          jump to next cursor position (after Ctrl-O)
+Ctrl-Y          move view pane up
+Ctrl-E          move view pane down
 
 
 
@@ -53,16 +53,23 @@ Ctrl-E      move view pane down
 TABS
 ============
 
-:tabe[dit] filename 	Open filename in a new tab
-ctrl-W T 	        Move current split window into its own tab
-:tabc[lose] 	        Close the current tab page and all its windows
-:tabo[nly] 	        Close all tabs apart from the current one
-gt 	                Move to next tab
-gT 	                Move to previous tab
-#gt 	                Move to tab number #
-:tabmove 	        Move current tab to the end
-:tabmove 0 	        Move current tab to the beginning
-:tabmove 1 	        Move current tab to become the 2nd tab
+:tabe[dit] filename     Open filename in a new tab
+ctrl-W T                Move current split window into its own tab
+:tabc[lose]             Close the current tab page and all its windows
+:tabo[nly]              Close all tabs apart from the current one
+gt                      Move to next tab
+gT                      Move to previous tab
+#gt                     Move to tab number #
+:tabmove                Move current tab to the end
+:tabmove 0              Move current tab to the beginning
+:tabmove 1              Move current tab to become the 2nd tab
+
+
+
+
+
+
+
 
 =============
 LÖSCHEN
@@ -75,10 +82,14 @@ p                       gelöschtes beim Cursor einfügen (bzw. in der nächsten
 rx                      ersetze Zeichen durch x
 R                       ersetze mehrere Zeichen
 ce                      lösche bis zum Ende des Wortes, und schreibe direkt (change)
-cc          Lösche ganze Zeile, füge ein
-C           Lösche bis Ende Zeile, füge ein
-td$         Lösche bis zum Ende der Zeile, speichere im Buffer t
-tp          paste aus Buffer t
+cc                      Lösche ganze Zeile, füge ein
+C                       Lösche bis Ende Zeile, füge ein
+td$                     Lösche bis zum Ende der Zeile, speichere im Buffer t
+tp                      paste aus Buffer t
+
+
+
+
 
 
 
@@ -88,37 +99,44 @@ VERSCHIEDENES
 =================
 
 u                       undo
-ctrl+R          redo
+ctrl+R                  redo
 y                       kopieren (mit v auswählen)
-yy          kopiere ganze Zeile
+yy                      kopiere ganze Zeile
 p                       gelöschtes/kopiertes beim Cursor einfügen (bzw. in der nächsten Zeile)
 rx                      ersetze Zeichen durch x
 ce                      lösche bis zum Ende des Wortes, und schreibe direkt (change)
-ctrl+g          Position in der Datei anzeigen
+ctrl+g                  Position in der Datei anzeigen
 %                       Nächste Klammer gleicher Sorte
 :!                      Ausführen eines externen Kommandos. Bsp :!ls
 v                       Auswählen
-v:w Test        Schreibe die Auswahl in Datei Test
+v:w Test                Schreibe die Auswahl in Datei Test
 :r Dateiname            Liest Datei ein
-m<letter>   erstellt Markierung an dieser Stelle
-'<letter>   gehe zur Markierung
-~           Gross- zu Kleinbuchstaben umwandeln und umgekehrt
-ctrl+s      "Freeze out"
-ctrl+q      Kill "Freeze out"
+m<letter>               erstellt Markierung an dieser Stelle
+'<letter>               gehe zur Markierung
+~                       Gross- zu Kleinbuchstaben umwandeln und umgekehrt
+ctrl+s                  "Freeze out"
+ctrl+q                  Kill "Freeze out"
+
+
+
+
+
+
+
 
 
 
 ===================
 SUCHEN
 ===================
-/wort           Sucht Wort
+/wort                   Sucht Wort
 n                       nächster Eintrag
 N                       vorheriger Eintrag
 %                       nächste Klammer
-#           Gehe zum nächsten Wort wie das ausgewählte
+#                       Gehe zum nächsten Wort wie das ausgewählte
 :s/wort1/wort2          Ersetzt das nächste wort1 mit wort2 in der Zeile
 :s/wort1/wort2/g        Ersetzt alle wort1 mit wort2 in der Zeile
 :%s/wort1/wort2/g       Ersetzt alle wort1 mit wort2 im ganzen Dokument
 :%s/wort1/wort2/gc      Ersetzt alle wort1 mit wort2 im ganzen Dokument mit Fragenkatalog
-:noh            Entfernt Markierungen des gesuchten
+:noh                    Entfernt Markierungen des gesuchten
 

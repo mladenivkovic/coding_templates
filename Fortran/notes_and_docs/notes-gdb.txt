@@ -22,6 +22,9 @@ USING THE GDB TO DEBUG
             s       execute next step (even more anal than n)
             c       continue
 
+    6)  Tracking when a variable changes
+        watch varname
+
 
 
 

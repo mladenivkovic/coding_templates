@@ -1,0 +1,9 @@
+===============
+Valgrind
+===============
+http://valgrind.org/docs/manual/quick-start.html
+
+
+
+quickstart:
+valgrind --lead-check=yes myprog arg1 arg2
