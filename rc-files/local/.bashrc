@@ -216,7 +216,7 @@
 
     # some more ls aliases
     alias ll='ls -alh'
-    alias la='ls -A'
+    alias la='ls -a'
     alias l='ls -CF'
 
 
