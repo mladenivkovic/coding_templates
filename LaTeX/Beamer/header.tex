@@ -1,9 +1,6 @@
 \documentclass[11pt]{beamer}
 
 
-
-
-
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
@@ -27,61 +24,24 @@
 %BEAMER-SPEZIFISCH
 %-----------------
 
-\usefonttheme{professionalfonts} % using non standard fonts for beamer
-\usefonttheme{serif} % default family is serif
+
+\usetheme{metropolis}
+%deactivate a new page when a new section begins
+\metroset{sectionpage=none} 
+\usepackage{FiraSans}
 
 
-\usetheme{default}
 % Verschiedene Varianten von usetheme, usecolortheme und usefonttheme kann man hier ausprobieren: http://deic.uab.es/~iblanes/beamer_gallery/
 
-% \usetheme{
-% 	AnnArbor | Antibes | Bergen |
-% 	Berkeley | Berlin | Boadilla |
-% 	boxes | CambridgeUS | Copenhagen |
-% 	Darmstadt | default | Dresden |
-% 	Frankfurt | Goettingen |Hannover |
-% 	Ilmenau | JuanLesPins | Luebeck |
-% 	Madrid | Malmoe | Marburg |
-% 	Montpellier | PaloAlto | Pittsburgh |
-% 	Rochester | Singapore | Szeged |
-% 	Warsaw
-% }
-%Interessant scheinen: Boadilla, boxes, CambridgeUS, default, (Goettingen), Hannover, Madrid, Montpellier, Pittsburgh, Rochester, Singapore, Szeged, 
 
-\usecolortheme{dove}
-% \usecolortheme{
-% 	albatross | beaver | beetle |
-% 	crane | default | dolphin |
-% 	dove | fly | lily | orchid |
-% 	rose |seagull | seahorse |
-% 	sidebartab | structure |
-% 	whale | wolverine
-% }
+%Halbtransparente Overlays (was als nächstes Element auf der Folie gezeigt wird)
+%\setbeamercovered{transparent} 
 
-\usefonttheme{structurebold}
-% 	default | professionalfonts | serif |
-% 	structurebold | structureitalicserif |
-% 	structuresmallcapsserif
-% }
+% Entfernt Navigationssymbole unten
+%\beamertemplatenavigationsymbolsempty 
 
-
-%\useinnertheme{
-% 	circles | default | inmargin |
-% 	rectangles | rounded
-% } Am besten sein lassen.
-
-
-% \useoutertheme{
-% 	default | infolines | miniframes |
-% 	shadow | sidebar | smoothbars |
-% 	smoothtree | split | tree
-% } Am besten sein lassen.
-
-
-
-\setbeamercovered{transparent} %Halbtransparente Overlays (was als nächstes Element auf der Folie gezeigt wird)
-\beamertemplatenavigationsymbolsempty % Entfernt Navigationssymbole unten
-%\setbeamertemplate{footline}[frame]  % Seitenzahlen
-    \setbeamertemplate{footline}{%
-    	\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[10pt]{\hyperlink{tableofcontents}{\scriptsize\insertframenumber}}}}}
+% Seitenzahlen als links
+%\setbeamertemplate{footline}[frame]  
+%    \setbeamertemplate{footline}{%
+%    	\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[10pt]{\hyperlink{tableofcontents}{\scriptsize\insertframenumber}}}}}
 
