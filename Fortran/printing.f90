@@ -1,16 +1,21 @@
 program printing
 
-!A program to demonstrate formatted printing with fortran
-!An Edit descriptor is more or less a formatting operator, as 
-!far as I can tell.
+
+    !-------------------------------------------------------------------
+    !A program to demonstrate formatted printing with fortran
+    !An Edit descriptor is more or less a formatting operator, as 
+    !far as I can tell.
+    !-------------------------------------------------------------------
 
     implicit none
     integer :: someinteger
     real :: somereal, someotherreal
 
-    !----------------------
+
+
+    !======================
     ! Integers
-    !----------------------
+    !======================
 
     print *, ""
     print *, "--------"
@@ -18,11 +23,15 @@ program printing
     print *, "--------"
     print *, ""
     print *, "i * 120 * (-1)^i"
+
     do someinteger = 1, 10
         print 100, someinteger, someinteger, someinteger*120*(-1)**(someinteger)
         !print 100: 100 is a statement label. There must be a format statement with this label in the program.
     end do
+
+
     100 format ( ' ', i3, ' * 120 * (-1)^', i3, ' = ', i4) 
+    !-------------------------------------------------------------------
     ! format statements labelled 100. i3: print out first variable
     ! with maximal 3 columns ("digits"). i4: print out second 
     ! variable with maximal 4 columns.
@@ -30,12 +39,17 @@ program printing
     ! You must leave a column for the minus sign.
     ! If too few columns were specified for the data, the output
     !will be in asterisks (*)
+    !-------------------------------------------------------------------
 
     
 
-    !----------------------
+
+
+
+    !======================
     !Reals
-    !----------------------
+    !======================
+
     print *, ""
     print *, "-----"
     print *, "Reals"
@@ -47,6 +61,7 @@ program printing
     print *, " "
 
 
+    !-------------------------------------------------------------------
     ! fw.d : w = total column width, d = digits after comma
     ! The comma needs a column as well!!!!!
     ! The numbers will be rounded:
@@ -58,6 +73,7 @@ program printing
 
     ! gw.s: w = total width, s = significant digits.
     ! gives a real in scientific notation: 0.1234E-09
+    !-------------------------------------------------------------------
 
     print *, "Calculation        ", "f                     ", "e           ", "g      "
     print *, "                   ", "f19.12                ", "e12.3       ", "g12.3      "
@@ -79,9 +95,13 @@ program printing
 
 
 
-    !----------------------
+
+
+
+
+    !======================
     !Characters
-    !----------------------
+    !======================
 
     print *, ""
     print *, "----------"

@@ -1,19 +1,26 @@
 program loops
 
-! All kinds of do loops
+    !--------------------------
+    ! All kinds of do loops
+    !--------------------------
 
     implicit none
 
     integer :: start = 1, finish = 10, step = 1, controlvar
 
-    integer :: counter
+    integer :: counter, i, ii
     logical :: somelogical
 
+    integer :: len=10, wid=5;
+    integer, allocatable, dimension(:,:) :: z
 
 
-!DO control-var = initial-value, final-value, [step-size]
-!   statements
-!END DO
+
+    !----------------------------------------------------------
+    !DO control-var = initial-value, final-value, [step-size]
+    !   statements
+    !END DO
+    !----------------------------------------------------------
 
     write(*, *) "Simple do loop"
     do controlvar = start, finish, step
@@ -43,13 +50,17 @@ program loops
 
 
 
-! General DO
 
-! DO
-!   statements 1
-!   exit
-!   statements 2
-!END DO
+
+    !--------------------
+    ! General DO
+    !
+    ! DO
+    !   statements 1
+    !   exit
+    !   statements 2
+    !END DO
+    !--------------------
 
 
 
@@ -75,9 +86,16 @@ program loops
     end do
 
 
-! DO WHILE (logical expressions)
-!   expressions
-! enddo
+
+
+
+
+
+    !----------------------------------
+    ! DO WHILE (logical expressions)
+    !   expressions
+    ! enddo
+    !----------------------------------
 
     write(*, *) ""
     write(*, *) ""
@@ -107,6 +125,38 @@ program loops
 
 
 
+
+
+
+
+    !-----------------------------
+    ! Using construct names
+    !-----------------------------
+
+    write(*, *) ""
+    write(*, *) ""
+    write(*, *) "Loop control with construct names"
+    write(*, *) 
+
+    
+   
+    allocate(z(1:len, 1:wid))
+    z = 0
+
+    outer: do i=1, len
+      do ii=1,wid
+        if ( mod(i,2) == 0 ) cycle outer
+        if (mod(ii,2)==1) z(i, ii) = 1
+      enddo
+    enddo outer
+
+
+    do i = 1, len
+      do ii = 1, wid
+        write(*, '(I3,x)', advance='no') z(i, ii)
+      end do
+      write(*,*)
+    end do
 
 
 

@@ -1,5 +1,9 @@
 program cmdlineargs
 
+  !=============================
+  ! Reading cmd line args
+  !=============================
+
   integer :: i
   character(len=32) :: arg
 

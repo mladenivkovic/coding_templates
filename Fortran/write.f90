@@ -1,11 +1,18 @@
 program writing
-! A script to demonstrate how to use write(*, *) with formatted output
-! See http://www.cs.mtu.edu/~shene/COURSES/cs201/NOTES/format.html
+
+    !========================================================================
+    ! A script to demonstrate how to use write(*, *) with formatted output
+    ! See http://www.cs.mtu.edu/~shene/COURSES/cs201/NOTES/format.html
+    !========================================================================
+
     implicit none
     integer :: someint = 123456
     real :: somereal = 123.456789
     character(len=20) :: somechar = 'your text here'
     logical :: somelogical = .true.
+
+
+
 
     !------------------
     ! Integers:
@@ -41,6 +48,13 @@ program writing
     write(*, '(I8.8, I12.9)') someint, someint
     write(*, *) ""
     write(*, *) ""
+
+
+
+
+
+
+
 
     !------------------
     ! REALS:
@@ -112,6 +126,11 @@ program writing
     ! Output is only T or F; so there are w-1 spaces
     write(*, *) "L1, L4"
     write(*, '(L1, L4)') somelogical, somelogical
+
+
+
+
+
 
 
 

@@ -1,6 +1,8 @@
 program timing
 
-! How to time cpu-time with fortran
+    !=======================================
+    ! How to time cpu-time with fortran
+    !=======================================
 
 
     implicit none

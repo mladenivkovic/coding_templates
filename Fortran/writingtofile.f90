@@ -1,8 +1,9 @@
 program IO
 
-
-! How to write into file
-! Just specify the unit
+    !----------------------------
+    ! How to write into file
+    ! Just specify the unit
+    !----------------------------
 
     implicit none
     integer :: someinteger

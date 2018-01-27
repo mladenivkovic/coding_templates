@@ -1,28 +1,30 @@
 program preprocessing
 
-! a program to demonstrate preprocessing and preprocessing
-! directives.
+    !---------------------------------------------------------------------------------------
+    ! a program to demonstrate preprocessing and preprocessing
+    ! directives.
 
-! Compile with ifort -fpp -D limit=X preprocessingouptions.f90
+    ! Compile with ifort -fpp -D limit=X preprocessingouptions.f90
 
-! See 
-! https://software.intel.com/en-us/node/524750#AE98EA34-DCDC-4EEA-B0AE-80ACF4326CA9
-! (Using the fpp directive)
-! and
-! https://software.intel.com/en-us/node/525101#308122D4-3830-4AAD-AA98-722470D4B280
-! (the D compiler option)
-! for more informations.
+    ! See 
+    ! https://software.intel.com/en-us/node/524750#AE98EA34-DCDC-4EEA-B0AE-80ACF4326CA9
+    ! (Using the fpp directive)
+    ! and
+    ! https://software.intel.com/en-us/node/525101#308122D4-3830-4AAD-AA98-722470D4B280
+    ! (the D compiler option)
+    ! for more informations.
 
-! This program will calculate the integral of sin(x) from 0 to
-! pi/2  if limit = 1
-! pi    if limit = 2
-! 2 pi  if limit = 3
-! send out an error message if no directive was specified.
+    ! This program will calculate the integral of sin(x) from 0 to
+    ! pi/2  if limit = 1
+    ! pi    if limit = 2
+    ! 2 pi  if limit = 3
+    ! send out an error message if no directive was specified.
 
 
 
-! preprocessing directives must always be at the beginning of the line.
-! No whitespace before them is allowed!
+    ! preprocessing directives must always be at the beginning of the line.
+    ! No whitespace before them is allowed!
+    !---------------------------------------------------------------------------------------
 
 
     implicit none

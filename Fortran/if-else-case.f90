@@ -111,7 +111,8 @@ program ifelsecase
 
     casechar='g'
    
-    ! can be done without "somename"
+    ! somename is a "construct name"
+    ! can be done without it, but it can be useful to name constructs.
     somename: select case (casechar)
         case ('a', 'b', 'c') somename
             write(*, *) "Got a, b or c"

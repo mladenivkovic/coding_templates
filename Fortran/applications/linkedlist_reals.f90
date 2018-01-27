@@ -1,9 +1,11 @@
 program linkedreals
 
+    !====================================================================
     ! This program reads in an unknown number of reals from 
     ! a file specified with fname.
     ! It is assumed here that the file contains 3 columns of reals
     ! with the format 3ES10.3E2 (as it was created with that format...)
+    !====================================================================
 
 
     implicit none
@@ -24,7 +26,11 @@ program linkedreals
     open(unit=1, file = fname, status='old')
 
 
+
+
+    !--------------------------------------------
     ! assigning first row
+    !--------------------------------------------
     allocate(first)
     read(1, fmt='(3ES10.3E2)', iostat=io_stat_number) first%x, first%y, first%z
     if (io_stat_number == 0) then !if document not finished, create a new space in memory
@@ -32,7 +38,12 @@ program linkedreals
         i = i+1
     end if
 
+
+
+
+    !--------------------------------------------
     ! assigning all other rows
+    !--------------------------------------------
 
     current => first !point the current real as the first
 
@@ -53,7 +64,12 @@ program linkedreals
     write(*, *) i, "lines à 3 reals read"
 
 
+
+
+
+    !--------------------------------------------
     ! Placing all these reals in an array now
+    !--------------------------------------------
 
     ! store the amount of read rows
     n = i

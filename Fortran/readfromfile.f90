@@ -1,6 +1,8 @@
 program readfromfile
 
-! How to read input from files.
+    !================================
+    ! How to read input from files.
+    !================================
 
 
     implicit none
@@ -11,17 +13,20 @@ program readfromfile
 
     real :: pi, pj
 
-!---------------
-! WARNING
-!---------------
-! Unit numbers 0, 5, and 6 are associated with the standard error, standard input, and standard output files. 
-!(For e.g.  open(unit = x), you mustn't use x = 0, 5 or 6.
+    !---------------
+    ! WARNING
+    !---------------
+    ! Unit numbers 0, 5, and 6 are associated with the standard error, standard input, and standard output files. 
+    !(For e.g.  open(unit = x), you mustn't use x = 0, 5 or 6.
 
 
 
-!---------------------
-! INTEGERS
-!---------------------
+
+
+
+    !=====================
+    ! INTEGERS
+    !=====================
 
 
     write(*, *) ""
@@ -31,7 +36,9 @@ program readfromfile
 
 
 
-! One column integer input
+    !-----------------------------
+    ! One column integer input
+    !-----------------------------
     
     allocate(onedimarray(1:10))
     
@@ -47,7 +54,15 @@ program readfromfile
     write(*, *) ""
     write(*, '(I4)') onedimarray
 
-! Four column integer input
+
+
+
+
+
+
+    !-----------------------------
+    ! Four column integer input
+    !-----------------------------
     
     allocate(twodimarray(1:10, 1:4))
     
@@ -67,9 +82,16 @@ program readfromfile
     end do
 
 
-!---------------------
-! REALS
-!---------------------
+
+
+
+
+
+
+
+    !=====================
+    ! REALS
+    !=====================
 
 
     write(*, *) ""
@@ -96,9 +118,18 @@ program readfromfile
     end do
 
 
-!-------------------------
-!- Skipping the first line
-!-------------------------
+
+
+
+
+
+
+
+
+
+    !=========================
+    ! Skipping the first line
+    !=========================
 
     write(*, *) ""
     write(*, *) ""
@@ -126,9 +157,15 @@ program readfromfile
 
 
 
-!-------------------------
-!- Unknown number of lines 
-!-------------------------
+
+
+
+
+
+
+    !=========================
+    ! Unknown number of lines 
+    !=========================
 
     write(*, *) ""
     write(*, *) ""

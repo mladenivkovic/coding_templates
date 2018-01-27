@@ -1,17 +1,20 @@
 program logicaloperators
 
-! Fortran logical operators
+    !=================================
+    ! Fortran logical operators
+    !=================================
 
     implicit none
     logical :: true = .TRUE., false = .FALSE.
 
- ! Logical Operators
+    !-----------------------------------------------------------
     !   FORTRAN LOGICAL OPERATORS
     !    .NOT. : logical not
     !    .AND. : logical and
     !    .OR. : logical or
     !    .EQV. : logical equivalence
     !    .NEQV. : logical not equivalence   write(*,*) " "
+    !-----------------------------------------------------------
 
 
 

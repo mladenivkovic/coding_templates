@@ -1,9 +1,12 @@
 program linkedlist
 
-! Singly linked list
-! Concept: Consist of a sequence of boxes with compartments
-! Simplest case: First compartment holds a data item, second
-! Compartment contains directions to the next box.
+    !==============================================================
+    ! Singly linked list
+    ! Concept: Consist of a sequence of boxes with compartments
+    ! Simplest case: First compartment holds a data item, second
+    ! Compartment contains directions to the next box.
+    !==============================================================
+
     implicit none
 
     type link

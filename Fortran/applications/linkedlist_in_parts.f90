@@ -1,16 +1,18 @@
 program chair_linkedlist
 
-! This program shows how to create a linked list that is appended to with
-! "breaks" in between: Append your "object" to whatever list
-! it's supposed to be appended, while the order you "read them in" is
-! unknown. (But you know where they should be sorted into.)
+  !==================================================================================
+  ! This program shows how to create a linked list that is appended to with
+  ! "breaks" in between: Append your "object" to whatever list
+  ! it's supposed to be appended, while the order you "read them in" is
+  ! unknown. (But you know where they should be sorted into.)
 
 
-! Scenario for this program:
-! Assume you have nbuild buildings. In total there are nrooms rooms distributed
-! between those 5 buildings (randomly) and every room has nchair chairs.
-! The chairs are enumerated by integer numbers. We now want to know what chairs
-! can be found in what building.
+  ! Scenario for this program:
+  ! Assume you have nbuild buildings. In total there are nrooms rooms distributed
+  ! between those 5 buildings (randomly) and every room has nchair chairs.
+  ! The chairs are enumerated by integer numbers. We now want to know what chairs
+  ! can be found in what building.
+  !==================================================================================
 
     implicit none
 

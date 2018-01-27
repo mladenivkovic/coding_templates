@@ -1,13 +1,18 @@
 program array_quickie
+
+!=======================================================================
 ! A quick template to create and print arrays and allocatable arrays.
 ! IMPORTANT!!!!!!!!
 ! Execute with a.out < ./inputfiles/arrayinput.txt
+!=======================================================================
 
 
-! The rank of an array is its number of dimensions.
-! The extent of an array is the number of elements in one dimension.
-! The shape of an array is a vector for which each dimension equals 
-! the extent.
+  !---------------------------------------------------------------------
+  ! The rank of an array is its number of dimensions.
+  ! The extent of an array is the number of elements in one dimension.
+  ! The shape of an array is a vector for which each dimension equals 
+  ! the extent.
+  !---------------------------------------------------------------------
 
 
     implicit none
@@ -42,9 +47,16 @@ program array_quickie
     integer :: x, y, z
     integer :: counter = 0
 
-!###################################
-! ARRAY INITIATION
-!###################################
+
+
+
+
+
+
+    !-----------------------------
+    ! ARRAY INITIATION
+    !-----------------------------
+
     ! Initiate an array with initial values:
     real, dimension(4:8) :: InitialArray = (/1.0, 1.2, 1.4, 1.6, 1.8/)
     real, dimension(5) :: InitialArrayTwo = (/1.0, 1.2, 1.4, 1.6, 1.8/)
@@ -99,9 +111,13 @@ program array_quickie
             end do
         end do
     end do
-!#############################################
-! PRINTING ARRAYS
-!#############################################
+
+
+
+
+    !-----------------------
+    ! PRINTING ARRAYS
+    !-----------------------
 
     ! formatting for nicer output:
 

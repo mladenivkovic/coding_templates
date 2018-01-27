@@ -1,21 +1,23 @@
 program pointers
-! A pointer is a variable that has the pointer attribute.
-! A pointer is associated with a target by allocation or 
-! pointer assignment. 
-! Association:
-! - allocate statement referencing the pointer
-! - pointer-assigned to a target that is associated or is 
-!   specified with the target attribute and, if allocatable, 
-!   is currently allocated.
-!
-! A pointer may have a pointer association status
-! - associated
-! - disassociated
-! - undefined
-! The association status may change during execution of a program.
-! A pointer can't be referenced nor defined until it is associated.
-! A pointer is disassociated following execution of a deallocate or
-! nullify statement.
+    !------------------------------------------------------------------------
+    ! A pointer is a variable that has the pointer attribute.
+    ! A pointer is associated with a target by allocation or 
+    ! pointer assignment. 
+    ! Association:
+    ! - allocate statement referencing the pointer
+    ! - pointer-assigned to a target that is associated or is 
+    !   specified with the target attribute and, if allocatable, 
+    !   is currently allocated.
+    !
+    ! A pointer may have a pointer association status
+    ! - associated
+    ! - disassociated
+    ! - undefined
+    ! The association status may change during execution of a program.
+    ! A pointer can't be referenced nor defined until it is associated.
+    ! A pointer is disassociated following execution of a deallocate or
+    ! nullify statement.
+    !------------------------------------------------------------------------
 
 
     implicit none

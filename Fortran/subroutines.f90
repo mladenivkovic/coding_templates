@@ -1,39 +1,43 @@
 program subroutines
 
-! A fortran subroutine does not return any value with its name.
-! subroutines use formal arguments to receive values and to pass 
-! results back.
+    !------------------------------------------------------------------------
+    ! A fortran subroutine does not return any value with its name.
+    ! subroutines use formal arguments to receive values and to pass 
+    ! results back.
 
-! Syntax:
+    ! Syntax:
 
-! subroutine subroutine-name(arg1, ..., argn)
-!   implicit none
-!   [specification part]
-!   [execution part]
-!   [subprogram part]
-!end subroutine subroutine-name
-
-
-
-! INTENT
-
-! intent(in) :
-!   the argument is expected to have a value, but its value will not
-!   be changed inside the subroutine.
-
-! intent(out) :
-!   the parameter does not have a value and is given one in the
-!   called routine
-
-! intent(inout):
-!   parameter already has a value and is changed inside the routine
+    ! subroutine subroutine-name(arg1, ..., argn)
+    !   implicit none
+    !   [specification part]
+    !   [execution part]
+    !   [subprogram part]
+    !end subroutine subroutine-name
 
 
 
-! To use a subroutine, the CALL statement is needed.
+    ! INTENT
+
+    ! intent(in) :
+    !   the argument is expected to have a value, but its value will not
+    !   be changed inside the subroutine.
+
+    ! intent(out) :
+    !   the parameter does not have a value and is given one in the
+    !   called routine
+
+    ! intent(inout):
+    !   parameter already has a value and is changed inside the routine
 
 
-!-------------------------------------------------------
+
+    ! To use a subroutine, the CALL statement is needed.
+    !------------------------------------------------------------------------
+
+    
+
+
+    !-------------------------------------------------------
     ! simple example of the use of a main program
     ! and two subroutines.
     ! one interacts with the user and the
@@ -45,6 +49,7 @@ program subroutines
 
     ! It calculates the solutions for the quadratic eqn
     ! of the form ax**2  + bx + c = 0
+    !-------------------------------------------------------
 
 
     implicit none
@@ -137,7 +142,9 @@ contains
 
 
     subroutine interact(a, b, c, ok)
+        !------------------------------------------------------------
         ! reads in 3 values, checks if no problems while reading in
+        !------------------------------------------------------------
         implicit none
         real, intent (out) :: a
         real, intent (out) :: b
@@ -203,7 +210,9 @@ contains
 
 
     subroutine counting(state)
+        !------------------------------------------------------------
         ! a subroutine to demonstrate the save option
+        !------------------------------------------------------------
         implicit none
         integer, save :: i = 1  ! This local  variable will be 
                                 ! saved in between calls.
@@ -230,7 +239,9 @@ contains
 
 
     subroutine optionalandkeywords(somearray, opt_var, another_opt_var)
+        !------------------------------------------------------------
         ! a subroutine to demonstrate optional arguments
+        !------------------------------------------------------------
         implicit none
         real, intent(in), optional :: opt_var
         real, intent(in), optional :: another_opt_var
@@ -276,10 +287,12 @@ contains
 
 
     subroutine subrwitharrays(x, n, mean, std_dev)
+        !------------------------------------------------------------
         !x : array
         !n : array length
         !mean: mean
         !std_dev: standard deviation
+        !------------------------------------------------------------
         
         implicit none
         integer, intent(in) :: n

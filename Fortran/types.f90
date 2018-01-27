@@ -1,22 +1,27 @@
 program types
 
-! Creating and using your own types.
-!
-! Syntax:
-!
-!--- Defining types:
-!
-! type typename
-!   data type :: component_name
-!   etc
-! end type typename
-!
-! ---initiating types:
-!
-! type (typename) :: variablename
-!
-! ---referring to components:
-! variablename%component_name
+    !====================================
+    ! Creating and using your own types.
+    !====================================
+
+    !------------------------------------
+    ! Syntax:
+    !
+    !--- Defining types:
+    !
+    ! type typename
+    !   data type :: component_name
+    !   etc
+    ! end type typename
+    !
+    ! ---initiating types:
+    !
+    ! type (typename) :: variablename
+    !
+    ! ---referring to components:
+    ! variablename%component_name
+    !
+    !------------------------------------
 
     implicit none
 

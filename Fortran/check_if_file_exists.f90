@@ -1,5 +1,10 @@
 program check_if_file_exists
 
+  !===============================
+  ! Check whether a file exists.
+  !===============================
+
+
   implicit none
 
 

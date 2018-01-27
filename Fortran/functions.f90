@@ -1,44 +1,57 @@
 program functions
 
-!type FUNCTION function-name (arg1, arg2, ..., argn)
-!   IMPLICIT NONE
-!   [specification part] 
-!   [execution part] 
-!   [subprogram part] 
-!   END FUNCTION function-name
+  !=====================================
+  ! Dealing with functions.
+  !=====================================
 
 
-! "type" is a Fortran type: logical, integer, real...
-! function-name : a fortran identifier. Just name it.
-! arg1, ..., argn : formal arguments
+  ! Syntax:
+  !
+  ! type FUNCTION function-name (arg1, arg2, ..., argn)
+  !    IMPLICIT NONE
+  !    [specification part] 
+  !    [execution part] 
+  !    [subprogram part] 
+  !    END FUNCTION function-name
 
-! Somewhere in a function there has to be one or more 
-! assignment statements like " function-name = expression"
-! function-name cannot appear in the right-hand side of 
-! any expression.
 
-! In a type specification, formal arguments shold have a new
-! Attribute: INTENT(IN)
-! Its meaning is that the function only takes the calue from
-! a formal agrument and does not change its content.
+  ! "type" is a Fortran type: logical, integer, real...
+  ! function-name : a fortran identifier. Just name it.
+  ! arg1, ..., argn : formal arguments
 
-! Functions can have no formal argument, but () is still required.
+  ! Somewhere in a function there has to be one or more 
+  ! assignment statements like " function-name = expression"
+  ! function-name cannot appear in the right-hand side of 
+  ! any expression.
 
-! INTERNAL FUNCTIONS
-! Internal functions are inside of a program, the main program:
-! Program program-name 
-!   implicit none
-!   [specification part]
-!   [execution part]
-! contains
-!   [functions]
-! End program program-name
+  ! In a type specification, formal arguments shold have a new
+  ! Attribute: INTENT(IN)
+  ! Its meaning is that the function only takes the calue from
+  ! a formal agrument and does not change its content.
 
-! Common problems:
-! - forget function type
-! - forget INTENT (IN)
-! - change an INTENT(IN) argument
-! - forget to return a value
+  ! Functions can have no formal argument, but () is still required.
+
+
+
+
+  !--------------------
+  ! INTERNAL FUNCTIONS
+  !--------------------
+
+  ! Internal functions are inside of a program, the main program:
+  ! Program program-name 
+  !   implicit none
+  !   [specification part]
+  !   [execution part]
+  ! contains
+  !   [functions]
+  ! End program program-name
+
+  ! Common problems:
+  ! - forget function type
+  ! - forget INTENT (IN)
+  ! - change an INTENT(IN) argument
+  ! - forget to return a value
 
     implicit none
 
