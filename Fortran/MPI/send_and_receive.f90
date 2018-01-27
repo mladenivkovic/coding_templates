@@ -1,3 +1,12 @@
+!================================================
+! Demonstrate a sendreceive
+! Master processor does the printing, others
+! send their process number to it when
+! it's their turn.
+! Uses process rank as tag.
+!================================================
+
+
 program sendreceive
 
     use mpi
@@ -17,7 +26,13 @@ program sendreceive
 
     ! returns process number to variable this_process_number
     call mpi_comm_rank(mpi_comm_world, this_process_number, error_number)
-    
+   
+
+
+    !---------------------------------------------------
+    ! If main processor: Receive messages and print
+    !---------------------------------------------------
+
     if (this_process_number==0) then
         write(*, *) "Hello from process", this_process_number, " of ", number_of_processes, "processes"
         
@@ -39,9 +54,9 @@ program sendreceive
             ! status:
             ! ierror:       Error integer
             
-            call mpi_recv(this_process_number, 1, mpi_integer, i, 1, mpi_comm_world, status, error_number)
+            call mpi_recv(this_process_number, 1, mpi_integer, i, i, mpi_comm_world, status, error_number)
 
-            write(*,*) "Hello from process", this_process_number, " of ", number_of_processes, "processes"
+            write(*,*) "Received message from process", this_process_number
         end do
     else
         ! if not main process (= process 0), send:
@@ -50,7 +65,7 @@ program sendreceive
         ! dest instead of source
         ! dest:     rank of destination
         !           process number to which to send
-        call mpi_send(this_process_number, 1, mpi_integer, 0, 1, mpi_comm_world, error_number)
+        call mpi_send(this_process_number, 1, mpi_integer, 0, this_process_number, mpi_comm_world, error_number)
     end if
     
     ! end MPI

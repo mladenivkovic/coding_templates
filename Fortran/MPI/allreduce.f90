@@ -1,6 +1,6 @@
-! A short demonstration of allreduce.
-! Sum up 2 arrays which differ for each processor.
-! Meant to be run with 2 processors.
+!===================================================
+! A short demonstration of allgather vs alltoall.
+!===================================================
 
 program reducing
   use mpi
@@ -49,16 +49,16 @@ program reducing
     ! comm:	communicator
     ! ierror:	error integer
     
-! possible operations:
-!MPI_SUM     Sum of elements
-!MPI_PROD    Product of elements
-!MPI_MAX     Maximum of elements
-!MPI_MIN     Minimum of elements
-!MPI_MAXLOC  Maximum of elements and location
-!MPI_MINLOC  Minimum of elements and location
-!MPI_LAND    Logical AND
-!MPI_LOR     Logical OR
-!MPI_LXOR    Logical exclusive OR
+    ! possible operations:
+    !MPI_SUM     Sum of elements
+    !MPI_PROD    Product of elements
+    !MPI_MAX     Maximum of elements
+    !MPI_MIN     Minimum of elements
+    !MPI_MAXLOC  Maximum of elements and location
+    !MPI_MINLOC  Minimum of elements and location
+    !MPI_LAND    Logical AND
+    !MPI_LOR     Logical OR
+    !MPI_LXOR    Logical exclusive OR
 
      call mpi_finalize(error_number)
 end program reducing

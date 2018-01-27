@@ -1,13 +1,16 @@
 program writewithmpi
 
+    !--------------------------------------------------
     ! initialise MPI
     ! write a message to a single file
     ! write output to screen from only 1 processor
     ! finalize MPI
+    !--------------------------------------------------
 
     use mpi 
     implicit none
     integer :: dummy_io, errnr, myid, ncpu
+    integer, dimension(MPI_STATUS_SIZE) :: stat
 
     ! Never finalize MPI in a subroutine, otherwise no other
     ! subroutine can restart MPI
@@ -50,13 +53,13 @@ subroutine mladen_writetoonefile(somemessage)
         ! write it along with message
 
         do i = 2, ncpu
-            call mpi_recv(dummy_io, 1, mpi_integer, i-1, tag_mladen, mpi_comm_world, MPI_STATUS_IGNORE, errnr)
+            call mpi_recv(dummy_io, 1, mpi_integer, i-1, tag_mladen, mpi_comm_world, stat, errnr)
             write(666, *) somemessage, dummy_io, i
         end do
         close(666)
     else
         ! send your ID (dummy_IO) to ID 1
-        call mpi_send(dummy_io, 1, mpi_integer, 0, tag_mladen, mpi_comm_world,MPI_STATUS_IGNORE, errnr)      
+        call mpi_send(dummy_io, 1, mpi_integer, 0, tag_mladen, mpi_comm_world, errnr)      
         write(6, *) "myid /= 1"
     end if
     
