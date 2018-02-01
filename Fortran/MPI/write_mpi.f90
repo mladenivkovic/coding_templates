@@ -5,6 +5,7 @@ program writewithmpi
     ! write a message to a single file
     ! write output to screen from only 1 processor
     ! finalize MPI
+    ! !!! THIS IS NOT SAFE. LOOK AT OTHER FILE. !!!!!
     !--------------------------------------------------
 
     use mpi 
@@ -22,7 +23,7 @@ program writewithmpi
 
 
     call mladen_writetoonefile("my message")
-    call mladen_message("Hello! This is the message for stdout. Other output was written to mladen_output.txt")
+    call mladen_message("Hello! This is the message for stdout. Other output was written to io_files/mladen_output.txt")
 
     call mpi_finalize(errnr)
 
@@ -37,7 +38,7 @@ subroutine mladen_writetoonefile(somemessage)
     integer :: i
     character (len=80) :: filename
 
-    filename=TRIM('mladen_output.txt')
+    filename=TRIM('io_files/mladen_output.txt')
 
     dummy_io = myid
 
