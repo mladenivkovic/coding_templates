@@ -1,5 +1,5 @@
 #######################
-    FORTRAN NOTIZEN	
+    FORTRAN NOTIZEN     
 #######################
 
 ------------
@@ -19,31 +19,31 @@ COMPILER
         -x f95-cpp-input -ffpe-trap=zero,underflow,overflow,invalid,denormal -finit-real=nan
 
         -frecord-marker=4
-        -ffree-line-length-none     Set column after which characters are ignored in typical
-                                              free-form lines in the source file. The default value is 132. 
-                                              n may be ‘none’, meaning that the entire line is meaningful.
+        -ffree-line-length-none   Set column after which characters are ignored in typical
+                                      free-form lines in the source file. The default value is 132. 
+                                      n may be ‘none’, meaning that the entire line is meaningful.
 
-        -fbacktrace                 create backtrace
+        -fbacktrace               create backtrace
 
-        -g                          compile for debugging
+        -g                        compile for debugging
 
-        -O                          no optimisation
+        -O                        no optimisation
 
-        -fbounds-check              Enable generation of run-time checks for array subscripts and 
-                                              against the declared minimum and maximum values. It also 
-                                              checks array indices for assumed and deferred shape arrays 
-                                              against the actual allocated bounds. 
+        -fbounds-check            Enable generation of run-time checks for array subscripts and 
+                                      against the declared minimum and maximum values. It also 
+                                      checks array indices for assumed and deferred shape arrays 
+                                      against the actual allocated bounds. 
 
         -Wuninitilized
 
-        -Wall                       Enables commonly used warning options pertaining
+        -Wall                     Enables commonly used warning options pertaining
 
         -fcheck=all
 
-        -x                          Specify the language of the following input files
-                                              Permissible languages include: c c++ assembler none
-                                              'none' means revert to the default behavior of
-                                              guessing the language based on the file's extension
+        -x                        Specify the language of the following input files
+                                      Permissible languages include: c c++ assembler none
+                                      'none' means revert to the default behavior of
+                                      guessing the language based on the file's extension
 
         -f95-cpp-input
 
@@ -99,7 +99,7 @@ COMPILER
  
  
 ------------
-VARIA		
+VARIA           
 ------------
 
 - "Strings":
@@ -112,9 +112,9 @@ VARIA
 - forall: 
     allows calculations fo be carried out simultaneously in a multiprocessor 
     environment
-	  forall (i=1:n)
-	   	 a(i,i) = a(i, i) - lambda
-	  end forall
+          forall (i=1:n)
+                 a(i,i) = a(i, i) - lambda
+          end forall
 
 
 -   One may use GNU Fortran as a syntax checker (or verify that GNU Fortran's
