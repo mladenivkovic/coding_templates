@@ -65,8 +65,16 @@
     noremap  <buffer> <silent> $ g$
 
     " Allow to store file specific options as comments in file
-    set modeline
-    set modelines=5
+    " WARNING: Potential security risk
+    " set modeline
+    " set modelines=5
+
+    " Who doesn't like autoindent?
+    set autoindent
+
+    " tab and backspace are smart
+    set smarttab                  
+    set expandtab
 
 
 
@@ -87,6 +95,10 @@
 
     " Highlight things that we find with the search
     set hlsearch
+
+    set grepprg=grep\ -nH\ $*
+
+
 
 
 
@@ -134,9 +146,9 @@
 
 
 
-"=================
-" SYNTAX AND TABS
-"=================
+"=====================
+" SYNTAX AND FILETYPE
+"=====================
 
     " Needed for Syntax Highlighting and stuff
     filetype on 
@@ -144,16 +156,6 @@
     filetype indent on "needed by  plugin slim
 
     syntax enable
-    set t_Co=16
-    set grepprg=grep\ -nH\ $*
-
-    " Who doesn't like autoindent?
-    set autoindent
-
-    " tab and backspace are smart
-    set smarttab                  
-    set expandtab
-
 
     " Fortran highlighting
     let fortran_free_source=1
@@ -167,25 +169,37 @@
 
 
 
-"===============
-"HIGHLIGHTING
-"===============
+
+
+
+
+"==========================
+" COLORS AND HIGHLIGHTING
+"==========================
+
+    set t_Co=16
+
 
     " Set highlight colors for brackets/braces/parenthesis matching
     hi MatchParen cterm=bold ctermbg=none ctermfg=red
     hi Fold cterm=bold ctermbg=6 ctermfg=grey
 
-    " Tab line highlighting for profile  'One Dark' 
+
+    " Tab line highlighting for profile 'One Dark' 
     hi TabLineFill ctermbg=Yellow ctermfg=DarkGrey
     hi TabLine ctermfg=LightGrey ctermbg=DarkGrey cterm=bold
     hi TabLineSel ctermfg=DarkGrey ctermbg=yellow cterm=bold
    
+
     "statusline 
     hi StatusLine ctermbg=Black ctermfg=Grey 
     "vertical split line
     hi VertSplit ctermbg=Black ctermfg=DarkGrey
     "horizontal split line
     hi StatusLineNC ctermbg=Black ctermfg=DarkGrey
+
+
+
 
 
 
