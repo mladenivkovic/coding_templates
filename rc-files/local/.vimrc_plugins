@@ -32,7 +32,7 @@
 
     Plugin 'gcmt/taboo.vim'                 "tab goodies
 
-    Plugin 'vim-syntastic/syntastic'        "Syntax checking
+    " Plugin 'vim-syntastic/syntastic'        "Syntax checking
 
     "" The following are examples of different formats supported.
     "" Keep Plugin commands between vundle#begin/end.

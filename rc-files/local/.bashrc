@@ -311,9 +311,9 @@
 
 
     #Computational Astrophysics
-    if [ -f ~/.bashrc_compast ]; then
-        . ~/.bashrc_compast
-    fi
+    # if [ -f ~/.bashrc_compast ]; then
+    #     . ~/.bashrc_compast
+    # fi
 
 
 

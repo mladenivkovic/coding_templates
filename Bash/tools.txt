@@ -1,0 +1,19 @@
+========================
+VARIOUS CMDLINE TOOLS
+========================
+
+
+
+od - dump files in octal and other formats
+    print raw fortran/MPI data: od -d <filename>
+
+    -d  print in decimal system
+    -An don't print position 
+    -v  show repetitions instead of *
+    -wLEN LEN bits per line
+    -tdf format as floats
+    -i  format as integers
+
+
+
+    see also: hexdump

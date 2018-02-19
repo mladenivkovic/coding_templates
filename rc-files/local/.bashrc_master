@@ -111,6 +111,9 @@ echo "Importing master thesis stuff."
 
     alias cs='make merger_tree.o; make unbinding.o; make clump_finder.o; make clump_merger.o; make clfind_commons.o'
 
+    # octal dump MPI files with 251 4-byte integers per line
+    alias odmpi='od -An -v -i -w1004'
+
 
 
     #-------------------------
