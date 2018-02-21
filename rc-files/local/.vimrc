@@ -17,6 +17,8 @@
     set mouse=a
 
     " set backup
+    " Don't forget to create these directories first if you're on a new
+    " machine!
     set backup
     set backupdir=~/.vim/backup
     set directory=~/.vim/tmp
@@ -31,6 +33,10 @@
     "set paste " conflicts with YouCompleteMe
 
     " enable copypasting between sessions
+    " if this doesn't work, check whether you
+    " installed the right vim: vim --version | grep clipboard
+    " must contain +clipboard or +xterm_clipboard.
+    " (@ Ubuntu 16.04, you need vim-gnome)
     set clipboard=unnamedplus
 
     " make backspace work 'normally'

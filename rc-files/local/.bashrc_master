@@ -126,7 +126,7 @@ echo "Importing master thesis stuff."
     alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run"$DATE".log'
     alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice-big.nml 2>"$DATE"_error.log | tee run"$DATE".log'
     alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    alias debte='gdb --args mpiexec -n 4 ../ramses3d-merger-dice merger-dice.nml'
+    alias debte='gdb --args mpirun -np 4 ../ramses3d-merger-dice merger-dice.nml'
     alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run"$DATE".log'
     #alias goto='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-old unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
     #alias goo='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen-old unbinding.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
