@@ -1,7 +1,7 @@
 [/]
 foreground-color='rgb(130,143,148)'
-visible-name='Elementary_Custom'
-palette=['rgb(48,48,48)', 'rgb(225,50,26)', 'rgb(52,155,61)', 'rgb(255,192,5)', 'rgb(0,79,158)', 'rgb(236,0,72)', 'rgb(29,124,61)', 'rgb(242,242,242)', 'rgb(52,52,58)', 'rgb(255,54,30)', 'rgb(41,183,89)', 'rgb(255,208,10)', 'rgb(0,79,158)', 'rgb(210,26,61)', 'rgb(60,110,186)', 'rgb(99,95,142)']
+visible-name='my_profile_dark'
+palette=['rgb(48,48,48)', 'rgb(225,50,26)', 'rgb(52,155,61)', 'rgb(255,192,5)', 'rgb(0,79,158)', 'rgb(236,0,72)', 'rgb(29,124,61)', 'rgb(242,242,242)', 'rgb(52,52,58)', 'rgb(255,54,30)', 'rgb(41,183,89)', 'rgb(255,208,10)', 'rgb(78,79,185)', 'rgb(210,26,61)', 'rgb(60,110,186)', 'rgb(99,95,142)']
 use-system-font=false
 use-transparent-background=false
 use-theme-colors=false

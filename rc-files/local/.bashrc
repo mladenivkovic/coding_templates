@@ -122,15 +122,20 @@
     #export PS1="$PS1"'  ' # space arount newline did something weird with colors.
 
 
+
+
+
+
     #----------------
     # PATH VARIABLE
     #----------------
 
-    # Add executables from /home/mivkov/Skripte/execs_included_in_path
-    # to $PATH variable
-    PATH="$HOME"/"Skripte/bins_to_include_in_path:"$PATH
+    # Add executables from /home/mivkov/Skripte/execs_for_path to $PATH variable
+    PATH="$HOME"/"Skripte/execs_for_path:"$PATH
+
     # Add intel (fortran) compiler to path var
     #PATH="/opt/intel/bin:"$PATH
+
     #add local bin
     PATH="$HOME""/local/bin:"$PATH
 
@@ -165,26 +170,43 @@
     #alias ds='ssh -2Yt mivkov@linux.physik.uzh.ch ssh -i .ssh/data_science esc403.clusters.s3it.uzh.ch'
     #alias f2='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y f2'
 
+
+
+
+
     #---------------------
     # directory shortcuts
     #---------------------
 
+
+    # GLOBALS
     alias ..='cd ..'
     alias ~='cd ~'
-    alias pj='cd ~/Coding/projekte' # go to projects
-    alias templ='cd ~/Coding/coding_templates' #go to templates
+
+    # MY CODING AND PROJECTS
+    alias pj='cd ~/Coding/projekte'             # go to projects
+    alias templ='cd ~/Coding/coding_templates'  # go to templates
     alias t=templ
-    alias ft='cd ~/Coding/coding_templates/Fortran' # go to fortran templates
-    alias pt='cd ~/Coding/coding_templates/Python/python3' # go to python templates
-    alias ct='cd ~/Coding/coding_templates/C' # go to C templates
+    alias ft='cd ~/Coding/coding_templates/Fortran'         # go to fortran templates
+    alias pt='cd ~/Coding/coding_templates/Python/python3'  # go to python templates
+    alias ct='cd ~/Coding/coding_templates/C'               # go to C templates
     alias ppt='cd ~/Coding/coding_templates/Python/python3/plots' # go to python plot templates
-    alias bt='cd ~/Coding/coding_templates/Bash' # go to bash templates
-    alias lt='cd ~/Coding/coding_templates/LaTeX' # go to LaTeX templates
-    alias f='cd ~/UZH/Formelsammlung'
-    #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
-    alias d='cd ~/Documents/Texte/diary'
-    alias papers='cd ~/UZH/Papers'
+    alias bt='cd ~/Coding/coding_templates/Bash'            # go to bash templates
+    alias lt='cd ~/Coding/coding_templates/LaTeX'           # go to LaTeX templates
+    alias rcf='cd ~/Coding/coding_templates/rc-files'       # go to LaTeX templates
     alias plg='cd ~/Coding/Playground'
+    # alias d='cd ~/Documents/Texte/diary'
+
+
+
+    #UNI
+    alias f='cd ~/UZH/Formelsammlung'
+    alias papers='cd ~/UZH/Papers'
+    #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
+
+
+
+
 
 
     #---------
@@ -194,6 +216,11 @@
     alias e='exit'
     alias python=python3
     alias refresh='source ~/.bashrc'
+
+
+
+
+
 
 
 
@@ -229,11 +256,14 @@
 # FUNCTIONS
 #===========================
 
+    #-------------------------------------------------------
+    # functions to show specified content of ~/.bashrc file
+    #-------------------------------------------------------
 
-    #===========================
-    #functions to show specified content of ~/.bashrc file
-
-    function showaliases { #function to print all my self defined aliases in the ~/.SHELLrc file.
+    #---------------------
+    function showaliases { 
+    #---------------------
+        #function to print all my self defined aliases in the ~/.SHELLrc file.
         shell_in_use=$0
         echo " "
         echo "Printing all aliases defined in the ".$shell_in_use"rc file:"
@@ -242,7 +272,12 @@
         echo " "
     }
 
-    function showvars { #function to print all my self defined and exported variables in the ~/.SHELLrc file.
+
+
+    #---------------------
+    function showvars { 
+    #---------------------
+        #function to print all my self defined and exported variables in the ~/.SHELLrc file.
         shell_in_use=$0
         echo " "
         echo "Printing all exported variables defined in the ".$shell_in_use"rc file:"
@@ -251,7 +286,13 @@
         echo " "
     }
 
-    function showfuncs { #function to print all my self defined functions in the ~/.bashrc file.
+
+
+
+    #---------------------
+    function showfuncs { 
+    #---------------------
+        #function to print all my self defined functions in the ~/.bashrc file.
         shell_in_use=$0
         echo " "
         echo "Printing all functions defined in the ".$shell_in_use"rc file:"
@@ -260,10 +301,19 @@
         echo " "
     }
 
-    #===========================
 
 
-    function space { # Zeigt Grösse des Arbeitsverzeichnisses
+
+
+    #------------------------
+    # Conglomerate functions
+    #------------------------
+
+
+    #----------------
+    function space { 
+    #----------------
+        # Zeigt Grösse des Arbeitsverzeichnisses
         echo "Arbeitsverzeichnis: " $PWD
         echo "Grösse des Arbeitsverzeichnisses " `du -h 2>>/dev/null | tail -n1`
         echo "Benutze du -h für weitere Informationen."
@@ -281,12 +331,24 @@
 
 
 
+
+
+
+
 #=====================
 # PYTHON
 #=====================
 
     export PYTHONPATH="/home/mivkov/Coding/projekte/Python/modules/physics:"${PYTHONPATH}
     export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
+
+
+
+
+
+
+
+
 
 
 
