@@ -109,7 +109,7 @@ echo "Importing master thesis stuff."
 
     alias upr=update_ramses.sh
 
-    alias cs='make merger_tree.o; make unbinding.o; make clump_finder.o; make clump_merger.o; make clfind_commons.o'
+    alias cs='make clfind_commons.o && make clump_finder.o && make clump_merger.o && make unbinding.o && make merger_tree.o; '
 
     # octal dump MPI files with 251 4-byte integers per line
     alias odmpi='od -An -v -i -w1004'
@@ -120,7 +120,6 @@ echo "Importing master thesis stuff."
     # Running simulations
     #-------------------------
 
-    alias rmlog='rm -i *.log'
     alias  go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
     alias god='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
     alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run"$DATE".log'
@@ -135,6 +134,27 @@ echo "Importing master thesis stuff."
     #alias gomo='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi-old unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi-old.log'
     #alias gor='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-reltest unbinding-dice.nml 2>"$DATE"_error-reltest.log | tee run"$DATE"-reltest.log'
     alias mkt='make_mergertree 2>&1| tee maketree.log'
+
+
+
+    function rmlog {
+        #--------------------------------------------
+        # Remove log files.
+        # First asks you if you want to remove all.
+        # If no, then it'll ask you file by file.
+        #--------------------------------------------
+        while true; do
+            read -p "Do you wish to delete all *.log files? (y/n) " yn
+            case $yn in
+                [Yy]* ) echo "removing all *.log files."; rm *.log; break;;
+                [Nn]* ) rm -i *.log; exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+        echo "done"
+
+        
+    }
 
 
 
