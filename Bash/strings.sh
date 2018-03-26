@@ -17,3 +17,8 @@ echo extract suffix: ${filename#somefile}
 
 
 echo everything after keyword string: ${mystring#*string}
+
+
+number=5
+paddednumber=`printf "%05d" $number`
+echo padded number: $paddednumber
