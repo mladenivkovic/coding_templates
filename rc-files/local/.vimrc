@@ -116,7 +116,9 @@
 
     " Enable folding
     set foldmethod=indent
-    set foldlevel=99
+    set foldlevel=1
+    set foldminlines=5
+    set foldnestmax=3
     set foldenable
 
     " Set fold methods for every file type only! 
@@ -159,7 +161,7 @@
     " Needed for Syntax Highlighting and stuff
     filetype on 
     filetype plugin on "needed for plugins: nerdcommenter and to autoload .vim/after/ftplugin
-    filetype indent on "needed by  plugin slim
+    filetype indent off "needed by  plugin slim
 
     syntax enable
 
@@ -241,4 +243,51 @@
 
 
 
+"=============================
+" INDENTATION
+"=============================
+
+    " set defaults
+    setlocal ts=4 sts=4 sw=4 expandtab
+
+    " set filetype specifics
+    augroup cpp 
+        autocmd!
+        autocmd FileType cpp setlocal ts=2 sts=2 sw=2 expandtab
+    augroup end
+
+    augroup c
+        autocmd!
+        autocmd FileType c setlocal ts=2 sts=2 sw=2 expandtab
+    augroup end
+
+    augroup fortran
+        autocmd!
+        autocmd FileType fortran setlocal ts=2 sts=2 sw=2 expandtab
+    augroup end
+
+    augroup python
+        autocmd!
+        autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+    augroup end
+
+    augroup sh
+        autocmd!
+        autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab
+    augroup end
+
+    augroup text
+        autocmd!
+        autocmd FileType text setlocal ts=4 sts=4 sw=4 expandtab
+    augroup end
+
+    augroup txt
+        autocmd!
+        autocmd FileType txt setlocal ts=4 sts=4 sw=4 expandtab
+    augroup end
+
+    augroup vim
+        autocmd!
+        autocmd FileType vim setlocal ts=4 sts=4 sw=4 expandtab
+    augroup end
 

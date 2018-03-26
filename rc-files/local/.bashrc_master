@@ -1,4 +1,4 @@
-echo "Importing master thesis stuff."
+# echo "Importing master thesis stuff."
 
 
 #=========================
@@ -15,13 +15,14 @@ echo "Importing master thesis stuff."
 #=========================
 # PATH
 #=========================
-    export PATH="$PATH":"$MA"/scripts        #add python and bash script dir
+    export PATH="$PATH":"$MA"/scripts           #add python and bash script dir
     export PATH="$PATH":"$MA"/src/dice/bin/bin  #add dice
     export PATH="$PATH":"$MA"/scripts/unb
     export PATH="$PATH":"$MA"/project/mergertree/bin #add mergertree program
     #export PATH="$PATH":'/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/programs/scripts'
 
 
+    export PYTHONPATH=${PYTHONPATH}"/home/mivkov/UZH/ramses/utils/py:"
 
 
 
@@ -69,6 +70,9 @@ echo "Importing master thesis stuff."
     alias 2f='cd "$MA"/exec/2fracture'
     alias skip='cd "$MA"/exec/skipone'
 
+    alias fdt='cd "$MA"/exec/fieldtest'
+    alias fdtn='cd "$MA"/exec/fieldtest-noneigh'
+
     alias mk='cd "$MA"/project/ramses/bin_merger'
     #alias mk='cd "$MA"/project/ramses/bin_unbinding'
     alias mkc='cd "$MA"/project/ramses/bin_clean'
@@ -77,6 +81,7 @@ echo "Importing master thesis stuff."
     #alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
 
     alias ramses='cd $MA/src/ramses/'
+    alias dat='cd /media/mivkov/DATA/'
 
 
 
@@ -88,10 +93,10 @@ echo "Importing master thesis stuff."
     #alias cpr='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
     #alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-dice "$MA"/exec'
     #alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
-    alias cpr='cp "$MA"/project/ramses/bin_merger/ramses3d-merger "$MA"/exec'
-    alias cpu='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
-    alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-merger-dice "$MA"/exec'
-    alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
+    # alias cpr='cp "$MA"/project/ramses/bin_merger/ramses3d-merger "$MA"/exec'
+    # alias cpu='cp "$MA"/project/ramses/bin_unbinding/ramses3d-mladen "$MA"/exec'
+    # alias cpd='cp "$MA"/project/ramses/bin_dice/ramses3d-merger-dice "$MA"/exec'
+    # alias cpc='cp "$MA"/project/ramses/bin_clean/ramses3d-clean "$MA"/exec'
 
 
 
@@ -103,9 +108,9 @@ echo "Importing master thesis stuff."
 
     alias u=unbindingplot
     alias pp=plot_particles
-    alias r=ramsesplot
+    alias rp=ramsesplot
     alias tp=testplot
-    alias trp=treeplot
+    alias trp=treeplot.py
 
     alias upr=update_ramses.sh
 
@@ -120,20 +125,16 @@ echo "Importing master thesis stuff."
     # Running simulations
     #-------------------------
 
-    alias  go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    alias god='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice-big.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    alias debte='gdb --args mpirun -np 4 ../ramses3d-merger-dice merger-dice.nml'
-    alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run"$DATE".log'
-    #alias goto='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-old unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
-    #alias goo='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen-old unbinding.nml 2>"$DATE"_error.log | tee run"$DATE"-old.log'
-    #alias goi='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice-intel unbinding-dice.nml 2>"$DATE"_error-intel.log | tee run"$DATE"-intel.log'
-    #alias gom='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi.log'
-    #alias gomo='DATE=`date +%F_%Hh%M`; ../ramses3d-dice-nompi-old unbinding-dice.nml 2>"$DATE"_error-nompi.log | tee run"$DATE"-nompi-old.log'
-    #alias gor='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-reltest unbinding-dice.nml 2>"$DATE"_error-reltest.log | tee run"$DATE"-reltest.log'
-    alias mkt='make_mergertree 2>&1| tee maketree.log'
+    alias gou='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_unbinding/ramses3d-unbinding unbinding.nml 2>"$DATE"_error.log | tee run_unbinding_"$DATE".log'
+    alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_clean/ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run_clean_"$DATE".log'
+    alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_dice/ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run_merger_dice_"$DATE".log'
+    alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_merger/ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run_merger_"$DATE".log'
+
+
+    alias debte='gdb --args mpirun -np 4 $MA/project/ramses/bin_dice/ramses3d-merger-dice merger-dice.nml'
+    alias debfield='gdb --args mpirun -np 4 $MA/project/ramses/bin_merger/ramses3d-merger merger.nml'
+
+    # alias mkt='make_mergertree 2>&1| tee maketree.log'
 
 
 

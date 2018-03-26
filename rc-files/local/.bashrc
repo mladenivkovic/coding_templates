@@ -71,8 +71,11 @@
 #=================
 
     # Greetings
-    echo -e "$COL_CYAN_ITALIC""  Good luck and have fun!" "$COL_RESET"
-    echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to see variables,\n  aliases and functions defined in the ~/.bashrc file." "$COL_RESET"
+    case $- in *i*) # check if interactive, otherwise scp will crash
+        echo -e "$COL_CYAN_ITALIC""  Good luck and have fun!" "$COL_RESET"
+        echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to see variables,\n  aliases and functions defined in the ~/.bashrc file." "$COL_RESET"
+        ;;
+    esac
 
 
 
@@ -110,7 +113,6 @@
     #---------------------
 
     export NEWLINE=$'\n'
-    #export PS1="\[\033[38;5;239m\] mivkov@ASUS: \w \[\033[48;5;241m\]\\[$(tput sgr0)\]\n    "
 
     #FOR  DARK THEME
     #PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
@@ -165,10 +167,7 @@
 
     alias linux.physik='ssh -2Y mivkov@linux.physik.uzh.ch'
     alias phy='ssh -2Y mivkov@linux.physik.uzh.ch'
-    #alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
-    #alias zbox='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y zbox'
-    #alias ds='ssh -2Yt mivkov@linux.physik.uzh.ch ssh -i .ssh/data_science esc403.clusters.s3it.uzh.ch'
-    #alias f2='ssh -2Yt mivkov@malin1.physik.uzh.ch  ssh -i /home/uzh/mivkov/.ssh/forzbox -2Y f2'
+    alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
 
 
 
@@ -184,19 +183,17 @@
     alias ~='cd ~'
 
     # MY CODING AND PROJECTS
-    alias pj='cd ~/Coding/projekte'             # go to projects
-    alias templ='cd ~/Coding/coding_templates'  # go to templates
+    alias pj='cd ~/Coding/projekte'                                 # go to projects
+    alias templ='cd ~/Coding/coding_templates'                      # go to templates
     alias t=templ
-    alias ft='cd ~/Coding/coding_templates/Fortran'         # go to fortran templates
-    alias pt='cd ~/Coding/coding_templates/Python/python3'  # go to python templates
-    alias ct='cd ~/Coding/coding_templates/C'               # go to C templates
-    alias ppt='cd ~/Coding/coding_templates/Python/python3/plots' # go to python plot templates
-    alias bt='cd ~/Coding/coding_templates/Bash'            # go to bash templates
-    alias lt='cd ~/Coding/coding_templates/LaTeX'           # go to LaTeX templates
-    alias rcf='cd ~/Coding/coding_templates/rc-files'       # go to LaTeX templates
+    alias ft='cd ~/Coding/coding_templates/Fortran'                 # go to fortran templates
+    alias pt='cd ~/Coding/coding_templates/Python/python3'          # go to python templates
+    alias ct='cd ~/Coding/coding_templates/C'                       # go to C templates
+    alias ppt='cd ~/Coding/coding_templates/Python/python3/plots'   # go to python plot templates
+    alias bt='cd ~/Coding/coding_templates/Bash'                    # go to bash templates
+    alias lt='cd ~/Coding/coding_templates/LaTeX'                   # go to LaTeX templates
+    alias rcf='cd ~/Coding/coding_templates/rc-files'               # go to LaTeX templates
     alias plg='cd ~/Coding/Playground'
-    # alias d='cd ~/Documents/Texte/diary'
-
 
 
     #UNI
@@ -313,16 +310,16 @@
     #----------------
     function space { 
     #----------------
-        # Zeigt Grösse des Arbeitsverzeichnisses
-        echo "Arbeitsverzeichnis: " $PWD
-        echo "Grösse des Arbeitsverzeichnisses " `du -h 2>>/dev/null | tail -n1`
-        echo "Benutze du -h für weitere Informationen."
+        # Shows workdir size 
+        echo "Working directory: " $PWD
+        echo "usage of working directory" `du -h 2>>/dev/null | tail -n1`
+        echo "use du -h for further details."
 
         echo ""
-        echo "Informationen zur Hauptpartition:"
+        echo "Data on main partition:"
         df -h | head -n1
         df -h | grep nvme0n1p5 --colour=never
-        echo "Benutze df -h für weitere Informationen."
+        echo "use df -h for further details."
     }
 
     alias disk=space
@@ -339,8 +336,9 @@
 # PYTHON
 #=====================
 
-    export PYTHONPATH="/home/mivkov/Coding/projekte/Python/modules/physics:"${PYTHONPATH}
-    export PYTHONPATH="${PYTHONPATH}/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
+    export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Coding/projekte/Python/modules/physics:"
+    export PYTHONPATH=${PYTHONPATH}"/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages:"
+    # export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Programme/ParaView/lib/python2.7/site-packages:"
 
 
 
@@ -428,6 +426,4 @@
 #fi
 
 
-#For modules
-#. /etc/profile.d/modules.sh
 
