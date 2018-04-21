@@ -19,3 +19,6 @@ Options:
 
     --gen-suppressions=yes
         Suppress errors of generic libraries (e.g. pre-installed C libraries)
+
+Running with OpenMPI:
+    mpirun -np 4 valgrind --suppressions=/usr/share/openmpi/openmpi-valgrind.supp
