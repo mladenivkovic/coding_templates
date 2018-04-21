@@ -154,6 +154,7 @@
     #------------
 
     export TERM=xterm-256color
+    export OR='/home/mivkov/UZH/ramses/'
 
 
 
@@ -200,6 +201,7 @@
     alias f='cd ~/UZH/Formelsammlung'
     alias papers='cd ~/UZH/Papers'
     #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
+    alias or='cd $OR'
 
 
 

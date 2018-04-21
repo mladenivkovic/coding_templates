@@ -228,9 +228,9 @@
     "set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
     "set statusline+=%{&ff}]        "file format
     "set statusline+=%h             "help file flag
+    set statusline+=%F                    " path
     set statusline+=%m              "modified flag
     set statusline+=%r              "read only flag
-    set statusline+=%F                    " path
     let emptyspace='    '
     set statusline+=%{emptyspace}
     set statusline+=@%{hostname()}

@@ -39,6 +39,7 @@
 
     alias ela='ssh -2Y mivkov@ela.cscs.ch'
     alias daint='ssh -2Yt mivkov@ela.cscs.ch ssh -2Y daint'
+    alias hydra='ssh mivkov@cluster.s3it.uzh.ch'
 
 
 
@@ -72,11 +73,14 @@
 
     alias fdt='cd "$MA"/exec/fieldtest'
     alias fdtn='cd "$MA"/exec/fieldtest-noneigh'
+    alias f5='cd "$MA"/exec/fieldtest-500'
+    alias f5n='cd "$MA"/exec/fieldtest-500-noneigh'
 
     alias mk='cd "$MA"/project/ramses/bin_merger'
-    #alias mk='cd "$MA"/project/ramses/bin_unbinding'
     alias mkc='cd "$MA"/project/ramses/bin_clean'
     alias mkd='cd "$MA"/project/ramses/bin_dice'
+    alias mku='cd "$MA"/project/ramses/bin_unbinding'
+    alias mkud='cd "$MA"/project/ramses/bin_unbinding_dice'
     #alias mki='cd "$MA"/project/ramses/bin_dice_intel'
     #alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
 
@@ -125,10 +129,12 @@
     # Running simulations
     #-------------------------
 
-    alias gou='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_unbinding/ramses3d-unbinding unbinding.nml 2>"$DATE"_error.log | tee run_unbinding_"$DATE".log'
     alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_clean/ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run_clean_"$DATE".log'
     alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_dice/ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run_merger_dice_"$DATE".log'
     alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_merger/ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run_merger_"$DATE".log'
+    alias gom8='DATE=`date +%F_%Hh%M`; mpiexec -n 8 $MA/project/ramses/bin_merger/ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run_merger_"$DATE".log'
+    alias gou='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_unbinding/ramses3d-unbinding unbinding.nml 2>"$DATE"_error.log | tee run_unbinding_"$DATE".log'
+    alias goud='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $MA/project/ramses/bin_unbinding_dice/ramses3d-unbinding-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run_unbinding_"$DATE".log'
 
 
     alias debte='gdb --args mpirun -np 4 $MA/project/ramses/bin_dice/ramses3d-merger-dice merger-dice.nml'
