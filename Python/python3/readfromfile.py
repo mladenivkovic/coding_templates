@@ -3,13 +3,16 @@
 import numpy as np
 import subprocess
 
+
+
+
 #===============================
 def get_data_loadtxt(filename):
 #===============================
 
     #http://docs.scipy.org/doc/numpy/reference/generated/numpy.loadtxt.html
 
-    print('' )
+    print('')
     print(" Extracting data from file with loadtxt" )
 
     names=np.loadtxt(filename, dtype='str', usecols=[0], comments='#')
@@ -25,12 +28,40 @@ def get_data_loadtxt(filename):
 
 
 
+
+
+
+#====================================
+def get_data_genfromtxt(filename):
+#====================================
+
+    #  https://docs.scipy.org/doc/numpy-1.13.0/reference/arrays.dtypes.html
+
+    print('')
+    print(" Extracting data from file with genfromtxt" )
+
+    
+    # define new datatype
+    mytype = np.dtype([('name','U10'), ('ints', 'i4'), ('floats', 'f8')])
+
+    data = np.genfromtxt(filename, dtype=mytype, usecols=[0,1,2], comments='#')
+
+    names = data['name']
+    ints = data['ints']
+    flts = data['floats']
+
+    return names, ints, flts
+
+
+
+
+
+
 #===============================
 def get_data_awk(filename):
 #===============================
-    # Extract the necessary data from mladen_masscomparison.txt file.
 
-    print('' )
+    print('')
     print(" Extracting data from file with awk" )
     # Extract first column
     awk_callmap = ['awk', ' NR > 1 { print $1 } ', filename] 
@@ -60,19 +91,35 @@ def get_data_awk(filename):
 
 
 
+
+
+#=================================
+def print_results(data):
+#=================================
+    n = data[0]
+    i = data[1]
+    f = data[2]
+
+    print(('{0:8}{1:8}{2:8}'.format(" names", n[0], n[-1])))
+    print(('{0:8}{1:8d}{2:8d}'.format(" ints", i[0], i[-1])))
+    print(('{0:8}{1:8.4f}{2:8.4f}'.format(" floats", f[0], f[-1])))
+
+    return
+
+
+
+
+
 #===============================
 if __name__ == "__main__":
 #===============================
     
-    n1, i1, f1 = get_data_loadtxt('inputfiles/table.txt')
-    print(('{0:8}{1:8}{2:8}'.format("names", n1[0], n1[-1])) )
-    print(('{0:8}{1:8d}{2:8d}'.format("ints", i1[0], i1[-1])) )
-    print(('{0:8}{1:8.4f}{2:8.4f}'.format("floats", f1[0], f1[-1])) )
+    infile = 'inputfiles/table.txt'
+
+    print_results(get_data_loadtxt(infile))
+    print_results(get_data_awk(infile))
+    print_results(get_data_genfromtxt(infile))
 
 
-    n2, i2, f2 = get_data_awk('inputfiles/table.txt')
-    print(('{0:8}{1:8}{2:8}'.format("names", n2[0], n2[-1])) )
-    print(('{0:8}{1:8d}{2:8d}'.format("ints", i2[0], i2[-1])) )
-    print(('{0:8}{1:8.4f}{2:8.4f}'.format("floats", f2[0], f2[-1])) )
 
 

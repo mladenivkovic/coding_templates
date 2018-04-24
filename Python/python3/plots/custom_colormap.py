@@ -87,7 +87,7 @@ fig = plt.figure(facecolor='white', figsize=(12,5))
 ax1 = fig.add_subplot(121, aspect='equal', clip_on=True)
 
 mycmap1=matplotlib.colors.LinearSegmentedColormap.from_list('mycmap1', shortcolorlist)
-#using shortcolorlist because fullcolorlist is frankly just too much.
+# using shortcolorlist because fullcolorlist is frankly just too much.
 
 
 sc1=ax1.scatter(x, y, 
