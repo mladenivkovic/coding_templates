@@ -3,3 +3,6 @@
 *.exe
 my_program
 C/openmp/pdf
+*.aux
+*.log
+*.synctex.gz

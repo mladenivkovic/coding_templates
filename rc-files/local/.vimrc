@@ -78,10 +78,6 @@
     " Who doesn't like autoindent?
     set autoindent
 
-    " tab and backspace are smart
-    set smarttab                  
-    set expandtab
-
 
 
 
@@ -248,7 +244,7 @@
 "=============================
 
     " set defaults
-    setlocal ts=4 sts=4 sw=4 expandtab
+    setlocal ts=4 sts=4 sw=4 expandtab smarttab tw=0
 
     " set filetype specifics
     augroup cpp 

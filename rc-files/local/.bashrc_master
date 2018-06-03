@@ -53,6 +53,7 @@
 
     alias ma='cd "$MA"'
     alias scr='cd "$MA"/scripts'
+    alias res='cd "$MA"/results'
 
     alias pa='cd "$MA"/project/ramses/patch/mergertree'
     #alias pa='cd "$MA"/project/ramses/patch/unbinding_patch'
@@ -115,6 +116,7 @@
     alias rp=ramsesplot
     alias tp=testplot
     alias trp=treeplot.py
+    alias gc=get_correlation.sh
 
     alias upr=update_ramses.sh
 

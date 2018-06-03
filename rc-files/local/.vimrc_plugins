@@ -30,7 +30,7 @@
 
     "Plugin 'tmhedberg/SimpylFold'           "folding plugin
 
-    Plugin 'Konfekt/FastFold'               "fasten up folding/when writing
+    " Plugin 'Konfekt/FastFold'               "fasten up folding/when writing
 
     Plugin 'gcmt/taboo.vim'                 "tab goodies
 
