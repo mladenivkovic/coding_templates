@@ -71,8 +71,7 @@ h = hinch * 2.54 # get in cm
 
 tikzfile = 'tikz_plot.tex'
 
-tikz_save('tikz_plot.tex', figureheight=str(h)+'cm', figurewidth=str(w)+'cm')
-
+tikz_save('tikz_plot.tex', figure=fig, figureheight=str(h)+'cm', figurewidth=str(w)+'cm', show_info=False)
 
 
 
@@ -85,7 +84,6 @@ header = "\\documentclass[crop,tikz]{standalone}%\n"
 header +="\\usepackage[utf8]{inputenc}\n"
 header +="\\usepackage{pgfplots}\n"
 header +="\\usepgfplotslibrary{groupplots}\n"
-#  header +="\\usepgflibrary{pgfplots.groupplots}\n"
 header +="\\begin{document}\n"
 
 footer = "\n\\end{document}\n"
