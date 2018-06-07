@@ -204,7 +204,7 @@
     alias or='cd $OR'
 
 
-
+    alias fw='cd ~/Public/Fortran_Workshop/Exercises'
 
 
 

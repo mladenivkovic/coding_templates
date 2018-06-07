@@ -23,6 +23,8 @@ program functions
   ! assignment statements like " function-name = expression"
   ! function-name cannot appear in the right-hand side of 
   ! any expression.
+  ! OR: use type FUNCTION function-name (args) result(resultvar)
+  ! then the result is resultvar
 
   ! In a type specification, formal arguments shold have a new
   ! Attribute: INTENT(IN)
@@ -53,40 +55,82 @@ program functions
   ! - change an INTENT(IN) argument
   ! - forget to return a value
 
-    implicit none
+  implicit none
 
-real :: a = 14.0, b = 7.7
-    integer :: i=5
+  real :: a = 14.0, b = 7.7
+  integer :: i=5
+  integer, dimension(2) :: res
 
-    write(*, *) "a = ", a, "b = ", b, "i = ", i
-    
-    write(*, *) "divide(a,b) ", divide(a, b)
-    write(*, *) "factorial(i) ", factorial(i)
+  write(*, *) "a = ", a, "b = ", b, "i = ", i
+  
+  write(*, *) "divide(a,b)              ", divide(a, b)
+  write(*, *) "divide(a,b) with results ", divide_results(a, b)
+  write(*, *) "factorial(i)             ", factorial(i)
+  res = fibo(i)
+  write(*, *) "fibonacci(i)             ", res(1)
 
 
 
 
 
 contains
-    real FUNCTION divide(a, b)
-        implicit none
-        real, intent(in) :: a, b
-        write(*, *) "This is an output of the divide function."
-        divide = a/b
-    end FUNCTION divide
+  !=================
+  ! 0815 function
+  !=================
+  real FUNCTION divide(a, b)
+    implicit none
+    real, intent(in) :: a, b
+    divide = a/b      ! <- here you tell the function what to return
+  end FUNCTION divide
 
 
 
 
-    recursive integer function factorial(i) result (answer)
-        implicit none
-        integer , intent (in) :: i
+  !===============================================================
+  ! Use "result" to return another variable, not function name
+  !===============================================================
+  real FUNCTION divide_results(a, b) result(r)
+    implicit none
+    real, intent(in) :: a, b
+    ! real :: r   ! <= no need to re-declare r: it already is real
+    r = a/b
+  end FUNCTION divide_results
 
-        if (i == 0) then 
-            answer = 1
-        else
-            answer = i * factorial(i - 1)
-        end if
-    end function factorial
+
+
+
+  !===============================================================
+  ! Recursive Functions
+  !===============================================================
+  recursive integer function factorial(i) result (answer)
+    implicit none
+    integer , intent (in) :: i
+
+    if (i == 0) then 
+      answer = 1
+    else
+      answer = i * factorial(i - 1)
+    end if
+  end function factorial
+
+
+
+  !===============================================================
+  ! Return arrays
+  !===============================================================
+  recursive function fibonacci(i) result(r)
+    ! Compute fibonacci numbers
+    implicit none
+    integer, intent(in) :: i
+    integer, dimension(2) :: r, temp
+    ! this function returns r = (n-1, n-2)
+
+    if (i==1) then
+      r = (/1, 1/)
+    else
+      temp = fibonacci(i-1)
+      r = (/temp(1)+temp(2), temp(1)/)
+    endif
+  end function fibonacci
 
 end program functions
