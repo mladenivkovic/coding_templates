@@ -21,6 +21,8 @@ options for case:
     4   fftw_output_2d_real.txt
     5   fftw_output_3d_Pk.txt
     6   fftw_output_3d_real.txt
+    7   fftw_output_3d_omp_Pk.txt
+    8   fftw_output_3d_omp_real.txt
 
 Please select a case: """
 
@@ -37,6 +39,8 @@ file_dict['3'] = ('fftw_output_1d_real.txt', '1d real fftw')
 file_dict['4'] = ('fftw_output_2d_real.txt', '2d real fftw')
 file_dict['5'] = ('fftw_output_3d_Pk.txt', '3d real fftw')
 file_dict['6'] = ('fftw_output_3d_real.txt', '3d real fftw')
+file_dict['7'] = ('fftw_output_3d_omp_Pk.txt', '3d real fftw')
+file_dict['8'] = ('fftw_output_3d_omp_real.txt', '3d real fftw')
 
 lambda1=0.5
 lambda2=0.7
@@ -88,9 +92,9 @@ fig = plt.figure()
 
 ax = fig.add_subplot(111)
 #  ax.plot(k, Pk, label='power spectrum')
-if (case=='6'):
+if (case=='6' or case=='8'):
     # in this case: k=x, Pk=f(x)
-    ax.plot(k, Pk, label='power spectrum') # ignore negative k
+    ax.plot(k, Pk, label='recovered wave') # ignore negative k
     Nx = 200
     physical_length_x=20
     dx = 1.0*Nx/physical_length_x
@@ -107,7 +111,7 @@ else:
     ax.set_ylabel("P(k)")
     ax.plot([2*np.pi/lambda1]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda1')
     ax.plot([2*np.pi/lambda2]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda2')
-    if (case=='5'):
+    if (case=='5' or case=='7'):
         ax.plot([2*np.pi/lambda3]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda3')
 
 

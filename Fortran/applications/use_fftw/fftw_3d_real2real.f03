@@ -10,9 +10,9 @@ program use_fftw
   include 'fftw3.f03'
 
   integer, parameter     :: dp=kind(1.0d0)
-  integer, parameter     :: Nx = 200
-  integer, parameter     :: Ny = 100
-  integer, parameter     :: Nz = 100
+  integer, parameter     :: Nx = 400
+  integer, parameter     :: Ny = 200
+  integer, parameter     :: Nz = 200
   integer, parameter     :: nsamples = 200
   real(dp), parameter    :: pi = 3.1415926d0
   real(dp), parameter    :: physical_length_x = 20.d0
@@ -59,6 +59,8 @@ program use_fftw
       enddo
     enddo
   enddo
+
+
 
 
   !----------------------------
