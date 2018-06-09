@@ -131,7 +131,7 @@ program use_fftw
 
           do k = 1, Nz
 
-            if (k-1<Ny/2+1) then
+            if (k-1<Nz/2+1) then
               iz = k-1
             else
               iz = -Nz+k-1

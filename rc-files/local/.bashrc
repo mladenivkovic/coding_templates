@@ -145,7 +145,7 @@
     PATH="$HOME""/Programme:"$PATH
     PATH="$HOME""/Programme/briss-0.9":"$PATH"
 
-
+    export PATH
 
 
 
