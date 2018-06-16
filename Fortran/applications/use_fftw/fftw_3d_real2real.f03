@@ -40,10 +40,8 @@ program use_fftw
   integer, dimension(3)                       :: n(3) = (/Nx, Ny, Nz/)
 
 
-  allocate(arr_in( 1:Nx, 1:Ny, 1:Nz))
-  arr_in=0
-  allocate(arr_out(1:Nx/2+1, 1:Ny, 1:Nz))
-  arr_out = 0
+  allocate(arr_in( 1:Nx, 1:Ny, 1:Nz));      arr_in=0;
+  allocate(arr_out(1:Nx/2+1, 1:Ny, 1:Nz));  arr_out=0:
 
 
   call dfftw_plan_dft_r2c(plan_forward,  3, n, arr_in, arr_out, FFTW_ESTIMATE)
@@ -71,39 +69,24 @@ program use_fftw
 
 
   allocate(Pk_field(1:Nx/2+1, 1:Ny, 1:Nz))
-  allocate(distances_k(0:nsamples))
-  allocate(Pk(1:nsamples))
-  distances_k = 0
-  Pk = 0
+  allocate(distances_k(0:nsamples));        distances_k = 0;
+  allocate(Pk(1:nsamples));                 Pk = 0;
 
   ! Get bin distances
   kmax = sqrt(((Nx/2+1)*dkx)**2+((Ny/2+1)*dky)**2 + ((Nz/2+1)*dkz)**2)
   do i = 1, nsamples
-    distances_k(i) = i*kmax/nsamples*1.001d0 ! add a little more so max value will fit
+    distances_k(i) = i*kmax/nsamples*1.0001d0 ! add a little more so max value will fit
   enddo
 
   ! Compute P(k) field, distances field
   ! move all looping indexes one back:
   ! k starts with (0,0), but array indices start with (1, 1)
   do i = 1, Nx/2+1
-
     ix = i-1
-
     do j = 1, Ny
-
-      if (j-1<Ny/2+1) then
-        iy = j-1
-      else
-        iy = -Ny+j-1
-      endif
-
+      if (j-1<Ny/2+1) then; iy = j-1; else; iy = -Ny+j-1; endif;
       do k = 1, Nz
-
-        if (k-1<Ny/2+1) then
-          iz = k-1
-        else
-          iz = -Nz+k-1
-        endif
+        if (k-1<Ny/2+1) then; iz = k-1; else; iz = -Nz+k-1;  endif;
 
         Pk_field(i,j,k) = arr_out(i,j,k)*conjg(arr_out(i,j,k))
         d = sqrt((ix*dkx)**2+(iy*dky)**2 + (iz*dkz)**2)
