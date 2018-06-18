@@ -1,7 +1,6 @@
 ! Demonstrating how to use FFTW.
 ! computes power spectrum of real 3D array, then transforms it back.
-! Compile with gfortran use_fftw.f90 -o use_fftw.o -I/home/mivkov/.local/include
-! I installed fftw3 with ./configure --prefix=/home/mivkov/.local --enable-threads --enable-openmp --enable-mpi; make; make install
+! Compile with gfortran use_fftw.f90 -o use_fftw.o -I/usr/local/include -lfftw3
 
 program use_fftw
 

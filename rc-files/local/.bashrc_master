@@ -116,7 +116,7 @@
     alias rp=ramsesplot
     alias tp=testplot
     alias trp=treeplot.py
-    alias gc=get_correlation.sh
+    alias eg=eval_galaxies.sh
 
     alias upr=update_ramses.sh
 

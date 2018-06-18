@@ -23,6 +23,10 @@ options for case:
     6   fftw_output_3d_real.txt
     7   fftw_output_3d_omp_Pk.txt
     8   fftw_output_3d_omp_real.txt
+    9   fftw_output_convert_convention_complex_fft.txt
+   10   fftw_output_convert_convention_complex_real.txt
+   11   fftw_output_convert_convention_real_fft.txt
+   12   fftw_output_convert_convention_real_real.txt
 
 Please select a case: """
 
@@ -41,6 +45,10 @@ file_dict['5'] = ('fftw_output_3d_Pk.txt', '3d real fftw')
 file_dict['6'] = ('fftw_output_3d_real.txt', '3d real fftw')
 file_dict['7'] = ('fftw_output_3d_omp_Pk.txt', '3d real fftw')
 file_dict['8'] = ('fftw_output_3d_omp_real.txt', '3d real fftw')
+file_dict['9'] = ('fftw_output_convert_convention_complex_fft.txt', '1d converting between conventions, Fourier space')
+file_dict['10'] = ('fftw_output_convert_convention_complex_real.txt', '1d converting between conventions, real space')
+file_dict['11'] = ('fftw_output_convert_convention_real_fft.txt', '1d converting between conventions, Fourier space')
+file_dict['12'] = ('fftw_output_convert_convention_real_real.txt', '1d converting between conventions, real space')
 
 lambda1=0.5
 lambda2=0.7
@@ -95,15 +103,44 @@ ax = fig.add_subplot(111)
 if (case=='6' or case=='8'):
     # in this case: k=x, Pk=f(x)
     ax.plot(k, Pk, label='recovered wave') # ignore negative k
-    Nx = 200
-    physical_length_x=20
-    dx = 1.0*Nx/physical_length_x
     x = np.linspace(k.min(), k.max(), 1000)
     d = 2*np.pi*x
     ax.plot(x, np.cos(d/lambda1)+np.sin(d/lambda2)+np.cos(d/lambda3), ':', label='expected wave')
     ax.set_title("Real space wave for "+title)
     ax.set_xlabel("x")
     ax.set_ylabel("f(x)")
+
+elif (case=='9' or case=='11'):
+    # in this case: Pk= simple fourier transform of f(x)
+    ax.plot(k, Pk, label='Converted fourier transform')
+    x = np.linspace(k.min(), k.max(), 1000)
+    ax.set_title("Fourier transform for "+title)
+    ax.set_xlabel("k")
+    if (case=='9'):
+        ax.plot(x, np.sin(x), ':', label='expected wave')
+        ax.set_ylabel("Re[F(k)]")
+    if (case=='11'):
+        ax.plot(x, -np.sin(x), ':', label='expected wave')
+        ax.set_ylabel("Im[F(k)]")
+
+elif (case=='10' or case=='12'):
+    ax.plot(k, Pk, label='Reverted to real space')
+    N=1000
+    plen = 20
+    dx=plen/N
+    x = np.linspace(k.min(), k.max(), 1000)
+    y = np.zeros(1000)
+    ind = int(1.0/dx)
+    y[ind] = 0.5
+    y[-ind] = -0.5
+    ax.plot(x, y, ':', label='expected wave')
+    ax.set_title("Fourier transform for "+title)
+    ax.set_xlabel("x")
+    if (case=='10'):
+        ax.set_ylabel("Im[f(x)]")
+    if (case=='12'):
+        ax.set_ylabel("Re[f(x)]")
+
 else:
     ax.semilogx(k[k>0], Pk[k>0], label='power spectrum') # ignore negative k
     ax.set_title("Power spectrum for "+title)

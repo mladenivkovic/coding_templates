@@ -1,6 +1,5 @@
 ! Demonstrating how to use FFTW.
-! Compile with gfortran use_fftw.f90 -o use_fftw.o -I/home/mivkov/.local/include
-! I installed fftw3 with ./configure --prefix=/home/mivkov/.local --enable-threads --enable-openmp --enable-mpi; make; make install
+! Compile with gfortran use_fftw.f90 -o use_fftw.o -I/usr/local/include -lfftw3
 
 program use_fftw
 
@@ -9,9 +8,9 @@ program use_fftw
   include 'fftw3.f03'
 
 
-  integer, parameter :: N = 1000
+  integer, parameter :: N = 200
   real, parameter    :: pi = 3.1415926
-  real, parameter    :: physical_length = 10.0
+  real, parameter    :: physical_length = 20.d0
   real, parameter    :: lambda1 = 0.5
   real, parameter    :: lambda2 = 0.7
   real, parameter    :: dx = physical_length/real(N)
