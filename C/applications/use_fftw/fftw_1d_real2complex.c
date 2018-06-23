@@ -30,11 +30,11 @@ int main(void)
     fftw_plan my_plan;              // plan that will store the type of FFT that will be performed
  
     double pi = 3.1415926;
-    double physical_length = 10;
+    double physical_length = 100.0;
     double lambda1 = 0.5;
     double lambda2 = 0.7;
     double dx = physical_length/N;
-    double dk = 2*pi/physical_length;
+    double dk = 1.0/physical_length;
 
     int i;
 
@@ -44,9 +44,15 @@ int main(void)
     //-------------------------------------
     // IMPORTANT: input/output arrays don't have same sizes!
     // FFTW makes use of the fact that when input f(x) is real, then F(-k) = F*(k)
-    in = fftw_malloc(sizeof(double) * N);
-    out = fftw_malloc(sizeof(fftw_complex) * N/2+1);
+    // in = (double *) fftw_malloc(sizeof(double) * N);
+    // out = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * N/2+1);
+  in  = fftw_malloc(sizeof(double) * N);
+  out = fftw_alloc_complex(N/2+1);
+  // out = fftw_malloc(sizeof(fftw_complex) * N/2+1); // doesn't work for some reason?! not even when type casting to (fftw_complex *) fftw_malloc(..)
 
+    for (i=0; i<N; i++){
+      in[i] = cos(2.0*pi/lambda1*i*dx)+sin(2.0*pi/lambda2*i*dx);
+    }
 
     //-------------------------------------
     // Create Plan
@@ -100,7 +106,7 @@ int main(void)
     FILE *filep;
     filep = fopen("./fftw_output_1d_real.txt", "w");
     for (i=0; i<N/2+1; i++){
-      fprintf(filep, "%f\t%f\n", i*dk, Pk[i]);
+      fprintf(filep, "%f\t%f\n", i*dk*2*pi, Pk[i]);
     }
     fclose(filep);
 

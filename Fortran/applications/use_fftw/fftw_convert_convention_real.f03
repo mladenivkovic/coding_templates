@@ -19,25 +19,24 @@ program use_fftw
   integer, parameter   :: N = 1000
   integer, parameter   :: dp = kind(1.d0)
   real(dp), parameter  :: pi = 3.1415926d0
-  real(dp), parameter  :: physical_length = 20
+  real(dp), parameter  :: physical_length = 100
   real(dp), parameter  :: dx = physical_length/real(N)
   real(dp), parameter  :: dk = 2.d0*pi / physical_length
 
   integer :: i, ind1, ind2
 
+  complex(C_DOUBLE_COMPLEX), allocatable, dimension(:) :: arr_out
+  real(C_DOUBLE),    allocatable, dimension(:)         :: arr_in
+  type(C_PTR)                                          :: plan_forward, plan_backward
 
-  ! for double precision: use double complex & call dfftw_plan_dft_1d
-  complex(dp), allocatable, dimension(:) :: arr_out
-  real(dp),    allocatable, dimension(:) :: arr_in
-  integer*8                              :: plan_forward, plan_backward
 
 
   allocate(arr_in(1:N))
   allocate(arr_out(1:N/2+1))
 
 
-  call dfftw_plan_dft_r2c_1d(plan_forward, N, arr_in, arr_out, FFTW_ESTIMATE)
-  call dfftw_plan_dft_c2r_1d(plan_backward, N, arr_out, arr_in, FFTW_ESTIMATE)
+  plan_forward = fftw_plan_dft_r2c_1d( N, arr_in, arr_out, FFTW_ESTIMATE)
+  plan_backward = fftw_plan_dft_c2r_1d( N, arr_out, arr_in, FFTW_ESTIMATE)
 
 
   !----------------------
@@ -56,7 +55,7 @@ program use_fftw
   !----------------------
   ! Forward
   !----------------------
-  call dfftw_execute_dft_r2c(plan_forward, arr_in, arr_out)
+  call fftw_execute_dft_r2c(plan_forward, arr_in, arr_out)
 
   write(*,*) "Verification: Max real part of arr_out:", maxval(real(arr_out))
 
@@ -72,7 +71,7 @@ program use_fftw
   !----------------------
   ! Backward
   !----------------------
-  call dfftw_execute_dft_c2r(plan_backward, arr_out, arr_in)
+  call fftw_execute_dft_c2r(plan_backward, arr_out, arr_in)
 
   arr_in = arr_in/N
 
@@ -85,6 +84,7 @@ program use_fftw
   write(*,*) "Finished! Written results to fftw_output_convert_convention_real_real.txt"
 
   deallocate(arr_in, arr_out)
-  call dfftw_destroy_plan(plan_forward, plan_backward)
+  call fftw_destroy_plan(plan_forward)
+  call fftw_destroy_plan(plan_backward)
 
 end program use_fftw

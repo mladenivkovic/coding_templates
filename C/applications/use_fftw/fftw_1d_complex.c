@@ -28,11 +28,11 @@ int main(void)
     fftw_plan my_plan;              // plan that will store the type of FFT that will be performed
  
     double pi = 3.1415926;
-    double physical_length = 10;
+    double physical_length = 100.0;
     double lambda1 = 0.5;
     double lambda2 = 0.7;
     double dx = physical_length/N;
-    double dk = 2*pi/physical_length;
+    double dk = 1/physical_length;
 
     int i;
 
@@ -101,7 +101,7 @@ int main(void)
       else{
         j=i;
       }
-      fprintf(filep, "%f\t%f\n", j*dk, Pk[i]);
+      fprintf(filep, "%f\t%f\n", j*dk*2*pi, Pk[i]);
     }
     fclose(filep);
 

@@ -21,8 +21,8 @@
 
 int main(void)
 {
-  int Nx=200; 
-  int Ny=100;                     // dimension of input and output
+  int Nx=400; 
+  int Ny=200;                     // dimension of input and output
   int nsamples = 200;
   fftw_complex *out;              // pointers fo type fftw_complex; will contain input and output of the FFT
                                   // IMPORTANT: allocate memory with fftw_malloc instead of malloc!
@@ -31,14 +31,14 @@ int main(void)
   fftw_plan my_plan;              // plan that will store the type of FFT that will be performed
   
   double pi = 3.1415926;
-  double physical_length_x = 20;
-  double physical_length_y = 10;
+  double physical_length_x = 40;
+  double physical_length_y = 20;
   double lambda1 = 0.5;
   double lambda2 = 0.7;
   double dx = physical_length_x/Nx;
   double dy = physical_length_y/Ny;
-  double dkx = 2*pi/physical_length_x;
-  double dky = 2*pi/physical_length_y;
+  double dkx = 1/physical_length_x;
+  double dky = 1/physical_length_y;
   int n[2]; n[0] = Nx; n[1] = Ny;
 
   int i, j, ind, ix, iy, ik;
@@ -108,7 +108,7 @@ int main(void)
   distances_k = calloc(Nx*(Ny/2+1), sizeof(double));
   kmax = sqrt(pow((Nx/2+1)*dkx, 2) + pow((Ny/2+1)*dky, 2));
   for(i=0; i<nsamples; i++){
-    distances_k[i]= 1.0001*i/nsamples*kmax; // add a little more to make sure kmax will fit
+    distances_k[i]= 1.0000001*i/nsamples*kmax; // add a little more to make sure kmax will fit
   }
 
 
@@ -145,7 +145,7 @@ int main(void)
   FILE *filep;
   filep = fopen("./fftw_output_2d_real.txt", "w");
   for (i=0; i<nsamples; i++){
-    fprintf(filep, "%f\t%f\n", distances_k[i], Pk[i]);
+    fprintf(filep, "%f\t%f\n", distances_k[i]*2*pi, Pk[i]);
   }
   fclose(filep);
 

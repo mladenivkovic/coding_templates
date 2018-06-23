@@ -50,6 +50,7 @@ file_dict['10'] = ('fftw_output_convert_convention_complex_real.txt', '1d conver
 file_dict['11'] = ('fftw_output_convert_convention_real_fft.txt', '1d converting between conventions, Fourier space')
 file_dict['12'] = ('fftw_output_convert_convention_real_real.txt', '1d converting between conventions, real space')
 
+
 lambda1=0.5
 lambda2=0.7
 lambda3=0.9
@@ -94,13 +95,13 @@ filename,title=file_dict[case]
 # Read and plot data
 #-------------------------------
 
-k, Pk = np.loadtxt(filename, dtype=float, unpack=True)
+k, Pk = np.loadtxt(filename, dtype=float, unpack=True, usecols=([0,1]))
 
 fig = plt.figure()
 
 ax = fig.add_subplot(111)
 #  ax.plot(k, Pk, label='power spectrum')
-if (case=='6' or case=='8'):
+if case in ['6', '8']:
     # in this case: k=x, Pk=f(x)
     ax.plot(k, Pk, label='recovered wave') # ignore negative k
     x = np.linspace(k.min(), k.max(), 1000)
@@ -110,7 +111,7 @@ if (case=='6' or case=='8'):
     ax.set_xlabel("x")
     ax.set_ylabel("f(x)")
 
-elif (case=='9' or case=='11'):
+elif case in ['9', '11']:
     # in this case: Pk= simple fourier transform of f(x)
     ax.plot(k, Pk, label='Converted fourier transform')
     x = np.linspace(k.min(), k.max(), 1000)
@@ -119,14 +120,16 @@ elif (case=='9' or case=='11'):
     if (case=='9'):
         ax.plot(x, np.sin(x), ':', label='expected wave')
         ax.set_ylabel("Re[F(k)]")
-    if (case=='11'):
+    if case in ['11']:
         ax.plot(x, -np.sin(x), ':', label='expected wave')
         ax.set_ylabel("Im[F(k)]")
+    if case in ['13']:
+        ax.plot(x, np.sin(x), ':', label='expected wave')
 
-elif (case=='10' or case=='12'):
+elif case in ['10', '12']:
     ax.plot(k, Pk, label='Reverted to real space')
     N=1000
-    plen = 20
+    plen = 100
     dx=plen/N
     x = np.linspace(k.min(), k.max(), 1000)
     y = np.zeros(1000)
@@ -138,18 +141,19 @@ elif (case=='10' or case=='12'):
     ax.set_xlabel("x")
     if (case=='10'):
         ax.set_ylabel("Im[f(x)]")
-    if (case=='12'):
+    if case in ['12', '14']:
         ax.set_ylabel("Re[f(x)]")
 
-else:
-    ax.semilogx(k[k>0], Pk[k>0], label='power spectrum') # ignore negative k
+
+else: # 1, 2, 3, 4, 5, 7
+    ax.semilogx(k[k>0]/2/np.pi, Pk[k>0], label='power spectrum') # ignore negative k
     ax.set_title("Power spectrum for "+title)
     ax.set_xlabel("k")
     ax.set_ylabel("P(k)")
-    ax.plot([2*np.pi/lambda1]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda1')
-    ax.plot([2*np.pi/lambda2]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda2')
-    if (case=='5' or case=='7'):
-        ax.plot([2*np.pi/lambda3]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda3')
+    ax.plot([1.0/lambda1]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda1')
+    ax.plot([1.0/lambda2]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda2')
+    if case in ['5','7']:
+        ax.plot([1/lambda3]*2, [Pk.min()-1, Pk.max()+1], label='expected lambda3')
 
 
 ax.legend()
