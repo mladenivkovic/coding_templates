@@ -192,6 +192,17 @@ program use_fftw
   s3dr=0;  pk3dr=0;
 
 
+  ! First normalize arr_out correctly:
+  ! FFTW is unnormalised: F^-1[F(f(x))] = Volume*f(x). To recover original values, you need 
+  ! to divide 1/Volume somewhere. However, each transformation adds a factor 1/sqrt(volume), 
+  ! but since you're computing squares of transforms, you'll need to normalize with 1/volume 
+  ! each time anyway.
+  arr_out_2d_c=arr_out_2d_c/(Nx*Ny)
+  arr_out_2d_r=arr_out_2d_r/(Nx*Ny)
+  arr_out_3d_c=arr_out_3d_c/(Nx*Ny*Nz)
+  arr_out_3d_r=arr_out_3d_r/(Nx*Ny*Nz)
+
+
   !---------------------------------------------------
   ! FFTW may change input arrays:
   ! Compue integrals of squares of input arrays before
@@ -219,7 +230,7 @@ program use_fftw
 
 
   !----------------------
-  ! Do Forward FFTs
+  ! Do backward FFTs
   !----------------------
   call     fftw_execute_dft(p2d_cb,  arr_out_2d_c, arr_in_2d_c)
   call fftw_execute_dft_c2r(p2d_c2r, arr_out_2d_r, arr_in_2d_r)
@@ -262,7 +273,6 @@ program use_fftw
 
   ! Note that here the transform goes from Pk -> sigma, but to keep the 
   ! layout of the printing, multiply the source instead of dividing the result.
-  ! Also note how the unnormalized values have switched places compared to the forward transform!
 
 
 
