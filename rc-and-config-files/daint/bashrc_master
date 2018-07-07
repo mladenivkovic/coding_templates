@@ -1,0 +1,122 @@
+case $- in *i*)
+	echo "Importing master thesis stuff."
+	;;
+esac
+
+
+#=========================
+# ENVIRONMENT VARIABLES
+#=========================
+
+    export MA="$HOME"'/masterarbeit'
+    export SCR="$MA"/scripts
+    export BA="$MA"/backup/
+
+
+
+
+#=========================
+# PATH
+#=========================
+    export PATH="$PATH":"$MA"/scripts        #add python and bash script dir
+    export PATH="$PATH":"$MA"/src/dice/bin/bin  #add dice
+    export PATH="$PATH":"$MA"/scripts/unb
+    export PATH="$PATH":"$MA"/project/mergertree/bin #add mergertree program
+    #export PATH="$PATH":'/home/mivkov/UZH/Bachelorarbeit/bachelorarbeit/programs/scripts'
+
+
+
+
+
+#========================
+# Aliases
+#========================
+
+
+
+    #-----------------------
+    # SSH
+    #-----------------------
+
+
+        #alias ela='ssh -2Y mivkov@ela.cscs.ch'
+        #alias dora='ssh -2Yt mivkov@ela.cscs.ch ssh -2Y daint'
+
+
+
+
+
+
+
+    #-------------------------
+    # Dir aliases
+    #-------------------------
+
+        alias ma='cd $MA'
+        alias scr='cd "$MA"/scripts'
+
+        alias pa='cd "$MA"/project/ramses/patch/mergertree'
+        #alias pa='cd "$MA"/project/ramses/patch/unbinding_patch'
+        # alias m='cd "$MA"/project/mergertree'
+        # alias mb='cd "$MA"/project/mergertree/bin/'
+        # alias ms='cd "$MA"/project/mergertree/src'
+
+        # alias exec='cd "$MA"/exec'
+        # alias te='cd "$MA"/exec/testing'
+        # alias two='cd "$MA"/exec/dice_two'
+        # alias sub='cd "$MA"/exec/dice_sub'
+        # alias cos='cd "$MA"/exec/cosmo'
+
+        # alias 2='cd "$MA"/exec/2merge'
+        # alias 3='cd "$MA"/exec/3merge'
+        # alias 2f='cd "$MA"/exec/2fracture'
+        # alias skip='cd "$MA"/exec/skipone'
+
+        alias mk='cd "$MA"/project/ramses/bin_merger'
+        #alias mk='cd "$MA"/project/ramses/bin_unbinding'
+        alias mkc='cd "$MA"/project/ramses/bin_clean'
+        alias mkd='cd "$MA"/project/ramses/bin_dice'
+        #alias mki='cd "$MA"/project/ramses/bin_dice_intel'
+        #alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
+
+        alias ramses='cd $MA/src/ramses/'
+
+
+
+
+
+
+
+
+    #-------------------------
+    # Script shortcuts
+    #-------------------------
+
+        alias u=unbindingplot
+        alias pp=plot_particles
+        alias r=ramsesplot
+        alias tp=testplot
+        alias trp=treeplot
+
+        alias upr=update_ramses.sh
+
+
+
+
+    #-------------------------
+    # Running simulations
+    #-------------------------
+
+        alias rmlog='rm -i *.log *.out'
+        alias  go='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-mladen unbinding.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+        alias god='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+        alias goc='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-clean clean.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+        alias got='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-dice unbinding-dice-big.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+        alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+        alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 ../ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run"$DATE".log'
+        alias mkt='make_mergertree 2>&1| tee maketree.log'
+
+
+
+
+

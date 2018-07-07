@@ -1,0 +1,16 @@
+# bash-rc file for piz daint
+case $- in *i*) # check if interactive, otherwise scp will crash
+
+    module switch PrgEnv-cray/6.0.4 PrgEnv-intel
+    module load daint-mc
+    module load ddt
+
+    echo -e "$COL_RED" "  loaded modules from .bashrc_daint file" "$COL_RESET"
+    ;;
+esac
+
+
+alias sq='squeue -u mivkov'
+alias sc='cd $SCRATCH'
+alias fdt='cd $SCRATCH/fieldtest-precise-saddle'
+alias fdtn='cd $SCRATCH/fieldtest-precise-nosaddle'

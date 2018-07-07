@@ -87,6 +87,9 @@
 
     alias ramses='cd $MA/src/ramses/'
     alias dat='cd /media/mivkov/DATA/'
+    
+    alias dg='cd $MA/results/daint/galaxy-256'
+    alias dgn='cd $MA/results/daint/galaxy-256-nocalc'
 
 
 

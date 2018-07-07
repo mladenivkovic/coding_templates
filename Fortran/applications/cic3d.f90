@@ -20,7 +20,7 @@ program cic
 
   integer :: i,j,k,p
   integer :: iup, idown, jup, jdown, kup, kdown
-  real    :: rho ! center of cell
+  real    :: rho
   real    :: xup, yup, zup
 
 

@@ -26,7 +26,7 @@ program use_fftw
   real(dp), parameter  :: pi = 3.1415926d0
 
   integer :: i,j,k
-  real(dp):: temp1
+  real(dp):: temp1, temp2, temp3
 
   real(dp):: s2dr = 0.d0, pk2dr = 0.d0
   real(dp):: s3dr = 0.d0, pk3dr = 0.d0
@@ -82,21 +82,21 @@ program use_fftw
 
   do i=1, Nx
     do j=1, Ny
-      ! call random_number(temp1)
-      ! call random_number(temp2)
-      ! call random_number(temp3)
-      ! arr_in_2d_c(i,j) = cmplx(temp1, temp2, kind=dp)
-      ! arr_in_2d_r(i,j) = temp3
-      arr_in_2d_c(i,j) = cmplx(i,0,kind=dp)
-      arr_in_2d_r(i,j) = i
+      call random_number(temp1)
+      call random_number(temp2)
+      call random_number(temp3)
+      arr_in_2d_c(i,j) = cmplx(temp1, temp2, kind=dp)
+      arr_in_2d_r(i,j) = temp3
+      ! arr_in_2d_c(i,j) = cmplx(i,0,kind=dp)
+      ! arr_in_2d_r(i,j) = i
       do k=1, Nz
-        ! call random_number(temp1)
-        ! call random_number(temp2)
-        ! call random_number(temp3)
-        ! arr_in_3d_c(i,j,k) = cmplx(temp1, temp2, kind=dp)
-        ! arr_in_3d_r(i,j,k) = temp3
-        arr_in_3d_c(i,j,k) = cmplx(i,0,kind=dp)
-        arr_in_3d_r(i,j,k) = i
+        call random_number(temp1)
+        call random_number(temp2)
+        call random_number(temp3)
+        arr_in_3d_c(i,j,k) = cmplx(temp1, temp2, kind=dp)
+        arr_in_3d_r(i,j,k) = temp3
+        ! arr_in_3d_c(i,j,k) = cmplx(i,0,kind=dp)
+        ! arr_in_3d_r(i,j,k) = i
       enddo
     enddo
   enddo

@@ -1,0 +1,187 @@
+ /$$    /$$ /$$$$$$ /$$      /$$       /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$$$  /$$$$$$ 
+| $$   | $$|_  $$_/| $$$    /$$$      | $$$ | $$ /$$__  $$|__  $$__/| $$_____/ /$$__  $$
+| $$   | $$  | $$  | $$$$  /$$$$      | $$$$| $$| $$  \ $$   | $$   | $$      | $$  \__/
+|  $$ / $$/  | $$  | $$ $$/$$ $$      | $$ $$ $$| $$  | $$   | $$   | $$$$$   |  $$$$$$ 
+ \  $$ $$/   | $$  | $$  $$$| $$      | $$  $$$$| $$  | $$   | $$   | $$__/    \____  $$
+  \  $$$/    | $$  | $$\  $ | $$      | $$\  $$$| $$  | $$   | $$   | $$       /$$  \ $$
+   \  $/    /$$$$$$| $$ \/  | $$      | $$ \  $$|  $$$$$$/   | $$   | $$$$$$$$|  $$$$$$/
+    \_/    |______/|__/     |__/      |__/  \__/ \______/    |__/   |________/ \______/ 
+                                                                                        
+
+
+
+=============================
+Inserting/Changing Text
+=============================
+i                       insert (before cursor)
+I                       intert at beginning of line
+
+a                       append after cursor
+A                       append at end of line
+
+R                       replace characters as you type
+rx                      replace character by x
+
+o                       insert in new line below cursor
+O                       insert in new line above cursor
+
+y                       copy visual selection 
+yy                      copy line
+
+p                       paste
+"*p                     paste from system clipboard
+
+ce                      delete word and start writing at this position (change)
+cc                      change entire line
+C                       change until end of line
+
+
+
+
+
+=============================
+Moving
+=============================
+2w                      move 2 words ahead (to beginning of 3rd word)
+2e                      move 2 words ahead (to end of 2nd word)
+
+0                       go to beginning of line
+$                       go to end of line
+
+23+G                    go to line 23
+:23                     go to line 23
+
+gg                      go to beginning of file
+G                       go to end of file
+
+ctrl+o                  go to previous position
+ctrl+i                  go back to previous position (undo ctrl+o)
+
+H                       move to top of screen
+M                       move to middle of screen
+L                       move to bottom of screen
+
+zz                      scroll the line with the cursor to the center of the screen
+zt                      scroll the line with the cursor to the top
+zb                      scroll the line with the cursor to the bottom
+
+Ctrl-D                  move half-page down
+Ctrl-U                  move half-page up
+Ctrl-B                  page up
+Ctrl-F                  page down
+Ctrl-O                  jump to last (older) cursor position
+Ctrl-I                  jump to next cursor position (after Ctrl-O)
+Ctrl-Y                  move view pane up   (scroll up)
+Ctrl-E                  move view pane down (scroll down)
+
+%                       next brace of same kind
+*                       go to next word like the one under the cursor
+#                       go to previous word like the one under the cursor
+
+
+
+=============================
+TABS
+=============================
+
+:tabe[dit] filename     Open filename in a new tab
+ctrl-W T                Move current split window into its own tab
+:tabc[lose]             Close the current tab page and all its windows
+:tabo[nly]              Close all tabs apart from the current one
+gt                      Move to next tab
+gT                      Move to previous tab
+#gt                     Move to tab number #
+:tabmove                Move current tab to the end
+:tabmove 0              Move current tab to the beginning
+:tabmove 1              Move current tab to become the 2nd tab
+
+
+
+
+
+
+
+
+=============================
+DELETING
+=============================
+
+x                       delete character
+dd                      delete line
+d$                      delete until end of line
+R                       ersetze mehrere Zeichen
+td$                     Lösche bis zum Ende der Zeile, speichere im Buffer t
+tp                      paste aus Buffer t
+
+
+
+
+
+
+
+
+=============================
+MISC
+=============================
+
+u                       undo
+ctrl+R                  redo
+
+ctrl+g                  show current position in file
+:!                      execute external command
+
+v                       visual selection Auswählen
+v:w Test                write visual selection in file "Test"
+
+:r file                 reads in file "file"
+
+m<letter>               creates a mark at this place
+'<letter>               go to mark
+
+~                       change case (a->A or A->a)
+
+ctrl+s                  "Freeze out"
+ctrl+q                  Kill "Freeze out"
+
+.                       repeat last normal command
+@:                      repeat last : command
+@/                      repeat last / command
+
+
+
+
+
+
+
+
+
+
+=============================
+SEARCH AND REPLACE
+=============================
+
+/wort                   search word
+n                       next entry
+N                       previous entry
+%                       next brace of same kind
+*                       go to next word like the one under the cursor
+#                       go to previous word like the one under the cursor
+
+:s/word1/word2          replace first wort1 with word2
+:s/word1/word2/g        replace all word1 with word2 on this line
+:%s/word1/word2/g       replace all word1 with word2 in file
+:%s/word1/word2/gc      replace all word1 with word2 in file with manual control
+:noh                    no highlight (remove highlighted words)
+
+@:                      repeat last search/replace command 
+
+
+
+
+
+=============================
+VIMDIFF
+=============================
+
+set diffopt+=iwhite     ignore whitespace
+
