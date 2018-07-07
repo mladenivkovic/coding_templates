@@ -1,57 +1,88 @@
-                VIM-NOTIZEN
-
-============
-EINFÜGEN
-============
-i           einfügen vor dem Cursor (insert)
-I           am Anfang der Zeile einfügen
-a           einfügen nach dem Cursor (append)
-A           am Ende der Zeile einfügen (Append) (Shift + a; Grossbuchstabe!)
-o           In neuer Zeile darunter einfügen
-O           In neuer Zeile drüber einfügen
-"*p         Aus Systemclipboard einfügen
+ /$$    /$$ /$$$$$$ /$$      /$$       /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$$$  /$$$$$$ 
+| $$   | $$|_  $$_/| $$$    /$$$      | $$$ | $$ /$$__  $$|__  $$__/| $$_____/ /$$__  $$
+| $$   | $$  | $$  | $$$$  /$$$$      | $$$$| $$| $$  \ $$   | $$   | $$      | $$  \__/
+|  $$ / $$/  | $$  | $$ $$/$$ $$      | $$ $$ $$| $$  | $$   | $$   | $$$$$   |  $$$$$$ 
+ \  $$ $$/   | $$  | $$  $$$| $$      | $$  $$$$| $$  | $$   | $$   | $$__/    \____  $$
+  \  $$$/    | $$  | $$\  $ | $$      | $$\  $$$| $$  | $$   | $$   | $$       /$$  \ $$
+   \  $/    /$$$$$$| $$ \/  | $$      | $$ \  $$|  $$$$$$/   | $$   | $$$$$$$$|  $$$$$$/
+    \_/    |______/|__/     |__/      |__/  \__/ \______/    |__/   |________/ \______/ 
+                                                                                        
 
 
 
+=============================
+Inserting/Changing Text
+=============================
+i                       insert (before cursor)
+I                       intert at beginning of line
 
+a                       append after cursor
+A                       append at end of line
 
-============
-BEWEGEN
-============
-2w              um 2 Wörter nach vorne zu springen
-0               Zum Zeilenanfang (Zahl Null)
-gg              Zum Dateianfang gehen
-G               Zum Dateiende gehen
-Nummer+G        Zur Zeilennummer gehen
-ctrl+o          Zur vorherigen Position
-ctrl+i          Zurück zur weiteren Position (undo ctrl+o)
+R                       replace characters as you type
+rx                      replace character by x
 
+o                       insert in new line below cursor
+O                       insert in new line above cursor
 
+y                       copy visual selection 
+yy                      copy line
 
-H               move to top of screen
-M               move to middle of screen
-L               move to bottom of screen
+p                       paste
+"*p                     paste from system clipboard
 
-zz              scroll the line with the cursor to the center of the screen
-zt              scroll the line with the cursor to the top
-zb              scroll the line with the cursor to the bottom
-
-Ctrl-D          move half-page down
-Ctrl-U          move half-page up
-Ctrl-B          page up
-Ctrl-F          page down
-Ctrl-O          jump to last (older) cursor position
-Ctrl-I          jump to next cursor position (after Ctrl-O)
-Ctrl-Y          move view pane up
-Ctrl-E          move view pane down
+ce                      delete word and start writing at this position (change)
+cc                      change entire line
+C                       change until end of line
 
 
 
 
 
-============
+=============================
+Moving
+=============================
+2w                      move 2 words ahead (to beginning of 3rd word)
+2e                      move 2 words ahead (to end of 2nd word)
+
+0                       go to beginning of line
+$                       go to end of line
+
+23+G                    go to line 23
+:23                     go to line 23
+
+gg                      go to beginning of file
+G                       go to end of file
+
+ctrl+o                  go to previous position
+ctrl+i                  go back to previous position (undo ctrl+o)
+
+H                       move to top of screen
+M                       move to middle of screen
+L                       move to bottom of screen
+
+zz                      scroll the line with the cursor to the center of the screen
+zt                      scroll the line with the cursor to the top
+zb                      scroll the line with the cursor to the bottom
+
+Ctrl-D                  move half-page down
+Ctrl-U                  move half-page up
+Ctrl-B                  page up
+Ctrl-F                  page down
+Ctrl-O                  jump to last (older) cursor position
+Ctrl-I                  jump to next cursor position (after Ctrl-O)
+Ctrl-Y                  move view pane up   (scroll up)
+Ctrl-E                  move view pane down (scroll down)
+
+%                       next brace of same kind
+*                       go to next word like the one under the cursor
+#                       go to previous word like the one under the cursor
+
+
+
+=============================
 TABS
-============
+=============================
 
 :tabe[dit] filename     Open filename in a new tab
 ctrl-W T                Move current split window into its own tab
@@ -71,19 +102,14 @@ gT                      Move to previous tab
 
 
 
-=============
-LÖSCHEN
-=============
-x                       lösche Zeichen unter dem Cursor
-dd                      lösche ganze Zeile
-d5w                     lösche die nächsten 5 Wörter
-d$                      lösche bis zum Ende der Zeile
-p                       gelöschtes beim Cursor einfügen (bzw. in der nächsten Zeile)
-rx                      ersetze Zeichen durch x
+=============================
+DELETING
+=============================
+
+x                       delete character
+dd                      delete line
+d$                      delete until end of line
 R                       ersetze mehrere Zeichen
-ce                      lösche bis zum Ende des Wortes, und schreibe direkt (change)
-cc                      Lösche ganze Zeile, füge ein
-C                       Lösche bis Ende Zeile, füge ein
 td$                     Lösche bis zum Ende der Zeile, speichere im Buffer t
 tp                      paste aus Buffer t
 
@@ -94,29 +120,32 @@ tp                      paste aus Buffer t
 
 
 
-=================
-VERSCHIEDENES
-=================
+=============================
+MISC
+=============================
 
 u                       undo
 ctrl+R                  redo
-y                       kopieren (mit v auswählen)
-yy                      kopiere ganze Zeile
-p                       gelöschtes/kopiertes beim Cursor einfügen (bzw. in der nächsten Zeile)
-rx                      ersetze Zeichen durch x
-ce                      lösche bis zum Ende des Wortes, und schreibe direkt (change)
-ctrl+g                  Position in der Datei anzeigen
-%                       Nächste Klammer gleicher Sorte
-:!                      Ausführen eines externen Kommandos. Bsp :!ls
-v                       Auswählen
-v:w Test                Schreibe die Auswahl in Datei Test
-:r Dateiname            Liest Datei ein
-m<letter>               erstellt Markierung an dieser Stelle
-'<letter>               gehe zur Markierung
-~                       Gross- zu Kleinbuchstaben umwandeln und umgekehrt
+
+ctrl+g                  show current position in file
+:!                      execute external command
+
+v                       visual selection Auswählen
+v:w Test                write visual selection in file "Test"
+
+:r file                 reads in file "file"
+
+m<letter>               creates a mark at this place
+'<letter>               go to mark
+
+~                       change case (a->A or A->a)
+
 ctrl+s                  "Freeze out"
 ctrl+q                  Kill "Freeze out"
 
+.                       repeat last normal command
+@:                      repeat last : command
+@/                      repeat last / command
 
 
 
@@ -126,17 +155,33 @@ ctrl+q                  Kill "Freeze out"
 
 
 
-===================
-SUCHEN
-===================
-/wort                   Sucht Wort
-n                       nächster Eintrag
-N                       vorheriger Eintrag
-%                       nächste Klammer
-#                       Gehe zum nächsten Wort wie das ausgewählte
-:s/wort1/wort2          Ersetzt das nächste wort1 mit wort2 in der Zeile
-:s/wort1/wort2/g        Ersetzt alle wort1 mit wort2 in der Zeile
-:%s/wort1/wort2/g       Ersetzt alle wort1 mit wort2 im ganzen Dokument
-:%s/wort1/wort2/gc      Ersetzt alle wort1 mit wort2 im ganzen Dokument mit Fragenkatalog
-:noh                    Entfernt Markierungen des gesuchten
+
+=============================
+SEARCH AND REPLACE
+=============================
+
+/wort                   search word
+n                       next entry
+N                       previous entry
+%                       next brace of same kind
+*                       go to next word like the one under the cursor
+#                       go to previous word like the one under the cursor
+
+:s/word1/word2          replace first wort1 with word2
+:s/word1/word2/g        replace all word1 with word2 on this line
+:%s/word1/word2/g       replace all word1 with word2 in file
+:%s/word1/word2/gc      replace all word1 with word2 in file with manual control
+:noh                    no highlight (remove highlighted words)
+
+@:                      repeat last search/replace command 
+
+
+
+
+
+=============================
+VIMDIFF
+=============================
+
+set diffopt+=iwhite     ignore whitespace
 
