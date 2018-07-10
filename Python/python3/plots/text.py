@@ -9,16 +9,16 @@ import numpy as np
 
 
 rows = 1
-columns = 1
+columns = 2
 
 x = np.linspace(0,100,1000)
 
-fig = plt.figure()
+fig = plt.figure(figsize=(6*columns, 4*rows))
 
 
 
 #-------------------------------------
-# Switch ticks and label positions
+# Annotations
 #-------------------------------------
 
 ax = fig.add_subplot(rows, columns, 1)
@@ -40,6 +40,19 @@ ax.annotate('point at stuff',
 
 
 
+#-------------------------------------
+# Text
+#-------------------------------------
+
+ax = fig.add_subplot(rows, columns, 2)
+ax.plot(x, np.sin(x))
+ax.set_xlabel("x label")
+ax.set_ylabel("y label")
+ax.set_xlim(0,100)
+ax.set_ylim(-2, 2)
+
+plt.figtext(0.7, 0.9, "my figtext 1")
+plt.figtext(0.91, 0.5, "my figtext 2", rotation=90)
 
 
 plt.savefig('plot_text.png')
