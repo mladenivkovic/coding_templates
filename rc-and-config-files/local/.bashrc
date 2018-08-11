@@ -169,6 +169,7 @@
     alias linux.physik='ssh -2Y mivkov@linux.physik.uzh.ch'
     alias phy='ssh -2Y mivkov@linux.physik.uzh.ch'
     alias malin1='ssh -2Y mivkov@malin1.physik.uzh.ch'
+    alias ssch='ssh -Yt stud59@ela.cscs.ch ssh -Y daint'
 
 
 
@@ -190,6 +191,7 @@
     alias ft='cd ~/Coding/coding_templates/Fortran'                 # go to fortran templates
     alias pt='cd ~/Coding/coding_templates/Python/python3'          # go to python templates
     alias ct='cd ~/Coding/coding_templates/C'                       # go to C templates
+    alias cppt='cd ~/Coding/coding_templates/cpp'                   # go to C++ templates
     alias ppt='cd ~/Coding/coding_templates/Python/python3/plots'   # go to python plot templates
     alias bt='cd ~/Coding/coding_templates/Bash'                    # go to bash templates
     alias lt='cd ~/Coding/coding_templates/LaTeX'                   # go to LaTeX templates
@@ -365,6 +367,12 @@
     if [ -f ~/.bashrc_openmp ]; then
         . ~/.bashrc_openmp
     fi
+
+    #CUDA stuff
+    if [ -f ~/.bashrc_cuda ]; then
+        . ~/.bashrc_cuda
+    fi
+
 
     #masterarbeit stuff
     if [ -f ~/.bashrc_master ]; then

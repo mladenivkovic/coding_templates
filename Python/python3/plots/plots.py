@@ -168,6 +168,7 @@ ax6.errorbar(x, y,
         yerr = (yerr_lower, yerr_upper), # different upper and lower values
         xerr=0.2, #constant error for x
         fmt='g.', 
+        capsize=5, # add caps
         label='name2')
 
 ax6.set_xlabel('x-Achse')
@@ -175,6 +176,7 @@ ax6.set_ylabel('y-Achse')
 ax6.set_title('Titel')
 ax6.grid()
 ax6.legend(loc=0)
+
 
 
 

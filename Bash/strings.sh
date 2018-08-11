@@ -22,3 +22,9 @@ echo everything after keyword string: ${mystring#*string}
 number=5
 paddednumber=`printf "%05d" $number`
 echo padded number: $paddednumber
+
+
+
+# Substing extraction
+echo "Substring starting from 5th character:" ${mystring:5}
+echo "Substring starting from 5th character, 11 chars long:" ${mystring:5:11}
