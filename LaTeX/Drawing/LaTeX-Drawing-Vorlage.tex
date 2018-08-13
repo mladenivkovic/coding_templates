@@ -22,6 +22,7 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{decorations.shapes}
 \usetikzlibrary{decorations.text}
+\usetikzlibrary{patterns}
 
 \usepackage{pgfplots}
 %%FIGUR
@@ -794,6 +795,381 @@ Braucht \verb|\usepackage{pgfplots}|
 
 
 \subsection{Bachelor thesis}
+
+
+
+
+%==============================================
+\subsubsection{Estimating Boundaries}
+%==============================================
+
+\begin{tikzpicture}[xscale=1,yscale=1,samples=400, transform shape]
+    \begin{axis}[
+    ticks=none,
+    ymin=0,
+    ymax=8,
+    xmin=-6,
+    xmax=7,
+    axis x line=bottom,axis y line=left,
+    %	axis lines = left,
+    xlabel = $x$,
+    ylabel = {$- \phi$, $\frac{1}{2} v^2$},
+    legend pos=north west,
+    every axis x label/.style={
+        at={(ticklabel* cs:1.05)},
+        anchor=west,
+    },
+    every axis y label/.style={
+        at={(ticklabel* cs:1.05)},
+        anchor=south,
+    },
+    axis equal image
+    ]
+    
+    %clump 
+    \addplot [
+    domain=-6:6, 
+    samples=400, 
+    color=blue, thick
+    ]
+    {6*exp( (-x^2)/10)+0.5};
+    %	\addlegendentry{$\phi_B$}
+    
+    %dotted
+    \addplot [
+    domain=-6:6, 
+    samples=400, 
+    color=blue, dotted
+    ]
+    {6*exp( (-x^2)/10)-2};
+    
+    % Particles
+    %	\draw[red,fill] (600,400) circle (.1) node [left = .7mm] {$\alpha$};
+    \draw[red,fill] (700,342.902) circle (.1) node [left = .7mm] {$\alpha$};
+    
+    % added + 15 pt un lower value and -15 for upper value of y axis for visibility
+    \draw[<->, color=teal, line width=1] (700,357.902) -- node [right = -14, above = -3mm] {$E/m_p$} +(0,220);
+    \draw[<->, color=teal, line width=1] (400,217.192) -- node [right = 14, above = -3mm] {$E/m_p$} +(0,220);
+    \draw[|<->|,color=purple] (600-331.453,40) -- node [anchor=south] {spatial boundary for $\alpha$} (600+331.453,40) ;
+    
+    %Naming
+    \node[thick, blue] at (80,160) {$-\phi$};
+    \end{axis};
+    \node[] at (-0.2,0.1) {$0$};
+\end{tikzpicture}
+
+
+
+
+
+
+%==============================================================
+\subsubsection{Potentials for exclusively bound particles}
+%==============================================================
+\begin{tikzpicture}[xscale=1,yscale=1,samples=400, transform shape,every node/.style={scale=0.7}]
+    \begin{axis}[
+    ticks=none,
+    ymin=0,
+    ymax=16,
+    xmin=-8,
+    xmax=25.6,
+    axis x line=bottom,axis y line=left,
+    %	axis lines = left,
+    xlabel = $x$,
+    ylabel = {$- \phi, \frac{1}{2}v^2$},
+    legend pos=north west,
+    every axis x label/.style={
+        at={(ticklabel* cs:1.05)},
+        anchor=west,
+    },
+    every axis y label/.style={
+        at={(ticklabel* cs:1.05)},
+        anchor=south,
+    },
+    axis equal image
+    ]
+    
+    %clump A
+    \addplot [
+    domain=2.66584:24, 
+    samples=400, 
+    color=red,thick
+    ]
+    {14*exp(-(x-12)^2/40)+0.75};
+    \addplot [
+    domain=-10:2.66584, 
+    samples=400, 
+    color=red!10,thick
+    ]
+    {14*exp(-(x-12)^2/40)+0.75};
+    
+    %clump B
+    \addplot [
+    domain=2.66584:24, 
+    samples=400, 
+    color=blue!10, thick
+    ]
+    {6*exp( (-x^2)/6)+0.5};
+    \addplot [
+    domain=-10:2.69, 
+    samples=400, 
+    color=blue, thick
+    ]
+    {6*exp( (-x^2)/6)+0.5};
+    
+    %totalplot
+    \addplot [
+    domain=-10:24, 
+    samples=400, 
+    color=violet,
+    style=dashed
+    ]{6*exp( (-x^2)/6)+0.5 + 14*exp(-(x-12)^2/40)+0.75};
+    %	\addlegendentry{$\phi_A+\phi_B$}
+    %
+    %
+    
+    % Particles
+    \draw[darkgray] (100,100) circle (.1) node [left = .7mm] {$\alpha$};
+    %\draw[cyan] (110,70) circle (.1) node [right = .7mm] {$\beta$};
+    \draw[purple] (105,45) circle (.1) node [left = .7mm] {$\gamma$};
+    \draw[teal] (92,25) circle (.1) node [left = .7mm] {$\beta$};
+    \draw[|<->|, color=purple] (60,40) -- node [right = 7mm, above=.1mm] {spatial boundary for $\gamma$} (330,40) ;
+    \draw[|<->|,color=teal] (83,15) -- (117,15) node [right=1mm] {spatial boundary for $\beta$};
+    %
+    %
+    %Naming
+    \node[thick, blue] at (40,20) {$-\phi_B$};
+    \node[thick, red] at (240,110) {$-\phi_A$};
+    \node[thick, violet] at (300,140) {$-\phi_{tot}=-(\phi_A+\phi_B)$};
+    %	\draw[color=black,style=dashed] (100+26.6584,25) -- (100+26.6584,120) node [above=1mm] {saddle};
+    
+    
+    \end{axis};
+    \node[] at (-0.2,0.1) {$0$};
+    \node[thick, blue] at (1.7,3.6) {Clump $B$};
+    \node[thick, red] at (4.8,3.6) {Clump $A$};
+\end{tikzpicture}
+
+
+
+
+
+
+%===================================================
+\subsubsection{Domain Decomposition}
+%===================================================
+\verb|needs \usetikzlibrary{patterns}|
+
+\begin{tikzpicture}[xscale=1,yscale=1,samples=400, transform shape,every node/.style={scale=.8}]
+    %===============
+    %	Sequential
+    %===============
+    %Outer rect
+    \filldraw[fill=blue!10,draw=blue!60,line width=.15mm] (-1.2,-1.2) rectangle (3.2,4.2);
+    \filldraw[fill=orange!20,draw=orange!60,line width=.15mm] (-1.05,-1.05) rectangle (3.05,3.55);
+    
+    %Grid
+    \filldraw[fill=green!10,draw=teal!80, line width=.15mm] (-1,-1) rectangle (3,3);
+    \draw[step=0.5cm,lightgray,very thin] (-1,-1) grid (3,3);
+    \draw[draw=teal!80, line width=.15mm] (-1,-1) rectangle (3,3);
+    
+    %Text
+    \node[blue!60] at (1, 3.9) {no domain decomposition};
+    \node[teal!90] at (1, 1.2) {computational domain};
+    \node[brown!90] at (1, 3.3) {processor};
+    
+    
+    %===============
+    %	Parallel
+    %===============
+    %Outer rect
+    \filldraw[fill=blue!10,draw=blue!60,line width=.15mm] (3.8,-1.2) rectangle (11.2,4.2);
+    \filldraw[fill=orange!20,draw=orange!60,line width=.15mm] (3.95,-1.05) rectangle (6.55,3.55);	
+    \filldraw[fill=orange!20,draw=orange!60,line width=.15mm] (8.435,-1.05) rectangle (11.05,3.55);
+    
+    
+    %Grid left
+    \filldraw[fill=green!10,draw=teal!80, line width=.15mm] (4,-1) rectangle (6,3);
+    \draw[step=0.5cm,lightgray,very thin] (4,-1) grid (6,3);
+    \draw[draw=teal!80, line width=.15mm] (4,-1) rectangle (6,3);
+    \fill[pattern=horizontal lines, pattern color=teal!40]  (5.5,-1) rectangle (6,3);
+    
+    %virtual left
+    \filldraw[fill=red!20,draw=red!80, line width=.15mm] (6.015,-1) rectangle (6.5,3);
+    \draw[step=0.5cm,lightgray,very thin] (6.015,-1) grid (6.5,3);
+    \draw[draw=red!80, line width=.15mm] (6.015,-1) rectangle (6.5,3);
+    \fill[pattern=vertical lines, pattern color=red!40]  (6.015,-1) rectangle (6.5,3);
+    
+    %Grid right
+    \filldraw[fill=green!10,draw=teal!80, line width=.15mm] (9,-1) rectangle (11,3);
+    \draw[step=0.5cm,lightgray,very thin] (9,-1) grid (11,3);
+    \draw[draw=teal!80, line width=.15mm] (9,-1) rectangle (11,3);
+    \fill[pattern=vertical lines, pattern color=teal!40] (9.0,-1) rectangle (9.5,3);
+    
+    %virtual right
+    \filldraw[fill=red!20,draw=red!80, line width=.15mm] (8.485,-1) rectangle (8.985,3);
+    \draw[step=0.5cm,lightgray,very thin] (8.485,-1) grid (8.985,3);
+    \draw[draw=red!80, line width=.15mm] (8.485,-1) rectangle (8.985,3);
+    \fill[pattern=horizontal lines, pattern color=red!40]  (8.485,-1) rectangle (8.985,3);
+    
+    
+    
+    %Text
+    \node[blue!60] at (7.5, 3.9) {domain decomposition};
+    \node[brown!90] at (5.25, 3.3) {processor 1};
+    \node[brown!90] at (9.75, 3.3) {processor 2};
+    
+    \node[rotate=90, teal!90] at (4.8, 1) {computational domain};
+    \node[rotate=90, teal!90] at (5.1, 1) {of processor 1};
+    
+    \node[rotate=90, teal!90] at (9.8, 1) {computational domain};
+    \node[rotate=90, teal!90] at (10.1, 1) {of processor 2};
+    
+    \node[rotate=90, red!80] at (6.25, 1) {virtual boundary};
+    \node[rotate=90, red!80] at (8.75, 1) {virtual boundary};
+    
+    \node[black!70] at (7.5, 3.25) {\footnotesize communication};
+    \node[black!70] at (7.5, -0.25) {\footnotesize communication};
+    
+    %Arrows
+    \draw[<->, black!70, thick] (5.75,-0.75) to[bend right=-20]
+    node[above] {} (8.75,-0.75);
+    \draw[<->, black!70, thick] (6.25,2.75) to[bend right=-20] (9.25,2.75);
+    
+\end{tikzpicture}
+
+
+
+
+
+
+
+%=======================================
+\subsection{Master Thesis}
+%=======================================
+
+
+%=======================================
+\subsubsection{Merger Tree}
+%=======================================
+\begin{tikzpicture}[xscale=1,yscale=1,samples=400, transform shape,every node/.style={scale=1.2}, shorten <=1pt, shorten >=1pt]
+    
+    
+    %===========================
+    % Timelines
+    %===========================
+    
+    \draw (5,0) -- (15.5, 0);
+    \draw (5,2) -- (15.5, 2);
+    \draw (5,4) -- (15.5, 4);
+    \draw (5,6) -- (15.5, 6);
+    \draw (5,8) -- (15.5, 8);
+    \node at (16,8) {$t_1$};
+    \node at (16,6) {$t_2$};
+    \node at (16,4) {$t_3$};
+    \node at (16,2) {$t_4$};
+    \node at (16,0) {$t_5$};
+    
+    
+    
+    %===========================
+    % Haloes
+    %===========================        
+    \draw node (A) at (10,0) [fill=gray!60,circle,minimum size=1.4cm, draw]{};
+    
+    % Left Side
+    \draw node (B1) at (9,2) [fill=gray!60,circle,minimum size=0.8cm, draw]{}; 
+    \draw[-stealth'] (B1) to (A);      
+    
+    \draw node (C1) at (7,4) [fill=gray!60,circle,minimum size=0.6cm, draw]{}; 
+    \draw[-stealth'] (C1) to (B1);      
+    \draw node (C2) at (8.5,4) [fill=gray!60,circle,minimum size=0.5cm, draw]{};
+    \draw[-stealth'] (C2) to (B1);
+    
+    \draw node (D1) at (7,6) [fill=gray!60,circle,minimum size=0.6cm, draw]{}; 
+    \draw[-stealth'] (D1) to (C1);      
+    \draw node (D2) at (8.5,6) [fill=gray!60,circle,minimum size=0.5cm, draw]{};
+    \draw[-stealth'] (D2) to (C2);      
+    
+    \draw node (E1) at (6,8) [fill=gray!60,circle,minimum size=0.25cm, draw]{};
+    \draw[-stealth'] (E1) to (D1);
+    \draw node (E2) at (7,8) [fill=gray!60,circle,minimum size=0.4cm, draw]{}; 
+    \draw[-stealth'] (E2) to (D1);      
+    \draw node (E3) at (8.5,8) [fill=gray!60,circle,minimum size=0.2cm, draw]{};
+    \draw[-stealth'] (E3) to (D2);
+    \draw node (E4) at (9.5,8) [fill=gray!60,circle,minimum size=0.35cm, draw]{}; 
+    \draw[-stealth'] (E4) to (D2);  
+    
+    
+    % Right Side    
+    \draw node (B2) at (11,2) [fill=gray!60,circle,minimum size=1cm, draw]{};
+    \draw[-stealth'] (B2) to (A);
+    
+    \draw node (C3) at (11,4) [fill=gray!60,circle,minimum size=1cm, draw]{}; 
+    \draw[-stealth'] (C3) to (B2);      
+    
+    \draw node (D3) at (11,6) [fill=gray!60,circle,minimum size=0.65cm, draw]{}; 
+    \draw[-stealth'] (D3) to (C3);      
+    \draw node (D4) at (12.5,6) [fill=gray!60,circle,minimum size=0.5cm, draw]{};
+    \draw[-stealth'] (D4) to (C3);      
+    \draw node (D5) at (14,6) [fill=gray!60,circle,minimum size=0.55cm, draw]{};
+    \draw[-stealth'] (D5) to (C3);
+    
+    
+    \draw node (E5) at (10.5,8) [fill=gray!60,circle,minimum size=0.2cm, draw]{};
+    \draw[-stealth'] (E5) to (D3);
+    \draw node (E6) at (11.5,8) [fill=gray!60,circle,minimum size=0.4cm, draw]{}; 
+    \draw[-stealth'] (E6) to (D3);      
+    \draw node (E7) at (12.5,8) [fill=gray!60,circle,minimum size=0.2cm, draw]{};
+    \draw[-stealth'] (E7) to (D4);
+    \draw node (E8) at (13.5,8) [fill=gray!60,circle,minimum size=0.45cm, draw]{}; 
+    \draw[-stealth'] (E8) to (D5);
+    \draw node (E9) at (14.5,8) [fill=gray!60,circle,minimum size=0.35cm, draw]{}; 
+    \draw[-stealth'] (E9) to (D5);              
+\end{tikzpicture}
+
+
+
+
+
+
+
+%=======================================
+\subsubsection{Fracture}
+%=======================================
+\begin{tikzpicture}[xscale=1,yscale=1,samples=400, transform shape,every node/.style={scale=1.2}, shorten <=1pt, shorten >=1pt]
+    
+    
+    %===========================
+    % Timelines
+    %===========================
+    
+    \draw (5,0) -- (16.5, 0);
+    \draw (5,4) -- (16.5, 4);
+    \node at (17,4) {$t_1$};
+    \node at (17,0) {$t_2$};
+    
+    
+    
+    %===========================
+    % Haloes
+    %===========================        
+    \draw node (A1) at (10,0) [fill=gray!60,circle,minimum size=2.0cm, draw]{};
+    \draw node (A2) at (13,0) [fill=gray!60,circle,minimum size=0.5cm, draw]{};
+    \draw node (P) [inner sep=0,minimum size=0.01,fill=black,circle,draw] at (12,2) {};        
+    
+    % Left Side
+    \draw node (B1) at (8,4) [fill=gray!60,circle,minimum size=1.3cm, draw]{}; 
+    \draw[-stealth'] (B1) to (A1);      
+    
+    % Right Side    
+    \draw node (B2) at (12,4) [fill=gray!60,circle,minimum size=1.2cm, draw]{};
+    \draw[shorten >=0pt] (B2) to (P);
+    \draw[-stealth', shorten <=0pt] (P) to (A1);
+    \draw[-stealth', shorten <=0pt] (P) to (A2);
+    
+\end{tikzpicture}
+
 
 
 
