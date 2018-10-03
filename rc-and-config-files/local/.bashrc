@@ -114,14 +114,14 @@
 
     export NEWLINE=$'\n'
 
-    #FOR  DARK THEME
+    #FOR DARK THEME
     #PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-    PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
-    export PS1="$PS1"'  ' # space around newline did something weird with colors.
+    # PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
+    # export PS1="$PS1"'  ' # space around newline did something weird with colors.
 
-    #FOR  LIGHT THEME
-    #PS1="\[\e[34;47m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-    #export PS1="$PS1"'  ' # space arount newline did something weird with colors.
+    #FOR LIGHT THEME
+    PS1="\[\e[37;104;1m\]\A [\u@\h] - \w \[\e[0m\] ${NEWLINE}"
+    export PS1="$PS1"'  ' # space around newline did something weird with colors.
 
 
 
