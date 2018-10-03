@@ -33,6 +33,10 @@ booleans:
     This works: int i = 1; then !i = 0; !(!i) = 1
     REMEMBER: true = 1 (!= 0); false = 0 
 
+return value of assignment
+    i = 5; returns 5
+    This is so that a = b = c; can work
+
 scope of names:
     imagine following scenario:
         int one(blabla){...};
