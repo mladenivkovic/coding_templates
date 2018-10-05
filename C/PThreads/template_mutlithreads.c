@@ -1,8 +1,8 @@
-/* ================================================================================ */
-/* COMPILE WITH gcc -pthread simple_multithreads.c                                  */
-/* A parent process that creates 2 child processes, which each do their own thing.  */
-/* The parent then waits for the children to finish, and wraps things up.           */
-/* ================================================================================ */
+/* ================================================================================ 
+ * COMPILE WITH gcc -pthread simple_multithreads.c                                  
+ *
+ *
+ * ================================================================================ */
 
 
 #include <stdio.h>
@@ -20,7 +20,7 @@ main(void)
   pthread_t       thread1,  thread2;
 
   pthread_create(&thread1,        /* pointer to a buffer for thread "ID"                                         */
-          NULL,                   /* pointer to a thread attribute object                                        */
+           NULL,                  /* pointer to a thread attribute object                                        */
           (void *) do_one_thing,  /* pointer to routine at which new thread will start executing                 */
           (void *) &r1);          /* pointer to parameter to be passed to the routine at which new thread starts */
   /* returns: 0 for success, nonzero for errors */
@@ -31,8 +31,8 @@ main(void)
           (void *) do_another_thing,
           (void *) &r2);
 
-  pthread_join(thread1,  NULL); /* wait for thread1 to finish */
-  pthread_join(thread2,  NULL); /* wait for thread2 to finish */
+  pthread_join(thread1,  NULL);
+  pthread_join(thread2,  NULL);
 
   do_wrap_up(r1, r2);
   return 0;

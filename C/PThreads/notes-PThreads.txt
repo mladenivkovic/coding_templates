@@ -1,0 +1,14 @@
+Compilation:
+    with -pthread flag for gcc
+
+
+Concurrency:
+    environments in which the tasks we define can occur in any order
+
+Parallelism:
+    simultaneous execution of concurrent tasks on different processors.
+    All parallel programming is concurrent, but not all concurrent programmin is parallel.
+
+The Pthreads standard specifies concurrency, parallelism is the option of system implementors. => Portability: Pthreads code can run on both multiprocessors and uniprocessors.
+
+By default, all threads share the resources of the process in which they exist. Independent processes share nothing
