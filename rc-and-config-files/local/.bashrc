@@ -133,7 +133,7 @@
     #----------------
 
     # Add executables from /home/mivkov/Skripte/execs_for_path to $PATH variable
-    PATH="$HOME"/"Skripte/execs_for_path:"$PATH
+    PATH="$HOME"/"scripts/execs_for_path:"$PATH
 
     # Add intel (fortran) compiler to path var
     #PATH="/opt/intel/bin:"$PATH
@@ -340,7 +340,7 @@
 # PYTHON
 #=====================
 
-    export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Coding/projekte/Python/modules/physics:"
+    export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Coding/projekte/my_python_modules/physics:"
     export PYTHONPATH=${PYTHONPATH}"/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages:"
     # export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Programme/ParaView/lib/python2.7/site-packages:"
 
