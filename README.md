@@ -7,6 +7,7 @@ This repository contains templates for various coding languages and a bit of oth
 
 So far, it contains some templates for:
 
+-   Algorithms (miscellaneous algorithms in various languages, mainly to demonstrate how they work)
 -   Bash
 - 	C, C++
 -   Fortran
