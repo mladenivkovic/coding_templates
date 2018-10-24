@@ -10,18 +10,30 @@
 import random as r
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib import colors
 
 
-npart = 100
+npart = 10
 r.seed(0)
 xpart=[r.random() for i in range(npart)]
 ypart=[r.random() for i in range(npart)]
 idpart=[i for i in range(npart)]
 cpart=[0 for i in range(npart)]
+
+# particle refinement threshold
 ref_thresh = 1
-levelmax = 3
+# max refinement level: smallest cell size=1/2^levelmax
+levelmax = 2
+
 ndim = 2
-leaves = [None for i in range(2**levelmax)]
+
+leaves = [None for i in range(2**(ndim*levelmax))]
+
+npix = 200
+background = np.zeros((npix, npix))
+
+
+
 
 
 #=========================================
@@ -33,7 +45,7 @@ class Node:
     #=============================================
     def __init__(self, x, y, parent, level):
     #=============================================
-        self.parent = None
+        self.parent = parent
         self.children = [None for i in range(4)]
         self.nchildren = 0
         self.x = x
@@ -43,6 +55,7 @@ class Node:
         self.idpart = []
 
         Node.totcells += 1
+        self.id = Node.totcells
         return
 
     #==============================
@@ -76,26 +89,24 @@ class Node:
 
             ind = i + 2*j
             self.children[ind].add_part(self.idpart[p])
-            cpart[self.idpart[p]] = Node.totcells-ind
+            cpart[self.idpart[p]] = self.children[ind].id
 
         # refine children, even the ones with 0 particles
-        if self.level < levelmax-2:
-            print("Entering level", self.level+1)
+        if self.level < levelmax-1:
             for c in self.children:
-                print("child level", c.level)
                 c.refine()
         else:
+        # get pointer to children in list
             for c in self.children:
-                ind = int(c.x*2**(levelmax-1)+0.5) + 2*int(c.y*2**(levelmax-1)+0.5)
-                print(int(c.x*2.**(levelmax-1)+0.5), 2*int(c.y*2.**(levelmax-1)+0.5))
-                print("hi", 2**(levelmax-1))
-                print(ind, 2**levelmax)
+                ind = int(c.x*2**(levelmax)) + 2**levelmax*int(c.y*2**(levelmax))
                 leaves[ind] = c
 
 
 
 
+#=======================
 def build_tree():
+#=======================
     root = Node(0.5, 0.5, None, 0)
     root.nparts = npart
     root.idpart = idpart
@@ -105,19 +116,92 @@ def build_tree():
 
 
 
+#==============================================
+def find_nearest_neighbour(x,y):
+#==============================================
+
+    
+    minind = 0
+    mindist = 1.0
+
+    def check_cell(cell):
+        nonlocal minind, mindist
+        if cell.nparts > 0:
+            for p in cell.idpart:
+                print("checking particle", p, xpart[p], ypart[p])
+                dist = np.sqrt(xpart[p]**2+ypart[p]**2)
+                if dist < mindist:
+                    mindist = dist
+                    minind = p
+        else:
+            print("no particles in cell", cell.id)
+
+
+
+
+    i = int(x*2**levelmax)
+    j = int(y*2**levelmax)
+    ind = i + 2**levelmax*j
+    cell = leaves[ind]
+
+    parent = cell.parent
+    if parent is not None:
+        check_cell(parent)
+
+        pparent = parent.parent
+        if pparent is not None:
+            i = 0
+            j = 0
+            if cell.x < pparent.x:
+                i = 1
+            if cell.y < pparent.y:
+                j = 1
+            ind = i + 2*j
+
+
+    
+
+    print("Best candidate:", minind, "|||", xpart[minind],x, "|||", ypart[minind], y)
+
+
+
+
+
+
 root = build_tree()
 
 
 
+for j in range(2**levelmax):
+    for i in range(2**levelmax):
+        ind = i + 2**levelmax*j
+        print((leaves[ind].x, leaves[ind].y), end=' ')
+    print()
+
+print(xpart)
+print(ypart)
+
+a = find_nearest_neighbour(0.844, 0.908)
+
+
+
+
+#===========================
+# Plot stuff
+#===========================
+
 fig = plt.figure()
 ax = fig.add_subplot(111,aspect='equal')
-colorlist=['red', 'blue','green','cyan', 'magenta','olive','orange', 'black', 'gray']
+colorlist=['red', 'blue','green','cyan', 'magenta','olive','orange', 'white', 'gray', 'gold']
+mycmap = colors.ListedColormap(colorlist)
+ax.imshow(background, cmap=mycmap, origin='lower', extent=[0,1,0,1])
 
 for p in range(npart):
-    i = cpart[p]
-    while i>=len(colorlist):
-        i -= len(colorlist)
-    ax.scatter(xpart[p],ypart[p],c=colorlist[i])
+    i = idpart[p]
+    #  i = cpart[p]
+    #  while i>=len(colorlist):
+    #      i -= len(colorlist)
+    ax.scatter(xpart[p],ypart[p],c=colorlist[i], lw=2, edgecolor='black')
 plt.show()
 
 

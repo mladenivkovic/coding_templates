@@ -2,7 +2,7 @@
 
 
 #===============================================
-# Make a quadtree that knows its neighbours
+# Make a quadtree, sort particles in it 
 #===============================================
 
 
@@ -11,14 +11,17 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-npart = 4000
+npart = 1000
 r.seed(0)
 xpart=[r.random() for i in range(npart)]
 ypart=[r.random() for i in range(npart)]
 idpart=[i for i in range(npart)]
 cpart=[0 for i in range(npart)]
+
+# particle refinement threshold
 ref_thresh = 1
-levelmax = 4
+# max refinement level: smallest cell size=1/2^levelmax
+levelmax = 3
 
 #=========================================
 class Node:
@@ -39,6 +42,7 @@ class Node:
         self.idpart = []
 
         Node.totcells += 1
+        self.id = Node.totcells
         return
 
     #==============================
@@ -72,7 +76,7 @@ class Node:
 
             ind = i + 2*j
             self.children[ind].add_part(self.idpart[p])
-            cpart[self.idpart[p]] = Node.totcells
+            cpart[self.idpart[p]] = self.children[ind].id
 
         # refine children
         for c in self.children:
@@ -86,6 +90,7 @@ def build_tree():
     root.nparts = npart
     root.idpart = idpart
     root.refine()
+    print("Finished making tree. Total cells:", Node.totcells)
     
     return root
 
@@ -94,6 +99,11 @@ def build_tree():
 root = build_tree()
 
 
+
+
+#=======================
+# plot particles 
+#=======================
 
 fig = plt.figure()
 ax = fig.add_subplot(111,aspect='equal')
