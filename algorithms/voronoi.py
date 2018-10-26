@@ -3,7 +3,10 @@
 
 #===============================================
 # Make a 2d voronoi tesselation using a quadtree
-# for neighbour search
+# for neighbour search.
+# Every point in space is assigned to the
+# particle that it is closest to.
+# Find particle by quadtree neighboursearch
 #===============================================
 
 
@@ -13,6 +16,9 @@ from matplotlib import pyplot as plt
 from matplotlib import colors
 
 
+#--------------------------
+# particle data
+#--------------------------
 npart = 10
 r.seed(0)
 xpart=[r.random() for i in range(npart)]
@@ -20,15 +26,30 @@ ypart=[r.random() for i in range(npart)]
 idpart=[i for i in range(npart)]
 cpart=[0 for i in range(npart)]
 
+
+#--------------------------
+# Refinement data
+#--------------------------
 # particle refinement threshold
 ref_thresh = 1
 # max refinement level: smallest cell size=1/2^levelmax
-levelmax = 2
+levelmax = 1
 
+# just a reminder where this comes in
 ndim = 2
 
-leaves = [None for i in range(2**(ndim*levelmax))]
 
+
+#--------------------------
+# cell data
+#--------------------------
+cells = [ [] for i in range(levelmax+1) ]
+for i in range(levelmax+1):
+    cells[i] = [None for j in range(2**(ndim*i))]
+
+
+
+# colored background
 npix = 200
 background = np.zeros((npix, npix))
 
@@ -78,6 +99,9 @@ class Node:
                 newy = self.y + (-1)**j*(0.5)**(self.level+ndim)
                 self.children[ind] = Node(newx, newy, self, self.level+1)
 
+                ind2 = int(newx*2**(self.level+1)) + 2**(self.level+1)*int(newy*2**(self.level+1))
+                cells[self.level+1][ind2] = self.children[ind]
+
         # Sort out particles
         for p in range(self.nparts):
             i=0
@@ -95,11 +119,6 @@ class Node:
         if self.level < levelmax-1:
             for c in self.children:
                 c.refine()
-        else:
-        # get pointer to children in list
-            for c in self.children:
-                ind = int(c.x*2**(levelmax)) + 2**levelmax*int(c.y*2**(levelmax))
-                leaves[ind] = c
 
 
 
@@ -117,95 +136,107 @@ def build_tree():
 
 
 #==============================================
-def find_nearest_neighbour(x,y):
+def find_nearest_neighbour(x,y,level=levelmax):
 #==============================================
 
-    
-    minind = 0
-    mindist = 1.0
+    # levelmax is default to search; start with leaves.
+    # If no result found, try again with parent.
 
+    minind = -1
+    mindist = 2.0
+
+    #---------------------------
     def check_cell(cell):
+    #---------------------------
         nonlocal minind, mindist
         if cell.nparts > 0:
             for p in cell.idpart:
-                print("checking particle", p, xpart[p], ypart[p])
-                dist = np.sqrt(xpart[p]**2+ypart[p]**2)
+                dist = (xpart[p]-x)**2+(ypart[p]-y)**2
                 if dist < mindist:
                     mindist = dist
                     minind = p
-        else:
-            print("no particles in cell", cell.id)
 
 
+    # find elligible neighbours; max is 8
+    # assume NO periodic boundaries
 
+    i = int(x*2**level)
+    j = int(y*2**level)
 
-    i = int(x*2**levelmax)
-    j = int(y*2**levelmax)
-    ind = i + 2**levelmax*j
-    cell = leaves[ind]
+    def ind(i,j):
+        return i+2**level*j
 
-    parent = cell.parent
-    if parent is not None:
-        check_cell(parent)
+    check_cell(cells[level][ind(i,j)])
 
-        pparent = parent.parent
-        if pparent is not None:
-            i = 0
-            j = 0
-            if cell.x < pparent.x:
-                i = 1
-            if cell.y < pparent.y:
-                j = 1
-            ind = i + 2*j
+    if i > 0:
+        check_cell(cells[level][ind(i-1,j)])
+    if i < 2**level-1:
+        check_cell(cells[level][ind(i+1,j)])
+    if j > 0:
+        check_cell(cells[level][ind(i,j-1)])
+    if j < 2**level-1:
+        check_cell(cells[level][ind(i,j+1)])
 
-
+    if i > 0 and j > 0:
+        check_cell(cells[level][ind(i-1, j-1)])
+    if i > 0 and j < 2**level-1:
+        check_cell(cells[level][ind(i-1, j+1)])
+    if i < 2**level-1 and j > 0:
+        check_cell(cells[level][ind(i+1,j-1)])
+    if i < 2**level-1 and j < 2**level-1:
+        check_cell(cells[level][ind(i+1,j+1)])
     
 
-    print("Best candidate:", minind, "|||", xpart[minind],x, "|||", ypart[minind], y)
+    
+    if minind < 0:
+        if level > 1:
+            return find_nearest_neighbour(x,y,level=level-1)
+        else:
+            print("Error: no candidate found?")
+            return 0
+    else:
+        return minind
+
+
+
+#===================
+def main():
+#===================
+
+    root = build_tree()
+    cells[0][0] = root
+
+    # compute background colours
+    dx = 1.0/npix
+    for i in range(npix):
+        for j in range(npix):
+            # remember: imshow takex matrix (rows x columns)
+            background[j,i] = find_nearest_neighbour(i*dx, j*dx)
+
+
+
+    # Plot stuff
+    fig = plt.figure()
+    ax = fig.add_subplot(111,aspect='equal')
+    colorlist=['red', 'blue','green','cyan', 'magenta','olive','orange', 'white', 'gray', 'gold']
+    mycmap = colors.ListedColormap(colorlist[:npart])
+    im = ax.imshow(background, cmap=mycmap, origin='lower', extent=[0,1,0,1])
+    plt.colorbar(im)
+
+    for p in range(npart):
+        i = idpart[p]
+        ax.scatter(xpart[p],ypart[p],c=colorlist[i], lw=2, edgecolor='black')
+    plt.show()
 
 
 
 
 
 
-root = build_tree()
-
-
-
-for j in range(2**levelmax):
-    for i in range(2**levelmax):
-        ind = i + 2**levelmax*j
-        print((leaves[ind].x, leaves[ind].y), end=' ')
-    print()
-
-print(xpart)
-print(ypart)
-
-a = find_nearest_neighbour(0.844, 0.908)
-
-
-
-
-#===========================
-# Plot stuff
-#===========================
-
-fig = plt.figure()
-ax = fig.add_subplot(111,aspect='equal')
-colorlist=['red', 'blue','green','cyan', 'magenta','olive','orange', 'white', 'gray', 'gold']
-mycmap = colors.ListedColormap(colorlist)
-ax.imshow(background, cmap=mycmap, origin='lower', extent=[0,1,0,1])
-
-for p in range(npart):
-    i = idpart[p]
-    #  i = cpart[p]
-    #  while i>=len(colorlist):
-    #      i -= len(colorlist)
-    ax.scatter(xpart[p],ypart[p],c=colorlist[i], lw=2, edgecolor='black')
-plt.show()
-
-
-
+#==================================
+if __name__ == "__main__":
+#==================================
+    main()
 
 
 
