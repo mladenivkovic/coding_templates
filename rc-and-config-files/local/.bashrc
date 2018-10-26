@@ -200,7 +200,7 @@
 
 
     #UNI
-    alias f='cd ~/UZH/Formelsammlung'
+    alias f='cd ~/Coding/projekte/formelsammlung'
     alias papers='cd ~/UZH/Papers'
     #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
     alias or='cd $OR'
@@ -217,6 +217,7 @@
     alias e='exit'
     alias python=python3
     alias refresh='source ~/.bashrc'
+    alias fucking=sudo
 
 
 
