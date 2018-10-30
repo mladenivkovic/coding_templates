@@ -220,7 +220,7 @@
     alias python=python3
     alias refresh='source ~/.bashrc'
     alias fucking=sudo
-
+    alias vimh='gedit $HOME/Coding/coding_templates/notes/vim-notizen.txt'
 
 
 

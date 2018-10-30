@@ -16,7 +16,7 @@ echo "Importing SWIFT stuff"
 # Aliases
 #============================
 
-alias sm="firefox $SW/doc/html/index.html"
+alias sm="firefox $SW/doc/RTD/build/html/index.html"
 
 
 

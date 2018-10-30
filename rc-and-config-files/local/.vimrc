@@ -290,6 +290,11 @@
         autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
     augroup end
 
+    augroup rst
+        autocmd!
+        autocmd FileType rst setlocal ts=4 sts=4 sw=4 expandtab
+    augroup end
+
     augroup sh
         autocmd!
         autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab
