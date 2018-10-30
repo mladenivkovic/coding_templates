@@ -113,18 +113,17 @@
     #---------------------
 
     export NEWLINE=$'\n'
+    # https://github.com/jimeh/git-aware-prompt
+    export GITAWAREPROMPT=~/.bash/git-aware-prompt
+    source "${GITAWAREPROMPT}/main.sh"
+
+    export PS1="\[\033[37;104;1m\]\A [\u@\h] - \w\[\033[00m\]\[\033[36;104;1m\] \$git_branch\[$txtrst\]\n\[\033[1;34m\]\$ \[\033[00m\]"
+    # export PS1="\[\033[37;104;1m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\[$txtrst\]\$ "
 
     #FOR DARK THEME
     #PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
     # PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
     # export PS1="$PS1"'  ' # space around newline did something weird with colors.
-
-    #FOR LIGHT THEME
-    PS1="\[\e[37;104;1m\]\A [\u@\h] - \w \[\e[0m\] ${NEWLINE}"
-    export PS1="$PS1"'  ' # space around newline did something weird with colors.
-
-
-
 
 
 
