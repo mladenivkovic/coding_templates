@@ -197,16 +197,18 @@
     alias lt='cd ~/Coding/coding_templates/LaTeX'                   # go to LaTeX templates
     alias rcf='cd ~/Coding/coding_templates/rc-files'               # go to LaTeX templates
     alias plg='cd ~/Coding/Playground'
+    alias f='cd ~/Coding/projekte/formelsammlung'                   # go to formelsammlung
+    alias g='cd ~/Coding/projekte/glossar'                          # go to formelsammlung
 
 
     #UNI
-    alias f='cd ~/Coding/projekte/formelsammlung'
     alias papers='cd ~/UZH/Papers'
-    #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
     alias or='cd $OR'
+    # alias fw='cd ~/Public/Fortran_Workshop/Exercises'
+    #alias d='cd ~/UZH/Introduction_to_Data_Science/esc403'
+    alias sw='cd ~/EPFL/swiftsim'
 
 
-    alias fw='cd ~/Public/Fortran_Workshop/Exercises'
 
 
 
@@ -378,6 +380,12 @@
     #masterarbeit stuff
     if [ -f ~/.bashrc_master ]; then
         . ~/.bashrc_master
+    fi
+
+
+    #SWIFT stuff
+    if [ -f ~/.bashrc_swift ]; then
+        . ~/.bashrc_swift
     fi
 
 

@@ -1,0 +1,22 @@
+#!/bin/bash
+echo "Importing SWIFT stuff"
+
+
+
+#============================
+# Variables
+#============================
+
+    export SW='$HOME/EPFL/swiftsim/'
+
+
+
+
+#============================
+# Aliases
+#============================
+
+alias sm="firefox $SW/doc/html/index.html"
+
+
+
