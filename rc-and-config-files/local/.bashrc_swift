@@ -17,6 +17,8 @@ echo "Importing SWIFT stuff"
 #============================
 
 alias sm="firefox $SW/doc/RTD/build/html/index.html"
+alias sd="firefox $SW/doc/html/index.html"
+alias rtd='cd ~/EPFL/swiftsim/doc/RTD/source/'
 
 
 

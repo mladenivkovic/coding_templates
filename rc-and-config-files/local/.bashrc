@@ -128,17 +128,17 @@
 
         # set colors
         if [[ ${MYPROMPTCOLOR} == 'light' ]]; then
-            col_left="\033[37;104;1m"
-            col_right="\033[31;1m" # 36 for green
-            col_nline="\033[94;1m"
-            compensate=17
+            col_left="\[\033[37;104;1m\]"
+            col_right="\[\033[31;1m\]" # 36 for green
+            col_nline="\[\033[94;1m\]"
+            compensate=25
         else
-            col_left="\033[33m"
-            col_right="\033[32;1m" # 36 for green
-            col_nline="\033[32;1m"
-            compensate=17
+            col_left="\[\033[33m\]"
+            col_right="\[\033[32;1m\]" # 36 for green
+            col_nline="\[\033[32;1m\]"
+            compensate=25
         fi
-        col_reset="\033[0m"
+        col_reset="\[\033[0m\]"
 
         # get text
         left="${col_left}\A [\u@\h] - \w${col_reset}"
