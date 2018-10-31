@@ -85,6 +85,10 @@ int main(void){
     printf("Floats: using shortest notation: %.4g\n", 12389123.17823917);
     printf("Floats: using shortest notation: %.3g\n", 2.5);
 
+    size_t myvar=15;
+    printf("size_t types: printing portably as unsigned: %zu\n",myvar );
+    printf("size_t types: printing portably as signed: %zd\n",myvar );
+    printf("size_t types: printing portably as hex: %zx\n",myvar );
 
     printf("\n");
     printf("Here is a \t tab\n");
