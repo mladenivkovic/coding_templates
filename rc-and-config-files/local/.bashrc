@@ -112,18 +112,44 @@
     # PROMPT
     #---------------------
 
-    export NEWLINE=$'\n'
-    # https://github.com/jimeh/git-aware-prompt
-    export GITAWAREPROMPT=~/.bash/git-aware-prompt
-    source "${GITAWAREPROMPT}/main.sh"
 
-    export PS1="\[\033[37;104;1m\]\A [\u@\h] - \w\[\033[00m\]\[\033[36;104;1m\] \$git_branch\[$txtrst\]\n\[\033[1;34m\]\$ \[\033[00m\]"
-    # export PS1="\[\033[37;104;1m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\[$txtrst\]\$ "
+    # Set light or dark theme
+    export MYPROMPTCOLOR='light'
+    # export MYPROMPTCOLOR='dark'
 
-    #FOR DARK THEME
-    #PS1="\[\e[40;34m\]\A [\u@\h] - \w  \[\e[m\]${NEWLINE}"
-    # PS1="\[\e[33m\]\A @ \w  \[\e[m\]${NEWLINE}"
-    # export PS1="$PS1"'  ' # space around newline did something weird with colors.
+    parse_git_branch() {
+        # get current git branch, if any
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    }
+
+    prompt() {
+        # This function prepares the prompt properly
+        # depending on the MYPROMPTCOLOR variable.
+
+        # set colors
+        if [[ ${MYPROMPTCOLOR} == 'light' ]]; then
+            col_left="\033[37;104;1m"
+            col_right="\033[31;1m" # 36 for green
+            col_nline="\033[94;1m"
+            compensate=17
+        else
+            col_left="\033[33m"
+            col_right="\033[32;1m" # 36 for green
+            col_nline="\033[32;1m"
+            compensate=17
+        fi
+        col_reset="\033[0m"
+
+        # get text
+        left="${col_left}\A [\u@\h] - \w${col_reset}"
+        right="${col_right}"$(parse_git_branch)"${col_reset}"
+        nextline="${col_nline}\$${col_reset}"
+
+        PS1=$(printf "%*s\r%s\n %s %s" "$(($(tput cols)+${compensate}))" "${right}" "${left}" "${nextline}" )
+    }
+    PROMPT_COMMAND=prompt
+
+
 
 
 
