@@ -24,3 +24,10 @@ Lists
 
 #. This is a numbered list.
 #. It has two items too.
+
+
++ normal list item
++ normal list item 2
+
+    + nested list item 1
+    + note the empty line in between the nested lists

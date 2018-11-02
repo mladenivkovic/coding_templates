@@ -156,6 +156,7 @@ int main(void)
   for (int i = 0; i < ntest; i++){
     TEST * newtest = malloc(sizeof(newtest));
     newtest->someint = i;
+    // same as (*newtest).someint = i;
     newtest->somedouble = i*0.33;
     testarr[i] = newtest;
   }
