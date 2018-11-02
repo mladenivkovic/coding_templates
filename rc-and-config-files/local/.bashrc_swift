@@ -22,3 +22,11 @@ alias rtd='cd ~/EPFL/swiftsim/doc/RTD/source/'
 
 
 
+
+#===========================
+# Modules
+#===========================
+
+module load mpich
+
+

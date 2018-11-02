@@ -5,6 +5,63 @@
 
 
 
+#===========================
+# PATH VARIABLE
+#===========================
+
+    # Add executables from /home/mivkov/Skripte/execs_for_path to $PATH variable
+    PATH="$HOME"/"scripts/execs_for_path:"$PATH
+
+    # Add intel (fortran) compiler to path var
+    #PATH="/opt/intel/bin:"$PATH
+
+    #add local bin
+    PATH="$HOME""/local/bin:"$PATH
+
+    #add downloaded programs
+    PATH="$HOME""/Programme:"$PATH
+    PATH="$HOME""/Programme/briss-0.9":"$PATH"
+
+    export SPACK_ROOT="$HOME/Programme/spack/"
+    PATH="$SPACK_ROOT/bin":"$PATH"
+
+    export PATH
+
+
+
+
+
+#=======================
+# LMOD STUFF
+#=======================
+
+	# NEEDS TO BE DONE AFTER PATH ADDITIONS AND BEFORE EVERYTHING ELSE
+
+	export LMOD_PATH=$SPACK_ROOT/opt/spack/linux-ubuntu16.04-x86_64/gcc-5.4.0/lmod-7.8-kmhks3puokhjxrhnypcplxdgq7x2dmam/lmod/7.8
+	$LMOD_PATH/init/bash
+
+	export MODULEPATH=$SPACK_ROOT/share/spack/lmod/linux-ubuntu16.04-x86_64/Core
+
+	if [ -d /etc/profile.d ]; then
+	 for i in /etc/profile.d/*.sh; do
+	   if [ -r $i ]; then
+		 . $i
+	   fi
+	 done
+	fi
+
+	export LMOD_CMD=$LMOD_PATH/libexec/lmod
+
+	module ()
+	{
+	  eval $($LMOD_CMD bash $*)
+	}
+
+
+
+
+
+
 
 #=================
 # COLORS
@@ -105,12 +162,8 @@
 
 
 #============================
-# VARIABLES
+# PROMPT
 #============================
-
-    #---------------------
-    # PROMPT
-    #---------------------
 
 
     # Set light or dark theme
@@ -153,30 +206,11 @@
 
 
 
-    #----------------
-    # PATH VARIABLE
-    #----------------
-
-    # Add executables from /home/mivkov/Skripte/execs_for_path to $PATH variable
-    PATH="$HOME"/"scripts/execs_for_path:"$PATH
-
-    # Add intel (fortran) compiler to path var
-    #PATH="/opt/intel/bin:"$PATH
-
-    #add local bin
-    PATH="$HOME""/local/bin:"$PATH
-
-    #add downloaded programs
-    PATH="$HOME""/Programme:"$PATH
-    PATH="$HOME""/Programme/briss-0.9":"$PATH"
-
-    export PATH
 
 
-
-    #------------
-    # Others
-    #------------
+#==================
+# VARIABLES
+#==================
 
     export TERM=xterm-256color
     export OR='/home/mivkov/UZH/ramses/'
