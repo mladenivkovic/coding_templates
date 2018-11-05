@@ -27,6 +27,8 @@ alias rtd='cd ~/EPFL/swiftsim/doc/RTD/source/'
 # Modules
 #===========================
 
-module load mpich
+module load --ignore-cache openmpi
+module load --ignore-cache fftw  hdf5
+module load --ignore-cache metis parmetis
 
 
