@@ -19,10 +19,10 @@
     PATH="$HOME""/local/bin:"$PATH
 
     #add downloaded programs
-    PATH="$HOME""/Programme:"$PATH
-    PATH="$HOME""/Programme/briss-0.9":"$PATH"
+    PATH="$HOME""/applications:"$PATH
+    PATH="$HOME""/applications/briss-0.9":"$PATH"
 
-    export SPACK_ROOT="$HOME/Programme/spack/"
+    export SPACK_ROOT="$HOME/applications/spack/"
     PATH="$SPACK_ROOT/bin":"$PATH"
 
     export PATH
@@ -37,25 +37,25 @@
 
 	# NEEDS TO BE DONE AFTER PATH ADDITIONS AND BEFORE EVERYTHING ELSE
 
-	export LMOD_PATH=$SPACK_ROOT/opt/spack/linux-ubuntu16.04-x86_64/gcc-5.4.0/lmod-7.8-kmhks3puokhjxrhnypcplxdgq7x2dmam/lmod/7.8
-	$LMOD_PATH/init/bash
+    export LMOD_PATH=$SPACK_ROOT/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.3.0/lmod-7.8-7xoal6tokagwidxziv3fspyhz5ojghdy/lmod/7.8
+    # $LMOD_PATH/init/bash
 
-	export MODULEPATH=$SPACK_ROOT/share/spack/lmod/linux-ubuntu16.04-x86_64/Core
+    export MODULEPATH=$SPACK_ROOT/share/spack/lmod/linux-ubuntu18.04-x86_64/Core
 
-	if [ -d /etc/profile.d ]; then
-	 for i in /etc/profile.d/*.sh; do
-	   if [ -r $i ]; then
-		 . $i
-	   fi
-	 done
-	fi
+    if [ -d /etc/profile.d ]; then
+     for i in /etc/profile.d/*.sh; do
+       if [ -r $i ]; then
+         . $i
+       fi
+     done
+    fi
 
-	export LMOD_CMD=$LMOD_PATH/libexec/lmod
+    export LMOD_CMD=$LMOD_PATH/libexec/lmod
 
-	module ()
-	{
-	  eval $($LMOD_CMD bash $*)
-	}
+    module ()
+    {
+      eval $($LMOD_CMD bash $*)
+    }
 
 
 
@@ -167,8 +167,9 @@
 
 
     # Set light or dark theme
-    export MYPROMPTCOLOR='light'
+    # export MYPROMPTCOLOR='light'
     # export MYPROMPTCOLOR='dark'
+    export MYPROMPTCOLOR='ubuntu18_default_dark'
 
     parse_git_branch() {
         # get current git branch, if any
@@ -179,26 +180,40 @@
         # This function prepares the prompt properly
         # depending on the MYPROMPTCOLOR variable.
 
+        col_reset="\[\033[39;49;0m\]"
+
         # set colors
         if [[ ${MYPROMPTCOLOR} == 'light' ]]; then
             col_left="\[\033[37;104;1m\]"
             col_right="\[\033[31;1m\]" # 36 for green
             col_nline="\[\033[94;1m\]"
-            compensate=25
-        else
+            compensate=31
+        elif [[ ${MYPROMPTCOLOR} == 'dark' ]]; then
             col_left="\[\033[33m\]"
-            col_right="\[\033[32;1m\]" # 36 for green
+            col_right="\[\033[32;1m\]"
             col_nline="\[\033[32;1m\]"
-            compensate=25
-        fi
-        col_reset="\[\033[0m\]"
+            compensate=31
+        elif [[ ${MYPROMPTCOLOR} == 'ubuntu18_default_dark' ]]; then
+            col_left="\[\033[32;1m\]"
+            col_right="\[\033[31;1m\]"
+            col_nline="\[\033[32;1m\]"
+            compensate=31
+        else
+            # DEFAULTS OF SOME KIND
+            col_left="\[\033[1m\]"
+            col_right="\[\033[1m\]" # 36 for green
+            col_nline="\[\033[1m\]"
+            compensate=31
 
-        # get text
+        fi
+
+        # GET TEXT
         left="${col_left}\A [\u@\h] - \w${col_reset}"
         right="${col_right}"$(parse_git_branch)"${col_reset}"
-        nextline="${col_nline}\$${col_reset}"
+        nextline="${col_nline}"\$"${col_reset}"
+        linelen="$(($(tput cols) + compensate))"
 
-        PS1=$(printf "%*s\r%s\n %s %s" "$(($(tput cols)+${compensate}))" "${right}" "${left}" "${nextline}" )
+        PS1=$(printf "%*s\r%s\n %s %s" "${linelen}" "${right}" "${left}" "${nextline}" )
     }
     PROMPT_COMMAND=prompt
 
@@ -404,7 +419,7 @@
 
     export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Coding/projekte/my_python_modules/physics:"
     export PYTHONPATH=${PYTHONPATH}"/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages:"
-    # export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Programme/ParaView/lib/python2.7/site-packages:"
+    # export PYTHONPATH=${PYTHONPATH}"/home/mivkov/applications/ParaView/lib/python2.7/site-packages:"
 
 
 

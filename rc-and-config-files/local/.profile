@@ -21,9 +21,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-
-
-
-
-# set environment vars for Intel Fortran Compiler
-#alias intel="source /opt/intel/compilers_and_libraries_2016/linux/bin/compilervars.sh intel64"
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi

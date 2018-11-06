@@ -193,21 +193,21 @@
     "-----------------------------
     "Light Color Scheme
     "-----------------------------
-    "statusline 
-    hi StatusLine ctermbg=Black ctermfg=Blue
-    "vertical split line
-    hi VertSplit ctermbg=Black ctermfg=DarkGrey
-    "horizontal split line
-    hi StatusLineNC ctermbg=Black ctermfg=DarkGrey
-    " Line numbers
-    hi LineNr ctermfg=Black ctermbg=Blue
-    hi CursorLineNr ctermfg=Black ctermbg=Green
-    hi Visual term=reverse cterm=reverse guibg=Grey
-
-    " Tab line highlighting
-    hi TabLineFill ctermbg=Blue ctermfg=Blue
-    hi TabLine ctermfg=Yellow ctermbg=Blue cterm=bold
-    hi TabLineSel ctermfg=DarkGrey ctermbg=Green cterm=bold
+    " "statusline
+    " hi StatusLine ctermbg=Black ctermfg=Blue
+    " "vertical split line
+    " hi VertSplit ctermbg=Black ctermfg=DarkGrey
+    " "horizontal split line
+    " hi StatusLineNC ctermbg=Black ctermfg=DarkGrey
+    " " Line numbers
+    " hi LineNr ctermfg=Black ctermbg=Blue
+    " hi CursorLineNr ctermfg=Black ctermbg=Green
+    " hi Visual term=reverse cterm=reverse guibg=Grey
+    "
+    " " Tab line highlighting
+    " hi TabLineFill ctermbg=Blue ctermfg=Blue
+    " hi TabLine ctermfg=Yellow ctermbg=Blue cterm=bold
+    " hi TabLineSel ctermfg=DarkGrey ctermbg=Green cterm=bold
 
     
 
@@ -226,6 +226,23 @@
     " hi TabLineFill ctermbg=Yellow ctermfg=DarkGrey
     " hi TabLine ctermfg=LightGrey ctermbg=DarkGrey cterm=bold
     " hi TabLineSel ctermfg=DarkGrey ctermbg=yellow cterm=bold
+
+
+    "--------------------------------------
+    "Dark Ubuntu Defaul Color Scheme
+    "--------------------------------------
+    "statusline
+    hi StatusLine ctermbg=Black ctermfg=Grey
+    "vertical split line
+    hi VertSplit ctermbg=Black ctermfg=DarkGrey
+    "horizontal split line
+    hi StatusLineNC ctermbg=Black ctermfg=DarkGrey
+
+    " Tab line highlighting
+    hi TabLineFill ctermbg=Yellow ctermfg=DarkGrey
+    hi TabLine ctermfg=LightGrey ctermbg=DarkGrey cterm=bold
+    hi TabLineSel ctermfg=DarkGrey ctermbg=yellow cterm=bold
+
 
 
 
