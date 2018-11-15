@@ -31,5 +31,6 @@ module load --ignore-cache openmpi
 module load --ignore-cache fftw  hdf5
 module load --ignore-cache metis parmetis
 module load --ignore-cache grackle
+module load --ignore-cache jemalloc
 
 
