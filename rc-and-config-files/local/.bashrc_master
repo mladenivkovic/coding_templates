@@ -1,4 +1,5 @@
-# echo "Importing master thesis stuff."
+#!/bin/bash
+echo "Sourcing master thesis rc                  from ~/.bashrc_master"
 
 
 #=========================

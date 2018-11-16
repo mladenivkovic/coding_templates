@@ -1,4 +1,5 @@
 #bash rc file for openmp
+echo "Sourcing openmp rc                         from ~/.bashrc_openmp"
 
 #define how many threads you want
 export OMP_NUM_THREADS=4

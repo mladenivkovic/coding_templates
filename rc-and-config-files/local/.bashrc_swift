@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Importing SWIFT stuff"
+echo "Sourcing SWIFT rc                          from ~/.bashrc_swift"
 
 
 
@@ -16,21 +16,19 @@ echo "Importing SWIFT stuff"
 # Aliases
 #============================
 
-alias sm="firefox $SW/doc/RTD/build/html/index.html"
-alias sd="firefox $SW/doc/html/index.html"
-alias rtd='cd ~/EPFL/swiftsim/doc/RTD/source/'
+    # Changing directories
+    alias sw="cd $SW"
+    alias rtd="cd $SW/doc/RTD/source/"
+    alias sc="cd $SW/src"
+    alias se="cd $SW/examples"
+
+
+    # Running stuff
+    alias sm="firefox $SW/doc/RTD/build/html/index.html"
+    alias sd="firefox $SW/doc/html/index.html"
+    alias mh='make clean && make html'
 
 
 
-
-#===========================
-# Modules
-#===========================
-
-module load --ignore-cache openmpi
-module load --ignore-cache fftw  hdf5
-module load --ignore-cache metis parmetis
-module load --ignore-cache grackle
-module load --ignore-cache jemalloc
 
 

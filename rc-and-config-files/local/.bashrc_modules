@@ -1,0 +1,46 @@
+#!/bin/bash
+echo "Sourcing modules rc and loading modules    from ~/.bashrc_modules"
+
+
+#=======================
+# LMOD STUFF
+#=======================
+
+	# NEEDS TO BE DONE AFTER PATH ADDITIONS AND BEFORE EVERYTHING ELSE
+
+    export LMOD_PATH=$SPACK_ROOT/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.3.0/lmod-7.8-7xoal6tokagwidxziv3fspyhz5ojghdy/lmod/7.8
+    $LMOD_PATH/init/bash
+
+    export MODULEPATH=$SPACK_ROOT/share/spack/lmod/linux-ubuntu18.04-x86_64/Core
+
+    if [ -d /etc/profile.d ]; then
+     for i in /etc/profile.d/*.sh; do
+       if [ -r $i ]; then
+         . $i
+       fi
+     done
+    fi
+
+    export LMOD_CMD=$LMOD_PATH/libexec/lmod
+
+    module ()
+    {
+      eval $($LMOD_CMD bash $*)
+    }
+
+
+
+
+
+#===========================
+# Modules
+#===========================
+
+module load --ignore-cache openmpi
+module load --ignore-cache fftw hdf5
+module load --ignore-cache metis parmetis
+module load --ignore-cache grackle
+module load --ignore-cache jemalloc
+module load --ignore-cache gsl
+
+

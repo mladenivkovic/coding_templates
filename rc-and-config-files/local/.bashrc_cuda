@@ -1,1 +1,2 @@
+echo "Sourcing CUDA rc                           from ~/.bashrc_cuda"
 export PATH="/usr/local/cuda-9.2/bin"${PATH:+:${PATH}}

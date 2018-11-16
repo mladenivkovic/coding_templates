@@ -1,0 +1,34 @@
+#!/bin/bash
+# rc stuff for my own small coding projects
+echo "Sourcing coding rc                         from ~/.bashrc_coding"
+
+
+#-------------------------
+# VARIABLES
+#-------------------------
+
+    export COD="$HOME/Coding/"
+    export CT="$COD/coding_templates"
+    export CPJ="$COD/projekte"
+
+
+#-------------------------
+# ALIASES
+#-------------------------
+
+    alias pj="cd $CPJ"                          # go to projects
+    alias templ="cd $CT"                        # go to templates
+    alias t=templ
+    alias ft="cd $CT/Fortran"                   # go to fortran templates
+    alias pt="cd $CT/Python/python3"            # go to python templates
+    alias ct="cd $CT/C"                         # go to C templates
+    alias cppt="cd $CT/cpp"                     # go to C++ templates
+    alias ppt="cd $CT/Python/python3/plots"     # go to python plot templates
+    alias bt="cd $CT/Bash"                      # go to bash templates
+    alias lt="cd $CT/LaTeX"                     # go to LaTeX templates
+    alias rcf="cd $CT/rc-files"                 # go to LaTeX templates
+    alias plg="cd $COD/Playground"
+    alias f="cd $CPJ/formelsammlung"            # go to formelsammlung
+    alias g="cd $CPJ/glossar"                   # go to formelsammlung
+
+

@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Importing ramses stuff"
+echo "Sourcing bachelor thesis rc                from ~/.bashrc_bachelor"
 
 
 #=====================

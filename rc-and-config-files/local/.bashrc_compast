@@ -1,4 +1,4 @@
-echo "Importing computational astrophysics stuff."
+echo "Sourcing computational astrophysics rc     from ~/.bashrc_compast"
 
 
 #=========================
