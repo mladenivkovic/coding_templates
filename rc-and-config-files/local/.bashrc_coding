@@ -10,6 +10,9 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     export COD="$HOME/Coding/"
     export CT="$COD/coding_templates"
     export CPJ="$COD/projekte"
+    export PLG="$COD/Playground"
+
+    export NOT="$HOME/EPFL/notes"
 
 
 #-------------------------
@@ -27,8 +30,11 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     alias bt="cd $CT/Bash"                      # go to bash templates
     alias lt="cd $CT/LaTeX"                     # go to LaTeX templates
     alias rcf="cd $CT/rc-files"                 # go to LaTeX templates
-    alias plg="cd $COD/Playground"
+    alias plg="cd $PLG"
     alias f="cd $CPJ/formelsammlung"            # go to formelsammlung
     alias g="cd $CPJ/glossar"                   # go to formelsammlung
+
+    alias deb="cd $NOT/debugging/source"        # go to debugging notes
+    alias ins="cd $NOT/instructions/source"     # go to instructions notes
 
 

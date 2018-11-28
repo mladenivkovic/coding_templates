@@ -7,7 +7,7 @@ echo "Sourcing SWIFT rc                          from ~/.bashrc_swift"
 # Variables
 #============================
 
-    export SW='$HOME/EPFL/swiftsim/'
+    export SW="$APPDIR/swiftsim/"
 
 
 

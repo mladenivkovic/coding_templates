@@ -46,14 +46,20 @@
     #add local bin
     PATH="$HOME""/local/bin:"$PATH
 
+    export APPDIR="$HOME/applications/"
+
     #add downloaded programs
-    PATH="$HOME""/applications:"$PATH
-    PATH="$HOME""/applications/briss-0.9":"$PATH"
-    PATH="$HOME""/applications/music":"$PATH"
-    PATH="$HOME""/applications/ramses":"$PATH"
+    PATH="$APPDIR:"$PATH
+    PATH="$APPDIR/briss-0.9":"$PATH"
+    PATH="$APPDIR/music":"$PATH"
+    PATH="$APPDIR/ramses/bin":"$PATH"
+    PATH="$APPDIR/dice/bin":"$PATH"
+    PATH="$APPDIR/Gadget-2.0.7/Gadget2":"$PATH"
+    PATH="$APPDIR/GadgetConverter/build/rundir":"$PATH"
+    PATH="$APPDIR/Gear/src":"$PATH"
 
 
-    export SPACK_ROOT="$HOME/applications/spack/"
+    export SPACK_ROOT="$APPDIR/spack/"
     PATH="$SPACK_ROOT/bin":"$PATH"
 
     export PATH
@@ -212,9 +218,11 @@
     alias python=python3
     alias refresh='source ~/.bashrc'
     alias fucking=sudo
-    alias vimh='gedit $HOME/Coding/coding_templates/notes/vim-notizen.txt'
+    alias vimh="gedit $HOME/Coding/coding_templates/notes/vim-notizen.txt"
+    alias jn='jupyter-notebook'
+    alias v='firefox build/html/index.html'
 
-
+    alias pmake='python setup.py build && python setup.py install --user'
 
 
 
@@ -335,11 +343,17 @@
 # PYTHON
 #=====================
 
-    export PYTHONPATH=${PYTHONPATH}"/home/mivkov/Coding/projekte/my_python_modules/physics:"
-    export PYTHONPATH=${PYTHONPATH}"/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages:"
-    # export PYTHONPATH=${PYTHONPATH}"/home/mivkov/applications/ParaView/lib/python2.7/site-packages:"
-
-
+    # PYTHONPATH=${PYTHONPATH}"/home/mivkov/Coding/projekte/my_python_modules/physics:"
+    # PYTHONPATH=${PYTHONPATH}"/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages:"
+    # # export PYTHONPATH=${PYTHONPATH}"/home/mivkov/applications/ParaView/lib/python2.7/site-packages:"
+    #
+    # # PYTHONPATH=${PYTHONPATH}"$APPDIR/pNbody/Doc/sphinxext/lib/python3.6/site-packages:"
+    # PYTHONPATH=${PYTHONPATH}"$APPDIR/pNbody/Doc/sphinxext/lib/python2.7/site-packages:"
+    # PYTHONPATH=${PYTHONPATH}"$APPDIR/python_libs/lib/python2.7/site-packages:"
+    # PYTHONPATH=${PYTHONPATH}"$APPDIR/python_libs/lib/python3.6/site-packages:"
+    #
+    # export PYTHONPATH
+    export PYTHONLIBS="$APPDIR/python_libs/"
 
 
 
@@ -395,6 +409,12 @@
     if [ -f ~/.bashrc_master ]; then
         . ~/.bashrc_master
     fi
+
+    #masterarbeit stuff
+    if [ -f ~/.bashrc_phd ]; then
+        . ~/.bashrc_phd
+    fi
+
 
     #SWIFT stuff
     if [ -f ~/.bashrc_swift ]; then
