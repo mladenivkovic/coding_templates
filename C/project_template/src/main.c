@@ -14,6 +14,7 @@
 
 #ifndef NDIM
 #define NDIM 3
+#pragma message("You didn't define the number of dimensions in the Makefile. Compiling with NDIM=3\n")
 #endif
 
 void check_parameters();
