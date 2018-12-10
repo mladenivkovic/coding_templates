@@ -1,4 +1,4 @@
-#include "globals.h"
+#include "params.h"
 
 #include <stdio.h>
 #include <stdlib.h>

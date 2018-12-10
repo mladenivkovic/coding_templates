@@ -42,7 +42,7 @@ VPATH=$(SRCDIR)
 
 
 # OBJECTS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
-OBJECTS = main.o io.o
+OBJECTS = main.o io.o params.o
 
 
 

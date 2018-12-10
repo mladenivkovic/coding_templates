@@ -1,3 +1,6 @@
+/* All around parameters used in the simulation. */
+
+/* GLOBAL PARAMETERS */
 typedef struct {
   int levelmax;
   int nstepmax;
@@ -8,6 +11,7 @@ typedef struct {
 } globalparams;
 
 
+/* RUN PARAMETERS */
 typedef struct {
   int step;
   double t;
@@ -15,8 +19,27 @@ typedef struct {
 } runparams;
 
 
+
+/* UNITS */
 typedef struct{
   double unit_m;
   double unit_l;
   double unit_t;
 } units;
+
+
+
+/* ALL PARAMETERS */
+typedef struct {
+  globalparams gp;
+  runparams rp;
+  units units;
+} params;
+
+
+
+
+
+extern void check_parameters();
+extern void init_params();
+
