@@ -65,6 +65,8 @@
     export PATH
 
 
+    MANPATH=/usr/share/man
+
 
 
 
@@ -333,7 +335,13 @@
 
 
 
-
+    function gitup {
+        # a function to check out the master branch, pull,
+        # then go back to the original branch and rebase
+        mybranch=`git rev-parse --abbrev-ref HEAD`
+        git checkout master && git pull && git checkout $mybranch && git rebase master
+        return 0
+    }
 
 
 
@@ -353,7 +361,7 @@
     # PYTHONPATH=${PYTHONPATH}"$APPDIR/python_libs/lib/python3.6/site-packages:"
     #
     # export PYTHONPATH
-    export PYTHONLIBS="$APPDIR/python_libs/"
+    # export PYTHONLIBS="$APPDIR/python_libs/"
 
 
 

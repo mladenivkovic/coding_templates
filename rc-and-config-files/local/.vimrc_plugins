@@ -21,7 +21,7 @@
 
     Plugin 'scrooloose/nerdtree'            "file tree
 
-    Plugin 'Valloric/YouCompleteMe'         "auto completion
+    " Plugin 'Valloric/YouCompleteMe'         "auto completion
     " has component that needs compiling. See
     " https://github.com/Valloric/YouCompleteMe#installation
 
