@@ -12,7 +12,7 @@
  * parameters, or stops the run otherwise.
  *============================================*/
 
-void check_parameters(params* p){
+void check_params(params* p){
 
   int error = 0;
 
@@ -89,3 +89,34 @@ void init_params(params * p){
 
 }
 
+
+
+
+void print_params(params * p){
+
+  globalparams *g = &(p->gp);
+  runparams *r    = &(p->rp);
+  units *u        = &(p->units);
+  printf("==================================================\n");
+  printf("Starting simulation. Parameters are:\n");
+
+  printf("Verbose?              ");
+  if (g->verbose) {
+    printf("True\n");
+  } else {
+    printf("False\n");
+  }
+
+  printf("levelmax:             %d\n", g->levelmax);
+  printf("nstepmax:             %d\n", g->nstepmax);
+  printf("tmax:                 %g\n", g->tmax);
+
+
+  printf("\n");
+  printf("Units:\n");
+  printf("unit_m:               %g\n", u->unit_m);
+  printf("unit_l:               %g\n", u->unit_l);
+  printf("unit_t:               %g\n", u->unit_t);
+  printf("==================================================\n");
+
+}

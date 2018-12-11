@@ -40,6 +40,7 @@ typedef struct {
 
 
 
-extern void check_parameters();
+extern void check_params();
 extern void init_params();
+extern void print_params();
 

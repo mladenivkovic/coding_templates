@@ -26,9 +26,10 @@ int main(int argc, char* argv[]){
 
   params p;
   init_params(&p);
-  read_cmdlineargs(argc, argv, &p.gp);
-  read_paramfile(&p.gp);
-  check_parameters(&p.gp);
+  read_cmdlineargs(argc, argv, &p);
+  read_paramfile(&p);
+  check_params(&p);
+  print_params(&p);
 
   return(0);
 

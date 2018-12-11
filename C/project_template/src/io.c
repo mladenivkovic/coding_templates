@@ -9,11 +9,9 @@
 /* This function reads in the command line arguments and stores them in   */
 /* the globalparams struct                                                */
 /* ====================================================================== */
-void read_cmdlineargs(int argc, char* argv[], globalparams* g){
+void read_cmdlineargs(int argc, char* argv[], params* p){
 
-  printf("you go girl\n");
-  printf("levelmax is: %d\n", g->levelmax);
-  g->levelmax = 10;
+  globalparams *g = &(p->gp);
 
   if (argc < 3){
     printf("Too few arguments given. Run this program with ./sph paramfile datafile\n");
@@ -33,13 +31,17 @@ void read_cmdlineargs(int argc, char* argv[], globalparams* g){
 /* ====================================================================== */
 /* Read in parameter file, store read in global parameters.               */
 /* ====================================================================== */
-void read_paramfile(globalparams* g){
+void read_paramfile(params* p){
+
+  globalparams * g = &(p->gp);
+  units *u = &(p->units);
+
 
   //open file
-  FILE *params = fopen(g->paramfilename, "r");
+  FILE *par = fopen(g->paramfilename, "r");
 
   // check if file exists
-  if (params == NULL) { 
+  if (par == NULL) { 
     printf("Error: file '%s' not found.\n", g->paramfilename);
     exit(602);
   }
@@ -51,7 +53,7 @@ void read_paramfile(globalparams* g){
   
 
 
-  while (fgets(tempbuff,80,params))
+  while (fgets(tempbuff,80,par))
   // fgets(str_buff, n,filepointer) :
   // gets n characters from file in filepointer and stores them
   // in str_buff.
@@ -78,6 +80,15 @@ void read_paramfile(globalparams* g){
     else if (strcmp(varname, "tmax")==0){
       g->tmax = atof(varvalue);
     }
+    else if (strcmp(varname, "unit_m")==0){
+      u->unit_m = atof(varvalue);
+    }
+    else if (strcmp(varname, "unit_l")==0){
+      u->unit_l = atof(varvalue);
+    }
+    else if (strcmp(varname, "unit_t")==0){
+      u->unit_t = atof(varvalue);
+    }
     else if (strcmp(varname, "//")==0) {
       // ignore comments
       continue;
@@ -91,6 +102,6 @@ void read_paramfile(globalparams* g){
     }
   }
 
-    fclose(params);
+    fclose(par);
 
 }
