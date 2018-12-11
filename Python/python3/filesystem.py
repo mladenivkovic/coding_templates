@@ -67,7 +67,7 @@ else:
     print("Directory ", dirname, " already exists.", sep="'")
 
 
-print("This directorie's contents are now:", os.listdir())
+print("This directory's contents are now:", os.listdir())
 
 
 print("")
