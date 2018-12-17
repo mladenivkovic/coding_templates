@@ -1,0 +1,22 @@
+#=========================
+# LESTA SPECIFIC STUFF
+#=========================
+
+module load -q spack
+module load -q clastro
+module load -q swift
+
+# module load -q python/3.7.1
+# module load -q h5py
+# module load -q mpi4py
+
+# module load -q jemalloc
+# module load -q metis
+# module load -q hdf5
+# module load -q fftw
+# module load -q tcl
+# module load -q gsl
+
+echo -e "$COL_RED" "  loaded modules from .bashrc_lesta file" "$COL_RESET"
+
+alias sq='squeue -u ivkovic'
