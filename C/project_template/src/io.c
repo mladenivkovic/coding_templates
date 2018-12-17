@@ -60,6 +60,21 @@ void read_paramfile(params* p){
   // returns 0 if EoF is reached.
   
   {
+  
+    // check whether tempbuff is empty line
+    int isempty = 0;
+    for (int i = 0; i<MAX_LINE_SIZE; i++){
+      if (tempbuff[i] != ' '){
+        if (tempbuff[i] == '\n'){
+          isempty = 1;
+        }
+        break;
+      }
+    }
+
+    if (isempty) continue;
+
+
     sscanf(tempbuff, "%20s = %56[^\n]\n", varname, varvalue);
     // reads formatted input from a string, writes it in
     // the variables given after the format string.
