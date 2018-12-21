@@ -46,7 +46,7 @@
     #add local bin
     PATH="$HOME""/local/bin:"$PATH
 
-    export APPDIR="$HOME/applications/"
+    export APPDIR="$HOME/local/"
 
     #add downloaded programs
     PATH="$APPDIR:"$PATH
@@ -173,7 +173,7 @@
 #==================
 
     export TERM=xterm-256color
-    export OR='/home/mivkov/applications/ramses/'
+    export OR="$APPDIR/ramses/"
 
 
 
@@ -225,6 +225,7 @@
     alias v='firefox build/html/index.html'
 
     alias pmake='python setup.py build && python setup.py install --user'
+    alias pcomp='python -m compileall'
 
 
 
@@ -433,4 +434,8 @@
 
 
 
+#=================================
+# Small Misc Stuff
+#=================================
 
+    shopt -s direxpand # expand variables fully. Needed to prevent fuckery like expanding $HOME to \$HOME

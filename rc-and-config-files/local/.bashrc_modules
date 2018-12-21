@@ -39,7 +39,7 @@ echo "Sourcing modules rc and loading modules    from ~/.bashrc_modules"
 module load --ignore-cache mpich
 module load --ignore-cache fftw hdf5
 module load --ignore-cache metis parmetis
-module load --ignore-cache grackle
+# module load --ignore-cache grackle
 module load --ignore-cache jemalloc
 module load --ignore-cache gsl
 
@@ -49,4 +49,4 @@ module load --ignore-cache gsl
 # Manual Additions
 #===========================
 
-export FFTW2_ROOT="$HOME"/applications/fftw-2.1.5/build
+export FFTW2_ROOT="$APPDIR"/fftw-2.1.5/build
