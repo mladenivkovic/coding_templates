@@ -28,6 +28,8 @@ echo "Sourcing PhD thesis rc                     from ~/.bashrc_phd"
     # Dir aliases
     #-------------------------
 
+    alias pn="cd $APPDIR/pNbody"
+
 
     #-------------------------
     # Script shortcuts

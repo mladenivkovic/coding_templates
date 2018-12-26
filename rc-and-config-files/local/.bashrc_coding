@@ -50,4 +50,5 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
         cd $APPDIR/pNbody
         python setup.py build && python setup.py install --user
         cd $pw
+        echo =============================================================
     }
