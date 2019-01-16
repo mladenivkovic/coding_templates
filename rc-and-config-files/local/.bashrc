@@ -68,6 +68,16 @@
     MANPATH=/usr/share/man
 
 
+#===========================
+# ENVIRONMENT VARIABLES
+#===========================
+
+    export CXX=/usr/bin/gcc-8
+    export F77=/usr/bin/gfortran-8
+    export F90=/usr/bin/gfortran-8
+    export F95=/usr/bin/gfortran-8
+
+
 
 
 #=======================
@@ -206,7 +216,7 @@
     
     #UNI
     alias papers='cd ~/UZH/Papers'
-    alias or='cd $OR'
+    alias or="cd $OR"
 
 
 

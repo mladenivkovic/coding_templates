@@ -118,13 +118,13 @@
     set foldenable
 
     " Set fold methods for every file type only! 
-    let g:vimsyn_folding='af'
-    let g:tex_fold_enabled=1
-    let g:python_folding = 1
-    let python_folding = 1
-    let g:fortran_folding = 1
-    let g:bash_folding = 1
-    let g:c_folding = 1
+    " let g:vimsyn_folding='af'
+    " let g:tex_fold_enabled=1
+    " let g:python_folding = 1
+    " let python_folding = 1
+    " let g:fortran_folding = 1
+    " let g:bash_folding = 1
+    " let g:c_folding = 1
     "let g:xml_syntax_folding = 1
     "let g:php_folding = 1
     "let g:perl_fold = 1
@@ -157,16 +157,17 @@
     " Needed for Syntax Highlighting and stuff
     filetype on 
     filetype plugin on "needed for plugins: nerdcommenter and to autoload .vim/after/ftplugin
-    filetype indent off "needed by  plugin slim
-
-    syntax enable
+    filetype indent off "needed by plugin slim
 
     " Fortran highlighting
     let fortran_free_source=1
-    let fortran_have_tabs=1
-    let fortran_more_precise=1
-    let fortran_do_enddo=1
+    let fortran_have_tabs=0
+    let fortran_more_precise=0
+    set redrawtime=10000    " sometimes syntax highlight breaks for large fortran files
 
+    " needs to be after fortran definitions
+    syntax on
+    set re=1
 
 
 
@@ -287,48 +288,16 @@
     setlocal ts=4 sts=4 sw=4 expandtab smarttab tw=0
 
     " set filetype specifics
-    augroup cpp 
+    augroup filetypespecs 
         autocmd!
-        autocmd FileType cpp setlocal ts=2 sts=2 sw=2 expandtab
-    augroup end
-
-    augroup c
-        autocmd!
-        autocmd FileType c setlocal ts=2 sts=2 sw=2 expandtab
-    augroup end
-
-    augroup fortran
-        autocmd!
-        autocmd FileType fortran setlocal ts=2 sts=2 sw=2 expandtab
-    augroup end
-
-    augroup python
-        autocmd!
-        autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-    augroup end
-
-    augroup rst
-        autocmd!
-        autocmd FileType rst setlocal ts=4 sts=4 sw=4 expandtab
-    augroup end
-
-    augroup sh
-        autocmd!
-        autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab
-    augroup end
-
-    augroup text
-        autocmd!
-        autocmd FileType text setlocal ts=4 sts=4 sw=4 expandtab
-    augroup end
-
-    augroup txt
-        autocmd!
-        autocmd FileType txt setlocal ts=4 sts=4 sw=4 expandtab
-    augroup end
-
-    augroup vim
-        autocmd!
-        autocmd FileType vim setlocal ts=4 sts=4 sw=4 expandtab
+        autocmd FileType cpp        setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType c          setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType fortran    setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType python     setlocal ts=4 sts=4 sw=4 expandtab
+        autocmd FileType rst        setlocal ts=4 sts=4 sw=4 expandtab
+        autocmd FileType sh         setlocal ts=4 sts=4 sw=4 expandtab
+        autocmd FileType text       setlocal ts=4 sts=4 sw=4 expandtab
+        autocmd FileType txt        setlocal ts=4 sts=4 sw=4 expandtab
+        autocmd FileType vim        setlocal ts=4 sts=4 sw=4 expandtab
     augroup end
 

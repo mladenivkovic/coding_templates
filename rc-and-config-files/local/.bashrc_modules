@@ -8,7 +8,7 @@ echo "Sourcing modules rc and loading modules    from ~/.bashrc_modules"
 
 	# NEEDS TO BE DONE AFTER PATH ADDITIONS AND BEFORE EVERYTHING ELSE
 
-    export LMOD_PATH=$SPACK_ROOT/opt/spack/linux-ubuntu18.04-x86_64/gcc-7.3.0/lmod-7.8-7xoal6tokagwidxziv3fspyhz5ojghdy/lmod/7.8
+    export LMOD_PATH=$SPACK_ROOT/opt/spack/linux-ubuntu18.04-x86_64/gcc-8.2.0/lmod-7.8-bfepnljyur5xwgqy7syv32ehtz32ao6g/lmod/7.8
     $LMOD_PATH/init/bash
 
     export MODULEPATH=$SPACK_ROOT/share/spack/lmod/linux-ubuntu18.04-x86_64/Core
@@ -36,8 +36,8 @@ echo "Sourcing modules rc and loading modules    from ~/.bashrc_modules"
 # Modules
 #===========================
 
-module load --ignore-cache mpich
-module load --ignore-cache fftw hdf5
+module load --ignore-cache --quiet openmpi
+module load --ignore-cache --quiet fftw hdf5
 module load --ignore-cache metis parmetis
 # module load --ignore-cache grackle
 module load --ignore-cache jemalloc
@@ -49,4 +49,4 @@ module load --ignore-cache gsl
 # Manual Additions
 #===========================
 
-export FFTW2_ROOT="$APPDIR"/fftw-2.1.5/build
+# export FFTW2_ROOT="$APPDIR"/fftw-2.1.5/build

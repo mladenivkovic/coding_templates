@@ -21,7 +21,7 @@
 
     Plugin 'scrooloose/nerdtree'            "file tree
 
-    Plugin 'Valloric/YouCompleteMe'         "auto completion
+    " Plugin 'Valloric/YouCompleteMe'         "auto completion
     " has component that needs compiling. See
     " https://github.com/Valloric/YouCompleteMe#installation
 
@@ -134,7 +134,7 @@
 
     let g:ycm_python_binary_path = '/usr/bin/python3'
 
-    let g:ycm_auto_trigger = 1 "trigger after X characters
+    let g:ycm_auto_trigger = 5 "trigger after X characters
 
 
 
