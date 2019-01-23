@@ -7,7 +7,7 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
 # VARIABLES
 #-------------------------
 
-    export COD="$HOME/Coding/"
+    export COD="$HOME/coding/"
     export CT="$COD/coding_templates"
     export CPJ="$COD/projekte"
     export PLG="$COD/Playground"
@@ -26,12 +26,12 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     # Templates
     alias templ="cd $CT"                        # go to templates
     alias t=templ
-    alias ft="cd $CT/Fortran"                   # go to fortran templates
-    alias pt="cd $CT/Python/python3"            # go to python templates
-    alias ct="cd $CT/C"                         # go to C templates
+    alias ft="cd $CT/fortran"                   # go to fortran templates
+    alias pt="cd $CT/python/python3"            # go to python templates
+    alias ct="cd $CT/c"                         # go to C templates
     alias cppt="cd $CT/cpp"                     # go to C++ templates
-    alias ppt="cd $CT/Python/python3/plots"     # go to python plot templates
-    alias bt="cd $CT/Bash"                      # go to bash templates
+    alias ppt="cd $CT/python/python3/plots"     # go to python plot templates
+    alias bt="cd $CT/bash"                      # go to bash templates
     alias lt="cd $CT/LaTeX"                     # go to LaTeX templates
     alias rcf="cd $CT/rc-files"                 # go to LaTeX templates
 

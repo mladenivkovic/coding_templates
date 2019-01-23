@@ -41,7 +41,7 @@ echo "Sourcing master thesis rc                  from ~/.bashrc_master"
     alias ela='ssh -2Y mivkov@ela.cscs.ch'
     alias daint='ssh -2Yt mivkov@ela.cscs.ch ssh -2Y daint'
     alias hydra='ssh mivkov@cluster.s3it.uzh.ch'
-
+    alias glamdring='ping -c 2 -s 999 glamdring.physics.ox.ac.uk && ssh mivkov@glamdring.physics.ox.ac.uk'
 
 
 

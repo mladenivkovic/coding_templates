@@ -32,6 +32,17 @@ git diff-tree --no-commit-id --name-only -r "COMMIT_ID"
 
 git diff HEAD^^ HEAD main.c
     compare versions of files. Here: third to last commit with last commit.
+    
+    
+git diff --name-only
+    show names of changed files
+    
+git add -u
+    add all modified files, ignore untracked files
+    
+git rebase -i
+    interactive rebase; allows you to modify history, squash commits etc
+
 
 
 contributing to a project:
