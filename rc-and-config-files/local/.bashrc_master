@@ -7,7 +7,7 @@ echo "Sourcing master thesis rc                  from ~/.bashrc_master"
 #=========================
 
     export MA="$HOME"'/UZH/Masterarbeit/masterarbeit'
-    export SCR="$MA"/scripts
+    # export SCR="$MA"/scripts
     export BA="$MA"/backup/
 
 
@@ -53,7 +53,7 @@ echo "Sourcing master thesis rc                  from ~/.bashrc_master"
     #-------------------------
 
     alias ma='cd "$MA"'
-    alias scr='cd "$MA"/scripts'
+    alias mscr='cd "$MA"/scripts'
     alias res='cd "$MA"/results'
 
     # alias pa='cd "$MA"/project/ramses/patch/mergertree'

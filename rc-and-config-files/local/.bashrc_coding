@@ -40,8 +40,9 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     alias plg="cd $PLG"                         # go to playground
     alias pj="cd $CPJ"                          # go to projects
     alias f="cd $CPJ/formelsammlung"            # go to formelsammlung
-    alias g="cd $CPJ/glossar"                   # go to formelsammlung
+    alias g="cd $CPJ/glossar"                   # go to glossary
     alias sph="cd $CPJ/SPH"                     # go to SPH project
+    alias scr="cd $CPJ/scripts"                 # go to scripts dir
 
     alias deb="cd $NOT/debugging/source"        # go to debugging notes
     alias ins="cd $NOT/instructions/source"     # go to instructions notes
