@@ -53,6 +53,7 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     # RAMSES stuff
 
     alias pa='cd "$APPDIR"/ramses/patch/mergertree'
+    alias pao='cd "$APPDIR"/ramses/patch/original_mergertree'
     alias exec="cd $RAMSESEXEC"
     alias te='cd "$RAMSESEXEC"/testing'
     alias two='cd "$RAMSESEXEC"/dice_two'
@@ -63,12 +64,14 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     alias fdt='cd "$RAMSESEXEC"/fieldtest'
 
     alias mk='cd "$APPDIR"/ramses/bin_merger'
+    alias mko='cd "$APPDIR"/ramses/bin_merger_original'
     alias mkc='cd "$APPDIR"/ramses/bin'
     alias mkd='cd "$APPDIR"/ramses/bin_dice'
 
 
     alias gomd='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $APPDIR/ramses/bin_dice/ramses3d-merger-dice merger-dice.nml 2>"$DATE"_error.log | tee run_merger_dice_"$DATE".log'
     alias gom='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $APPDIR/ramses/bin_merger/ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run_merger_"$DATE".log'
+    alias gomo='DATE=`date +%F_%Hh%M`; mpiexec -n 4 $APPDIR/ramses/bin_merger_original/ramses3d-merger merger.nml 2>"$DATE"_error.log | tee run_original_merger_"$DATE".log'
 
 
 
