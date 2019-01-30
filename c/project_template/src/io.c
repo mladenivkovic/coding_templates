@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define MAX_LINE_SIZE 200
 
 
 /* ====================================================================== */
@@ -14,7 +15,7 @@ void read_cmdlineargs(int argc, char* argv[], params* p){
   globalparams *g = &(p->gp);
 
   if (argc < 3){
-    printf("Too few arguments given. Run this program with ./sph paramfile datafile\n");
+    printf("Too few arguments given. Run this program with PROGRAMNAME paramfile datafile\n");
     exit(600);
   }
   else {
@@ -48,12 +49,12 @@ void read_paramfile(params* p){
 
   char varname[80] ;
   char varvalue[80] ;
-  char tempbuff[80] ;
+  char tempbuff[MAX_LINE_SIZE] ;
 
   
 
 
-  while (fgets(tempbuff,80,par))
+  while (fgets(tempbuff,MAX_LINE_SIZE,par))
   // fgets(str_buff, n,filepointer) :
   // gets n characters from file in filepointer and stores them
   // in str_buff.

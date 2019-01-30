@@ -1,8 +1,6 @@
 /* ======================================== 
  *  
- * A rudimentary SPH code.
- *
- * Usage: ./sph paramfile.txt datafile.dat
+ *  Template for a new project.
  *  
  * ======================================== */
 
