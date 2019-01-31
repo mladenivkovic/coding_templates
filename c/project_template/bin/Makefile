@@ -25,7 +25,7 @@ CC=gcc -I$(IDIR) -fopenmp
 
 
 # flags for gcc compiler
-CFLAGS= -g -Og -Wall -Wextra  -fsignaling-nans  -ffinite-math-only -fno-signed-zeros -Warray-bounds $(DEFINES) # debug
+CFLAGS= -g -Og -Wall -Wextra -pedantic -std=c11 -fsignaling-nans  -ffinite-math-only -fno-signed-zeros -Warray-bounds $(DEFINES) # debug
 # CFLAGS= -O3  		 	   # performance
 
 

@@ -5,14 +5,14 @@
 
 
 
-/*============================================
- * This function checks the parameters
- * that have been read in and makes sure that
- * the simulation can be run with the given
- * parameters, or stops the run otherwise.
- *============================================*/
-
+/* ============================================= */
 void check_params(params* p){
+/* ============================================= */
+  /* This function checks the parameters         */
+  /* that have been read in and makes sure that  */
+  /* the simulation can be run with the given    */
+  /* parameters, or stops the run otherwise.     */
+  /*---------------------------------------------*/
 
   int error = 0;
 
@@ -62,12 +62,11 @@ void check_params(params* p){
 
 
 
-
-/*==========================================
- * Initialize parameters to default values
- *==========================================*/
-
-void init_params(params * p){
+/* ==========================================*/
+void init_params(params *p){
+/* ==========================================*/
+  /* Initialize parameters to default values */
+  /*-----------------------------------------*/
 
   globalparams * g = &(p->gp);
   g->levelmax = 0;
@@ -91,11 +90,13 @@ void init_params(params * p){
 
 
 
-
+/* ============================== */
 void print_params(params * p){
+  /* ============================ */
+  /* print current parameters.    */
+  /* ---------------------------- */
 
   globalparams *g = &(p->gp);
-  runparams *r    = &(p->rp);
   units *u        = &(p->units);
   printf("==================================================\n");
   printf("Starting simulation. Parameters are:\n");
@@ -110,7 +111,6 @@ void print_params(params * p){
   printf("levelmax:             %d\n", g->levelmax);
   printf("nstepmax:             %d\n", g->nstepmax);
   printf("tmax:                 %g\n", g->tmax);
-
 
   printf("\n");
   printf("Units:\n");

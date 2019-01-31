@@ -1,16 +1,19 @@
-#include "params.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "io.h"
+#include "params.h"
+
 #define MAX_LINE_SIZE 200
 
 
-/* ====================================================================== */
-/* This function reads in the command line arguments and stores them in   */
-/* the globalparams struct                                                */
-/* ====================================================================== */
+/* ======================================================= */
 void read_cmdlineargs(int argc, char* argv[], params* p){
+/* ======================================================= */
+  /* This function reads in the command line arguments and */
+  /* stores them in the globalparams struct                */
+  /*-------------------------------------------------------*/
 
   globalparams *g = &(p->gp);
 
@@ -29,10 +32,12 @@ void read_cmdlineargs(int argc, char* argv[], params* p){
 
 
 
-/* ====================================================================== */
-/* Read in parameter file, store read in global parameters.               */
-/* ====================================================================== */
+/* ================================= */
 void read_paramfile(params* p){
+/* ================================= */
+  /* Read in parameter file, store   */
+  /* read in global parameters.      */
+  /*---------------------------------*/
 
   globalparams * g = &(p->gp);
   units *u = &(p->units);
@@ -118,6 +123,6 @@ void read_paramfile(params* p){
     }
   }
 
-    fclose(par);
+  fclose(par);
 
 }
