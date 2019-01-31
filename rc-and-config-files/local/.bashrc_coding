@@ -51,7 +51,7 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
 
 
     # RAMSES stuff
-
+    alias ramses="cd $APPDIR/ramses/"
     alias pa='cd "$APPDIR"/ramses/patch/mergertree'
     alias pao='cd "$APPDIR"/ramses/patch/original_mergertree'
     alias exec="cd $RAMSESEXEC"

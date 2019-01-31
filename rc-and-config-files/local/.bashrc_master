@@ -86,7 +86,6 @@ echo "Sourcing master thesis rc                  from ~/.bashrc_master"
     #alias mki='cd "$MA"/project/ramses/bin_dice_intel'
     #alias mkm='cd "$MA"/project/ramses/bin_dice_nompi'
 
-    alias ramses='cd $MA/src/ramses/'
     alias dat='cd /media/mivkov/DATA/'
     
     alias dg='cd $MA/results/daint/galaxy-256-old-redshifts'

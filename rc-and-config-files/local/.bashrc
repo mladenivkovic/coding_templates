@@ -4,6 +4,9 @@
 # there is more in the ~/.profile file.
 
 
+
+
+
 #===================
 # GREETING MESSAGE
 #===================
@@ -30,6 +33,51 @@
         # echo -e "$COL_DARK_ITALIC""  type 'showvars', 'showaliases' and 'showfuncs' to see variables,\n  aliases and functions defined in the ~/.bashrc file." "$COL_RESET"
         ;;
     esac
+
+
+#========================================
+# SET TERMINAL TAB TITLE
+#========================================
+
+    case "$TERM" in
+    xterm*|rxvt*)
+        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+
+        # Show the currently running command in the terminal title:
+        # http://www.davidpashley.com/articles/xterm-titles-with-bash.html
+        show_command_in_title_bar()
+        {
+            case "$BASH_COMMAND" in
+                *\033]0*)
+                    # The command is trying to set the title bar as well;
+                    # this is most likely the execution of $PROMPT_COMMAND.
+                    # In any case nested escapes confuse the terminal, so don't
+                    # output them.
+                    ;;
+                *)
+                    # echo -ne "\033]0;${USER}@${HOSTNAME}: ${BASH_COMMAND}\007"
+                    case "${BASH_COMMAND}" in
+                        prompt)
+                            TITLE=`pwd`
+                        ;;
+                        *)
+                            TITLE="$BASH_COMMAND"
+                        ;;
+                    esac
+
+                    echo -ne "\033]0;${TITLE}\007"
+                    ;;
+            esac
+        }
+        trap show_command_in_title_bar DEBUG
+        ;;
+    *)
+        ;;
+    esac
+
+
+
+
 
 
 
