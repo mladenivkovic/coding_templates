@@ -285,7 +285,7 @@
     alias pmake='python setup.py build && python setup.py install --user'
     alias pcomp='python -m compileall'
 
-
+    alias gd='google-drive-ocamlfuse ~/google-drive' # activate google drive directory
 
 
 

@@ -293,6 +293,7 @@
         autocmd FileType cpp        setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType c          setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType fortran    setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType python     setlocal ts=4 sts=4 sw=4 expandtab
         autocmd FileType rst        setlocal ts=4 sts=4 sw=4 expandtab
         autocmd FileType sh         setlocal ts=4 sts=4 sw=4 expandtab

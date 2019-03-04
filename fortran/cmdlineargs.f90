@@ -7,14 +7,22 @@ program cmdlineargs
   integer :: i
   character(len=32) :: arg
 
+  ! GNU extension
+  !-------------------
 
-  write(*, *) "Arguments given: ", iargc()
+  ! write(*, *) "Arguments given: ", iargc()
+  !
+  ! do i = 1, iargc()
+  !   call getarg(i, arg)
+  !   write(*,*) arg
+  ! end do
 
-  do i = 1, iargc()
-    call getarg(i, arg)
+
+  ! 2003 Fortran standard
+  do i=1, command_argument_count()
+    call get_command_argument(i, arg)
     write(*,*) arg
-  end do
-
+  enddo
 
 
 end program cmdlineargs

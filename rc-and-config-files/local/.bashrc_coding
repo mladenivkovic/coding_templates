@@ -10,6 +10,7 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     export COD="$HOME/coding/"
     export CT="$COD/coding_templates"
     export CPJ="$COD/projekte"
+    export PJ=$CPJ
     export PLG="$COD/Playground"
 
     export NOT="$HOME/EPFL/notes"
@@ -43,6 +44,8 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     alias g="cd $CPJ/glossar"                   # go to glossary
     alias sph="cd $CPJ/SPH"                     # go to SPH project
     alias scr="cd $CPJ/scripts"                 # go to scripts dir
+    alias rie="cd $CPJ/riemann"                 # go to riemann solver project
+    alias godunov="cd $CPJ/godunov"             # go to godunov project
 
     alias deb="cd $NOT/debugging/source"        # go to debugging notes
     alias ins="cd $NOT/instructions/source"     # go to instructions notes
