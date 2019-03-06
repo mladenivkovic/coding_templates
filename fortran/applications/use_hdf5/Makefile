@@ -4,7 +4,7 @@ LIBS = -I$(HDF5_ROOT)/include -L$(HDF5_ROOT)/lib -lhdf5_fortran
 
 
 
-all: simple_hdf5 append_datasets
+all: simple_hdf5 append_datasets concatenate_arrays
 
 %: %.f90
 	$(F90) $(FFLAGS) $^ -o $@ $(LIBS)
