@@ -64,12 +64,6 @@ program creating_groups
   ! Create a group named "/MyGroup1" in the file.
   !-------------------------------------------------
   CALL h5gcreate_f(file_id, group1name, group_id, error)
-  CALL h5gclose_f(group_id, error)
-
-  ! Open an existing group in the specified file.
-  CALL h5gopen_f(file_id, group1name, group_id, error)
-
-
 
   ! Create the data space for the first dataset.
   CALL h5screate_simple_f(rank, dims1, dataspace_id, error)
