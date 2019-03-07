@@ -11,10 +11,11 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
     export CT="$COD/coding_templates"
     export CPJ="$COD/projekte"
     export PJ=$CPJ
-    export PLG="$COD/Playground"
+    export WB="$COD/workbench"
+    export PLG="$WB"
 
     export NOT="$HOME/EPFL/notes"
-    export RAMSESEXEC="$PLG/ramses"
+    export RAMSESEXEC="$WB/ramses"
 
 
 
@@ -38,7 +39,8 @@ echo "Sourcing coding rc                         from ~/.bashrc_coding"
 
 
     # Projects
-    alias plg="cd $PLG"                         # go to playground
+    alias plg="cd $WB"                          # go to workbench
+    alias wb="cd $WB"                           # go to workbench
     alias pj="cd $CPJ"                          # go to projects
     alias f="cd $CPJ/formelsammlung"            # go to formelsammlung
     alias g="cd $CPJ/glossar"                   # go to glossary
