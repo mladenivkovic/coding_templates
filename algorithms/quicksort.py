@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 
 #  arr = [7,4,2,6,3,4,9,13,1,22,43,243]

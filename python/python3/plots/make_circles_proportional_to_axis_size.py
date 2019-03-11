@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 #=========================================================
 # Draw a circle that has radius exactly 0.5 on the axes

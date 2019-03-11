@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Sort given array l in a max-heap, which is in the list sl:
 # The children of the node at position n are at positions 2n+1 and 2n+2

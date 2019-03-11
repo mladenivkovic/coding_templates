@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 #==========================================================
 #This script shows how to deal with files on the filesystem.

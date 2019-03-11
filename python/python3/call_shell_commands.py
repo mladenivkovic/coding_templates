@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 #==========================================================
 # How to call shell commands and get output into the script

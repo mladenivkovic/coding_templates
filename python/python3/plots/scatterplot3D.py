@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 #==========================================================================
 # This script plots all particles that are in clumps and mark the ones 
