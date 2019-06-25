@@ -1,19 +1,20 @@
 \documentclass[12pt, a4paper, twopage]{scrartcl}
 
 %\documentclass[
-%11pt, % The default document font size, options: 10pt, 11pt, 12pt
-%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
-%chapterinoneline,% Have the chapter title next to the number in one single line
-%english, % ngerman for German
-%singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
-%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
-%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
-%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
-%toctotoc, % Uncomment to add the main table of contents to the table of contents
-%parskip, % Uncomment to add space between paragraphs
-%nohyperref, % Uncomment to not load the hyperref package
-%headsepline, % Uncomment to get a line under the header
+%11pt, 				% The default document font size, options: 10pt, 11pt, 12pt
+%oneside, 			% Two side (alternating margins) for binding by default, uncomment to switch to one side
+%chapterinoneline,	% Have the chapter title next to the number in one single line
+%english, 			% ngerman for German
+%singlespacing, 	% Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, 			% Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, 	% If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, 		% Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, 			% Uncomment to add the main table of contents to the table of contents
+%parskip, 			% Uncomment to add space between paragraphs
+%nohyperref, 		% Uncomment to not load the hyperref package
+%headsepline, 		% Uncomment to get a line under the header
 %]{scrartcl or scrreprt or scrbook} % The class file specifying the document structure
+
 
 %-----------------------------------------------
 % LOADING PACKAGES
@@ -22,26 +23,38 @@
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
+\usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
+\usepackage[T1]{fontenc}	% Umlaute.
+
 \usepackage{amssymb, amsmath, color, graphicx, float, setspace, tipa}
 \usepackage[utf8]{inputenc} 
-\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
 \usepackage[pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black, breaklinks]{hyperref}
 \usepackage{url}
-\usepackage{picins} 		%Gleittext um Grafik. Befehl: parpic. Vorlage siehe unten
-\usepackage{longtable} 		%Seitenübergreifende Tabelle. Vorlage siehe unten
+\usepackage{longtable} 		% Tables along multiple pages
 \usepackage{caption}
 \captionsetup{font=small,labelfont=bf, format=plain, justification=centering}
-\allowdisplaybreaks % allows page breaks in align/equation environment
+\allowdisplaybreaks 		% allows page breaks in align/equation environment
+
+\usepackage{authblk} 		% titlepage stuff
+\usepackage[titletoc, title]{appendix}
+
+\usepackage{newclude} 		% use \include*{file} instead \include{} to omit pagebreak after include
 
 %bibliography
-\usepackage[backend=bibtex,sorting=nyt,bibencoding=ascii]{biblatex}
+\usepackage[backend=bibtex,sorting=nyt,bibencoding=ascii,style=authoryear]{biblatex}
 \addbibresource{references.bib}
-\usepackage{csquotes} %recommended when using babel and biblatex
+\usepackage{csquotes} 		%recommended when using babel and biblatex
+%DONT FORGET TO COMPILE THE BIBLIOGRAPHY WITH BIBTEX WHEN CHANGES ARE MADE.
+
 
 %glossary
 %\usepackage[toc,acronyms]{glossaries} % glossary. Set after usepackage{hyperref}
 \usepackage{glossaries} % glossary. Set after usepackage{hyperref}
 \makeglossaries
+
+% IMPORTANT NOTE:
+% Don't forget to recompile the glossary and the bibliography first if you want them to show up!
 
 %Pseudocode
 \usepackage{algorithm}
@@ -53,11 +66,11 @@
 
 
 
-% IMPORTANT NOTE:
-% Don't forget to recompile the glossary and the bibliography first if you want them to show up!
+
+
 
 %-----------------------------------------------
-% TEXT IN BOXEN
+% TEXT IN BOXES
 %-----------------------------------------------
 
 \usepackage[framemethod=TikZ]{mdframed}
@@ -76,34 +89,48 @@
 	frametitlerulewidth=2
 	}
 
+
+
+
 %--------------------------------------------
-% NEUE BEFEHLE
+% NEW COMMANDS
 %--------------------------------------------
-% Gleich mit Dach obendrauf
-\newcommand{\entspricht}{\mathrel{\widehat{=}}}
 
-% Atanh
-\newcommand {\arctanh}{\mathrm{arctanh}}
+\newcommand{\corresponds}{\mathrel{\widehat{=}}}		% equals with hat
+\newcommand{\entspricht}{\mathrel{\widehat{=}}}		% equals with hat
 
-% Acotanh
-\newcommand{\arccot}{\mathrm{arccot }}
+\newcommand {\arctanh}{\mathrm{arctanh}}				% Atanh
+\newcommand{\arccot}{\mathrm{arccot }}					% Acotanh
 
-% Limes von etwas gegen null
-\newcommand{\limz}[1]{\lim\limits_{#1 \rightarrow 0}}
+\newcommand{\limz}[1]{\lim\limits_{#1 \rightarrow 0}}	% Limes of something towars zero
 
-%Bold font in math
-\newcommand{\bm}{\boldmath}
-\newcommand{\dps}{\displaystyle}
+\newcommand{\bm}{\boldmath}								% Bold font in math
+\newcommand{\dps}{\displaystyle}						
 
-% e noncursive in math mode
-\newcommand{\e}{\mbox{e}}
+\newcommand{\e}{\mbox{e}}								% e noncursive in math mode
 
-% partial diff operator
-\newcommand{\del}{\partial}
+\newcommand{\del}{\partial}								% partial diff operator
+\newcommand{\de}{\mathrm{d}}							% differential d
+\newcommand{\D}{\mathrm{d}}								% differential d
+\newcommand{\GRAD}{\mathrm{grad}\ }						% gradiend
+\newcommand{\DIV}{\mathrm{div}\ }						% divergence
+\newcommand{\ROT}{\mathrm{rot}\ }						% rotation
+
+\newcommand{\CONST}{\mathrm{const.\ }}					% constant
+\newcommand{\var}{\mathrm{var}}							% variance
+
+\newcommand{\g}{^\circ}									% degrees
+\newcommand{\degr}{^\circ}								% degrees
+
+\newcommand{\msol}{M_\odot}								% solar mass
+
+
+
+
 
 
 %-----------------------------------------------
-% TITEL FORMATIEREN
+% FORMAT TITLE
 %-----------------------------------------------
 
 
@@ -116,29 +143,36 @@
 \setkomafont{descriptionlabel}{\rmfamily\bfseries\boldmath}
 
 
-%--------------------------------------------
-%--------------------------------------------
-%---------OPTIONAL---------------------------
 
-%% Schriftart ändern
+
+
+%--------------------------------------------
+%     OPTIONAL
+%--------------------------------------------
+
+%% Change font
 %\newcommand{\changefont}[3]{
 %\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
 %\changefont{ppl}{m}{n} nach \begin{document} einsetzen
 
-%% Abb. statt Abbildung, Tab. statt Tabelle
+%% Fig. instead of Figure, Tab. instead of Table
 %\usepackage[footnotesize]{caption2}
-\addto\captionsngerman{\renewcommand{\figurename}{Abb.}}
+\addto\captionsngerman{\renewcommand{\figurename}{Fig.}}
 %\renewcommand{\tablename}{Tab.}%
 
-%\pagestyle{headings} % Überschrift an jeder Seite
 
-%\usepackage{chngcntr} \counterwithout{figure}{section} % Ganzzahlige Bildnummerierungen, Kapitelunabhängig
+%\pagestyle{headings} % Write headings on each page
+
+%\usepackage{chngcntr} \counterwithout{figure}{section} % Integer only figure numbers, ignoring chapter numbers
 
 
 
-%-------------
+
+
+
+%------------------------------
 % Set paper margins
-%-------------
+%------------------------------
 
 %\usepackage{geometry}
 %\geometry{
@@ -150,8 +184,9 @@
 
 
 
-
+%-------------------------------------
 % Set fonts of document parts
+%-------------------------------------
 %\setkomafont{title}{\rmfamily\bfseries\boldmath}
 %\addtokomafont{section}{\rmfamily\bfseries\boldmath}
 %\addtokomafont{subsection}{\rmfamily\bfseries\boldmath}
@@ -168,11 +203,11 @@
 
 
 %------------------------------------------
-%:Metainformationen
+%:Metadata
 
 \title{Titel}
 \author{Mladen Ivkovic\\
-mladen.ivkovic@uzh.ch\\
+mladen.ivkovic@hotmail.com\\
 }
 \date{Datum}
 
@@ -219,7 +254,9 @@ mladen.ivkovic@uzh.ch\\
 
 
 
+%=============================================
 \section*{Anmerkung des Autoren}
+%=============================================
 
 Dieser Abschnitt ist nicht nummeriert und nicht im Inhaltsverzeichnis. 
 
@@ -252,18 +289,26 @@ Sonstiger text: Bla blablabla blabla bla. Blabla bla. Blablablabal basdiga asdif
 
 
 
-
+%=============================================
 \section{Kapitel 1}
+%=============================================
+
+%=============================================
 \subsection{Unterkapitel 1.1}
+%=============================================
+
+%=============================================
 \subsubsection{Unterunterkapitel 1.1.1}
+%=============================================
 
 %
-\piccaption{Darstellung des Zahlenbereichs des Zweierkomplements mit acht Stellen\label{fig:tabelle_zweierkomplement}}
-\parpic[r]{%
+
+\begin{figure}
   \fbox{
     \includegraphics[width = 3.5cm, keepaspectratio]{images/random_image.png}
   }
-}
+	\caption{Darstellung des Zahlenbereichs des Zweierkomplements mit acht Stellen\label{fig:tabelle_zweierkomplement}}
+\end{figure}
 %
 Die gängigste Form der Zahlensysteme sind Stellenwertsysteme. Eine Zahl $a$ wird in Form einer Reihe von Ziffern $z_i$ mit dazugehöriger Potenz der Basis $b^i$ dargestellt. Der Wert der Zahl ergibt sich dann als Summe der Werte aller Einzelstellen: $a = \sum\limits_{i}z_ib^i$.
 
@@ -320,8 +365,9 @@ DeMorgan-Gesetz & $\overline{a\wedge b} = \bar{a} \vee \bar{b}$ (NAND)& $\overli
 
 
 
-%-----------------------------
+%=============================================
 \section{Zwei Bilder, Spalten}
+%=============================================
 
 \begin{figure}[h!]
 \centering
@@ -381,8 +427,9 @@ Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsigna
 
 
 
-
+%=============================================
 \section{Text in Boxen}
+%=============================================
 
 \begin{mdframed}[style=exampledefault,frametitle={Braucht package mdframed.}]
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta lectus nec ante convallis lacinia. Nunc lobortis eu lacus nec euismod. Mauris at dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas luctus sapien ac venenatis. Sed maximus pellentesque arcu non ultrices. Aliquam erat volutpat. Nam pharetra orci in sem consequat, a dictum metus eleifend. Morbi non odio libero. Morbi porttitor in purus quis commodo. Aliquam erat volutpat. Nunc vitae arcu tempus, aliquet elit sit amet, rutrum diam. Curabitur imperdiet elementum iaculis. Vestibulum suscipit interdum libero, id ultrices est semper vitae.
@@ -398,7 +445,16 @@ In sed lacus malesuada, euismod mauris sit amet, lobortis metus. Maecenas iaculi
 
 
 
+
+
+
+
+
+%=============================================
 \section{Bibliographie und Zitate}
+%=============================================
+
+
 Einstein said something important\cite{einstein} and so did Dirac \cite{dirac}.
 
 
@@ -459,8 +515,9 @@ Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 
 
 
-
+%=============================================
 \subsection{Gleichungen und Spezielles}
+%=============================================
 \begin{align}
 	 %
 	 \vec{S}_\mu &= \vec{S}_\mu ^{\parallel}(0) \vec{u} + \vec{S}_\mu^{\bot} (0) [\cos(\omega_\mu t)\vec{v} - \sin(\omega_\mu t)\vec{w}]
@@ -651,7 +708,9 @@ Version 2:
 %########################################################################
 \clearpage
 
+%=============================================
 \section{Pseudocode}
+%=============================================
 
 %\usepackage{algorithm}
 %\usepackage[noend]{algpseudocode}
@@ -703,10 +762,17 @@ Version 2:
 %########################################################################
 %########################################################################
 \clearpage
+
+
+%=============================================
 \begin{appendix}
+%=============================================
 \setcounter{figure}{0} %Bildnummerierung auf Null setzen
 \renewcommand{\thefigure}{A\arabic{figure}} %Bilder mit A$Bildnummer beschriften
+
+%=============================================
 \section{Bildanhang}
+%=============================================
 
 
 \begin{figure}[h!]
@@ -724,11 +790,17 @@ Version 2:
 \endminipage
 \end{figure}
 
+
+%=============================================
 \section{Zeilenumbruch}
+%=============================================
 asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfghjklösdfghjklöasd222\-fghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklö
 
 
+
+%=============================================
 \section{Neue Befehle definieren}
+%=============================================
 \newcommand{\musr}{$\mu$SR }
 \musr
 
@@ -747,11 +819,11 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
 \myint
 
 \vspace{2cm}
-\newcommand{\fett}[1]{{\bf #1}}
+\newcommand{\fett}[1]{{\textbf #1}}
 
 \fett{fettes hallo}
 
-\newcommand{\kursiv}[1]{{\it #1}}
+\newcommand{\kursiv}[1]{{\textit #1}}
 
 \kursiv{kursives hallo}
 
