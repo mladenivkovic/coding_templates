@@ -26,7 +26,7 @@
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
-\usepackage{amssymb, amsmath, color, graphicx, float, setspace, tipa}
+\usepackage{amssymb, amsmath, color, dsfont, graphicx, float, setspace, tipa}
 \usepackage[utf8]{inputenc} 
 \usepackage[english]{babel}
 \usepackage[pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black, breaklinks]{hyperref}
@@ -486,6 +486,11 @@ Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 \begin{align}
 	& \mathcal{H \ L \ S \ T \ Q \ O}  \ \mathbb{R\ N \ Z}
 \end{align}
+
+\begin{align}
+	& \mathds{R\ N \ Z\ 1\ 2\ 3\ C} % NEEDS DSFONT PACKAGE
+\end{align}
+
 
 \begin{flalign}
 	 & \int\limits_{1}^{2} \ \oint \ \iint \ \iiint \ \prod \ \sum

@@ -18,7 +18,7 @@
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
-\usepackage{amssymb, amsmath, color, graphicx, float, setspace, tipa}
+\usepackage{amssymb, amsmath, color, dsfont, graphicx, float, setspace, tipa}
 \usepackage[utf8]{inputenc} 
 \usepackage[english]{babel}
 \usepackage[pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black, breaklinks]{hyperref}
@@ -63,7 +63,7 @@
 \newcommand{\del}{\partial}								% partial diff operator
 \newcommand{\de}{\mathrm{d}}							% differential d
 \newcommand{\D}{\mathrm{d}}								% differential d
-\newcommand{\GRAD}{\mathrm{grad}\ }						% gradiend
+\newcommand{\GRAD}{\mathrm{grad}\ }						% gradient
 \newcommand{\DIV}{\mathrm{div}\ }						% divergence
 \newcommand{\ROT}{\mathrm{rot}\ }						% rotation
 
@@ -76,6 +76,44 @@
 \newcommand{\msol}{M_\odot}								% solar mass
 
 
+\newcommand{\x}{\mathbf{x}}								% x vector
+\newcommand{\xdot}{\dot{\mathbf{x}}}					% x dot vector
+\newcommand{\xddot}{\ddot{\mathbf{x}}}					% x doubledot vector
+\newcommand{\R}{\mathbf{r}}								% r vector
+\newcommand{\rdot}{\dot{\mathbf{r}}}					% r dot vector
+\newcommand{\rddot}{\ddot{\mathbf{r}}}					% r doubledot vector
+\newcommand{\vel}{\mathbf{v}}							% v vector
+\newcommand{\V}{\mathbf{v}}								% v vector
+\newcommand{\vdot}{\dot{\mathbf{v}}}					% v dot vector
+\newcommand{\vddot}{\ddot{\mathbf{v}}}					% v doubledot vector
+
+\newcommand{\dete}{\mathrm{d}t}							% dt
+\newcommand{\delte}{\del t}								% partial t
+\newcommand{\dex}{\mathrm{d}x}							% dx
+\newcommand{\delx}{\del x}								% partial x
+\newcommand{\der}{\mathrm{d}r}							% dr
+\newcommand{\delr}{\del r}								% partial r
+
+
+
+
+% shortcut for TODO box
+\newcommand{\todo}[1]{\begin{mdframed}[style=todo,frametitle={TODO}] #1 \end{mdframed}}
+
+
+% quickly insert a figure without a caption
+% usage: \quickfig{filename}{label}
+\newcommand{\quickfig}[2]{
+	\begin{figure}[H]
+		\includegraphics[width=\textwidth]{#1}
+		\caption{\label{#2}}
+	\end{figure}
+}
+
+
+% replace \sum with \sum\limits
+\let\oldsum\sum
+\renewcommand{\sum}{\oldsum\limits}
 
 
 
@@ -96,7 +134,7 @@
 %\addto\captionsngerman{\renewcommand{\figurename}{Fig.}}
 %\renewcommand{\tablename}{Tab.}%
 
-\pagestyle{headings} % Write headings on each page
+%\pagestyle{headings} % Write headings on each page
 
 %\usepackage{chngcntr} \counterwithout{figure}{section} % Integer only figure numbers, ignoring chapter numbers
 
@@ -114,3 +152,38 @@
 \addtokomafont{subsubsection}{\rmfamily\bfseries\boldmath}
 \addtokomafont{disposition}{\rmfamily} % table of contents and stuff
 \setkomafont{descriptionlabel}{\rmfamily\bfseries\boldmath}
+
+
+
+%-----------------------------------------------
+% TEXT IN BOXES
+%-----------------------------------------------
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+%New Colors (needs to be after usepackage mdframed)
+\definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
+\definecolor{ashgrey}{rgb}{0.7, 0.75, 0.71}
+\definecolor{caribbeangreen}{rgb}{0.0, 0.8, 0.6}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+
+\mdfdefinestyle{todo}{%
+	%rightline=true,
+	innerleftmargin=10,
+	innerrightmargin=10,
+	%frametitlerule=true,
+	%frametitlerulecolor=black,
+	frametitlebackgroundcolor=babyblueeyes,
+	frametitlerulewidth=2
+}
+
+
+\mdfdefinestyle{eyecatcher}{%
+	%rightline=true,
+	innerleftmargin=10,
+	innerrightmargin=10,
+	%frametitlerule=true,
+	%frametitlerulecolor=black,
+	frametitlebackgroundcolor=bittersweet,
+	frametitlerulewidth=2
+}
