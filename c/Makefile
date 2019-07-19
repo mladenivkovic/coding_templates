@@ -26,8 +26,8 @@ CC=gcc -I$(IDIR)
 #--------------------------
 
 
-OPTFLAGS = 	-Og 			# debug
-# OPTFLAGS = 	-O3  		# performance
+# OPTFLAGS = 	-Og 			# debug
+OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
 FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
 STDFLAGS= 	-std=c11
@@ -74,17 +74,6 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
 
-
-# $(EXECS_NOSTD) :  %.o: %.c
-#     $(CC) $(CFLAGS_NODEBUG)-o $@ $< $(LDFLAGS)
-
-# $(EXECS_NODEBUG) :  %.o: %.c
-#     $(CC) $(CFLAGS_NOSTD)-o $@ $< $(LDFLAGS)
-
-# %.o:  %.c #%.h
-#     $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $<
-
-#-c : compile and assemble, but do not link
 
 
 
