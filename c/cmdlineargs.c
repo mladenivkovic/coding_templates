@@ -29,6 +29,8 @@ main( int argc,     // input argument count (including program name)
 
 
   printf("\n\nUsing getopt():\n");
+  printf("(Expecting to get flags as arguments with 1 dash in front of them, e.g. -a, -b, -c...)\n");
+  printf("(Note: requires no -std= is set for the compiler)\n");
 
   int c;
   char *cval = NULL;

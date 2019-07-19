@@ -54,10 +54,10 @@ void print(const char *format,...)
 
     printf("\n");                //always end with a newline! :)
 
-    /*if (done !=0)*/
-    /*{*/
-    /*    printf("ERROR: your print() function exited with error code %d\n", done);*/
-    /*}*/
+    if (done !=0)
+    {
+       printf("ERROR: your print() function exited with error code %d\n", done);
+    }
 
 } 
 

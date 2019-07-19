@@ -85,6 +85,8 @@ int main(void)
 
 
 
+/* ignore 'uninitialized' warnings because I want the var to be uninitialized */
+#pragma GCC diagnostic ignored "-Wuninitialized"
   printf("\n\n\n");
   int *somep;
   if (somep==NULL)
@@ -115,16 +117,16 @@ int main(void)
   charp = (char *)malloc(sizeof (char));
 
   printf("Allocated new memory place\n");
-  printf("intp:  %10d, charp:  %10d\n", intp, charp);
-  printf("*intp: %10d, *charp: %10c\n\n", *intp, *charp);
+  printf("intp:  %20p, charp:  %20p\n", (void *)intp, (void *)charp);
+  printf("*intp: %20d, *charp: %20c\n\n", *intp, *charp);
 
   //fill the memory up
   *intp = 3;
   *charp = 'c';
 
   printf("Assigned values to new memory place:\n");
-  printf("intp:  %10d, charp:  %10d\n", intp, charp);
-  printf("*intp: %10d, *charp: %10c\n\n", *intp, *charp);
+  printf("intp:  %20p, charp:  %20p\n", (void *)intp, (void *)charp);
+  printf("*intp: %20d, *charp: %20c\n\n", *intp, *charp);
 
 
   //deallocate
@@ -132,8 +134,8 @@ int main(void)
   free(charp);
 
   printf("Deallocated:\n");
-  printf("intp:  %10d, charp:  %10d\n", intp, charp);
-  printf("*intp: %10d, *charp: %10c\n\n", *intp, *charp);
+  printf("intp:  %20p, charp:  %20p\n", (void *)intp, (void *)charp);
+  printf("*intp: %20d, *charp: %20c\n\n", *intp, *charp);
 
 
   return(0);

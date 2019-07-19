@@ -8,10 +8,6 @@
 # COMPILATION TIME PARAMETERS
 #==================================
 
-#executable name
-EXEC=
-#include headers from this directory
-IDIR=
 #directory where source files are
 SRCDIR=.
 
@@ -27,10 +23,20 @@ CC=gcc -I$(IDIR)
 
 
 # flags for gcc compiler
-# Debug
-CFLAGS= -g -Og -Wall -Wextra -pedantic -std=c11 -fsignaling-nans -ffinite-math-only -fno-signed-zeros -Warray-bounds 
-CFLAGS_NOSTD= -g -Og -Wall -Wextra -pedantic -fsignaling-nans -ffinite-math-only -fno-signed-zeros -Warray-bounds 
-#CFLAGS= -O3  		 # performance
+#--------------------------
+
+
+OPTFLAGS = 	-Og 			# debug
+# OPTFLAGS = 	-O3  		# performance
+WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
+FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
+STDFLAGS= 	-std=c11
+
+
+CFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS)
+CFLAGS_NOSTD=	$(OPTFLAGS) $(WFLAGS) $(FFLAGS)				# no standard
+CFLAGS_MIN=		$(OPTFLAGS) 							    # so I can force errors for demonstration
+
 
 
 LDFLAGS= -lm
@@ -45,13 +51,9 @@ LDFLAGS= -lm
 VPATH=$(IDIR):$(SRCDIR)
 
 
-# EXECS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
+EXECS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
 
-EXECS= arrays.o backtrace.o branches.o enum.o functions.o increment_operators.o loops.o macros.o \
-	math.o myprint.o new_types.o pointers.o printf.o readwritefile.o starting_template.o strings.o \
-	type_casting.o type_limits.o unions.o timing.o 
 
-EXECS_NOSTD= cmdlineargs.o
 
 
 #==================================
@@ -61,13 +63,23 @@ EXECS_NOSTD= cmdlineargs.o
 
 default: all
 
-all: $(EXECS) $(EXECS_NOSTD)
+backtrace.o: backtrace.c
+	$(CC) $(CFLAGS_MIN) -rdynamic -o $@ $< $(LDFLAGS)
 
-$(EXECS_NOSTD) :  %.o: %.c
-	$(CC) $(CFLAGS_NOSTD)-o $@ $< $(LDFLAGS) 
+cmdlineargs.o: cmdlineargs.c
+	$(CC) $(CFLAGS_NOSTD) -o $@ $< $(LDFLAGS)
 
-$(EXECS) : %.o: %.c
+all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
+
+%.o: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
+
+
+# $(EXECS_NOSTD) :  %.o: %.c
+#     $(CC) $(CFLAGS_NODEBUG)-o $@ $< $(LDFLAGS)
+
+# $(EXECS_NODEBUG) :  %.o: %.c
+#     $(CC) $(CFLAGS_NOSTD)-o $@ $< $(LDFLAGS)
 
 # %.o:  %.c #%.h
 #     $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $<
@@ -82,5 +94,5 @@ $(EXECS) : %.o: %.c
 .PHONY: clean # keeps makefile from doing something with a file named clean
 
 clean:
-	rm -f $(EXECS) $(EXEC)
-
+	rm -f $(EXECS)
+	# rm -f $(EXECS) $(EXECS_NOSTD) $(EXECS_NODEBUG)

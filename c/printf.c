@@ -50,9 +50,9 @@ int main(void){
     printf("Printing an unsigned integer: %u\n", someuint);
     printf("Printing another unsigned integer: %u\n", someuint2);
     printf("Printing a long: %ld\n", somelong);
-    printf("Printing an unsigned long: %lu\n", someulong);
-    printf("Printing a long long: %Ld\n", somellong);
-    printf("Printing an unsigned long long: %Lu\n", someullong);
+    printf("Printing an unsigned long: %zu\n", someulong);
+    printf("Printing a long long: %lld\n", somellong);
+    printf("Printing an unsigned long long: %llu\n", someullong);
 
 
 
@@ -65,6 +65,17 @@ int main(void){
     printf("Printing a double: %lf\n", somedouble);
     printf("Printing a long double: %Lf\n", someldouble);
 
+
+    printf("\n");
+    printf("========================================\n");
+    printf(" Pointers - Need to be type cast \n");
+    printf("========================================\n");
+  
+    int * someint_p = &someint;
+    float * somefloat_p = &somefloat;
+
+    printf("Printing a int pointer: %p\n", (void *)someint_p);
+    printf("Printing a float pointer: %p\n", (void *)somefloat_p);
 
 
     printf("\n");
