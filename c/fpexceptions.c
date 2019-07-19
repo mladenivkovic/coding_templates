@@ -23,13 +23,16 @@ int main()
 
   fedisableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
   float res = one/zero;
-  printf("%f\n", res);
+  printf("Now it doesn't crash:\n");
+  printf(" %f\n", res);
 
 
   feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 
+  printf("Now it crashes:\n");
   float res2 = one/zero;
-  printf("%f\n", res2);
+  printf("It doesn't even make it this far\n");
+  printf(" %f\n", res2);
 
 
   return(0);
