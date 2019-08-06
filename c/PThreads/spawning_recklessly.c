@@ -1,7 +1,7 @@
 /* ================================================================================ 
- * COMPILE WITH gcc -pthread simple_multithreads.c                                  
+ * COMPILE WITH gcc -pthread spawning_recklessly.c
  *
- *  Try to spawn as many threads as you can. Let's see how many we can get.
+ *  Try to spawn many threads. Let's see how many we can get.
  * ================================================================================ */
 
 
@@ -25,6 +25,7 @@ void * do_one_thing(void *args)
 
   printf("thread %d doing one thing \n", id);
 
+  /* comment out following three lines to finish working fast */
   for (i = 0;    i  <  1000;  i++) {
     for (j = 0; j < 10000000; j++) x = x + i;
   }

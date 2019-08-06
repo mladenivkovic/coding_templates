@@ -9,10 +9,10 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-void do_one_thing(void);
-void do_another_thing(void);
-void lock_something(void);
-void try_if_locked(void);
+void * do_one_thing();
+void * do_another_thing();
+void * lock_something();
+void * try_if_locked();
 
 
 int r1 = 0, r2 = 0, r3 = 0;
@@ -36,14 +36,14 @@ main(int argc, char **argv)
 
   pthread_create(&thread1,        /* pointer to a buffer for thread "ID"                                         */
           NULL,                   /* pointer to a thread attribute object                                        */
-          (void *) do_one_thing,  /* pointer to routine at which new thread will start executing                 */
+          do_one_thing,           /* pointer to routine at which new thread will start executing                 */
           NULL);                  /* pointer to parameter to be passed to the routine at which new thread starts */
   /* returns: 0 for success, nonzero for errors */
 
 
   pthread_create(&thread2,
           NULL,
-          (void *) do_another_thing,
+          do_another_thing,
           NULL);
 
   pthread_join(thread1,  NULL);
@@ -52,14 +52,14 @@ main(int argc, char **argv)
 
   pthread_create(&thread1,
           NULL,
-          (void *) lock_something,
+          lock_something,
           NULL);
 
 
 
   pthread_create(&thread2,
           NULL,
-          (void *) try_if_locked,
+          try_if_locked,
           NULL);
 
   pthread_join(thread1,  NULL);
@@ -69,7 +69,7 @@ main(int argc, char **argv)
 }
 
 
-void do_one_thing()
+void * do_one_thing()
 {
   pthread_mutex_lock(&r3_mutex);
   printf("thread 1 accessing r3. r3 is now: %d\n", r3);
@@ -80,9 +80,11 @@ void do_one_thing()
   }
   pthread_mutex_unlock(&r3_mutex);
 
+  return NULL;
+
 }
 
-void do_another_thing()
+void * do_another_thing()
 {
   pthread_mutex_lock(&r3_mutex);
   printf("thread 2 accessing r3. r3 is now: %d\n", r3);
@@ -92,10 +94,12 @@ void do_another_thing()
      r3 =  1;
   }
   pthread_mutex_unlock(&r3_mutex);
+
+  return NULL;
 }
 
 
-void lock_something(){
+void * lock_something(){
   pthread_mutex_lock(&r3_mutex);
   printf("thread 1 locked r3. Now wasting some time.\n");
   for (int i=0; i<10000000; i++){
@@ -103,9 +107,11 @@ void lock_something(){
   }
   printf("thread 1 done. Unlocking r3.\n");
   pthread_mutex_unlock(&r3_mutex);
+
+  return NULL;
 }
 
-void try_if_locked(){
+void * try_if_locked(){
 
   /* pthread_mutex_trylock doesn't block if variable is locked. */
 
@@ -118,7 +124,7 @@ void try_if_locked(){
     someint += 1;
   }
 
-  while (test=pthread_mutex_trylock(&r3_mutex)){
+  while ((test=pthread_mutex_trylock(&r3_mutex))){
     printf("thread 2 trying lock: %d\n", test);
     /* now waste some time */
     someint=0;
@@ -132,4 +138,5 @@ void try_if_locked(){
    * pthread_mutex_trylock locks the variable! you need to unlock it! */
   pthread_mutex_unlock(&r3_mutex);
 
+  return NULL;
 }

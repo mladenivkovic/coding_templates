@@ -12,11 +12,11 @@ static const int real_bad_error = -12;
 static const int normal_error = -10;
 static const int success = 1;
 
-void * routine_x(int * arg_in)
+void * routine_x(void * arg_in)
 {
-  if ( *arg_in==1) {
+  if ( *(int *)arg_in==1) {
     pthread_exit((void *) &real_bad_error);
-  }else if ( *arg_in==2 ) {
+  }else if ( *(int *)arg_in==2 ) {
     return ((void *) &normal_error);
   }else {
     return ((void *) &success);
@@ -25,15 +25,18 @@ void * routine_x(int * arg_in)
 
 
 extern int
-main(int argc, char **argv)
+main(int argc, char ** argv)
 {
   pthread_t thread;
   void *statusp;
 
+  if (argc<2) {
+   printf("Need cmd line arg. 1: real bad error; 2: failure; else: success\n");
+   exit(1);
+  };
   int arg_in = atoi(argv[1]);
 
-  printf("(Need cmd line arg. 1: real bad error; 2: failure; else: success)\n");
-  pthread_create(&thread, NULL, (void *) routine_x, &arg_in);
+  pthread_create(&thread, NULL, routine_x, (void *)&arg_in);
   pthread_join(thread, &statusp);
   if ((void*)statusp == PTHREAD_CANCELED) {
     printf("Thread was canceled.\n");
