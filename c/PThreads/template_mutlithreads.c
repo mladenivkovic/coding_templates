@@ -30,8 +30,8 @@ main(void)
 
   pthread_create(&thread1,        /* pointer to a buffer for thread "ID"                                         */
            NULL,                  /* pointer to a thread attribute object                                        */
-           do_one_thing,  /* pointer to routine at which new thread will start executing                 */
-          (void *) &r1);          /* pointer to parameter to be passed to the routine at which new thread starts */
+           do_one_thing,          /* pointer to routine at which new thread will start executing                 */
+           (void *) &r1);         /* pointer to parameter to be passed to the routine at which new thread starts */
   /* returns: 0 for success, nonzero for errors */
 
 
