@@ -35,6 +35,7 @@ main(void)
 {
 
   // simple usage
+  // note that 'wednesday' is neither a string nor a declared variable!
   enum week today;
     today = wednesday;
     printf("Day %d\n",today+1);

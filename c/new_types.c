@@ -13,12 +13,19 @@
 //====================
 // enumerated type
 //====================
-typedef enum 
-  // enumeration constants must be indetifiers, they cannot be numeric,character,
-  // or string literals
+
+// enumeration constants must be identifiers, they cannot be numeric,character,
+// or string literals
+// enum types are mainly used to make the code more readable.
+
+typedef enum
   { student_id, grade, income}
   student;
 
+typedef enum {
+  Mon, Tue, Wed, Thur, Fri, Sat, Sun}
+  week; 
+  
 
 
 
@@ -68,11 +75,22 @@ int main(void)
 {
 
 
-    // type enum
+  // type enum
 
   printf("\n ENUM TYPES\n\n");
+
+
+  // note how you're not integers to assign the value,
+  // but the keywords you defined!
+  // 'Wed' and 'grade' are not variables!
+
+  week day;
+  day = Wed;
+  printf("The day is %d (Wed)\n", day);
+
+
   int result;
-  student teststudent;
+  student teststudent = grade;
 
   switch (teststudent) {
     case student_id:
