@@ -2,10 +2,7 @@
 // Defining macros
 //===================================
 
-
-
-#include <stdio.h>      /* input, output    */
-
+#include <stdio.h> /* input, output    */
 
 // PARENTHESES AROUND FORMAL PARAMETERS ARE VITAL!
 #define PRINT_INT(label, num) printf("%s %d\n", (label), (num))
@@ -13,13 +10,9 @@
 #define PI 3.14152926
 #define I_AM_DEFINED
 
-
-
 void predefined_macros();
 
-int
-main(void)    
-{
+int main(void) {
 
   PRINT_INT("The answer is", 42);
   PRINT_DOUBLE("Pi is", PI);
@@ -29,15 +22,10 @@ main(void)
 
   predefined_macros();
 
-  
-  
-  return(0);
+  return (0);
 }
 
-
-
-void predefined_macros()
-{
+void predefined_macros() {
   /* Test out some predefined macros.*/
   printf("Testing\n");
   printf("__FUNCTION__ = %s\n", __FUNCTION__);

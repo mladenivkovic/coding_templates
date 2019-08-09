@@ -1,30 +1,15 @@
-/* 
+/*
  * Write some comments in here.
  * compile with -fopenmp flag (gcc)
  */
 
+#include <omp.h>   /* openMP library     */
+#include <stdio.h> /* input, output    */
 
-
-#include <stdio.h>      /* input, output    */
-#include <omp.h>        /* openMP library     */
-
-
-
-
-
-
-int
-main(void)    
-{
+int main(void) {
 
 #pragma omp parallel
-  {
+  {}
 
-
-
-  }
-
-
-  return(0);
+  return (0);
 }
-

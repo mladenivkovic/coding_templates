@@ -13,7 +13,6 @@ typedef struct {
   char datafilename[200];
 } globalparams;
 
-
 /* RUN PARAMETERS */
 typedef struct {
   int step;
@@ -21,16 +20,12 @@ typedef struct {
   double dt_max;
 } runparams;
 
-
-
 /* UNITS */
-typedef struct{
+typedef struct {
   double unit_m;
   double unit_l;
   double unit_t;
 } units;
-
-
 
 /* ALL PARAMETERS */
 typedef struct {
@@ -38,10 +33,6 @@ typedef struct {
   runparams rp;
   units units;
 } params;
-
-
-
-
 
 extern void check_params(params *p);
 extern void init_params(params *p);

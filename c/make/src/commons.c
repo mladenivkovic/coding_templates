@@ -3,47 +3,39 @@
  * Add one useless function
  */
 
-
-#include <stdio.h>
 #include <stdarg.h>
-
+#include <stdio.h>
 
 // VARIABLES
 
-int    Nx = 1, Ny = 1, Nz = 1;
+int Nx = 1, Ny = 1, Nz = 1;
 double dx = 1, dy = 1, dz = 1;
 
 const double pi = 3.14159;
 const double c = 2.998E8;
 
+int verbose = 0;  // verbose = false by default
 
-int verbose = 0; //verbose = false by default
-
-
-
-//ARRAYS
+// ARRAYS
 int *grid;
-
-
-
 
 // FUNCITONS
 
-int getiind(int x, ...){
+int getiind(int x, ...) {
 
   va_list ap;
   int temp;
   int y = 0, z = 0;
 
-  va_start(ap,x);
+  va_start(ap, x);
 
   temp = va_arg(ap, int);
-  if (temp){
+  if (temp) {
     y = temp;
   }
 
   temp = va_arg(ap, int);
-  if (temp){
+  if (temp) {
     z = temp;
   }
 
@@ -56,10 +48,6 @@ int getiind(int x, ...){
   y = 0;
 #endif
 
-    int result = x + Ny * y + Nz * z;
-    return (result);
-  }
-
-
-
-
+  int result = x + Ny * y + Nz * z;
+  return (result);
+}

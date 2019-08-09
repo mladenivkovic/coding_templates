@@ -1,13 +1,11 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "params.h"
-
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* ============================================= */
-void check_params(params* p){
-/* ============================================= */
+void check_params(params *p) {
+  /* ============================================= */
   /* This function checks the parameters         */
   /* that have been read in and makes sure that  */
   /* the simulation can be run with the given    */
@@ -16,13 +14,12 @@ void check_params(params* p){
 
   int error = 0;
 
-  globalparams * g = &(p->gp);
-  units * u = &(p->units);
+  globalparams *g = &(p->gp);
+  units *u = &(p->units);
 
-  if (g->verbose){
+  if (g->verbose) {
     printf("Am verbose\n");
-  }
-  else {
+  } else {
     printf("Am quiet\n");
   }
 
@@ -30,74 +27,64 @@ void check_params(params* p){
     printf("Got levelmax = 0. Weird, but ok I guess...\n");
   }
 
-  if (g->nstepmax==0 && g->tmax==0) {
-    printf("Got no info on when to end. You need to specify either nstepmax or tmax in your parameter file.\n");
+  if (g->nstepmax == 0 && g->tmax == 0) {
+    printf(
+        "Got no info on when to end. You need to specify either nstepmax or "
+        "tmax in your parameter file.\n");
     error = 1;
   }
 
-
-  if (u->unit_m==0){
+  if (u->unit_m == 0) {
     printf("unit_m can't be zero.");
-    error=1;
+    error = 1;
   }
-  if (u->unit_l==0){
+  if (u->unit_l == 0) {
     printf("unit_l can't be zero.");
-    error=1;
+    error = 1;
   }
-  if (u->unit_t==0){
+  if (u->unit_t == 0) {
     printf("unit_t can't be zero.");
-    error=1;
+    error = 1;
   }
 
-
-  if (error){
+  if (error) {
     exit(602);
   }
-
 }
 
-
-
-
-
-
-
 /* ==========================================*/
-void init_params(params *p){
-/* ==========================================*/
+void init_params(params *p) {
+  /* ==========================================*/
   /* Initialize parameters to default values */
   /*-----------------------------------------*/
 
-  globalparams * g = &(p->gp);
+  globalparams *g = &(p->gp);
   g->levelmax = 0;
   g->verbose = 0;
   g->nstepmax = 0;
   g->tmax = 0.0;
   strcpy(g->paramfilename, "");
-  strcpy(g->datafilename,  "");
+  strcpy(g->datafilename, "");
 
-  runparams * r = &(p->rp);
-  r->step=0;
-  r->t=0.0;
-  r->dt_max=1e10;
+  runparams *r = &(p->rp);
+  r->step = 0;
+  r->t = 0.0;
+  r->dt_max = 1e10;
 
-  units * u = &(p->units);
+  units *u = &(p->units);
   u->unit_m = 1.0;
   u->unit_l = 1.0;
   u->unit_t = 1.0;
-
 }
 
-
-
 /* ============================== */
-void print_params(params * p){
+void print_params(params *p) {
   /* ============================ */
   /* print current parameters.    */
   /* ---------------------------- */
 
   globalparams *g = &(p->gp);
-  units *u        = &(p->units);
+  units *u = &(p->units);
   printf("==================================================\n");
   printf("Starting simulation. Parameters are:\n");
 
@@ -118,5 +105,4 @@ void print_params(params * p){
   printf("unit_l:               %g\n", u->unit_l);
   printf("unit_t:               %g\n", u->unit_t);
   printf("==================================================\n");
-
 }

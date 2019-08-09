@@ -2,22 +2,15 @@
  * =======================================================
  * Write some comments in here.
  * =======================================================
-*/
+ */
 
-
-#include <stdio.h>      /* input, output */
-
-
-
-
+#include <stdio.h> /* input, output */
 
 /* =================================== */
-int main(int argc, char *argv[])    
+int main(int argc, char *argv[])
 /* =================================== */
 {
-  printf("A line to avoid unused args: argc is %d, argv[0] is %s", argc, argv[0]);
-  return(0);
+  printf("A line to avoid unused args: argc is %d, argv[0] is %s", argc,
+         argv[0]);
+  return (0);
 }
-
-
-
