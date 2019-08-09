@@ -39,6 +39,9 @@ int main()
     arr1[i] = n;
   }
 
+  printf("calloc array:\n");
+  printarr(arr2, n);
+
   printf("memset array:\n");
   memset(arr1, 0, n*sizeof(int));
   printarr(arr1, n);

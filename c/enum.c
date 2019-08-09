@@ -55,6 +55,7 @@ main(void)
   int tasks_pendent[5];
   workweekday tomorrow = thu;
   tasks_pendent[tomorrow] = 7;
+  printf("Use in array: tasks_pendent[tomorrow]=%d\n", tasks_pendent[tomorrow]);
 
 
 

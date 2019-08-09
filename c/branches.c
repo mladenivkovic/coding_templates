@@ -90,6 +90,11 @@ int main(void)
         printf("Now checking 25\n");
         break;      // doesn't check other cases
     
+/* these lines make gcc ignore -Wimplicit-fallthrough warnings in this part
+ * of the code (until the #pragma GCC diagnostic pop line) */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+
     case 40:        // if true, it will go on until the first break.
     case 50:
 
@@ -118,6 +123,8 @@ int main(void)
     default:
         life = 0; // if watts > 200
     }
+
+#pragma GCC diagnostic push
 
     printf("expected bulb life: %d\n", life);
 
