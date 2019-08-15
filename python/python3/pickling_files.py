@@ -10,7 +10,7 @@
 import pickle
 
 #open file for writing
-pickle_file = open('inputfiles/my_picklefile.pkl', 'w')
+pickle_file = open('inputfiles/my_picklefile.pkl', 'wb')
 
 #create whatever you need
 my_list = ["Johnny B. Goode", 21, 1.89234e-7, (7,3), ['2',4,'c']]
