@@ -23,13 +23,19 @@
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
-\usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
-\usepackage[T1]{fontenc}	% Umlaute.
 
 \usepackage{amssymb, amsmath, color, dsfont, graphicx, float, setspace, tipa}
 \usepackage[utf8]{inputenc} 
 \usepackage[english]{babel}
-\usepackage[pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black, breaklinks]{hyperref}
+\usepackage[pdfpagelabels,
+			pdfstartview = FitH,
+			bookmarksopen = true,
+			bookmarksnumbered = true,
+			linkcolor = black,
+			plainpages = false,
+			hypertexnames = false,
+			citecolor = black,
+			breaklinks]{hyperref}
 \usepackage{url}
 \usepackage{longtable} 		% Tables along multiple pages
 \usepackage{caption}
@@ -41,14 +47,25 @@
 
 \usepackage{newclude} 		% use \include*{file} instead \include{} to omit pagebreak after include
 
-%bibliography
-\usepackage[backend=bibtex,sorting=nyt,bibencoding=ascii,style=authoryear]{biblatex}
+
+
+
+%===================
+% BIBLIOGRAPHY
+%===================
+\usepackage[backend=bibtex,
+			sorting=nyt,
+			bibencoding=ascii,
+			citestyle=authoryear]{biblatex}
 \addbibresource{references.bib}
 \usepackage{csquotes} 		%recommended when using babel and biblatex
 %DONT FORGET TO COMPILE THE BIBLIOGRAPHY WITH BIBTEX WHEN CHANGES ARE MADE.
 
 
-%glossary
+
+%===================
+% glossary
+%===================
 %\usepackage[toc,acronyms]{glossaries} % glossary. Set after usepackage{hyperref}
 \usepackage{glossaries} % glossary. Set after usepackage{hyperref}
 \makeglossaries
@@ -56,7 +73,7 @@
 % IMPORTANT NOTE:
 % Don't forget to recompile the glossary and the bibliography first if you want them to show up!
 
-%Pseudocode
+% Pseudocode
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \makeatletter
@@ -92,37 +109,58 @@
 
 
 
+
+
 %--------------------------------------------
-% NEW COMMANDS
+% New Commands
 %--------------------------------------------
 
-\newcommand{\corresponds}{\mathrel{\widehat{=}}}		% equals with hat
-\newcommand{\entspricht}{\mathrel{\widehat{=}}}		% equals with hat
+\newcommand{\corresponds}{\mathrel{\widehat{=}}}       % equals with hat
 
-\newcommand {\arctanh}{\mathrm{arctanh}}				% Atanh
-\newcommand{\arccot}{\mathrm{arccot }}					% Acotanh
+\newcommand {\arctanh}{\mathrm{arctanh}}               % Atanh
+\newcommand{\arccot}{\mathrm{arccot }}                 % Acotanh
 
-\newcommand{\limz}[1]{\lim\limits_{#1 \rightarrow 0}}	% Limes of something towars zero
+\newcommand{\limz}[1]{\lim\limits_{#1 \rightarrow 0}}  % Limes of something towards zero
 
-\newcommand{\bm}{\boldmath}								% Bold font in math
-\newcommand{\dps}{\displaystyle}						
+\newcommand{\bm}{\boldmath}                            % Bold font in math
+\newcommand{\dps}{\displaystyle}                                               
 
-\newcommand{\e}{\mbox{e}}								% e noncursive in math mode
+\newcommand{\e}{\mbox{e}}                              % e noncursive in math mode
 
-\newcommand{\del}{\partial}								% partial diff operator
-\newcommand{\de}{\mathrm{d}}							% differential d
-\newcommand{\D}{\mathrm{d}}								% differential d
-\newcommand{\GRAD}{\mathrm{grad}\ }						% gradiend
-\newcommand{\DIV}{\mathrm{div}\ }						% divergence
-\newcommand{\ROT}{\mathrm{rot}\ }						% rotation
+\newcommand{\del}{\partial}                            % partial diff operator
+\newcommand{\de}{\mathrm{d}}                           % differential d
+\newcommand{\D}{\mathrm{d}}                            % differential d
+\newcommand{\GRAD}{\mathrm{grad}\ }                    % gradient
+\newcommand{\DIV}{\mathrm{div}\ }                      % divergence
+\newcommand{\ROT}{\mathrm{rot}\ }                      % rotation
 
-\newcommand{\CONST}{\mathrm{const.\ }}					% constant
-\newcommand{\var}{\mathrm{var}}							% variance
+\newcommand{\CONST}{\mathrm{const.\ }}                 % constant
+\newcommand{\var}{\mathrm{var}}                        % variance
 
-\newcommand{\g}{^\circ}									% degrees
-\newcommand{\degr}{^\circ}								% degrees
+\newcommand{\g}{^\circ}                                % degrees
+\newcommand{\degr}{^\circ}                             % degrees
 
-\newcommand{\msol}{M_\odot}								% solar mass
+\newcommand{\msol}{M_\odot}                            % solar mass
+
+
+\newcommand{\x}{\mathbf{x}}                            % x vector
+\newcommand{\xdot}{\dot{\mathbf{x}}}                   % x dot vector
+\newcommand{\xddot}{\ddot{\mathbf{x}}}                 % x doubledot vector
+\newcommand{\R}{\mathbf{r}}                            % r vector
+\newcommand{\rdot}{\dot{\mathbf{r}}}                   % r dot vector
+\newcommand{\rddot}{\ddot{\mathbf{r}}}                 % r doubledot vector
+\newcommand{\vel}{\mathbf{v}}                          % v vector
+\newcommand{\V}{\mathbf{v}}                            % v vector
+\newcommand{\vdot}{\dot{\mathbf{v}}}                   % v dot vector
+\newcommand{\vddot}{\ddot{\mathbf{v}}}                 % v doubledot vector
+
+\newcommand{\dete}{\mathrm{d}t}                        % dt
+\newcommand{\delte}{\del t}                            % partial t
+\newcommand{\dex}{\mathrm{d}x}                         % dx
+\newcommand{\delx}{\del x}                             % partial x
+\newcommand{\der}{\mathrm{d}r}                         % dr
+\newcommand{\delr}{\del r}                             % partial r
+
 
 
 
@@ -157,7 +195,8 @@
 
 %% Fig. instead of Figure, Tab. instead of Table
 %\usepackage[footnotesize]{caption2}
-\addto\captionsngerman{\renewcommand{\figurename}{Fig.}}
+\addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
+%\addto\captionsngerman{\renewcommand{\figurename}{Fig.}}
 %\renewcommand{\tablename}{Tab.}%
 
 
@@ -184,17 +223,6 @@
 
 
 
-%-------------------------------------
-% Set fonts of document parts
-%-------------------------------------
-%\setkomafont{title}{\rmfamily\bfseries\boldmath}
-%\addtokomafont{section}{\rmfamily\bfseries\boldmath}
-%\addtokomafont{subsection}{\rmfamily\bfseries\boldmath}
-%\addtokomafont{subsubsection}{\rmfamily\bfseries\boldmath}
-%\addtokomafont{disposition}{\rmfamily} % table of contents and stuff
-%\setkomafont{descriptionlabel}{\rmfamily\bfseries\boldmath}
-
-
 
 
 
@@ -205,14 +233,25 @@
 %------------------------------------------
 %:Metadata
 
-\title{Titel}
+\title{Title}
 \author{Mladen Ivkovic\\
 mladen.ivkovic@hotmail.com\\
 }
-\date{Datum}
+\date{Date}
 
 %------------------------------------------
 
+
+
+
+
+
+
+
+
+
+%============================================================================================
+%============================================================================================
 
 
 
@@ -255,10 +294,10 @@ mladen.ivkovic@hotmail.com\\
 
 
 %=============================================
-\section*{Anmerkung des Autoren}
+\section*{Preamble}
 %=============================================
 
-Dieser Abschnitt ist nicht nummeriert und nicht im Inhaltsverzeichnis. 
+This section is not in the table of contents and is not enumerated.
 
 
 \begin{description}
@@ -266,7 +305,7 @@ Dieser Abschnitt ist nicht nummeriert und nicht im Inhaltsverzeichnis.
   \item[Punkt 2] Punkt 2
 \end{description}
 
-Sonstiger text: Bla blablabla blabla bla. Blabla bla. Blablablabal basdiga asdifsdjfh asdfjlsdfn uilsdfyjkzu shflsdf jhksdfui sf df,jhi afuil sdfuinm,j shsdfnm,,.
+
 \clearpage
 
 
@@ -288,26 +327,35 @@ Sonstiger text: Bla blablabla blabla bla. Blabla bla. Blablablabal basdiga asdif
 
 
 
+%====================================
+\section{Section}
+%====================================
 
-%=============================================
-\section{Kapitel 1}
-%=============================================
 
-%=============================================
-\subsection{Unterkapitel 1.1}
-%=============================================
 
-%=============================================
-\subsubsection{Unterunterkapitel 1.1.1}
-%=============================================
+
+
+%====================================
+\subsection{Subsection}
+%====================================
+
+
+
+
+
+
+%====================================
+\subsubsection{Subsubsection}
+%====================================
 
 %
 
 \begin{figure}
-  \fbox{
-    \includegraphics[width = 3.5cm, keepaspectratio]{images/random_image.png}
-  }
-	\caption{Darstellung des Zahlenbereichs des Zweierkomplements mit acht Stellen\label{fig:tabelle_zweierkomplement}}
+	\centering
+	\fbox{
+		\includegraphics[width = 3.5cm, keepaspectratio]{figures/random_image.png}
+	}
+	\caption{Figure caption goes here\label{fig:tabelle_zweierkomplement}}
 \end{figure}
 %
 Die gängigste Form der Zahlensysteme sind Stellenwertsysteme. Eine Zahl $a$ wird in Form einer Reihe von Ziffern $z_i$ mit dazugehöriger Potenz der Basis $b^i$ dargestellt. Der Wert der Zahl ergibt sich dann als Summe der Werte aller Einzelstellen: $a = \sum\limits_{i}z_ib^i$.
@@ -318,8 +366,20 @@ Website mit Umrechnungen und Erklärungen: \url{http://www.arndt-bruenner.de/mat
 }: Dividiere $Z$ durch $b$. Der Rest dieser Division ist die letzte Stelle der Zahl in der Basis $b$  (Einerstelle). Dividiere den Quotienten dieser Division wieder durch $b$. Der Rest dieser zweiten Division ergibt die zweite Stelle der Zahl in der neuen Basis. Wiederhole Divisionen, bis kein Rest mehr.
 
 
-\section{Tabellen}
-\subsection{Einfach}
+
+
+
+
+
+%====================================
+\section{Tables}
+%====================================
+
+
+
+%====================================
+\subsection{Simple}
+%====================================
 \begin{center}
 \begin{tabular}[c]{c | c | c || c| c | c || c | c || c | c | c || c| c| c}
 \multicolumn{3}{c||}{Konjunktion}	&	\multicolumn{3}{c||}{Disjunktion} & \multicolumn{2}{c||}{Negation} & \multicolumn{3}{c||}{NAND} & \multicolumn{3}{c}{NOR}\\
@@ -335,21 +395,41 @@ $a$ & $b$ & $a$ $\wedge$ $b$ & $a$ & $b$ & $a$ $\vee$ $b$ & $a$ & $\bar{a}$ & $a
 \end{tabular}
 \end{center}
 
-\subsection{Mit extra + Seitenumbruch}
+
+
+
+
+
+
+
+%===========================================
+\subsection{With Extras and Pagebreaks}
+%===========================================
 \begin{spacing}{1.4}
-\begin{longtable}{p{4cm} l l}
-Kommutativgesetz: & $a \wedge b = b \wedge a$ & $a \vee b = b \vee a$\\ 
-Distributivgesetz: & $a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge b)$ & $a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c)$\\ 
-Neutrales Element & $a \wedge 1 = a$ & $a \vee 0 = a$\\
-Inverses Element & $a \wedge \bar{a} = 0$ & $a \vee \bar{a} = 1$\\
-Assoziativgesetz & $(a \wedge b) \wedge c = a \wedge (b \wedge c)$ & $(a \vee b) \vee c = a \vee (b \vee c)$\\
-Idempotenzgesetz & $a \wedge a = a$ & $a \vee a = a$\\
-Absorptionsgesetz & $a \wedge ( a \vee b) = a$ & $a \vee (a \wedge b) = a$\\
-DeMorgan-Gesetz & $\overline{a\wedge b} = \bar{a} \vee \bar{b}$ (NAND)& $\overline{a \vee b} = \bar{a} \wedge \bar{b}$ (NOR)\\
-\smash{Gesetz vom Widerspruch} & & $a \wedge \overline{a} = 0$\\
-\smash{Gesetz vom ausgeschl. Dritten} & & $a \vee \overline{a} = 1$ \\
-\smash{Gesetz der doppelten Negation} & & $\overline{\overline{a}} = a$ \\
-\end{longtable}
+	\begin{longtable}{p{4cm} l l}
+		Kommutativgesetz: 	& $a \wedge b = b \wedge a$ & 
+			$a \vee b = b \vee a$\\ 
+		Distributivgesetz: 	& $a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge b)$ & 
+			$a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c)$\\ 
+		Neutrales Element 	& $a \wedge 1 = a$ & 
+			$a \vee 0 = a$\\
+		Inverses Element 	& $a \wedge \bar{a} = 0$ & 
+			$a \vee \bar{a} = 1$\\
+		Assoziativgesetz 	& $(a \wedge b) \wedge c = a \wedge (b \wedge c)$ & 
+			$(a \vee b) \vee c = a \vee (b \vee c)$\\
+		Idempotenzgesetz 	& $a \wedge a = a$ & 
+			$a \vee a = a$\\
+		Absorptionsgesetz 	& $a \wedge ( a \vee b) = a$ & 
+			$a \vee (a \wedge b) = a$\\
+		DeMorgan-Gesetz 	& $\overline{a\wedge b} = \bar{a} \vee \bar{b}$ (NAND)& 
+			$\overline{a \vee b} = \bar{a} \wedge \bar{b}$ (NOR)\\
+		\smash{Gesetz vom Widerspruch} & & 
+			$a \wedge \overline{a} = 0$\\
+		\smash{Gesetz vom ausgeschl. Dritten} & & 
+			$a \vee \overline{a} = 1$ \\
+		\smash{Gesetz der doppelten Negation} & & 
+			$\overline{\overline{a}} = a$ \\
+	\end{longtable}
 \end{spacing}
 
 
@@ -366,25 +446,26 @@ DeMorgan-Gesetz & $\overline{a\wedge b} = \bar{a} \vee \bar{b}$ (NAND)& $\overli
 
 
 %=============================================
-\section{Zwei Bilder, Spalten}
+\section{Two images, columns}
 %=============================================
 
 \begin{figure}[h!]
 \centering
-  \minipage{0.3\textwidth}
-  \centering
-    \fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/random_image.png}}%
-    \caption{RS-Flipflop}%
-    \label{fig:rsflipflop}
-  \endminipage\hspace{1cm}   
+	\minipage{0.3\textwidth}
+		\centering
+		\fbox{\includegraphics[height=2.5cm, keepaspectratio]{figures/random_image.png}}%
+		\caption{RS-Flipflop}%
+		\label{fig:rsflipflop}
+	\endminipage\hspace{1cm}   
 %
-  \minipage{0.4\textwidth}
-	\centering
-    \fbox{\includegraphics[height=2.5cm, keepaspectratio]{images/random_image_2.png}}%
-    \caption{getaktetes RS-Flipflop}%
-    \label{fig:rsflipfloptakt}
-  \endminipage
+	\minipage{0.4\textwidth}
+		\centering
+		\fbox{\includegraphics[height=2.5cm, keepaspectratio]{figures/random_image_2.png}}%
+		\caption{getaktetes RS-Flipflop}%
+		\label{fig:rsflipfloptakt}
+	\endminipage
 \end{figure}
+
 
 Dabei müssen wir eine Nebenbedingung $R \wedge S = 0$ setzen - $R$ und $S$ dürfen niemals gleichzeitig $= 1$ sein. In der Realisierung, dargestellt in Abb. \ref{fig:rsflipflop}, führt dies zu oszillationen. 
 
@@ -398,8 +479,8 @@ Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsigna
 	
 	This is still in the first column.
 	\begin{align}
-	a+b &= c\\
-	d+e &= e
+		a+b &= c\\
+		d+e &= e
 	\end{align}
 \end{minipage}
 %
@@ -411,13 +492,23 @@ Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsigna
 	
 	Blablabla.
 	\begin{align*}
-	a+b &= c\\
-	d+e &= e
+		a+b &= c\\
+		d+e &= e
 	\end{align*}
 \end{minipage}
 
 
 
+
+
+
+
+
+
+
+%=============================================
+%\section{Including files}
+%=============================================
 \include{./includefile}
 
 
@@ -427,18 +518,24 @@ Will man ein taktgesteuertes RS-Flipflop, so braucht man lediglich das Taktsigna
 
 
 
+
+
+
+
 %=============================================
-\section{Text in Boxen}
+\section{Text in Boxes}
 %=============================================
 
-\begin{mdframed}[style=exampledefault,frametitle={Braucht package mdframed.}]
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta lectus nec ante convallis lacinia. Nunc lobortis eu lacus nec euismod. Mauris at dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas luctus sapien ac venenatis. Sed maximus pellentesque arcu non ultrices. Aliquam erat volutpat. Nam pharetra orci in sem consequat, a dictum metus eleifend. Morbi non odio libero. Morbi porttitor in purus quis commodo. Aliquam erat volutpat. Nunc vitae arcu tempus, aliquet elit sit amet, rutrum diam. Curabitur imperdiet elementum iaculis. Vestibulum suscipit interdum libero, id ultrices est semper vitae.
+\begin{mdframed}[style=exampledefault,frametitle={needs package mdframed.}]
+	
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta lectus nec ante convallis lacinia. Nunc lobortis eu lacus nec euismod. Mauris at dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas luctus sapien ac venenatis. Sed maximus pellentesque arcu non ultrices. Aliquam erat volutpat. Nam pharetra orci in sem consequat, a dictum metus eleifend. Morbi non odio libero. Morbi porttitor in purus quis commodo. Aliquam erat volutpat. Nunc vitae arcu tempus, aliquet elit sit amet, rutrum diam. Curabitur imperdiet elementum iaculis. Vestibulum suscipit interdum libero, id ultrices est semper vitae.
+	
 \end{mdframed}
 
 
-\begin{mdframed}[style=simple,frametitle={Mein style.}]
+\begin{mdframed}[style=simple,frametitle={My style.}]
 
-In sed lacus malesuada, euismod mauris sit amet, lobortis metus. Maecenas iaculis ac mauris quis semper. Donec eget eros scelerisque, pellentesque nisl non, fermentum velit. Aliquam pharetra dolor risus, at tristique urna suscipit ut. Ut sit amet placerat mi. Maecenas felis felis, pharetra in tellus eget, blandit luctus nunc. Nunc mattis tortor vel nibh sollicitudin, id pulvinar quam accumsan. Nullam id risus id ipsum sollicitudin molestie ut hendrerit augue. Sed sit amet pharetra est, at interdum enim. Phasellus eget arcu vitae mauris lacinia tristique eu at nisl. Nam elementum vel mauris non aliquet. Morbi vel felis lobortis, pulvinar urna ut, venenatis nulla. Aliquam euismod eleifend est, consequat laoreet lorem posuere et. Fusce lectus erat, dapibus rhoncus tincidunt vel, porta quis libero. 
+	In sed lacus malesuada, euismod mauris sit amet, lobortis metus. Maecenas iaculis ac mauris quis semper. Donec eget eros scelerisque, pellentesque nisl non, fermentum velit. Aliquam pharetra dolor risus, at tristique urna suscipit ut. Ut sit amet placerat mi. Maecenas felis felis, pharetra in tellus eget, blandit luctus nunc. Nunc mattis tortor vel nibh sollicitudin, id pulvinar quam accumsan. Nullam id risus id ipsum sollicitudin molestie ut hendrerit augue. Sed sit amet pharetra est, at interdum enim. Phasellus eget arcu vitae mauris lacinia tristique eu at nisl. Nam elementum vel mauris non aliquet. Morbi vel felis lobortis, pulvinar urna ut, venenatis nulla. Aliquam euismod eleifend est, consequat laoreet lorem posuere et. Fusce lectus erat, dapibus rhoncus tincidunt vel, porta quis libero. 
 
 \end{mdframed}
 
@@ -451,7 +548,7 @@ In sed lacus malesuada, euismod mauris sit amet, lobortis metus. Maecenas iaculi
 
 
 %=============================================
-\section{Bibliographie und Zitate}
+\section{Bibliography and Citing}
 %=============================================
 
 
@@ -460,11 +557,30 @@ Einstein said something important\cite{einstein} and so did Dirac \cite{dirac}.
 
 So they both said something important \cite{dirac,einstein}.
 
-Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
+And this is a reference to the glossary entry of \gls{computer}.
 
 
-\section{Mathematik und Symbole}
-\subsection{Sonderzeichen und Symbole}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%=============================================
+\section{Mathematics and Symbols}
+%=============================================
+
+
+%=============================================
+\subsection{Special characters and symbols}
+%=============================================
 
 \begin{flalign}
 	 & \equiv \ \ll \ \lll \ \gg \ \ggg \ \leq \ \geq \ \leqslant \ \geqslant \ \propto \ \approx \ \approxeq \ \neq \ \simeq \ \cong \ \ncong \ \overset{\widehat{=}} \ \overset{!}{=}
@@ -521,10 +637,9 @@ Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 
 
 %=============================================
-\subsection{Gleichungen und Spezielles}
+\subsection{Equations and Special Stuff}
 %=============================================
 \begin{align}
-	 %
 	 \vec{S}_\mu &= \vec{S}_\mu ^{\parallel}(0) \vec{u} + \vec{S}_\mu^{\bot} (0) [\cos(\omega_\mu t)\vec{v} - \sin(\omega_\mu t)\vec{w}]
 \end{align}
 
@@ -549,7 +664,7 @@ Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 \begin{align}
 	 % CASES
 	 \nonumber
-	 \Rightarrow q_{0, 0} &= \int \limits_{\mathbb{R}^3} \rho(\vec{x}' ) d^3 x' \entspricht 
+	 \Rightarrow q_{0, 0} &= \int \limits_{\mathbb{R}^3} \rho(\vec{x}' ) d^3 x' \corresponds 
 	 \begin{cases} 
 	 \text{total charge (electrostatics)} \\
 	 \text{total mass (gravitation)}\\
@@ -579,13 +694,15 @@ Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 
 \begin{align}
 	 \begin{pmatrix}
-	 0\\0\\0
-	 \end{pmatrix} &= \begin{pmatrix}
-	 0 & 1 & -1 \\
-	 2 & 0 & 2\\
-	 2 & 2 & 0\\
-	 \end{pmatrix} \begin{pmatrix}
-	 x_1 \\ y_1\\ z_1
+	 	0\\0\\0
+	 \end{pmatrix} &= 
+	 \begin{pmatrix}
+		 0 & 1 & -1 \\
+		 2 & 0 & 2\\
+		 2 & 2 & 0\\
+	 \end{pmatrix} 
+	 \begin{pmatrix}
+		 x_1 \\ y_1\\ z_1
 	 \end{pmatrix}
 \end{align}
 
@@ -624,8 +741,38 @@ Und hier ist die Referenz zum Glossareintrag von \gls{computer}.
 
 
 \begin{align}
-	 \nonumber \limz{\epsilon}\int(z) dz &= \limz{\epsilon} \frac14 \left[ \int\frac{e^{ia(u + 1)}}{u} du - \int\frac{e^{ia(u + 1)}}{u + 2}du   \right]\\[1em]
-	 & \overset{z = 1 \Rightarrow u = 0}= \limz{\epsilon} \frac{e^{i a}}{4} \left[\vphantom{ \int\limits_{\pi}^0} \smash{ \underbrace{\frac{\overbrace{e^{ia \epsilon e^{i \varphi}}}^{\rightarrow 1}} {\epsilon e^{i \varphi}} i \epsilon e^{i \varphi}}_{\rightarrow i}  d \varphi            - \int\limits_{\pi}^0 \underbrace{\frac{\overbrace{e^{ia \epsilon e^{i \varphi}}}^{\rightarrow 1}} {\underbrace{\epsilon e^{i \varphi}}_{\rightarrow 0} + 2} \underbrace{i \epsilon e^{i \varphi}}_{\rightarrow 0}}_{\rightarrow 0}  d \varphi  }\right]\\[2em]
+	 \nonumber \limz{\epsilon}\int(z) dz &= 
+	 	\limz{\epsilon} \frac14 \left[ \int\frac{e^{ia(u + 1)}}{u} du - 
+	 	\int\frac{e^{ia(u + 1)}}{u + 2}du   \right]\\[1em]
+	 & \overset{z = 1 \Rightarrow u = 0} = 
+	 	\limz{\epsilon} \frac{e^{i a}}{4} 
+	 	\left[
+	 		\vphantom{ \int\limits_{\pi}^0} 
+		 	\smash{ 
+		 		\underbrace{
+		 			\frac{\overbrace{
+		 					e^{ia \epsilon e^{i \varphi}}
+	 					}^{\rightarrow 1}
+ 					} {
+ 						\epsilon e^{i \varphi}
+ 					} 
+ 					i \epsilon e^{i \varphi}
+	 			}_{\rightarrow i}  
+ 				d \varphi   -
+				\int\limits_{\pi}^0 \underbrace{
+					\frac{ 
+						\overbrace{
+							e^{ia \epsilon e^{i \varphi}}
+						}^{\rightarrow 1}
+					} {
+					\underbrace{
+						\epsilon e^{i \varphi}
+					}_{\rightarrow 0} + 2} 
+				\underbrace{i \epsilon e^{i \varphi}}_{\rightarrow 0}
+				}_{\rightarrow 0}  
+				d \varphi  
+			}
+		\right]\\[2em]
 	 %	
 	 %
 	 2 + 2 &= 4 \ \text{some more space after this line please.}\\[4em]\nonumber
@@ -704,13 +851,12 @@ Version 2:
 
 
 
+%============================================================================================
+%============================================================================================
 
 
 
 
-%########################################################################
-%########################################################################
-%########################################################################
 \clearpage
 
 %=============================================
@@ -763,48 +909,69 @@ Version 2:
 
 
 
-%########################################################################
-%########################################################################
-%########################################################################
+
+%============================================================================================
+%============================================================================================
+
+
+
+
 \clearpage
 
 
 %=============================================
 \begin{appendix}
 %=============================================
-\setcounter{figure}{0} %Bildnummerierung auf Null setzen
-\renewcommand{\thefigure}{A\arabic{figure}} %Bilder mit A$Bildnummer beschriften
+\setcounter{figure}{0} % Set figure counter back to zero
+\renewcommand{\thefigure}{A\arabic{figure}} % Set figure numbering to A<integer>
+
+
+
+
+
 
 %=============================================
-\section{Bildanhang}
+\section{Image appendix}
 %=============================================
 
 
 \begin{figure}[h!]
 \centering
 \minipage{0.4\textwidth}
-  \fbox{\includegraphics[height = 3cm, keepaspectratio,draft]{images/random_image.png}}%
+  \fbox{\includegraphics[height = 3cm, keepaspectratio,draft]{figures/random_image.png}}%
   \caption{Draft option \vspace{27pt}}%
   \label{fig:jkflipflop}
 \endminipage\hspace{.5cm}
 %
 \minipage{0.4\textwidth}
-  \fbox{\includegraphics[height = 3cm, keepaspectratio]{images/random_image.png}}%
+  \fbox{\includegraphics[height = 3cm, keepaspectratio]{figures/random_image.png}}%
   \caption{JK-Flipflop, Darstellung mit RS-Flipflop. C = Takt, $Q_1 = Q$, $Q_2 = \bar{Q}$}%
   \label{fig:JKmitRS}
 \endminipage
 \end{figure}
 
 
+
+
+
+
+
+
+
 %=============================================
-\section{Zeilenumbruch}
+\section{Line break}
 %=============================================
 asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfghjklösdfghjklöasd222\-fghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklö
 
 
 
+
+
+
+
+
 %=============================================
-\section{Neue Befehle definieren}
+\section{Defining new commands}
 %=============================================
 \newcommand{\musr}{$\mu$SR }
 \musr
@@ -819,18 +986,18 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
   &\text{mysum} & \mysum{x}{y}{z}
 \end{align*}
 
-\renewcommand{\myint}{myint ist jetzt ein neuer Befehl und macht nur noch das hier.}
+\renewcommand{\myint}{myint is now a new command and does this:}
 
 \myint
 
 \vspace{2cm}
-\newcommand{\fett}[1]{{\textbf #1}}
+\newcommand{\fett}[1]{{\textbf{#1}}}
 
-\fett{fettes hallo}
+\fett{phat hello}
 
-\newcommand{\kursiv}[1]{{\textit #1}}
+\newcommand{\kursiv}[1]{{\textit{#1}}}
 
-\kursiv{kursives hallo}
+\kursiv{cursive hallo}
 
 
 
@@ -840,9 +1007,12 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
 
 
 
-%------------
-%Bibliography
-%------------
+
+
+
+%=============================================
+% Bibliography
+%=============================================
 %https://www.sharelatex.com/learn/Bibliography_management_in_LaTeX
 %\medskip % or: \bigskip to add some space
 
@@ -859,9 +1029,9 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
 
 
 
-%------------
-%Glossary
-%------------
+%=============================================
+% Glossary
+%=============================================
 
 
 \newglossaryentry{computer}

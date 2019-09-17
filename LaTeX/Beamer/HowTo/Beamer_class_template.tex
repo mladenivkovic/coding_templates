@@ -4,29 +4,24 @@
 
 
 %---------------------
-%--Metainformationen--
+%  Metadata
 %---------------------
-\title{Presentation Title}
-\subtitle{Subtitle}
 
-\author[M. Ivkovic]{Mladen Ivkovic}
-\date[16.11.15]{16. November 2015}
+ \title[shortform]{Title}
+%     Titel of the presentations
+ \subtitle[shortform-subtitle]{Subtitile}
+%     Subtitle
+ \author[M. Ivkovic]{Mladen Ivkovic}
+%     Set author
+ \institute[EPFL]{LASTRO \\ \'Ecole Polytechnique F\'ed\'erale de Lausanne}
+%     Institute
+ \date[17.09.19]{17. September 2019}
+%	  Date of presentation. Alternatively you can use \today to set compilation time date automatically.
+% \logo{\pgfimage[width=2cm,height=2cm]{mylogo}}
+%     Add mylogo.pdf (bzw. mylogo.png, mylogo.jpg, mylogo.mps if you're using pdftex as Backend) as the logo on all slides, here using the package pgf.
+% \titlegraphic{\includegraphics[width=2cm,height=2cm]{mylogo}}
+%	  Add mylogo.pdf/png/jpg file as the logo only on the title packe using the graphicx package
 
-
-% \title[Kurzform]{Vortrag zur Berechenbarkeit}
-%     Titel des Vortrages
-% \subtitle[Kurzform]{Untertitel}
-%     Untertitel
-% \author[M. Schulz]{Michael Schulz}
-%     Autor festlegen
-% \institute[IfI -- HU Berlin]{Institut für Informatik\\ Humboldt-Universität zu Berlin}
-%     Angabe des Institutes
-% \date[26.05.06]{26. Mai 2006}
-%     Datum der Präsentation, alternativ kann mittels \date{\today} auch das aktuelle Datum eingetragen werden.
-% \logo{\pgfimage[width=2cm,height=2cm]{hulogo}}
-%     Die Datei hulogo.pdf (bzw. hulogo.png, hulogo.jpg, hulogo.mps bei Verwendung von pdftex als Backend) als Logo auf allen Folien, hier mithilfe des Paketes pgf.
-% \titlegraphic{\includegraphics[width=2cm,height=2cm]{hulogo}}
-%     Die Datei hulogo.pdf (bzw. analog wie bei \logo auch entsprechendes Format) als Logo nur auf der Titelseite unter Verwendung des Paketes graphicx.
 
 
 
@@ -37,30 +32,47 @@
 
 %===================================================================================
 %===================================================================================
-% \begin{frame}[Overlay-Aktionen][Optionen]{Titel}{Untertitel}
+%
+%
+%
+% \begin{frame}[Overlay-actrions][options]{Title}{Subtitle}
 % 
-% Overlay-Aktionen
-%     Overlay-Aktionen setzen die Standard-Overlay-Aktionen aller Umgebungen innerhalb des Frames, welche Aktion-Spezifikationen erlauben. Dazu gehören u.a. \item bei Listen und Block-Umgebungen.
+%Overlay-actions
+%	Overlay-actions set the default overlay actions of all environments within the 
+%	frame, which allow action-specifications, e.g. \item in lists and blocks.
+%	Overlays are 'animations' for elements on a slide, e.g. items appearing one after 
+%	the other.
+%
 % 
 %     <+->
-%         Sorgt dafür, dass die Elemente stückweise zum Vorschein kommen.
+%			makes the elements appear one by one.
 % 
-% Optionen
+% options
 % 
 %     allowdisplaybreaks
-%         Sorgt durch Aufruf von \allowdisplaybreaks aus AMS-LaTeX für einen Seitenumbruch bei mehrzeiligen Formelumgebungen. Funktioniert nur im Zusammenhang mit der Option allowframebreaks
+%			allows a page break in multi-line equations. Works only together with option
+%			allowframebreaks
+%
 %     allowframebreaks
-%         Passt der Inhalt nicht mehr auf ein Slide, wird er automatisch auf mehrere Slides verteilt. Allerdings ist somit kein Overlay mehr möglich.
+%			automatically distribute the contents on multiple slides if it doesn't fit
+%			on only one. However this disables overlays.
+%
 %     b,c,t
-%         Sorgt dafür, dass der Frame nach unten (b), zentriert (c) oder nach oben (t) ausgerichtet wird.
+%			aligns frame to (b)ottom, (t)op or (c)enter
+%
 %     fragile
-%         Wird für Quelltextumgebungen, z.B. verbatim, benötigt.
+%			necessary for sourse text environments, e.g. verbatim
+%
 %     label=name
-%         Legt einen Namen für ein Frame fest um es später mit \againframe{name} erneut aufrufen zu können.
+%			set a name for the frame so you can call it again later with \againframe{label}
+%
 %     plain
-%         Unterdrückt die Anzeige der Überschrift, Fußzeile und Sidebar.
+%			suppresses header, footer, and sidebar.
+%
 %     squeeze
-%         Verkleinert die vertikalen Abstände so weit wie möglich um u.U. mehr auf der Folie unterbringen zu können.
+%			minimizes vertical spacings as far as possible to make more content possible
+%			on a slide
+%
 % 
 %===================================================================================
 %===================================================================================
@@ -85,21 +97,24 @@
 
 
 
+%=======================================
+\section{Section Name}
+%=======================================
 
-\section{Section 1}
 \begin{frame}
 	\frametitle{Test Frametitle}
 	\framesubtitle{Test yo}
 
     \begin{itemize}
-	\item Test
-	\item Test 2
-	\item Test 3
+		\item Test
+		\item Test 2
+		\item Test 3
     \end{itemize}
+
     \begin{description}
-      \item[${G_3}'$:] Die Menge R ist ausdrückbar.
-      \item WTF
-      \item [Das hier:] Description: Aufzählung ohne Punkte
+		\item[${G_3}'$:] Text goes here.
+		\item WTF
+		\item [Item Name] Description
     \end{description}
 \end{frame}
 
@@ -108,60 +123,27 @@
 
 
 
-\section{Section 2}
-\subsection{Subsection name}
+
+
+
+%=======================================
+\section{Blocks}
+%=======================================
+
+
 \begin{frame}
-    \begin{figure}[!htb]
-      \centering
-        \minipage{0.4\textwidth}
-          \fbox{\includegraphics[height=3cm, keepaspectratio]{Bilder/test.jpg}}%
-          \caption{RS-Flipflop}%
-          \label{fig:rsflipflop}
-        \endminipage\hspace{1cm}   
-      %
-        \minipage{0.4\textwidth}
-          \fbox{\includegraphics[height=3cm, keepaspectratio]{Bilder/test.jpg}}%
-          \caption{\smash{getaktetes RS-Flipflop}}%
-          \label{fig:rsflipfloptakt}
-        \endminipage
-    \end{figure}
-\end{frame}
+	\frametitle{blocks}
 
-
-
-
-{
-    \setbeamertemplate{background}
-    {\vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[width=\paperwidth]{Bilder/halostats_image_output_00041-halo-5440676.pdf}\hfil}\vfil}}
-    \begin{frame}[plain]
-        \frametitle{Full Page Image 1}
-    \end{frame}
-}
-
-{
-    \setbeamertemplate{background}
-    {\vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[width=\paperwidth]{Bilder/test.jpg}\hfil}}}
-    \begin{frame}[plain]
-        \frametitle{Full Page Image 2}
-    \end{frame}
-}
-
-
-
-\section{blocktest}
-\begin{frame}
-	\frametitle{Blöcke}
-
-    \begin{block}{Einfacher Blocktitel}
-        Einfacher Blocktext
+    \begin{block}{simple block title}
+        Simple block text
     \end{block}
     
-    \begin{exampleblock}{Beispielblocktitel}
-         Beispielblocktext
+    \begin{exampleblock}{example block title}
+         example block text
     \end{exampleblock}
    
-    \begin{alertblock}{Warnungsblocktitel}
-         Warnungsblocktext
+    \begin{alertblock}{alert block title}
+         alert block text
     \end{alertblock}
     
 \end{frame}
@@ -176,30 +158,34 @@
 
 
 
-\section{Beweise, Definitionen, Lemmata, Bemerkung}
-\begin{frame}[fragile]
-	\frametitle{Beweise etc}
+
+%=========================================================
+\section{Proof, Definitions, Lemmata, Remarks}
+%=========================================================
+
+
+\begin{frame}[fragile] % need fragile for verbatim
+	\frametitle{Proofs etc}
 
     \begin{proof}
-        Beweis
+        Proof
     \end{proof}
     
-    \begin{lemma}[XY -- Ein Dual zu YX]
+    \begin{lemma}[XY -- A dual zu YX]
         Lemma
     \end{lemma}
     
-    \begin{theorem}[T -- Nach Tarski]
+    \begin{theorem}[T -- after Tarski]
         Theorem
     \end{theorem}
     
-     \begin{bem}
-	Bemerkung: zuerst 
-	  \begin{verbatim}
-	    \newtheorem*{bem}{Bemerkung}
-	  \end{verbatim}
-	  in Präambel setzen! 
-     \end{bem}
-%     Auch muss \begin{frame}[fragile]{Frametitle}             
+     \begin{rem}
+		remark: first set
+		  \begin{verbatim}
+		    \newtheorem*{rem}{Remark}
+		  \end{verbatim}
+		  in preamble! 
+     \end{rem}
 \end{frame}
 
 
@@ -209,16 +195,18 @@
 
 
 
+%=========================================================
+\section{Overlays}
+%=========================================================
 
 
 \begin{frame}
 	\frametitle{Overlays}
    \begin{itemize}
-        \item Einleitung
-        \item<2-> daher
-        \item<alert@3> aber Achtung!
-        \item<3-> also so und so
-        \item<4-> Schlussfolgerung
+        \item Start
+        \item<2-> so it follows
+        \item<3-> then this
+        \item<4-> then that
    \end{itemize}
 \end{frame}
 
@@ -230,16 +218,21 @@
 
 
 
-\section{Zweispaltig}
+
+
+%=========================================================
+\section{Two Columns}
+%=========================================================
+
 \begin{frame}
-	\frametitle{Zweispaltige Sachen}
+	\frametitle{Two column stuff}
     \begin{columns}
          \column{.55\textwidth}
-                 \pgfimage[width=\textwidth]{Bilder/test.jpg}
+                 \pgfimage[width=\textwidth]{figures/test.jpg}
          \column{.45\textwidth}
                  \begin{enumerate}
                  \item Start
-                 \item Stopp
+                 \item Stop
                  \end{enumerate}
     \end{columns}
 \end{frame}
@@ -253,15 +246,94 @@
 
 
 
-\section{Bilder und Quellen}
-\subsection{General principle of $\mathbf{\mu}$SR}
+
+
+
+
+
+
+%=========================================================
+\section{Images}
+%=========================================================
+
+
+
+
+
+%=======================================
+\subsection{Two images}
+%=======================================
+
+
+\begin{frame}{Two images}
+\begin{figure}[!htb]
+	\centering
+	\minipage{0.4\textwidth}
+		\fbox{\includegraphics[height=3cm, keepaspectratio]{figures/test.jpg}}%
+		\caption{
+			I really don't 
+			\label{fig:noidea1}
+		}%
+	\endminipage\hspace{1cm}   
+	%
+	\minipage{0.4\textwidth}
+		\fbox{\includegraphics[height=3cm, keepaspectratio]{figures/test.jpg}}%
+		\caption{
+			\smash{indeed I don't} 
+			\label{fig:noidea2}
+		}%
+	\endminipage
+\end{figure}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+%====================================
+\subsection{Full Page Image}
+%====================================
+
+
+
+
+{
+	\setbeamertemplate{background}
+	{
+		\vbox to \paperheight{
+			\vfil\hbox to \paperwidth{
+				\hfil\includegraphics[width=\paperwidth]{figures/test.jpg}
+			\hfil}
+		}
+	}
+	\begin{frame}[plain]
+		\frametitle{Full Page Image}
+	\end{frame}
+}
+
+
+
+
+
 \begin{frame}[fragile]
-	\frametitle{General principle of $\mathbf{\mu}$SR}
+	\frametitle{Small caption for big image}
 	\begin{figure}[!htb]
 		\begin{center}
-			\includegraphics[height=6cm, keepaspectratio]{Bilder/musr_general_principle.png}%
+			\includegraphics[height=6cm, keepaspectratio]{figures/musr_general_principle.png}%
 			\caption*{  \setlength{\baselineskip}{6pt}
-				{\tiny Dalmas de Réotier, Pierre (2010): \textit{Introduction to muon spin rotation and relaxation (\musr)} [Online]. Availible: \url{http://inac.cea.fr/Pisp/pierre.dalmas-de-				reotier/introduction_muSR.pdf}}
+				{\tiny 
+					Dalmas de Réotier, Pierre (2010): \textit{ 						
+						Introduction to muon spin rotation and relaxation.
+					}
+					[Online]. Availible: \url{
+						http://inac.cea.fr/Pisp/pierre.dalmas-de-reotier/introduction_muSR.pdf
+					}
+				}
 			}%
 		\end{center}
 	\end{figure}          
@@ -279,95 +351,54 @@
 
 
 
-\begin{frame}
-	\frametitle{Coexistence of ferromagnetism and superconductivity in RuSr$_2$GdCu$_2$O$_8$}
-	
-	\begin{columns}
-		\column{.55\textwidth}
-		\begin{itemize}
-			\item ferromagnetic phase is homogenous on a microscopic scale \vspace{10pt}
-			\item it accounts for most of the sample volume\vspace{10pt}
-			\item magnetic order is not significantly modified at the onset of superconductivity
-		\end{itemize}
-		\vspace{1cm}
-		\vfill
-		\setlength{\baselineskip}{6pt}      
-		\begin{tiny}
-			C. Bernhard, J. L. Tallon, Ch. Niedermayer, Th. Blasius, A. Golnik, E. Brücher, R. K. Kremer, D. R. Noakes, C. E. Stronach, and E. J. Ansaldo, Phys. Rev. \textbf{B} 59, 14099 (1999)
-		\end{tiny}
-		
-		\column{.45\textwidth}
-		\begin{figure}[htbp]
-			\centering
-			\includegraphics[width=\textwidth]{Bilder/ferromagnetism.png}%
-			\caption*{\setlength{\baselineskip}{5pt}{\tiny Time-resolved normalised muon-spin polarisation $^{P(t)}/_{P(t=0)}$ at temperatures $T = 5.3K < T_{c,sc}$ and at $T_{c, sc} < T = 28K < T_{c,m}$ . The large oscillatory component gives clear evidence for the presence of a magnetically ordered state.}}%
-		\end{figure}
-	\end{columns}
-	
-	\vfill
-	
-	
-\end{frame}
 
 
 
 
 
 
+
+
+
+%====================================
+\subsection{Math}
+%====================================
 
 
 
 
 \begin{frame}
-	\begin{columns}
-		\column{.45\textwidth}
-		\begin{block}{\textbf{5 - 6 }}
-			$He$ core is homogenous (convective mixing). It will be nearly isothermal.\\~\\
-			
-			More and more $He$ is produced by shell burning, the core becomes more massive \\~\\			
-			
-			At some point, core cannot support envelope mass anymore: \\~\\
-			
-			
-			$\Rightarrow$ core contracts, envelope expands
-		\end{block}
-		\column{.65\textwidth}
-		\vspace{.77cm}
-		\pgfimage[width=\textwidth]{Bilder/Scan_Padmanabhan_cropped.pdf}
-	\end{columns}	
-	\begin{center}
-		\fillframe
-		\setlength{\baselineskip}{0pt}
-		{\tiny
-			T. Padmanabhan, "Theoretical Astrophysics Volume II: Stars and Stellar Systems". New York: Cambridge University Press, 2001.
-		}
-	\end{center}
-\end{frame}
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{frame}
-	\frametitle{Mathtest}
+	\frametitle{Math}
 	\begin{align}
-			 f(z) &= \lim\limits_{x\rightarrow \infty} \frac{\sin x}{x} = 0\\
-		 	 \binom{a}{n} &= \frac{a!}{(a-n)! n!}\\
-		 	 \nonumber \int(z) dz &=  \frac14 \left[ \int\frac{e^{ia(u + 1)}}{u} du - \int\frac{e^{ia(u + 1)}}{u + 2}du   \right]\\[1em]
-		 	 & \overset{z = 1 \Rightarrow u = 0}=  \frac{e^{i a}}{4} \left[\vphantom{ \int\limits_{\pi}^0} \smash{ \underbrace{\frac{\overbrace{e^{ia \epsilon e^{i \varphi}}}^{\rightarrow 1}} {\epsilon e^{i \varphi}} i \epsilon e^{i \varphi}}_{\rightarrow i}  d \varphi            - \int\limits_{\pi}^0 \underbrace{\frac{\overbrace{e^{ia \epsilon e^{i \varphi}}}^{\rightarrow 1}} {\underbrace{\epsilon e^{i \varphi}}_{\rightarrow 0} + 2} \underbrace{i \epsilon e^{i \varphi}}_{\rightarrow 0}}_{\rightarrow 0}  d \varphi  }\right]\\[2em]
+			 f(z) &= 
+			 	\lim\limits_{x\rightarrow \infty} \frac{\sin x}{x} = 0\\
+		 	 \binom{a}{n} &= 
+		 	 	\frac{a!}{(a-n)! n!}\\
+		 	 \nonumber \int(z) dz &=  
+		 	 	\frac14 \left[ \int\frac{e^{ia(u + 1)}}{u} du - \int\frac{e^{ia(u + 1)}}{u + 2}du   \right]\\[1em]
+		 	 & \overset{z = 1 \Rightarrow u = 0}=  
+		 	 	\frac{e^{i a}}{4} \left[\vphantom{ \int\limits_{\pi}^0} \smash{ \underbrace{\frac{\overbrace{e^{ia \epsilon e^{i \varphi}}}^{\rightarrow 1}} {\epsilon e^{i \varphi}} i \epsilon e^{i \varphi}}_{\rightarrow i}  d \varphi            - \int\limits_{\pi}^0 \underbrace{\frac{\overbrace{e^{ia \epsilon e^{i \varphi}}}^{\rightarrow 1}} {\underbrace{\epsilon e^{i \varphi}}_{\rightarrow 0} + 2} \underbrace{i \epsilon e^{i \varphi}}_{\rightarrow 0}}_{\rightarrow 0}  d \varphi  }\right]\\[2em]
 		 	 %	
 		 	 %
 		 	 2 + 2 &= 4 \ \text{some more space after this line please.}\\[4em]\nonumber
 	\end{align}
 \end{frame}
 
+
+
+
+
+
+
+
+
+
+
+
+
+%=========================================================
+\section{Citations and References}
+%=========================================================
 
 
 \begin{frame}{Citations and References}
