@@ -8,12 +8,11 @@
 \usepackage[utf8]{inputenc} 
 \usepackage[english]{babel}
 \usepackage[justification=centering]{caption}
-\addto\captionsenglish{\renewcommand{\figurename}{}} %Abbildungen nicht bzw. anders beschriften.
+\addto\captionsenglish{\renewcommand{\figurename}{}} % Redefine how figures are called
 
 
 %\usepackage[pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,citecolor = black, breaklinks]{hyperref}
 %\usepackage{url}
-\usepackage{picins} 		%Gleittext um Grafik. Befehl: parpic. Vorlage siehe unten
 \usepackage{longtable} 		%Seitenübergreifende Tabelle. Vorlage siehe unten
 \newtheorem*{bem}{Bemerkung} % Neue Theorem-Umgebung: Bemerkung
 \newcommand{\fillframe}{\vskip0pt plus 1filll} 
@@ -35,37 +34,40 @@
 \addbibresource{references.bib}
 \usepackage{csquotes} %recommended when using babel and biblatex
 %Abbreviations for Bibliography: http://adsabs.harvard.edu/abs_doc/aas_macros.html
-\newcommand{\aap}{Astronomy and Astrophysics}
-\newcommand{\mnras}{Monthly Notices of the RAS}
-\newcommand{\apj}{The Astrophysical Journal}
-\newcommand{\nat}{Nature}
+
+
 
 
 
 
 
 %-----------------
-%BEAMER-SPEZIFISCH
+% BEAMER-SPECIFIC
 %-----------------
 
 \usetheme{metropolis}
-%deactivate a new page when a new section begins
+% deactivate a new page when a new section begins
 \metroset{sectionpage=none} 
 \usepackage{FiraSans}
 \usefonttheme[onlymath]{serif}
 
 
-% Verschiedene Varianten von usetheme, usecolortheme und usefonttheme kann man hier ausprobieren: http://deic.uab.es/~iblanes/beamer_gallery/
+% You can look at different options for usetheme, usecolortheme und usefonttheme 
+% here: http://deic.uab.es/~iblanes/beamer_gallery/
 
 
-%Halbtransparente Overlays (was als nächstes Element auf der Folie gezeigt wird)
+% transparent Overlays (what's coming next on the slide is shown with reduced alpha)
 %\setbeamercovered{transparent} 
 
-% Entfernt Navigationssymbole unten
+% Removes navigation symbols at the bottom
 %\beamertemplatenavigationsymbolsempty 
 
-% Seitenzahlen als links
+% Use page numbers as links
 %\setbeamertemplate{footline}[frame]  
 %    \setbeamertemplate{footline}{%
 %    	\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[10pt]{\hyperlink{tableofcontents}{\scriptsize\insertframenumber}}}}}
 
+
+
+
+\include{my_defines}
