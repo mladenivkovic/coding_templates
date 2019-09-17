@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 
 a = 0
+b = 20
 epsilon = 1e-6
 
 def p(x):
