@@ -7,8 +7,7 @@
 \usepackage{amssymb, amsmath, color, graphicx, float, setspace, tipa}
 \usepackage[utf8]{inputenc} 
 \usepackage[english]{babel}
-\usepackage[justification=centering]{caption}
-\addto\captionsenglish{\renewcommand{\figurename}{}} % Redefine how figures are called
+
 
 
 %\usepackage[pdfpagelabels,
@@ -29,9 +28,12 @@
 
 
 % CAPTIONS
-\usepackage[]{caption}
-\addto\captionsenglish{\renewcommand{\figurename}{}} % Don't label Figures with 'Figure'
-\captionsetup{font={small,sf}, labelfont=bf, format=plain}
+\usepackage[justification=centering]{caption}
+\addto\captionsenglish{\renewcommand{\figurename}{}} % Redefine how figures are called
+\captionsetup{font={small,sf}, 
+				labelfont=bf,
+				format=plain,
+				labelformat=empty}
 % Use captionsetup below for no 'Figure' label
 %\captionsetup{font={small,tt}, labelformat=empty, format=plain}
 
@@ -44,7 +46,9 @@
 \usepackage[backend=bibtex,
 			sorting=nyt,
 			bibencoding=ascii,
-			citestyle=authoryear]{biblatex}
+			style=science,
+			citestyle=authoryear 	% must be after style=science
+			]{biblatex}
 \addbibresource{references.bib}
 \usepackage{csquotes} %recommended when using babel and biblatex
 
