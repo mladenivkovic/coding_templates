@@ -212,6 +212,39 @@
 
 
 
+\begin{frame}{Overlays 2}
+	\begin{itemize}
+		\item<1> This is on the first only
+		\item<-3> This is on the first three slides
+		\item<2-4,6> This is on the second to fourth slides and the sixth slide
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Overlays shortcuts} % fragile for \verb
+	\begin{itemize}
+		\item<+-> This is on the first and all following slides
+		\item<+-> This is on the second and all following slides
+		\item<+-> This is on the third and all following slides
+		\item<.-> This is the same as the last called \verb|<+->|, i.e. the last \verb|+|
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Overlays shortcuts 2}
+	\begin{itemize}[<+->]
+		\item This is on the first and all following slides
+		\item This is on the second and all following slides
+		\item This is on the third and all following slides
+		\item<1-> This is on the first and all following slides. You can override shortcuts
+	\end{itemize}
+\end{frame}
+
 
 
 
