@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 #----------------------------------------
 # Playing around with text.
 #----------------------------------------
@@ -54,5 +55,5 @@ ax.set_ylim(-2, 2)
 plt.figtext(0.7, 0.9, "my figtext 1")
 plt.figtext(0.91, 0.5, "my figtext 2", rotation=90)
 
-
-plt.savefig('plot_text.png')
+plt.savefig('plot_text.png', dpi=200)
+print("finished plot_text.png")

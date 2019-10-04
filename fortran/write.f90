@@ -153,8 +153,8 @@ program writing
     ! printed.
     print *, "print *, somechar                              ", somechar
     write(*, *) "write(*,*) somechar                            ", somechar
-    write(*, '(A, A)'),  " write(*, '(A)') somechar                       ", somechar
-    write(*, '(A, A6)'),  " write(*, '(A6)') somechar                      ", somechar
+    write(*, '(A, A)')  " write(*, '(A)') somechar                       ", somechar
+    write(*, '(A, A6)')  " write(*, '(A6)') somechar                      ", somechar
     write(*, '(A, A, A3)') " write(*, '(A, A3)') somechar, somechar         ", somechar, somechar
     write(*, '(4A)') " write(*, '(3A4)') somechar, somechar, somechar ", somechar, somechar, somechar
 

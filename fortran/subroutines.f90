@@ -4,33 +4,33 @@ program subroutines
     ! A fortran subroutine does not return any value with its name.
     ! subroutines use formal arguments to receive values and to pass 
     ! results back.
-
+    !
     ! Syntax:
-
+    !
     ! subroutine subroutine-name(arg1, ..., argn)
     !   implicit none
     !   [specification part]
     !   [execution part]
     !   [subprogram part]
-    !end subroutine subroutine-name
-
-
-
+    ! end subroutine subroutine-name
+    !
+    !
+    !
     ! INTENT
-
+    !
     ! intent(in) :
     !   the argument is expected to have a value, but its value will not
     !   be changed inside the subroutine.
-
+    !
     ! intent(out) :
     !   the parameter does not have a value and is given one in the
     !   called routine
-
+    !
     ! intent(inout):
     !   parameter already has a value and is changed inside the routine
-
-
-
+    !
+    !
+    !
     ! To use a subroutine, the CALL statement is needed.
     !------------------------------------------------------------------------
 
@@ -43,10 +43,10 @@ program subroutines
     ! one interacts with the user and the
     ! second solves a quadratic equation,
     ! based on the user input.
-
+    !
     ! It calculates the solutions for the quadratic eqn
     ! of the form ax**2  + bx + c = 
-
+    !
     ! It calculates the solutions for the quadratic eqn
     ! of the form ax**2  + bx + c = 0
     !-------------------------------------------------------
@@ -153,17 +153,18 @@ contains
         integer :: io_status = 0
 
         ! fuck reading in, let's just do -1, 2 and 3
-        !write(*, *) ' type in the coefficients a, b and c (e.g. -1, 2, 3)'
-        !read (unit=*, fmt=*, iostat=io_status) a, b, c
-        !if (io_status==0) then
-        !  ok = .true.
-        !else
-        !  ok = .false.
-        !end if
+        ! write(*, *) ' type in the coefficients a, b and c (e.g. -1, 2, 3)'
+        ! read (unit=*, fmt=*, iostat=io_status) a, b, c
+        ! if (io_status==0) then
+        !   ok = .true.
+        ! else
+        !   ok = .false.
+        ! end if
         a = -1
         b = 2
         c = 3
         ok = .true.
+        io_status = 1 ! useless, just to keep from 'unused variable' warnings
     end subroutine interact
 
 

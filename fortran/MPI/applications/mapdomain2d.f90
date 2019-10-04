@@ -5,7 +5,6 @@ program mapdomain2d
     integer :: error_number
     integer :: myid
     integer :: nproc
-    integer, dimension(mpi_status_size) :: status
 
     integer :: i, j
     integer :: nproc_x = 2, nproc_y = 4

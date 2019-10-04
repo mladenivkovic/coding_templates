@@ -23,8 +23,8 @@ contains
 
     real function circlearea(radius)
         implicit none
-    ! returns the area of a circle.
-    ! The argument is radius in whatever unit.
+        ! returns the area of a circle.
+        ! The argument is radius in whatever unit.
         real, intent(in) :: radius
         
         circlearea = pi * radius * radius
@@ -38,7 +38,7 @@ contains
         ! a function to compute the area of a rectangle type.
         implicit none
         type (rectangle), intent(in) :: rect 
-        ! WATCH OUT! BRACES AROUND TYPE NAME NEEDED!
+        ! WATCH OUT! PARENTHESES AROUND TYPE NAME NEEDED!
         real :: xborder, yborder
 
         xborder = abs(rect%top_x - rect%bottom_x)

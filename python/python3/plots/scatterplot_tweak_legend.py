@@ -1,5 +1,4 @@
 #!/usr/bin/env python3 
-# -*- coding: utf8 -*-
 
 
 #=====================================================================
@@ -111,16 +110,3 @@ plt.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=F
 plt.close()
 
 print( "done", outputfilename+".png" )
-
-
-
-
-
-
-
-
-
-
-
-
-

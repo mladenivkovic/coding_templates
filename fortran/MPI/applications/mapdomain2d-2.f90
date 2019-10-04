@@ -5,7 +5,6 @@ program mapdomain2d
     integer :: error_number
     integer :: myid
     integer :: nproc
-    integer, dimension(mpi_status_size) :: status
 
     integer :: i, j
     integer :: nproc_x = 2, nproc_y = 4
@@ -13,16 +12,15 @@ program mapdomain2d
     integer :: wall=0
 
 
-    !Tells each processors who their neighbours to the left, 
-    !to the right, above and below are, or if there is a wall.
-    !Processors are mapped in the following way:
-    !myid=1 is always the lower left corner
-    !with nproc_x = 3 and nproc_y = 4:
-    !10 11  12
-    !7  8   9
-    !4  5   6
-    !1  2   3
-    !
+    ! Tells each processors who their neighbours to the left, 
+    ! to the right, above and below are, or if there is a wall.
+    ! Processors are mapped in the following way:
+    ! myid=1 is always the lower left corner
+    ! with nproc_x = 3 and nproc_y = 4:
+    ! 10 11  12
+    ! 7  8   9
+    ! 4  5   6
+    ! 1  2   3
 
 
     ! initialise MPI 
@@ -36,7 +34,7 @@ program mapdomain2d
 
     myid = myid+1
 
-    !create procmap
+    ! create procmap
     do i=1, nproc_x
         do j=1, nproc_y
 
@@ -67,7 +65,7 @@ program mapdomain2d
 
 
 
-    !write everything
+    ! write everything
     do i=1, nproc
         if (myid==i) then
         write(*,'(A12, I4)') "Myid", myid

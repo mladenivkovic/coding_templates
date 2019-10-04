@@ -147,6 +147,7 @@ fig.colorbar(im, cax=cax)
 
 
 
-
+plt.tight_layout()
 
 plt.savefig('plot_normalizations.png', dpi=200)
+print("Finished plot_normalizations.png")

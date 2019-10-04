@@ -13,7 +13,7 @@ program alltoallv
 
  integer, dimension(:), allocatable :: sendcount, reccount, sendbuf, recbuf, send_displ, rec_displ
  integer :: myid, ncpu, err, send_tot, rec_tot
- integer :: i, j, ind
+ integer :: i
 
 
  call MPI_INIT(err)

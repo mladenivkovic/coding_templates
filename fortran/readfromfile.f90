@@ -11,13 +11,11 @@ program readfromfile
     integer, dimension(:, :), allocatable :: twodimarray, unknownlengtharray
     real, dimension(:,:), allocatable :: twodimrealsarray, skippedlinearray
 
-    real :: pi, pj
-
     !---------------
     ! WARNING
     !---------------
     ! Unit numbers 0, 5, and 6 are associated with the standard error, standard input, and standard output files. 
-    !(For e.g.  open(unit = x), you mustn't use x = 0, 5 or 6.
+    ! (e.g.  open(unit = x), you mustn't use x = 0, 5 or 6.
 
 
 

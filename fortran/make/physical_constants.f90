@@ -10,7 +10,7 @@ module physical_constants
     ! public: every program/module that uses this module can access this variable.
     ! protected: this variable cannot be changed anywhere else but here.
     real (qp), private :: planck_eV = 4.135667662E-15
-    !private: only this module has access to this var.
+    ! private: only this module has access to this var.
 
 
 contains

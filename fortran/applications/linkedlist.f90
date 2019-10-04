@@ -16,7 +16,7 @@ program linkedlist
 
     type (link), pointer :: root, current
     character (len=:), allocatable :: word
-    character (len=80) :: fname="inputfiles/loremipsum.txt"
+    character (len=80) :: fname="../inputfiles/loremipsum.txt"
     integer :: io_stat_number = 0
     integer :: n, i = 0
     

@@ -2,14 +2,15 @@ program printing
 
 
     !-------------------------------------------------------------------
-    !A program to demonstrate formatted printing with fortran
-    !An Edit descriptor is more or less a formatting operator, as 
-    !far as I can tell.
+    ! A program to demonstrate formatted printing with fortran
+    ! An Edit descriptor is more or less a formatting operator, as 
+    ! far as I can tell.
     !-------------------------------------------------------------------
 
     implicit none
     integer :: someinteger
     real :: somereal, someotherreal
+    character(len=50) :: somechar 
 
 
 
@@ -26,7 +27,7 @@ program printing
 
     do someinteger = 1, 10
         print 100, someinteger, someinteger, someinteger*120*(-1)**(someinteger)
-        !print 100: 100 is a statement label. There must be a format statement with this label in the program.
+        ! print 100: 100 is a statement label. There must be a format statement with this label in the program.
     end do
 
 
@@ -38,10 +39,9 @@ program printing
     ! Commas are item separators.
     ! You must leave a column for the minus sign.
     ! If too few columns were specified for the data, the output
-    !will be in asterisks (*)
+    ! will be in asterisks (*)
     !-------------------------------------------------------------------
 
-    
 
 
 
@@ -65,12 +65,12 @@ program printing
     ! fw.d : w = total column width, d = digits after comma
     ! The comma needs a column as well!!!!!
     ! The numbers will be rounded:
-
-
+    !
+    !
     ! ew.s: w = total width, s = significant digits.
     ! gives a real in scientific notation: 0.1234E-09
-
-
+    !
+    !
     ! gw.s: w = total width, s = significant digits.
     ! gives a real in scientific notation: 0.1234E-09
     !-------------------------------------------------------------------
@@ -100,7 +100,7 @@ program printing
 
 
     !======================
-    !Characters
+    ! Characters
     !======================
 
     print *, ""
@@ -118,8 +118,8 @@ program printing
     somechar='your text here'
     print *, "print *, somechar                              ", somechar
     write(*, *) "write(*,*) somechar                            ", somechar
-    write(*, '(A, A)'),  " write(*, '(A)') somechar                       ", somechar
-    write(*, '(A, A6)'),  " write(*, '(A6)') somechar                      ", somechar
+    write(*, '(A, A)')  " write(*, '(A)') somechar                       ", somechar
+    write(*, '(A, A6)')  " write(*, '(A6)') somechar                      ", somechar
     write(*, '(A, A, A3)') " write(*, '(A, A3)') somechar, somechar         ", somechar, somechar
     write(*, '(4A)') " write(*, '(3A4)') somechar, somechar, somechar ", somechar, somechar, somechar
 

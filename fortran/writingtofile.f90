@@ -16,6 +16,7 @@ program IO
         write(1, '(2i8)' ) someinteger * 2, someinteger*50
     end do
     close(1)
+    write(*, *) "Written stuff to data.txt"
 
 
 end program IO

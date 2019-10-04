@@ -21,4 +21,5 @@ Table of contents:
    lists
    tables
    images
-   advanced
+   footnotes
+   links

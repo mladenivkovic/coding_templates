@@ -7,6 +7,9 @@ program cmdlineargs
   integer :: i
   character(len=32) :: arg
 
+
+  write(*,*) "Give me cmd line args to show you what I can do."
+
   ! GNU extension
   !-------------------
 

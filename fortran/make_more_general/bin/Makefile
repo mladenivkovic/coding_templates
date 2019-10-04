@@ -23,6 +23,7 @@ EXEC=my_made_program
 
 #Compiler to use
 F90=gfortran -fbacktrace -g -O 
+
 # flags for gfortran compiler
 F90FLAGS= -fbounds-check -Wuninitialized -Wall -fcheck=all -ffree-line-length-none -ffpe-trap=zero,underflow,overflow,invalid -finit-real=nan
 

@@ -41,7 +41,7 @@ subroutine fill2Darray(id, array)
     integer, intent(in) :: id
     real, dimension(1:rows, 1:columns), intent(inout) :: array
 
-    integer :: domainwidth, x, y
+    integer :: x, y
     real:: value
 
 
@@ -219,7 +219,7 @@ subroutine fill3Darray(id, array)
     integer, intent(in) :: id
     real, dimension(1:rows, 1:columns, 1:depth), intent(inout) :: array
 
-    integer :: domainwidth, x, y, z
+    integer :: x, y, z
     real:: value
 
 
@@ -441,31 +441,30 @@ subroutine run2d()
 end subroutine run2d
 
 
-subroutine run3d()
-    use threedim
-    use globalvars
-    implicit none
-
-    if (myid == 1) write(*, *) "#########################"
-    if (myid == 1) write(*, *) "#####     RUN 3D    #####"
-    if (myid == 1) write(*, *) "#########################"
-
-    array3D = 0
-    
-    domainwidth = columns/nproc
-    domainstart = myid * domainwidth+1
-    domainend = (myid + 1) * domainwidth
-
-    call fill3Darray(myid, array3D)
-    call write3Darray(array3D, 'before send', myid)
-    call copylefttoright3D(myid, array3D)   ! can be ignored in hydro; values in ghost cells happen by themselves
-    call copyrighttoleft3D(myid, array3D)   ! can be ignored in hydro; values in ghost cells happeb by themselves
-    call write3Darray(array3D, 'after copyleftright', myid)
-    call communicate3D(myid, array3D)
-    call write3Darray(array3D, 'after mpi', myid)
-
-end subroutine run3d
-
+! subroutine run3d()
+!     use threedim
+!     use globalvars
+!     implicit none
+!
+!     if (myid == 1) write(*, *) "#########################"
+!     if (myid == 1) write(*, *) "#####     RUN 3D    #####"
+!     if (myid == 1) write(*, *) "#########################"
+!
+!     array3D = 0
+!
+!     domainwidth = columns/nproc
+!     domainstart = myid * domainwidth+1
+!     domainend = (myid + 1) * domainwidth
+!
+!     call fill3Darray(myid, array3D)
+!     call write3Darray(array3D, 'before send', myid)
+!     call copylefttoright3D(myid, array3D)   ! can be ignored in hydro; values in ghost cells happen by themselves
+!     call copyrighttoleft3D(myid, array3D)   ! can be ignored in hydro; values in ghost cells happeb by themselves
+!     call write3Darray(array3D, 'after copyleftright', myid)
+!     call communicate3D(myid, array3D)
+!     call write3Darray(array3D, 'after mpi', myid)
+!
+! end subroutine run3d
 
 end program sendarrays
 

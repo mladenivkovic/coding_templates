@@ -7,7 +7,7 @@ program random
   use omp_lib
   
   implicit none
-  integer :: i, j, id, nthreads
+  integer :: i, id, nthreads
   logical, dimension(:), allocatable :: seed_set ! for independent multithreading
 
 
@@ -40,8 +40,8 @@ program random
 
     !$OMP CRITICAL (indep)
       write(*, '(A7,I3,A7)', advance='no') "Thread", id, "got:"
-      do j=1, 10
-        write(*, '(F10.6)', advance='no') independent_multithreading(id, nthreads)
+      do i=1, 10
+        write(*, '(F10.6)', advance='no') independent_multithreading(id)
       enddo
       write(*,*)
     !$OMP END CRITICAL (indep)
@@ -99,9 +99,6 @@ contains
     integer :: i, j, id, nthreads
     real :: randomreal 
 
-    integer :: n = 10
-    integer, dimension(1:10) :: seed
-
     !$OMP PARALLEL DEFAULT(PRIVATE)
       nthreads=omp_get_num_threads()
       id=omp_get_thread_num()
@@ -125,13 +122,13 @@ contains
 
 
 
-  real function independent_multithreading(id, nthreads)
+  real function independent_multithreading(id)
     !-----------------------------------------------
     ! Generate different seeds for each threads,
     ! but only once per run
     !-----------------------------------------------
 
-    integer, intent(in) :: id, nthreads   ! thread ID, number of threads
+    integer, intent(in) :: id   ! thread ID, number of threads
     integer :: n, clock, i
     integer, dimension(:), allocatable :: seed
     real :: temp

@@ -4,3 +4,4 @@ python3/__pycache__/
 python3/make_a_package/build
 python3/make_a_package/dist
 python3/make_a_package/My_Test_Package.egg-info
+**/.ipynb_checkpoints

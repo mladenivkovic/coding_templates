@@ -1,6 +1,4 @@
 #!/usr/bin/env python3 
-# -*- coding: utf8 -*-
-
 
 #===============================================================
 # A script to demonstrate how to create a custom colormap
@@ -121,18 +119,18 @@ fig.colorbar(sc1, cax=cax1)
 
 print( "Creating figure for discrete colorbar" )
 
-#zmin and zmax are random integers.
-#assuming we want a new color (boundary) for every integer in the colormap:
-#this part of the script creates a colormap that has
-#precisely that many different colors for that many  different 
-#discrete values.
+# zmin and zmax are random integers.
+# assuming we want a new color (boundary) for every integer in the colormap:
+# this part of the script creates a colormap that has
+# precisely that many different colors for that many  different 
+# discrete values.
 
 bounds=np.linspace(zmind, zmaxd+1, zmaxd+2)
 colorlist=fullcolorlist[0:len(bounds)]
 mycmap2=matplotlib.colors.ListedColormap(colorlist, name='My colormap')
 mynorm=matplotlib.colors.BoundaryNorm(bounds, len(colorlist))
 
-#move every upper limit to zmax+1 so it will be shown properly!
+# move every upper limit to zmax+1 so it will be shown properly!
 
 
 ax2 = fig.add_subplot(122, aspect='equal', clip_on=True)
@@ -171,7 +169,7 @@ print( "Figure created" )
 
 fig_path = workdir+'/'+outputfilename+'.png'
 print( "saving figure as "+fig_path )
-plt.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=100)
+plt.savefig(fig_path, format='png', facecolor=fig.get_facecolor(), transparent=False, dpi=200)
 plt.close()
 
 print( "done", outputfilename+".png" )

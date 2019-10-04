@@ -11,23 +11,27 @@
 ! subroutine writearray         line 326
 ! subroutine make3Dmatrix       line 356
 ! subroutine write3Darray       line 385
-!
-!
+
+
 program sendarray
 
     use mpi
     implicit none
-    integer :: code, rank
+    integer :: code, rank, nproc
 
-    call MPI_INIT (code)
-    call MPI_COMM_RANK ( MPI_COMM_WORLD ,rank,code)
+    call MPI_INIT(code)
+    call MPI_COMM_RANK(MPI_COMM_WORLD, rank, code)
+    call MPI_COMM_SIZE(MPI_COMM_WORLD, nproc, code)
 
-    !call sendcolumn(rank)
-    !call sendline(rank)
-    !call sendmatrixblock(rank)
+    if (nproc /= 2) then
+      if (rank == 0) write(*, *) "This program is written to be run on 2 tasks only. Quitting"
+      stop
+    endif
+
+    call sendcolumn(rank)
+    call sendline(rank)
+    call sendmatrixblock(rank)
     call send3dimsubarray(rank)
-    call send3dimsubarray2(rank)
-    
     call MPI_FINALIZE(code)
 
 contains
@@ -272,6 +276,7 @@ subroutine send3dimsubarray(rank)
 
     call write3Darray(linenumber, columnnumber, depth, a, 'after send', rank)
 
+
 end subroutine send3dimsubarray
 
 
@@ -281,86 +286,9 @@ end subroutine send3dimsubarray
 
 
 
-
-
-
-
-
-
-
-
-
-
-subroutine send3dimsubarray2(rank)
-! sends all rows and depth (y and z values) for the last 2 x values to other proc
-! The rank of an array is its number of dimensions.
-! The extent of an array is the number of elements in one dimension.
-! The shape of an array is a vector for which each dimension equals 
-! the extent.
-! For example, the T(10,0:5,-10:10) array: Its rank is 3; its extent 
-! in the first dimension is 10, in the second 6 and in the third 21; 
-! so its shape is the (10,6,21) vector.
-
-    use mpi
-    implicit none
-    integer, intent(in) :: rank
-
-    integer, parameter:: linenumber=5,columnnumber=6, depth =3
-    integer, parameter:: tag=100
-    real, dimension(1:linenumber,1:columnnumber, 1:depth):: a
-    integer, dimension( MPI_STATUS_SIZE):: status
-    integer::code,type_subarray
-    integer, dimension(3) :: shape_array, shape_subarray, start_coord
-
-    shape_array(:) = (/linenumber, columnnumber, depth /)
-    shape_subarray(:) = (/linenumber,2, depth/) ! von jeder Zeile 2 Spalten
-    start_coord(:) = (/0, columnnumber-2, 0/)
-    !!! ATTENTION!!!!
-    ! the start_coord(:) array contains the indexes that MPI_TYPE_CREATE_SUBARRAY
-    ! needs. BUT: Fortran usually starts with index 1, this MPI subroutine 
-    ! starts with index 0 !!!!
-
-
-!    if (rank ==1) write(*, '(3(I2, x))') shape_subarray, shape_array, start_coord
-
-    if (rank == 1) then
-        write(*, *) "############################"
-        write(*, *) "subroutine send3dimarray"
-        write(*, *)
-    end if
-
-    call make3Dmatrix(linenumber, columnnumber, depth, rank, a)
-    call write3Darray(linenumber, columnnumber, depth, a, 'before send', rank)
-
-    !call MPI_TYPE_CREATE_SUBARRAY(3, shape_array, shape_subarray, start_coord, MPI_ORDER_FORTRAN, MPI_REAL, type_subarray, code)
-    !call MPI_TYPE_COMMIT(type_subarray, code)
-    ! call MPI_TYPE_CREATE_SUBARRAY(nb_dims,shape_array,shape_sub_array,coord_start, order,old_type,new_type,code)
-    ! nb_dims : rank of the array
-    ! shape_array : shape of the array from which a subarray will be extracted
-    ! shape_sub_array : shape of the subarray
-    ! coord_start : start coordinates if the indices of the array start at 0.
-    ! For example, if we want the start coordinates of the subarray to be 
-    ! array(2,3), we must have coord_start(:)=(/ 1,2 /)
-    ! order : storage order of elements
-
-    !call MPI_SENDRECV(a, 1, type_subarray, 1, tag, a(1, columnnumber-1, 1), 1, type_subarray, 0, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE, code)
-  
-    call MPI_SENDRECV(a(1, columnnumber-1, 1), 2*linenumber*depth,MPI_REAL, 1, tag, a(1, 1, 1), 2*linenumber*depth, MPI_REAL, 0, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE, code) 
-
-    !call MPI_TYPE_FREE (type_subarray,code)
-
-    call write3Darray(linenumber, columnnumber, depth, a, 'after send', rank)
-
-end subroutine send3dimsubarray2
-
-
-
-
 !###########################################################################
 !###########################################################################
 !###########################################################################
-
-
 
 !###########################################################################
 !###########################################################################

@@ -1,4 +1,4 @@
-#/usr/bin/python3
+#/usr/bin/env python3
 
 #==================================================
 # Simple tutorial on how to use mpi4py

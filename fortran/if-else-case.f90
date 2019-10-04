@@ -62,8 +62,15 @@ program ifelsecase
 
 
     ! if - then - else - end if: if (logical expr) then statement1 else statement 2 end if
-    write(*, *) "If - then - else - end if"
+    write(*, *) "if (true) - then - else - end if"
     if (true) then
+        write(*, '(A8)') "True"
+    else
+        write(*, '(A8)') "False"
+    end if
+
+    write(*, *) "if (false) - then - else - end if"
+    if (false) then
         write(*, '(A8)') "True"
     else
         write(*, '(A8)') "False"
@@ -122,6 +129,5 @@ program ifelsecase
             write(*, *) "Got into default here - so no case was matched."
     end select somename
 
-    
 
 end program ifelsecase

@@ -10,7 +10,6 @@ program omp_basics
   implicit none
 
   integer, parameter       :: n=12
-  integer                  :: id, nthreads
   integer                  :: i, j
   integer, dimension(n,n)  :: arr
   integer, dimension(n)    :: oned

@@ -4,7 +4,8 @@
 file=$1
 runfile=${file%.f03}.o
 
-gfortran $file -o $runfile -I/usr/local/include -lfftw3 -lfftw3_omp -fopenmp -Wall -fbounds-check -g
+gfortran $file -o $runfile -I/$FFTW_ROOT/include -lfftw3 -lfftw3_omp -fopenmp -Wall -fbounds-check -g
+# gfortran $file -o $runfile -I/usr/local/include -lfftw3 -lfftw3_omp -fopenmp -Wall -fbounds-check -g
 
 if [[ $? -ne 0 ]]; then
     echo "STOPPING"

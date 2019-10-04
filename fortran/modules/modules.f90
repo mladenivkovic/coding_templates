@@ -1,3 +1,4 @@
+!=======================================================================
 ! This is a program to demonstrate how modules work.
 ! Modules have to be compiled before the main program
 ! is compiled, otherwise they won't be found.
@@ -12,10 +13,11 @@
 ! function: simple_math_module
 ! type: simple_math_module
 ! private, public and protected variables: physical_constants 
-! 
+!=======================================================================
+
 program main_program
 
-    use precision_specification, only: qp !Specify like this what you need if you don't want to use the whole module.
+    use precision_specification, only: qp ! Specify like this what you need if you don't want to use the whole module.
     use physical_constants
     use simple_math_module
 

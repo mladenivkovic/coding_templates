@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+#=================================================================================
+# Show a plot of all colormaps with their names
+#
+# based on https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/
+#=================================================================================
+
 import matplotlib.pyplot as plt
 import matplotlib.colors
 import numpy as np

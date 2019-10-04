@@ -1,4 +1,4 @@
-F90 = gfortran
+F90 = gfortran-8
 FFLAGS = -Wall -fbacktrace -g
 LIBS = -I$(HDF5_ROOT)/include -L$(HDF5_ROOT)/lib -lhdf5_fortran
 

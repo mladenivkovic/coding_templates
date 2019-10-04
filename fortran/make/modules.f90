@@ -1,3 +1,4 @@
+!==============================================================
 ! This is a program to demonstrate how modules work.
 ! Modules have to be compiled before the main program
 ! is compiled, otherwise they won't be found.
@@ -12,23 +13,23 @@
 ! function: simple_math_module
 ! type: simple_math_module
 ! private, public and protected variables: physical_constants 
-! 
+!==============================================================
 program main_program
 
-    use precision_specification, only: qp !Specify like this what you need if you don't want to use the whole module.
+    use precision_specification, only: qp ! Specify like this what you need if you don't want to use the whole module.
     use physical_constants
     use simple_math_module
 
     implicit none
-    real (qp) :: mu_null = 4 * pi * 1E-7!from simple_math_module and precision_specification
+    real (qp) :: mu_null = 4 * pi * 1E-7 ! from simple_math_module and precision_specification
     type (rectangle) :: myrect            ! from simple_math_module
-    ! BRACES NEEDED AROUND TYPE DEFINED IN A MODULE
+    ! PARENTHESES NEEDED AROUND TYPE DEFINED IN A MODULE
 
 
     write(*, *)
-    write(*, *) speedoflight            !from physical_constants 
-    call showconstants()                !from physical_constants
-    write(*, *) "area", circlearea(1.0) !from simple_math_module
+    write(*, *) speedoflight            ! from physical_constants 
+    call showconstants()                ! from physical_constants
+    write(*, *) "area", circlearea(1.0) ! from simple_math_module
 
 
     ! defining the values of rectangle type.

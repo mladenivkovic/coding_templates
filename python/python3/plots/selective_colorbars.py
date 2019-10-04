@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 #===============================================================
-# Compute A(x) between two specified particles at various
-# positions x
+# Get nice grid of plots with only one colorbar on the right
+# edge
 #===============================================================
 
 
@@ -112,6 +112,7 @@ def main():
     plt.subplots_adjust(wspace=0.1, hspace=0.1)
     plt.savefig('plot_selective_colorbars.png', dpi=150)
     plt.close()
+    print("Finished plot_selective_colorbars.png")
 
 
     return

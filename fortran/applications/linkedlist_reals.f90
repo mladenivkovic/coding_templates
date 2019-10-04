@@ -19,7 +19,7 @@ program linkedreals
 
     type (link), pointer :: first, current
     real, dimension(:, :), allocatable :: arrayofreals
-    character (len=80) :: fname="inputfiles/3columnreals.dat"
+    character (len=80) :: fname="../inputfiles/3columnreals.dat"
     integer :: io_stat_number = 0
     integer :: n, i = 0, j
 

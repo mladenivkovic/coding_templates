@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
-"""
-========================
-Visualizing named colors
-========================
 
-Simple plot example with the named colors and its visual representation.
-"""
+#==========================
+# Visualizing named colors
+#==========================
+
+# Simple plot example with the named colors and its visual representation.
+# https://matplotlib.org/mpl_examples/color/named_colors.py
+
+
 from __future__ import division
 
 import matplotlib.pyplot as plt

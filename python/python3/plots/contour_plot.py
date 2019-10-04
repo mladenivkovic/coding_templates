@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #=====================================
-# Draw contours
+# Draw contour plots
 #=====================================
 
 
@@ -17,10 +17,10 @@ nx = 200
 
 
 
+# get data
 data = np.zeros((nx, nx), dtype=np.float)
 dx = (uplim-lowlim)/(nx)
 
-# get data
 for i in range(nx):
     for j in range(nx):
         xx = lowlim + (i+0.5)*dx

@@ -3,8 +3,8 @@ program functions
   !=====================================
   ! Dealing with functions.
   !=====================================
-
-
+  !
+  !
   ! Syntax:
   !
   ! type FUNCTION function-name (arg1, arg2, ..., argn)
@@ -13,24 +13,24 @@ program functions
   !    [execution part] 
   !    [subprogram part] 
   !    END FUNCTION function-name
-
-
+  !
+  !
   ! "type" is a Fortran type: logical, integer, real...
   ! function-name : a fortran identifier. Just name it.
   ! arg1, ..., argn : formal arguments
-
+  !
   ! Somewhere in a function there has to be one or more 
   ! assignment statements like " function-name = expression"
   ! function-name cannot appear in the right-hand side of 
   ! any expression.
   ! OR: use type FUNCTION function-name (args) result(resultvar)
   ! then the result is resultvar
-
+  !
   ! In a type specification, formal arguments shold have a new
   ! Attribute: INTENT(IN)
   ! Its meaning is that the function only takes the calue from
   ! a formal agrument and does not change its content.
-
+  !
   ! Functions can have no formal argument, but () is still required.
 
 
@@ -39,7 +39,7 @@ program functions
   !--------------------
   ! INTERNAL FUNCTIONS
   !--------------------
-
+  !
   ! Internal functions are inside of a program, the main program:
   ! Program program-name 
   !   implicit none
@@ -48,7 +48,7 @@ program functions
   ! contains
   !   [functions]
   ! End program program-name
-
+  !
   ! Common problems:
   ! - forget function type
   ! - forget INTENT (IN)
@@ -66,7 +66,7 @@ program functions
   write(*, *) "divide(a,b)              ", divide(a, b)
   write(*, *) "divide(a,b) with results ", divide_results(a, b)
   write(*, *) "factorial(i)             ", factorial(i)
-  res = fibo(i)
+  res = fibonacci(i)
   write(*, *) "fibonacci(i)             ", res(1)
 
 

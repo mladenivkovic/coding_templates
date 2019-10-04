@@ -5,8 +5,8 @@ program chair_linkedlist
   ! "breaks" in between: Append your "object" to whatever list
   ! it's supposed to be appended, while the order you "read them in" is
   ! unknown. (But you know where they should be sorted into.)
-
-
+  !
+  !
   ! Scenario for this program:
   ! Assume you have nbuild buildings. In total there are nrooms rooms distributed
   ! between those 5 buildings (randomly) and every room has nchair chairs.
@@ -23,8 +23,7 @@ program chair_linkedlist
     integer, dimension (1:nrooms) :: room_building_ID
     ! building ID of every room.
     real, dimension(1:nrooms) :: randomrealarray
-    real :: randomreal
-    integer :: dummy_chair_index, empty_room_index
+    integer :: dummy_chair_index
 
 
     ! new stuff i want to implement into ramses:
@@ -34,27 +33,26 @@ program chair_linkedlist
     end type chairll
     
     type (chairll), allocatable, dimension(:,:), target :: buildingchairs
-    !two dimensional array for linked lists of chairs that belong to a building
-    !first index: room id
-    !second index: first and last chair of list
+    ! two dimensional array for linked lists of chairs that belong to a building
+    ! first index: room id
+    ! second index: first and last chair of list
 
 
     ! looping variables, counters:
-    integer :: i, j, k, building_id, iroom, index, ichair, firstchair
-    logical :: relevant
-    type (chairll), pointer :: lastchair_ll, thischair_ll
+    integer :: i, j, k, building_id, iroom, index, ichair
+    type (chairll), pointer :: thischair_ll
 
-    !comparison
+    ! comparison
     integer, dimension(1:nbuild) :: total_chairs_control, total_chairs_ll
-    integer, dimension(:,:),allocatable :: ci_ll, ci_c !chair index array
+    integer, dimension(:,:), allocatable :: ci_c ! chair index array
     integer :: maxchairs_c
 
 
 
-!---------------------------------------
+!----------------------------------------------------
 !--- CREATING IMAGINARY ROOMS AND CHAIRS ARRAYS
 !--- ASSIGNING CONTROL ARRAYS
-!---------------------------------------
+!----------------------------------------------------
 
     total_chairs_control=0 !initiate array to 0
 
@@ -234,16 +232,15 @@ subroutine output_index
 end subroutine output_index
 
 
-subroutine output_cp
-    ! print all cells with chairs and room IDs
-    implicit none
-
-    write(*,*)
-     do i=1, nrooms
-        write(*, '(I4,xxx,10I4)') (dummy_chairs_array(i,j), j=1, nchairs+1) 
-    end do
-end subroutine output_cp
-
+! subroutine output_cp
+!     ! print all cells with chairs and room IDs
+!     implicit none
+!
+!     write(*,*)
+!      do i=1, nrooms
+!         write(*, '(I4,xxx,10I4)') (dummy_chairs_array(i,j), j=1, nchairs+1)
+!     end do
+! end subroutine output_cp
 
 
 

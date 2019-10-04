@@ -1,5 +1,4 @@
 #!/usr/bin/env python3 
-# -*- coding: utf8 -*-
 
 #===========================================================
 # Create a scatterplot, where the color of the plot points

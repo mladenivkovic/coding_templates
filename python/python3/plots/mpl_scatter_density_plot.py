@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+#========================================
+# Using the mpl_scatter_density package
+# for quick scatter plots
+#========================================
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
@@ -40,7 +45,7 @@ ax2.set_title("Scatter Density")
 print("Timing: scatter:", endscatter-startscatter, "scatter_density:", endscatterden-startscatterden)
 
 
-plt.savefig('plot_mpl_scatter_density.png')
+plt.savefig('plot_mpl_scatter_density.png', dpi=200)
 
 
 plt.close()
