@@ -23,3 +23,4 @@ Table of contents:
    images
    footnotes
    links
+   math
