@@ -6,7 +6,7 @@
 #include "mylib.h"
 #include <stdio.h>
 
-extern void print_cylinder_volume(cylinder_t c) {
+void print_cylinder_volume(cylinder_t c) {
   double volume;
 
   volume = c.radius * c.radius * PI * c.height;
