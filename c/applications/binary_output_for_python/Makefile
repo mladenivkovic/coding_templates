@@ -18,7 +18,7 @@ SRCDIR=.
 
 
 #Compiler to use
-CC=gcc
+CC=gcc 
 
 
 
@@ -39,7 +39,7 @@ CFLAGS_MIN=		$(OPTFLAGS) 							    # so I can force errors for demonstration
 
 
 
-LDFLAGS= -lm -I/usr/local/include -L/user/local/lib -lfftw3 
+LDFLAGS= -lm 
 
 
 #==================================
@@ -68,17 +68,6 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
 
-fftw_1d_complex.o: fftw_1d_complex.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
-fftw_1d_real2complex.o: fftw_1d_real2complex.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
-fftw_2d_complex.o: fftw_2d_complex.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
-fftw_2d_real2complex.o: fftw_2d_real2complex.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 
 
