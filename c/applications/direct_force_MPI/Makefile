@@ -18,18 +18,18 @@ SRCDIR=.
 
 
 #Compiler to use
-CC=gcc-8 -I$(IDIR)
-
+CC=gcc 
+MPICC=mpicc
 
 
 # flags for gcc compiler
 #--------------------------
 
 
-# OPTFLAGS = 	-Og 			# debug
-OPTFLAGS = 	-O3  		# performance
+OPTFLAGS = 	-Og 			# debug
+# OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
-FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
+FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros
 STDFLAGS= 	-std=c11
 
 
@@ -39,7 +39,7 @@ CFLAGS_MIN=		$(OPTFLAGS) 							    # so I can force errors for demonstration
 
 
 
-LDFLAGS= -lm
+LDFLAGS= -lm 
 
 
 #==================================
@@ -63,13 +63,10 @@ EXECS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
 
 default: all
 
-backtrace.o: backtrace.c
-	$(CC) $(CFLAGS_MIN) -rdynamic -o $@ $< $(LDFLAGS)
-
-cmdlineargs.o: cmdlineargs.c
-	$(CC) $(CFLAGS_NOSTD) -o $@ $< $(LDFLAGS)
-
 all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
+
+direct_force.o: direct_force.c
+	$(MPICC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
@@ -84,4 +81,3 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 clean:
 	rm -f $(EXECS)
-	# rm -f $(EXECS) $(EXECS_NOSTD) $(EXECS_NODEBUG)
