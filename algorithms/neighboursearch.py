@@ -20,18 +20,18 @@ def main():
 
     # invent some data
     npart = 1000
-    L = 1.0
-    periodic = False
-    h_glob = 0.12
+    L = [1.0, 2.0]
+    periodic = True
+    h_glob = 0.13
 
     np.random.seed(10)
-    x = np.random.random(size=npart) * L
-    y = np.random.random(size=npart) * L
+    x = np.random.random(size=npart) * L[0]
+    y = np.random.random(size=npart) * L[1]
     h = np.ones(npart, dtype=np.float)*h_glob
 
     # if you want to manually set a particle, set it here
     part_to_plot = 0
-    x[0] = 0.7
+    x[0] = 0.99
     y[0] = 0.04
 
 
@@ -41,7 +41,8 @@ def main():
     stop_n = time.time()
 
     start_s = time.time()
-    neigh_s, nneigh_s = get_neighbours(x, y, h, L=L, periodic=periodic)
+    #  neigh_s, nneigh_s = get_neighbours_square(x, y, h, L=L, periodic=periodic)
+    neigh_s, nneigh_s = get_neighbours_rect(x, y, h, L=L, periodic=periodic)
     stop_s = time.time()
 
     tn = stop_n - start_n
@@ -56,7 +57,7 @@ def main():
     plot_solution(x, y, h, part_to_plot, neigh_s, L=L, periodic=periodic)
     
     # run a speed comparison 
-    compare_speeds()
+    #  compare_speeds()
 
 
     return
@@ -67,11 +68,236 @@ def main():
 
 
 
+
 #========================================================================
-def get_neighbours(x, y, h, fact=1.0, L=1.0, periodic=True):
+def get_neighbours_rect(x, y, h, fact=1.0, L=[1.0, 1.0], periodic=True):
 #========================================================================
     """
     Gets all the neighbour data for all particles ready.
+    Assumes domain is a rectangle with boxsize L[0], L[1].
+    x, y, h:    arrays of positions/h of all particles
+    fact:       kernel support radius factor: W = 0 for r > fact*h
+    L:          boxsize. List/Array or scalar.
+    periodic:   Whether you assume periodic boundary conditions
+
+    returns:
+        neighbours:     list of lists of all neighbours for each particle
+        nneigh:         numpy array of now many neighbours each particle has
+
+
+    """
+
+    # if it isn't in a list already, create one
+    # do this before function/class definition
+    if not hasattr(L, "__len__"):
+        L = [L, L]
+
+
+    #-----------------------------------------------
+    class cell:
+    #-----------------------------------------------
+        """
+        A cell object to store particles in.
+        Stores particle indexes, positions, compact support radii
+        """
+
+        def __init__(self):
+           self.npart = 0
+           self.size = 100
+           self.parts = np.zeros(self.size, dtype=np.int)
+           self.x = np.zeros(self.size, dtype=np.float)
+           self.y = np.zeros(self.size, dtype=np.float)
+           self.h = np.zeros(self.size, dtype=np.float)
+           return
+
+        def add_particle(self, ind, xp, yp, hp):
+            """
+            Add a particle, store the index, positions and h
+            """
+            if self.npart == self.size:
+                self.parts = np.append(self.parts, np.zeros(self.size, dtype=np.int))
+                self.x = np.append(self.x, np.zeros(self.size, dtype=np.float))
+                self.y = np.append(self.y, np.zeros(self.size, dtype=np.float))
+                self.h = np.append(self.h, np.zeros(self.size, dtype=np.float))
+                self.size *= 2
+
+            self.parts[self.npart] = ind
+            self.x[self.npart] = xp
+            self.y[self.npart] = yp
+            self.h[self.npart] = hp
+            self.npart += 1
+            
+            return
+
+
+    
+    #-------------------------------------------------------
+    def find_neighbours_in_cell(i, j, p, xx, yy, hh):
+    #-------------------------------------------------------
+        """
+        Find neighbours of a particle in the cell with indices i,j
+        of the grid
+        p:      global particle index to work with
+        xx, yy: position of particle x
+        hh:     compact support radius for p
+        """
+        n = 0
+        neigh = [0 for i in range(1000)]
+        ncell = grid[i][j] # neighbour cell we're checking for
+
+        N = ncell.npart
+        
+        fhsq = hh*hh*fact*fact
+
+        for c, cp in enumerate(ncell.parts[:N]):
+            if cp == p:
+                # skip yourself
+                continue
+
+            dx, dy = get_dx(xx, ncell.x[c], yy, ncell.y[c], L=L, periodic=periodic)
+
+            dist = dx**2 + dy**2
+
+            if dist <= fhsq:
+                try:
+                    neigh[n] = cp
+                except ValueError:
+                    nneigh+=[0 for i in range(1000)]
+                    nneigh[n] = cp
+                n += 1
+
+        return neigh[:n]
+
+
+
+
+    npart = x.shape[0]
+
+
+    # first find cell size
+    ncells_x = int(L[0]/h.max()) + 1
+    ncells_y = int(L[1]/h.max()) + 1
+    cell_size_x = L[0]/ncells_x
+    cell_size_y = L[1]/ncells_y
+
+    # create grid
+    grid = [[cell() for j in range(ncells_y)] for i in range(ncells_x)]
+
+    # sort out particles
+    for p in range(npart):
+        i = int(x[p]/cell_size_x)
+        j = int(y[p]/cell_size_y)
+        grid[i][j].add_particle(p, x[p], y[p], h[p])
+
+
+    neighbours = [[] for i in x]
+    nneigh = np.zeros(npart, dtype=np.int)
+   
+
+
+
+
+    # main loop: find and store all neighbours;
+    # go cell by cell
+    for row in range(ncells_y):
+        for col in range(ncells_x):
+
+            cell = grid[col][row]
+            N = cell.npart
+            parts = cell.parts
+            if N == 0: continue
+
+            hmax = cell.h[:N].max()
+
+            # find over how many cells to loop in every direction
+            maxdistx = int(cell_size_x/hmax+0.5) + 1
+            maxdisty = int(cell_size_y/hmax+0.5) + 1
+            
+            xstart = -maxdistx
+            xstop = maxdistx+1
+            ystart = -maxdisty
+            ystop = maxdisty+1
+
+            # exception handling: if ncells < 4, just loop over
+            # all of them so that you don't add neighbours multiple
+            # times
+            if ncells_x < 4:
+                xstart = 0
+                xstop = ncells_x
+            if ncells_y < 4:
+                ystart = 0
+                ystop = ncells_y
+
+            checked_cells = [(None, None) for i in range((2*maxdistx+1)*(2*maxdisty + 1))]
+            it = 0
+
+            # loop over all neighbours
+            # need to loop over entire square. You need to consider
+            # the maximal distance from the edges/corners, not from
+            # the center of the cell!
+            for i in range(xstart, xstop):
+                for j in range(ystart, ystop):
+                    
+                    if ncells_x < 4:
+                        iind = i
+                    else:
+                        iind = col+i
+ 
+                    if ncells_y < 4:
+                        jind = j
+                    else:
+                        jind = row+j
+
+                    if periodic:
+                        while iind<0: iind += ncells_x
+                        while iind>=ncells_x: iind -= ncells_x
+                        while jind<0: jind += ncells_y
+                        while jind>=ncells_y: jind -= ncells_y
+                    else:
+                        if iind < 0 or iind >= ncells_x:
+                            continue
+                        if jind < 0 or jind >= ncells_y:
+                            continue
+
+                    it += 1
+                    if (iind, jind) in checked_cells[:it-1]:
+                        continue
+                    else:
+                        checked_cells[it-1] = (iind, jind)
+
+                    # loop over all particles in THIS cell
+                    for pc, pg in enumerate(cell.parts[:N]):
+
+                        xp = cell.x[pc]
+                        yp = cell.y[pc]
+                        hp = cell.h[pc]
+
+                        neighbours[pg] += find_neighbours_in_cell(iind, jind, pg, xp, yp, hp)
+
+
+    # sort neighbours by index
+    for p in range(npart):
+        neighbours[p].sort()
+        nneigh[p] = len(neighbours[p])
+
+    return neighbours, nneigh
+
+
+
+
+
+
+
+
+
+
+
+#========================================================================
+def get_neighbours_square(x, y, h, fact=1.0, L=1.0, periodic=True):
+#========================================================================
+    """
+    Gets all the neighbour data for all particles ready.
+    Assumes domain is a square with boxsize L.
     x, y, h:    arrays of positions/h of all particles
     fact:       kernel support radius factor: W = 0 for r > fact*h
     L:          boxsize
@@ -83,6 +309,17 @@ def get_neighbours(x, y, h, fact=1.0, L=1.0, periodic=True):
 
 
     """
+
+
+    if hasattr(L, "__len__"):
+        if L[0] == L[1]:
+            L = L[0]
+        else:
+            print("Have different box dimensions:", L[0], "and", L[1])
+            print("Can't work like this")
+            quit()
+
+
 
 
     #-----------------------------------------------
@@ -159,7 +396,6 @@ def get_neighbours(x, y, h, fact=1.0, L=1.0, periodic=True):
                 n += 1
 
         return neigh[:n]
-
 
 
 
@@ -373,13 +609,14 @@ def get_neighbours_naive(x, y, h, fact=1.0, L=1.0, periodic=True):
 
 
 
+
 #=====================================================
 def get_dx(x1, x2, y1, y2, L=1.0, periodic=True):
 #=====================================================
     """
     Compute difference of vectors [x1 - x2, y1 - y2] while
     checking for periodicity if necessary
-    L:          boxsize
+    L:          boxsize. Scalar or array_like
     periodic:   whether to assume periodic boundaries
     """
 
@@ -388,17 +625,23 @@ def get_dx(x1, x2, y1, y2, L=1.0, periodic=True):
 
     if periodic:
 
-        Lhalf = 0.5*L
+        if hasattr(L, "__len__"):
+            Lxhalf = L[0]/2.0
+            Lyhalf = L[1]/2.0
+        else:
+            Lxhalf = L/2.0
+            Lyhalf = L/2.0
+            L = [L, L]
 
-        if dx > Lhalf:
-            dx -= L
-        elif dx < -Lhalf:
-            dx += L
+        if dx > Lxhalf:
+            dx -= L[0]
+        elif dx < -Lxhalf:
+            dx += L[0]
 
-        if dy > Lhalf:
-            dy -= L
-        elif dy < -Lhalf:
-            dy += L
+        if dy > Lyhalf:
+            dy -= L[1]
+        elif dy < -Lyhalf:
+            dy += L[1]
 
 
     return dx, dy
@@ -424,6 +667,8 @@ def plot_solution(x, y, h, part_to_plot, neigh, L=1.0, periodic=True):
     returns:    Nothing
     """
 
+    if not hasattr(L, "__len__"):
+        L = [L, L]
 
     # Set point parameters : Set circle centres
     xpart = x[part_to_plot]
@@ -433,29 +678,29 @@ def plot_solution(x, y, h, part_to_plot, neigh, L=1.0, periodic=True):
     yp = [ypart]
     if periodic:
         if xpart - rpart < 0:
-            xp.append(xpart+L)
+            xp.append(xpart+L[0])
             yp.append(ypart)
-        if xpart + rpart > L:
-            xp.append(xpart-L)
+        if xpart + rpart > L[0]:
+            xp.append(xpart-L[0])
             yp.append(ypart)
         if ypart - rpart < 0:
             xp.append(xpart)
-            yp.append(ypart+L)
-        if ypart + rpart > L:
+            yp.append(ypart+L[1])
+        if ypart + rpart > L[1]:
             xp.append(xpart)
-            yp.append(ypart-L)
-        if xpart - rpart < 0 and ypart + rpart > L:
-            xp.append(xpart+L)
-            yp.append(ypart-L)
+            yp.append(ypart-L[1])
+        if xpart - rpart < 0 and ypart + rpart > L[1]:
+            xp.append(xpart+L[0])
+            yp.append(ypart-L[1])
         if xpart - rpart < 0 and ypart - rpart < 0:
-            xp.append(xpart+L)
-            yp.append(ypart+L)
-        if xpart + rpart > L and ypart + rpart > L:
-            xp.append(xpart-L)
-            yp.append(ypart-L)
-        if xpart + rpart > L and ypart - rpart < 0:
-            xp.append(xpart-L)
-            yp.append(ypart+L)
+            xp.append(xpart+L[0])
+            yp.append(ypart+L[1])
+        if xpart + rpart > L[0] and ypart + rpart > L[1]:
+            xp.append(xpart-L[0])
+            yp.append(ypart-L[1])
+        if xpart + rpart > L[0] and ypart - rpart < 0:
+            xp.append(xpart-L[0])
+            yp.append(ypart+L[1])
         
     r = [rpart for i in xp] 
 
@@ -471,8 +716,8 @@ def plot_solution(x, y, h, part_to_plot, neigh, L=1.0, periodic=True):
     scat = ax1.scatter(xp,yp,s=0, alpha=0.5,clip_on=False, facecolor='grey')
 
     #Set axes edges
-    ax1.set_xlim(0.00,L)
-    ax1.set_ylim(0.00,L)  
+    ax1.set_xlim(0.00,L[0])
+    ax1.set_ylim(0.00,L[1])  
 
     # Draw figure
     fig.canvas.draw()
@@ -503,12 +748,15 @@ def plot_solution(x, y, h, part_to_plot, neigh, L=1.0, periodic=True):
 
 
     # Plot cell boundaries
-    ncells = int(L/h.max()) + 1
-    cell_size = L/ncells
+    ncells_x = int(L[0]/h.max()) + 1
+    cell_size_x = L[0]/ncells_x
+    ncells_y = int(L[1]/h.max()) + 1
+    cell_size_y = L[1]/ncells_y
 
-    for i in range(1, ncells+1):
-        ax1.plot([i*cell_size, i*cell_size], [0, L], lw=0.5, c='darkgrey')
-        ax1.plot([0, L], [i*cell_size, i*cell_size], lw=0.5, c='darkgrey')
+    for i in range(1, ncells_x+1):
+        ax1.plot([i*cell_size_x, i*cell_size_x], [0, L[1]], lw=0.5, c='darkgrey')
+    for j in range(1, ncells_y+1):
+        ax1.plot([0, L[0]], [j*cell_size_y, j*cell_size_y], lw=0.5, c='darkgrey')
 
     print("Warning: Manually resizing the figure changes the circle size.")
     plt.show()
@@ -530,9 +778,9 @@ def plot_solution(x, y, h, part_to_plot, neigh, L=1.0, periodic=True):
 
 
 
-#======================================================================
-def compare_results(x, y, h, neigh_n, nneigh_n, neigh_s, nneigh_s, L):
-#======================================================================
+#===============================================================================================
+def compare_results(x, y, h, neigh_n, nneigh_n, neigh_s, nneigh_s, L=1.0, periodic=True):
+#===============================================================================================
     """
     Compare the neighboursearch results element-by-element
     x, y, h:    np.arrays of positions, compact support lengths
@@ -547,8 +795,13 @@ def compare_results(x, y, h, neigh_n, nneigh_n, neigh_s, nneigh_s, L):
 
     npart = x.shape[0]
 
-    ncells = int(L/h.max()) + 1
-    cell_size = L/ncells
+    if not hasattr(L, "__len__"):
+        L = [L, L]
+
+    ncells_x = int(L[0]/h.max()) + 1
+    ncells_y = int(L[1]/h.max()) + 1
+    cell_size_x = L[0]/ncells_x
+    cell_size_y = L[1]/ncells_y
 
     found_difference = False
 
@@ -583,21 +836,21 @@ def compare_results(x, y, h, neigh_n, nneigh_n, neigh_s, nneigh_s, L):
             xl = x[larger[p][problem]]
             yl = y[larger[p][problem]]
             Hl = h[larger[p][problem]]
-            dxl, dyl = get_dx(xl, x[p], yl, y[p])
+            dxl, dyl = get_dx(xl, x[p], yl, y[p], L=L, periodic=periodic)
             rl = np.sqrt(dxl**2 + dyl**2)
 
             xS = x[smaller[p][problem]]
             yS = y[smaller[p][problem]]
             HS = h[smaller[p][problem]]
-            dxS, dyS = get_dx(xS, x[p], yS, y[p])
+            dxS, dyS = get_dx(xS, x[p], yS, y[p], L=L, periodic=periodic)
             rS = np.sqrt(dxS**2 + dyS**2)
     
-            ip = int(x[p]/cell_size)
-            jp = int(y[p]/cell_size)
-            iS = int(x[smaller[p][problem]]/cell_size)
-            jS = int(y[smaller[p][problem]]/cell_size)
-            il = int(x[larger[p][problem]]/cell_size)
-            jl = int(y[larger[p][problem]]/cell_size)
+            ip = int(x[p]/cell_size_x)
+            jp = int(y[p]/cell_size_y)
+            iS = int(x[smaller[p][problem]]/cell_size_x)
+            jS = int(y[smaller[p][problem]]/cell_size_y)
+            il = int(x[larger[p][problem]]/cell_size_x)
+            jl = int(y[larger[p][problem]]/cell_size_y)
 
             print("Larger is:", larger_is, " positions:")
             print("ind part:  {0:6d}  x: {1:14.7f}  y: {2:14.7f}  H: {3:14.7f}; i= {4:5d} j= {5:5d}".format(p, x[p], y[p], h[p], ip, jp))
@@ -617,6 +870,8 @@ def compare_results(x, y, h, neigh_n, nneigh_n, neigh_s, nneigh_s, L):
 
     if not found_difference:
         print("Found no difference.")
+
+    return
 
 
 
