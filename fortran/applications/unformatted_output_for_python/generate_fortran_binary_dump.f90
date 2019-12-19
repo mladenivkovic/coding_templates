@@ -24,11 +24,13 @@ program generate_unformatted_dump
   
   integer i, j
 
+  character           :: somechar = 'c'
   integer             :: someint = 10
   real                :: somefloat = 2.345
   real(dp)            :: somedouble = 1.2345d-306
-  real(qp)            :: somequad = 2.34567q900
-  character           :: somechar = 'c'
+  real(kind=8)        :: somereal8 = 2.345e34
+  ! real(qp)            :: somequad = 2.34567q900 
+  ! don't use quads. They are nonstandard, and scipy.io.FortranFile can't do it properly.
 
 
   character (len=40)            :: somestring
@@ -57,8 +59,10 @@ program generate_unformatted_dump
   write(666) someint
   write(666) somefloat
   write(666) somedouble
-  write(666) somequad
+  write(666) somereal8
+  ! write(666) somequad
   write(666) somechar
+  write(666) somestring
   write(666) intarr
   write(666) intarr2d
   close(666)
@@ -68,8 +72,10 @@ program generate_unformatted_dump
   write(*, '(I10)') someint
   write(*, '(F7.3)') somefloat
   write(*, '(E20.8)') somedouble
-  write(*, '(E60.30)') somequad
+  write(*, '(E20.8)') somereal8
+  ! write(*, '(E60.30)') somequad
   write(*, '(A)') somechar
+  write(*, '(A)') somestring
   do i = 1, 10
     write(*, '(I4)', advance='no') intarr(i)
   enddo
