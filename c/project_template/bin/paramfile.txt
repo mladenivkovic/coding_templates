@@ -1,5 +1,9 @@
-// parameter file for SPH program
+// default parameter file
+
+/* empty lines and comment lines will be skipped.
 
 levelmax = 3
 nstepmax = 10
 verbose = 1
+
+dx = a

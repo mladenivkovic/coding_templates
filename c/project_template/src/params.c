@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* ============================================= */
-void check_params(params *p) {
-  /* ============================================= */
+void params_check(params *p) {
+  /*---------------------------------------------*/
   /* This function checks the parameters         */
   /* that have been read in and makes sure that  */
   /* the simulation can be run with the given    */
@@ -48,13 +47,12 @@ void check_params(params *p) {
   }
 
   if (error) {
-    exit(602);
+    exit(1);
   }
 }
 
-/* ==========================================*/
-void init_params(params *p) {
-  /* ==========================================*/
+void params_init(params *p) {
+  /*-----------------------------------------*/
   /* Initialize parameters to default values */
   /*-----------------------------------------*/
 
@@ -77,9 +75,8 @@ void init_params(params *p) {
   u->unit_t = 1.0;
 }
 
-/* ============================== */
-void print_params(params *p) {
-  /* ============================ */
+void params_print(params *p) {
+  /* ---------------------------- */
   /* print current parameters.    */
   /* ---------------------------- */
 

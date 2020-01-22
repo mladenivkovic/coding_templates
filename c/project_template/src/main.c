@@ -19,11 +19,11 @@
 int main(int argc, char* argv[]) {
 
   params p;
-  init_params(&p);
-  read_cmdlineargs(argc, argv, &p);
-  read_paramfile(&p);
-  check_params(&p);
-  print_params(&p);
+  params_init(&p);
+  io_read_cmdlineargs(argc, argv, &p);
+  io_read_paramfile(&p);
+  params_check(&p);
+  params_print(&p);
 
   return (0);
 }

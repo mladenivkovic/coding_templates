@@ -34,8 +34,8 @@ typedef struct {
   units units;
 } params;
 
-extern void check_params(params *p);
-extern void init_params(params *p);
-extern void print_params(params *p);
+void params_check(params *p);
+void params_init(params *p);
+void params_print(params *p);
 
 #endif

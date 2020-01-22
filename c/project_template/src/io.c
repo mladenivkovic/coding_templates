@@ -5,11 +5,8 @@
 #include "io.h"
 #include "params.h"
 
-#define MAX_LINE_SIZE 200
-
-/* ======================================================= */
-void read_cmdlineargs(int argc, char* argv[], params* p) {
-  /* ======================================================= */
+void io_read_cmdlineargs(int argc, char* argv[], params* p) {
+  /*-------------------------------------------------------*/
   /* This function reads in the command line arguments and */
   /* stores them in the globalparams struct                */
   /*-------------------------------------------------------*/
@@ -28,9 +25,8 @@ void read_cmdlineargs(int argc, char* argv[], params* p) {
   };
 }
 
-/* ================================= */
-void read_paramfile(params* p) {
-  /* ================================= */
+void io_read_paramfile(params* p) {
+  /*---------------------------------*/
   /* Read in parameter file, store   */
   /* read in global parameters.      */
   /*---------------------------------*/
@@ -38,10 +34,12 @@ void read_paramfile(params* p) {
   globalparams* g = &(p->gp);
   units* u = &(p->units);
 
-  // open file
+  /* check if file exists */
+  io_check_file_exists(g->paramfilename);
+
+  /* open file */
   FILE* par = fopen(g->paramfilename, "r");
 
-  // check if file exists
   if (par == NULL) {
     printf("Error: file '%s' not found.\n", g->paramfilename);
     exit(602);
@@ -52,35 +50,23 @@ void read_paramfile(params* p) {
   char tempbuff[MAX_LINE_SIZE];
 
   while (fgets(tempbuff, MAX_LINE_SIZE, par))
-  // fgets(str_buff, n,filepointer) :
-  // gets n characters from file in filepointer and stores them
-  // in str_buff.
-  // returns 0 if EoF is reached.
+  /* fgets(str_buff, n,filepointer) : */
+  /* gets n characters from file in filepointer and stores them */
+  /* in str_buff. */
+  /* returns 0 if EoF is reached. */
 
   {
 
-    // check whether tempbuff is empty line
-    int isempty = 0;
-    for (int i = 0; i < MAX_LINE_SIZE; i++) {
-      if (tempbuff[i] != ' ') {
-        if (tempbuff[i] == '\n') {
-          isempty = 1;
-        }
-        break;
-      }
-    }
-
-    if (isempty) continue;
+    if (line_is_empty(tempbuff)) continue;
 
     sscanf(tempbuff, "%20s = %56[^\n]\n", varname, varvalue);
-    // reads formatted input from a string, writes it in
-    // the variables given after the format string.
-    // The format used is <string> separator <=> <string> ends with <;>
+
+    if (line_is_comment(varname)) continue;
 
     if (strcmp(varname, "verbose") == 0) {
       g->verbose = atoi(varvalue);
-      // atoi/atof: convert string to integer/float
-      // from stdlib.h
+      /* atoi/atof: convert string to integer/float */
+      /* from stdlib.h */
     } else if (strcmp(varname, "levelmax") == 0) {
       g->levelmax = atoi(varvalue);
     } else if (strcmp(varname, "nstepmax") == 0) {
@@ -93,16 +79,63 @@ void read_paramfile(params* p) {
       u->unit_l = atof(varvalue);
     } else if (strcmp(varname, "unit_t") == 0) {
       u->unit_t = atof(varvalue);
-    } else if (strcmp(varname, "//") == 0) {
-      // ignore comments
-      continue;
-    } else if (strcmp(varname, "/*") == 0) {
-      // ignore comments
-      continue;
     } else {
       printf("Unrecongized parameter : \"%s\"\n", varname);
     }
   }
 
   fclose(par);
+}
+
+void io_check_file_exists(char* fname) {
+  /* -------------------------------------------------------- */
+  /* Check whether a file exists. If it doesn't, exit.        */
+  /* -------------------------------------------------------- */
+
+  FILE* f = fopen(fname, "r");
+
+  /* check if file exists */
+  if (f == NULL) {
+    printf("Error: file '%s' not found.\n", fname);
+    exit(1);
+  } else {
+    fclose(f);
+  }
+}
+
+int line_is_empty(char* line) {
+  /* --------------------------------- */
+  /* Check whether this line is empty, */
+  /* i.e. only whitespaces or newlines.*/
+  /* returns 1 if true, 0 otherwise.   */
+  /* assumes line is MAX_LINE_SIZE     */
+  /* --------------------------------- */
+
+  int isempty = 0;
+
+  for (int i = 0; i < MAX_LINE_SIZE; i++) {
+    if (line[i] != ' ') {
+      if (line[i] == '\n') isempty = 1;
+      break;
+    }
+  }
+  return (isempty);
+}
+
+int line_is_comment(char* line) {
+  /* --------------------------------------
+   * Check whether the given line string is
+   * a comment, i.e. starts with // or
+   * <slash>*
+   * -------------------------------------- */
+
+  char firsttwo[3];
+  strncpy(firsttwo, line, 2);
+
+  /* strcmp returns 0 if strings are equal */
+  if (!strcmp(firsttwo, "//") || !strcmp(firsttwo, "/*")) {
+    return (1);
+  } else {
+    return (0);
+  }
 }
