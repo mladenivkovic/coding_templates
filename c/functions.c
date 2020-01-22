@@ -1,13 +1,13 @@
-//===============================
-// Functions baby, functions!
-//===============================
+/* =============================== */
+/* Functions baby, functions! */
+/* =============================== */
 
 #include <stdio.h>
 #define PI 3.14159
 
-//===================================================
-// Declare functions that will be defined after main:
-//===================================================
+/* =================================================== */
+/* Declare functions that will be defined after main: */
+/* =================================================== */
 void print_useless_shit(void);
 void compute_and_print_area(double radius);
 double circumference(double radius);
@@ -18,9 +18,9 @@ void passing_output_parameters_as_arguments(double num, char *signp,
                                             int *wholep, int *fracp);
 int fibonacci(int n);
 
-//========================
+/* ======================== */
 int main(void) {
-  //========================
+  /* ======================== */
 
   double radius = 13.2;
 
@@ -54,52 +54,54 @@ int main(void) {
   return (0);
 }
 
-//==============================
+/* ============================== */
 void print_useless_shit(void)
-//==============================
+/* ============================== */
 {
-  // This is a function that doesn't need or return anything.
+  /* This is a function that doesn't need or return anything. */
 
   printf("Hey there! Here's some more useless text for you.\n");
 }
 
-//========================================
+/* ======================================== */
 void compute_and_print_area(double radius)
-//========================================
+/* ======================================== */
 {
-  // takes input, but creates no output.
+  /* takes input, but creates no output. */
 
   double area = PI * radius * radius;
   printf("The area is %.3f\n", area);
 }
 
-//========================================
+/* ======================================== */
 double circumference(double radius)
-//========================================
+/* ======================================== */
 {
-  // takes input, creates only one output
+  /* takes input, creates only one output */
 
   double circumference = 2 * PI * radius;
 
   return (circumference);
 }
 
-//====================================================
+/* ==================================================== */
 double cylinder_volume(double radius, double height)
-//====================================================
+/* ==================================================== */
 {
-  // takes multiple arguments, gives one out
+  /* takes multiple arguments, gives one out */
   double volume = PI * radius * radius * height;
   return (volume);
 }
 
-//====================================================================================
+/* ====================================================================================
+ */
 void output_values_with_pointers(double num, char *signp, int *wholep,
                                  int *fracp)
-//====================================================================================
+/* ====================================================================================
+ */
 {
-  // Separates float "num" into sign, whole value and fractional value.
-  // Sign, whole value and fractional value are "returned" to the main.
+  /* Separates float "num" into sign, whole value and fractional value. */
+  /* Sign, whole value and fractional value are "returned" to the main. */
 
   int magnitude;
   double remainder;
@@ -116,14 +118,16 @@ void output_values_with_pointers(double num, char *signp, int *wholep,
   *wholep = magnitude;
 
   remainder = num - magnitude;
-  // assuming up to 6 decimal digits
+  /* assuming up to 6 decimal digits */
   *fracp = remainder * 1000000;
 }
 
-//============================================================================================
+/* ============================================================================================
+ */
 void passing_output_parameters_as_arguments(double num, char *signp,
                                             int *wholep, int *fracp)
-//============================================================================================
+/* ============================================================================================
+ */
 {
   /*This function passes the arguments to the function
    * output_values_with_pointers()*/
@@ -131,18 +135,18 @@ void passing_output_parameters_as_arguments(double num, char *signp,
   printf("Accessed function passing_output_parameters_as_arguments :)\n");
 }
 
-//================================
+/* ================================ */
 int fibonacci(int n)
-//================================
+/* ================================ */
 {
-  // Determine the n-th fibonacci number recursively.
-  // This is just an auxilliary function to keep the code clean.
-  // The actual computation happens with compute_fibonacci(n)
+  /* Determine the n-th fibonacci number recursively. */
+  /* This is just an auxilliary function to keep the code clean. */
+  /* The actual computation happens with compute_fibonacci(n) */
 
   int result;
   int previous = 0;
 
-  // define function here
+  /* define function here */
   int compute_fibonacci(int n, int *previous);
 
   if (n > 1) {
@@ -156,9 +160,9 @@ int fibonacci(int n)
   }
 }
 
-//===========================================
+/* =========================================== */
 int compute_fibonacci(int n, int *previous)
-//===========================================
+/* =========================================== */
 {
 
   int step, result;
@@ -172,7 +176,7 @@ int compute_fibonacci(int n, int *previous)
     printf("Something went wrong.\n");
     return 0;
   } else {
-    /**previous = 0; // not necessary...*/
+    /* *previous = 0; [> not necessary...<] */
     return 1;
   }
 }

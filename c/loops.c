@@ -1,6 +1,6 @@
-//======================
-// Loopityloops
-//======================
+/* ====================== */
+/* Loopityloops */
+/* ====================== */
 
 #include <stdio.h> /* input, output    */
 
@@ -24,9 +24,9 @@ int main(void) {
   printf("1.2 - Counter after loop: %d\n", counter);
   printf("\n");
 
-  //=======================
-  // FOR Loop
-  //=======================
+  /* ======================= */
+  /* FOR Loop */
+  /* ======================= */
 
   counter = 0;
 
@@ -43,10 +43,10 @@ int main(void) {
   }
 
   printf("2.2 - Counter after loop: %d\n", counter);
-  ///////////////////////////////////////////////////////////////////
-  // You're not using the return value of i, only its actual value -
-  // therefore it makes no difference whether you use i++ or ++i !
-  ///////////////////////////////////////////////////////////////////
+  /* ///////////////////////////////////////////////////////////////// */
+  /* You're not using the return value of i, only its actual value - */
+  /* therefore it makes no difference whether you use i++ or ++i ! */
+  /* ///////////////////////////////////////////////////////////////// */
 
   for (i = 0; i < 7; i++) {
     if (i == 5) {
@@ -57,9 +57,9 @@ int main(void) {
 
   printf("\n");
 
-  //=======================
-  // DO WHILE Loop
-  //=======================
+  /* ======================= */
+  /* DO WHILE Loop */
+  /* ======================= */
 
   counter = 0;
 
@@ -75,9 +75,9 @@ int main(void) {
   } while (counter < 0);
   printf("3.2 - Counter after loop: %d\n", counter);
 
-  ////////////////////////////////////////////////////
-  // DO WHILE executes command block at least once!
-  ////////////////////////////////////////////////////
+  /* ////////////////////////////////////////////////// */
+  /* DO WHILE executes command block at least once! */
+  /* ////////////////////////////////////////////////// */
 
   return (0);
 }

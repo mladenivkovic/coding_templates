@@ -4,9 +4,9 @@
 
 #include <stdio.h>
 
-//=====================
+/* ===================== */
 int main(void) {
-  //=====================
+  /* ===================== */
 
   short someshort = -5;
   unsigned short someushort = 7;

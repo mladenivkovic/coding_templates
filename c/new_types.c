@@ -1,39 +1,40 @@
-//=========================
-// New types and structs.
-//=========================
+/* ========================= */
+/* New types and structs. */
+/* ========================= */
 
 #include <stdio.h> /* input, output    */
 #include <stdlib.h>
-#include <string.h>  // strcpy()
+#include <string.h> /* strcpy() */
 
 #define STRINGSIZE 30
 
-//====================
-// enumerated type
-//====================
+/* ==================== */
+/* enumerated type */
+/* ==================== */
 
-// enumeration constants must be identifiers, they cannot be numeric,character,
-// or string literals
-// enum types are mainly used to make the code more readable.
+/* enumeration constants must be identifiers, they cannot be numeric,character,
+ */
+/* or string literals */
+/* enum types are mainly used to make the code more readable. */
 
 typedef enum { student_id, grade, income } student;
 
 typedef enum { Mon, Tue, Wed, Thur, Fri, Sat, Sun } week;
 
-//====================
-// struct type
-//====================
+/* ==================== */
+/* struct type */
+/* ==================== */
 typedef struct {
-  char name[STRINGSIZE];  // name of planet
-  double diameter;        // diameter in km
-  int moons;              // # of moons
-  double orbit_time;      // orbit around sun in yrs
-  double rotation_time;   // time for one revolution in hrs
+  char name[STRINGSIZE]; /* name of planet */
+  double diameter;       /* diameter in km */
+  int moons;             /* # of moons */
+  double orbit_time;     /* orbit around sun in yrs */
+  double rotation_time;  /* time for one revolution in hrs */
 } planet;
 
-//===========================
-// functions using new types
-//===========================
+/* =========================== */
+/* functions using new types */
+/* =========================== */
 void printplanet(planet p) {
   printf("Name:          %s\n", p.name);
   printf("Diameter:      %f\n", p.diameter);
@@ -42,18 +43,18 @@ void printplanet(planet p) {
   printf("Rotation time: %f\n", p.orbit_time);
 }
 
-//====================
+/* ==================== */
 int main(void)
-//====================
+/* ==================== */
 {
 
-  // type enum
+  /* type enum */
 
   printf("\n ENUM TYPES\n\n");
 
-  // note how you're not integers to assign the value,
-  // but the keywords you defined!
-  // 'Wed' and 'grade' are not variables!
+  /* note how you're not integers to assign the value, */
+  /* but the keywords you defined! */
+  /* 'Wed' and 'grade' are not variables! */
 
   week day;
   day = Wed;
@@ -83,7 +84,7 @@ int main(void)
 
   printf("\n\n\n STRUCT TYPES\n\n");
 
-  // struct type
+  /* struct type */
   planet jupiter = {"Jupiter", 142800, 16, 11.9, 9.925};
   planet earth;
   strcpy(earth.name, "Earth");
@@ -97,38 +98,38 @@ int main(void)
   printf("%s\n", earth.name);
   printf("%f\n", earth.diameter);
 
-  // Assigning whole structs to others works
+  /* Assigning whole structs to others works */
   earth = jupiter;
   printf("%s\n", earth.name);
   printf("%f\n", earth.diameter);
 
-  // using functions
+  /* using functions */
   printplanet(jupiter);
 
-  //=================================
-  // WORKING WITH ARRAYS OF STRUCTS
-  //=================================
+  /* ================================= */
+  /* WORKING WITH ARRAYS OF STRUCTS */
+  /* ================================= */
 
-  // define new struct
+  /* define new struct */
   typedef struct {
     int someint;
     double somedouble;
   } TEST;
 
-  // initialize new array of pointers to structs
+  /* initialize new array of pointers to structs */
   int ntest = 3;
   TEST** testarr = malloc(ntest * sizeof(TEST*));
 
-  // fill array
+  /* fill array */
   for (int i = 0; i < ntest; i++) {
     TEST* newtest = malloc(sizeof(newtest));
     newtest->someint = i;
-    // same as (*newtest).someint = i;
+    /* same as (*newtest).someint = i; */
     newtest->somedouble = i * 0.33;
     testarr[i] = newtest;
   }
 
-  // print
+  /* print */
   printf("\n\n\n");
   for (int i = 0; i < ntest; i++) {
     printf("ARRAYTEST %d : %d %g\n", i, testarr[i]->someint,

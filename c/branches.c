@@ -1,12 +1,12 @@
-//==========================
-// Branches: if and switch
-//==========================
+/* ========================== */
+/* Branches: if and switch */
+/* ========================== */
 
 #include <stdio.h>
 
-//=================
+/* ================= */
 int main(void)
-//=================
+/* ================= */
 {
 
   int true, false;
@@ -58,23 +58,23 @@ int main(void)
 
   printf("\nSWITCH\n");
 
-  // int watts_of_bulb =240;
+  /* int watts_of_bulb =240; */
   int watts_of_bulb = 75;
-  // int watts_of_bulb =40;
+  /* int watts_of_bulb =40; */
   int life;
 
   switch (watts_of_bulb) {
     case 25:
       life = 2500;
       printf("Now checking 25\n");
-      break;  // doesn't check other cases
+      break; /* doesn't check other cases */
 
 /* these lines make gcc ignore -Wimplicit-fallthrough warnings in this part
  * of the code (until the #pragma GCC diagnostic pop line) */
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
 
-    case 40:  // if true, it will go on until the first break.
+    case 40: /* if true, it will go on until the first break. */
     case 50:
 
     case 60:
@@ -82,7 +82,7 @@ int main(void)
       break;
 
     case 75:
-      // if true, it will go on until the first break.
+      /* if true, it will go on until the first break. */
       printf("Now checking 75\n");
 
     case 100:
@@ -100,7 +100,7 @@ int main(void)
       break;
 
     default:
-      life = 0;  // if watts > 200
+      life = 0; /* if watts > 200 */
   }
 
 #pragma GCC diagnostic push

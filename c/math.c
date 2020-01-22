@@ -1,10 +1,10 @@
-//====================
-// How math is done.
-//====================
+/* ==================== */
+/* How math is done. */
+/* ==================== */
 
 #include <math.h>
 #include <stdio.h>
-#include <stdlib.h>  // abs()
+#include <stdlib.h> /* abs() */
 
 #define PI 3.14159
 

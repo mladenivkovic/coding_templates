@@ -63,21 +63,20 @@ EXECS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
 
 default: all
 
+all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
+
+
+# first special cases
 backtrace.o: backtrace.c
 	$(CC) $(CFLAGS_MIN) -rdynamic -o $@ $< $(LDFLAGS)
 
-cmdlineargs.o: cmdlineargs.c
-	$(CC) $(CFLAGS_NOSTD) -o $@ $< $(LDFLAGS)
 
-all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
+# then in alphabetical order
 
 arrays2d.o: arrays2d.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 arrays.o: arrays.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
-backtrace.o: backtrace.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 bitwise_comparison.o: bitwise_comparison.c

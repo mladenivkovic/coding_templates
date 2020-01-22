@@ -1,6 +1,6 @@
-//====================================
-// Handling command line arguments
-//====================================
+/* ==================================== */
+/* Handling command line arguments */
+/* ==================================== */
 //
 
 /* Note that the way we're handling cmdline args with getopt etc
@@ -11,8 +11,8 @@
 #include <string.h>
 #include <unistd.h> /* parse options starting with - or -- */
 
-int main(int argc,     // input argument count (including program name)
-         char *argv[]  // input argument vector
+int main(int argc,    /* input argument count (including program name) */
+         char *argv[] /* input argument vector */
 ) {
 
   printf(

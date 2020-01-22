@@ -1,14 +1,14 @@
-//============================================================
-// A program to show the value limits of different types.
-//============================================================
+/* ============================================================ */
+/* A program to show the value limits of different types. */
+/* ============================================================ */
 
 #include <float.h>  /* library containing limits of float data types */
 #include <limits.h> /* library containing limits of data types */
 #include <stdio.h>  /* input, output    */
 
-//==============
+/* ============== */
 int main(void)
-//==============
+/* ============== */
 {
   printf("\n");
   printf(" -------------------\n");

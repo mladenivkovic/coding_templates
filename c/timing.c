@@ -1,18 +1,18 @@
-//======================================
-// measure passed time
-// compile with -lm to include math lib
-//======================================
+/* ====================================== */
+/* measure passed time */
+/* compile with -lm to include math lib */
+/* ====================================== */
 
 #include <math.h>  /* math library     */
 #include <stdio.h> /* input, output    */
 #include <time.h>  /* measure time */
 
 #define N \
-  100000000  // if sourcearray not static, I'll be overflowing the stack.
+  100000000 /* if sourcearray not static, I'll be overflowing the stack. */
 
-//===================
+/* =================== */
 int main(void)
-//===================
+/* =================== */
 {
 
   clock_t start, end;

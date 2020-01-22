@@ -1,16 +1,16 @@
-//=======================================================
-// On bitwise comparisons.
-//=======================================================
+/* ======================================================= */
+/* On bitwise comparisons. */
+/* ======================================================= */
 
 #include <math.h>
 #include <stdio.h> /* input, output    */
 #include <stdlib.h>
 
-//===================================
+/* =================================== */
 char* binary(int a) {
-  //===================================
-  // returns binary representation of integer a as a string,
-  // ready to be printed
+  /* =================================== */
+  /* returns binary representation of integer a as a string, */
+  /* ready to be printed */
 
   char* binary_string;
 
@@ -32,9 +32,9 @@ char* binary(int a) {
   return (binary_string);
 }
 
-//===================================
+/* =================================== */
 int main()
-//===================================
+/* =================================== */
 {
 
   int a, b;

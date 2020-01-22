@@ -48,10 +48,10 @@ int main(int argc, char* argv[]) {
 
   /* distribute particles amongst processors */
   int nguess = npart / size;
-  int npart_local[size]; /* number of particles local to each processor */
-  int npart_local_start
-      [size]; /* cumulative sum of local number of particles, i.e. starting
-                 index of particles for each rank */
+  int npart_local[size];       /* number of particles local to each processor */
+  int npart_local_start[size]; /* cumulative sum of local number of particles,
+                                  i.e. starting index of particles for each rank
+                                */
 
   npart_local[0] = npart - (size - 1) * nguess;
   npart_local_start[0] = 0;

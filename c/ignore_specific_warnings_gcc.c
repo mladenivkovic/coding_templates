@@ -34,6 +34,7 @@ int main()
   int a[2][2] = {0, 1, 2, 3};
 #pragma GCC diagnostic pop
 
+#pragma message("This will produce an uninitialized warning again")
   result += uninitialized2;
 
   printf("Done. Compiling should have raised exactly one warning with gcc.\n");
