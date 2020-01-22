@@ -17,9 +17,9 @@ fi
 
 # Print the help
 function show_help {
-    echo -e "This script formats SWIFT according to Google style"
+    echo -e "This script formats according to Google style"
     echo -e "  -h, --help \t Show this help"
-    echo -e "  -t, --test \t Test if SWIFT is well formatted"
+    echo -e "  -t, --test \t Test if .c and .h files are well formatted"
 }
 
 # Parse arguments (based on https://stackoverflow.com/questions/192249)
@@ -54,7 +54,7 @@ then
     # Note trapping the exit status from both commands in the pipe. Also note
     # do not use -q in grep as that closes the pipe on first match and we get
     # a SIGPIPE error.
-    echo "Testing if SWIFT is correctly formatted"
+    echo "Testing if files are correctly formatted"
     $cmd -output-replacements-xml | grep "<replacement " > /dev/null
     status=("${PIPESTATUS[@]}")
 
@@ -75,6 +75,6 @@ then
         echo "...is correctly formatted"
     fi
 else
-    echo "Formatting SWIFT"
+    echo "Formatting"
     $cmd -i
 fi
