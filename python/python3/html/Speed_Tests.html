@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Filesystem</title>
+<title>Speed_Tests</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,7 +13116,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Filesystem">Filesystem<a class="anchor-link" href="#Filesystem">&#182;</a></h1>
+<h1 id="Speed-Tests">Speed Tests<a class="anchor-link" href="#Speed-Tests">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -13125,9 +13125,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">fnmatch</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 </pre></div>
 
     </div>
@@ -13138,7 +13136,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Get-Information">Get Information<a class="anchor-link" href="#Get-Information">&#182;</a></h2>
+<h2 id="Lists:-Appending-vs-initial-alloc">Lists: Appending vs initial alloc<a class="anchor-link" href="#Lists:-Appending-vs-initial-alloc">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13147,150 +13145,20 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># current path</span>
-<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[2]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/home/mivkov/coding/coding_templates/python/python3&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Files in directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[3]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;sphinx&#39;,
- &#39;mpi_examples.py&#39;,
- &#39;applications&#39;,
- &#39;Matrices.ipynb&#39;,
- &#39;Sympy_Examles.ipynb&#39;,
- &#39;Arrays.ipynb&#39;,
- &#39;html&#39;,
- &#39;convert_to_html.sh&#39;,
- &#39;importmodul.py&#39;,
- &#39;switching_to_python_3.txt&#39;,
- &#39;inputfiles&#39;,
- &#39;.ipynb_checkpoints&#39;,
- &#39;Variable_Scope_Checks.ipynb&#39;,
- &#39;plots&#39;,
- &#39;Pickling_Files.ipynb&#39;,
- &#39;ObjectOrientedProgramming.ipynb&#39;,
- &#39;file.h5&#39;,
- &#39;Random_Methods.ipynb&#39;,
- &#39;Lists.ipynb&#39;,
- &#39;Functions.ipynb&#39;,
- &#39;cmdline_args_and_workdir.py&#39;,
- &#39;Loops.ipynb&#39;,
- &#39;Speed_Tests.ipynb&#39;,
- &#39;Strings.ipynb&#39;,
- &#39;deprecated&#39;,
- &#39;README.md&#39;,
- &#39;Dictionnaries.ipynb&#39;,
- &#39;use_hdf5.py&#39;,
- &#39;__pycache__&#39;,
- &#39;time_stuff.py&#39;,
- &#39;make_a_package&#39;,
- &#39;exception_handling.py&#39;,
- &#39;Filesystem.ipynb&#39;,
- &#39;formatted_output.py&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Files in some other dir:</span>
-<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;python2&#39;, &#39;.gitignore&#39;, &#39;python3&#39;, &#39;README.md&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get only files matching pattern from a dir:</span>
-<span class="n">inputfiles</span><span class="o">=</span><span class="p">[]</span>
-<span class="n">fileloc</span><span class="o">=</span><span class="s1">&#39;inputfiles/mpi_multiple_files/&#39;</span>
-<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">fileloc</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;output_00008*&#39;</span><span class="p">):</span>
-        <span class="n">inputfiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-<span class="n">inputfiles</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c1"># sort alphabetically</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">inputfiles</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">50000000</span><span class="p">]:</span>
+    <span class="n">start_append</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">stop_append</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    
+    <span class="n">start_alloc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># overestimate how many elements you will need</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">stop_alloc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;n = </span><span class="si">{0:.1e}</span><span class="s2">, allocate: </span><span class="si">{1:.3e}</span><span class="s2">s, append: </span><span class="si">{2:.3e}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">stop_alloc</span><span class="o">-</span><span class="n">start_alloc</span><span class="p">,</span> <span class="n">stop_append</span> <span class="o">-</span> <span class="n">start_append</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -13307,210 +13175,10 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;output_00008.00001&#39;, &#39;output_00008.00002&#39;, &#39;output_00008.00003&#39;, &#39;output_00008.00004&#39;, &#39;output_00008.00005&#39;, &#39;output_00008.00006&#39;, &#39;output_00008.00007&#39;, &#39;output_00008.00008&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Interact">Interact<a class="anchor-link" href="#Interact">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create directory if it doesn&#39;t exist already</span>
-<span class="n">dirname</span><span class="o">=</span><span class="s1">&#39;python_created_this_directory&#39;</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dirname</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Created directory &quot;</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory &quot;</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="s2">&quot; already exists.&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
-
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This directory&#39;s contents are now:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Created directory &#39;python_created_this_directory&#39;
-This directory&#39;s contents are now: [&#39;sphinx&#39;, &#39;mpi_examples.py&#39;, &#39;applications&#39;, &#39;Matrices.ipynb&#39;, &#39;Sympy_Examles.ipynb&#39;, &#39;Arrays.ipynb&#39;, &#39;html&#39;, &#39;convert_to_html.sh&#39;, &#39;importmodul.py&#39;, &#39;switching_to_python_3.txt&#39;, &#39;inputfiles&#39;, &#39;.ipynb_checkpoints&#39;, &#39;Variable_Scope_Checks.ipynb&#39;, &#39;plots&#39;, &#39;Pickling_Files.ipynb&#39;, &#39;ObjectOrientedProgramming.ipynb&#39;, &#39;file.h5&#39;, &#39;Random_Methods.ipynb&#39;, &#39;Lists.ipynb&#39;, &#39;Functions.ipynb&#39;, &#39;cmdline_args_and_workdir.py&#39;, &#39;Loops.ipynb&#39;, &#39;Speed_Tests.ipynb&#39;, &#39;Strings.ipynb&#39;, &#39;deprecated&#39;, &#39;README.md&#39;, &#39;Dictionnaries.ipynb&#39;, &#39;use_hdf5.py&#39;, &#39;python_created_this_directory&#39;, &#39;__pycache__&#39;, &#39;time_stuff.py&#39;, &#39;make_a_package&#39;, &#39;exception_handling.py&#39;, &#39;Filesystem.ipynb&#39;, &#39;formatted_output.py&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create file if it doesn&#39;t exist</span>
-<span class="n">filename</span><span class="o">=</span><span class="s1">&#39;python_created_this_file.txt&#39;</span>
-<span class="n">fileloc</span><span class="o">=</span><span class="n">dirname</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">filename</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileloc</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File exists already.&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File didn&#39;t exist. Writing a new one.&quot;</span><span class="p">)</span>
-    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileloc</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;some text to put in the file</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="c1"># If opened this way while the file exists, it will be overwritten completely!</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New file with some useless content written.&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">))</span>
-    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileloc</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>File didn&#39;t exist. Writing a new one.
-New file with some useless content written. [&#39;python_created_this_file.txt&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Reading from created file</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>some text to put in the file
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># deleting file</span>
-<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fileloc</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># deleting directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Königsdisziplin: Remove directory and contents recursively.</span>
-
-<span class="c1"># First creating directory and file again.</span>
-
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileloc</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;some text to put in the file</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="c1"># If opened this way while the file exists, it will be overwritten completely!</span>
-<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;directory and file created: &quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">))</span>
-
-<span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;directory and file removed: &quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>directory and file created:  [&#39;python_created_this_file.txt&#39;]
-directory and file removed:  [&#39;sphinx&#39;, &#39;mpi_examples.py&#39;, &#39;applications&#39;, &#39;Matrices.ipynb&#39;, &#39;Sympy_Examles.ipynb&#39;, &#39;Arrays.ipynb&#39;, &#39;html&#39;, &#39;convert_to_html.sh&#39;, &#39;importmodul.py&#39;, &#39;switching_to_python_3.txt&#39;, &#39;inputfiles&#39;, &#39;.ipynb_checkpoints&#39;, &#39;Variable_Scope_Checks.ipynb&#39;, &#39;plots&#39;, &#39;Pickling_Files.ipynb&#39;, &#39;ObjectOrientedProgramming.ipynb&#39;, &#39;file.h5&#39;, &#39;Random_Methods.ipynb&#39;, &#39;Lists.ipynb&#39;, &#39;Functions.ipynb&#39;, &#39;cmdline_args_and_workdir.py&#39;, &#39;Loops.ipynb&#39;, &#39;Speed_Tests.ipynb&#39;, &#39;Strings.ipynb&#39;, &#39;deprecated&#39;, &#39;README.md&#39;, &#39;Dictionnaries.ipynb&#39;, &#39;use_hdf5.py&#39;, &#39;__pycache__&#39;, &#39;time_stuff.py&#39;, &#39;make_a_package&#39;, &#39;exception_handling.py&#39;, &#39;Filesystem.ipynb&#39;, &#39;formatted_output.py&#39;]
+<pre>n = 1.0e+01, allocate: 1.049e-05s, append: 1.049e-05s
+n = 1.0e+03, allocate: 4.451e-04s, append: 3.531e-04s
+n = 1.0e+06, allocate: 1.589e-01s, append: 2.063e-01s
+n = 5.0e+07, allocate: 7.475e+00s, append: 6.016e+00s
 </pre>
 </div>
 </div>
