@@ -57,6 +57,23 @@
 \newcommand{\delr}{\del r}                             % partial r
 
 
+\newcommand{\deldx}{\frac{\del}{\del x}}				% shortcut partial derivative, in line
+\newcommand{\ddx}{\frac{\de}{\de x}}					% shortcut total derivative, in line
+\newcommand{\DELDX}[1]{\frac{\del  #1}{\del x}}			% shortcut partial derivative, on fraction
+\newcommand{\DDX}[1]{\frac{\de  #1}{\de x}}				% shortcut total derivative, on fraction
+
+\newcommand{\deldvecx}{\frac{\del}{\del \x}}	   		% shortcut partial derivative, in line
+\newcommand{\ddvecx}{\frac{\de}{\de \x}}				% shortcut total derivative, in line
+\newcommand{\DELDVECX}[1]{\frac{\del  #1}{\del \x}}		% shortcut partial derivative, on fraction
+\newcommand{\DDVECX}[1]{\frac{\de  #1}{\de \x}}			% shortcut total derivative, on fraction
+
+\newcommand{\deldr}{\frac{\del}{\del r}}				% shortcut partial derivative, in line
+\newcommand{\ddr}{\frac{\de}{\de r}}					% shortcut total derivative, in line
+\newcommand{\DELDR}[1]{\frac{\del  #1}{\del r}}			% shortcut partial derivative, on fraction
+\newcommand{\DDR}[1]{\frac{\de  #1}{\de r}}				% shortcut total derivative, on fraction
+
+
+
 
 
 
@@ -101,6 +118,7 @@
 % shortcut for TODO box
 %		usage: \todo{Your text here}
 \newcommand{\todo}[1]{\begin{mdframed}[style=todo,frametitle={TODO}] #1 \end{mdframed}}
+\newcommand{\note}[1]{\begin{mdframed}[style=eyecatcher,frametitle={Note}] #1 \end{mdframed}}
 
 
 % quickly insert a figure without a caption
@@ -113,7 +131,12 @@
 }
 
 
-
+\newcommand{\quickfigcap}[3]{
+       \begin{figure}[H]
+               \includegraphics[width=\textwidth]{#1}
+               \caption{#3\label{#2}}
+       \end{figure}
+}
 
 
 
