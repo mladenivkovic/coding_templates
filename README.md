@@ -3,7 +3,7 @@
 
 ### What is this repository for? ###
 
-This repository contains templates for various coding languages and a bit of other stuff like notes or "runtime configuration files" like .bashrc and .vimrc. More will follow.
+This repository contains templates for various coding languages, how-to's and a bit of other stuff like algorithms.
 
 So far, it contains some templates for:
 
@@ -11,9 +11,9 @@ So far, it contains some templates for:
 -   Bash
 - 	C, C++
 -   Fortran
--   Python 2 and 3 (although python 2 won't be updated anymore)
+-   html
 -   LaTeX
--	rc files
+-   Python 2 and 3 (although python 2 won't be updated anymore)
 
 
 
@@ -26,7 +26,7 @@ Others might be added as soon as I need to learn them :)
 
 ### Contribution guidelines ###
 
--   No contributions from other people are planned. If you want to contribute, contact me. 
+-   No contributions from other people are planned. But you do what you gotta do.
 
 ### Who do I talk to? ###
 
