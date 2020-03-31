@@ -9,13 +9,23 @@
 
 \title[shortform]{Title}
 %     Titel of the presentations
-\subtitle[shortform-subtitle]{Subtitile}
+\subtitle[shortform-subtitle]{Subtitle}
 %     Subtitle
 \author[M. Ivkovic]{Mladen Ivkovic}
 %     Set author
-\institute[EPFL]{LASTRO \\ \'Ecole Polytechnique F\'ed\'erale de Lausanne}
+\institute[LASTRO EPFL]{
+    \begin{columns}
+        \column{0.7\textwidth}
+            LASTRO \\ 
+            \'Ecole Polytechnique F\'ed\'erale de Lausanne 
+        \column{0.2\textwidth}
+            \makebox[\textwidth][r]{\includegraphics[width=2cm]{figures/epfl-logo.pdf}}
+    \end{columns}
+}
+
+
 %     Institute
-\date[17.09.19]{17. September 2019}
+\date[SHORT DATE]{Date}
 %	  Date of presentation. Alternatively you can use \today to set compilation time date automatically.
 % \logo{\pgfimage[width=2cm,height=2cm]{mylogo}}
 %     Add mylogo.pdf (bzw. mylogo.png, mylogo.jpg, mylogo.mps if you're using pdftex as Backend) as the logo on all slides, here using the package pgf.
@@ -70,10 +80,8 @@
 \begin{frame}{References}
     \cite{AHF}
     
-    \parencite{AMR}
-    
     \renewcommand*{\bibfont}{\footnotesize}
-    \printbibliography[]    
+    \bibliography{references}
 \end{frame}
 
 

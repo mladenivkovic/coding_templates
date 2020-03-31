@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper, onepage, english,singlespacing, parskip]{scrartcl}
+\documentclass[12pt, a4paper, onepage, english, singlespacing, parskip]{scrartcl}
 
 %\documentclass[
 %11pt, 				% The default document font size, options: 10pt, 11pt, 12pt
@@ -18,7 +18,7 @@
 \usepackage{lmodern} 		% Diese beiden packages sorgen für echte 
 \usepackage[T1]{fontenc}	% Umlaute.
 
-\usepackage{amssymb, amsmath, color, dsfont, graphicx, float, setspace, tipa}
+\usepackage{amssymb, amsmath, color, graphicx, float, setspace, tipa}
 \usepackage[utf8]{inputenc} 
 \usepackage[english]{babel}
 \usepackage[pdfpagelabels,
@@ -31,9 +31,7 @@
 			citecolor = black,
 			breaklinks]{hyperref}
 \usepackage{url}
-\usepackage{longtable} 		% Tables along multiple pages
-\usepackage{caption}
-\captionsetup{font=small,labelfont=bf, format=plain, justification=centering}
+
 \allowdisplaybreaks 		% allows page breaks in align/equation environment
 
 \usepackage{authblk} 		% titlepage stuff
@@ -47,12 +45,10 @@
 %===================
 % BIBLIOGRAPHY
 %===================
-\usepackage[backend=bibtex,
-			sorting=nyt,
-			bibencoding=ascii,
-			citestyle=authoryear]{biblatex}
-\addbibresource{references.bib}
-\usepackage{csquotes} 		% recommended when using babel and biblatex
+
+\usepackage[]{natbib}
+\bibliographystyle{unsrtnat}
+
 %DONT FORGET TO COMPILE THE BIBLIOGRAPHY WITH BIBTEX WHEN CHANGES ARE MADE.
 
 

@@ -32,7 +32,7 @@ fi
 
 
 
-filelist=`find . -name 'my_defines.tex'`
+filelist=`find Document -name 'my_defines.tex'`
 
 # get all my_defines files in array sorted by newest modification time
 declare -a filelist_sorted

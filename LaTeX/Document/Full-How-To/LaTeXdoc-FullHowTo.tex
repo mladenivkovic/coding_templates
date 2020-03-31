@@ -53,12 +53,10 @@
 %===================
 % BIBLIOGRAPHY
 %===================
-\usepackage[backend=bibtex,
-			sorting=nyt,
-			bibencoding=ascii,
-			citestyle=authoryear]{biblatex}
-\addbibresource{references.bib}
-\usepackage{csquotes} 		%recommended when using babel and biblatex
+
+\usepackage[]{natbib}
+\bibliographystyle{unsrtnat}
+
 %DONT FORGET TO COMPILE THE BIBLIOGRAPHY WITH BIBTEX WHEN CHANGES ARE MADE.
 
 
@@ -269,7 +267,7 @@ mladen.ivkovic@hotmail.com\\
 % Stuff that needs to be done before all else
 %--------------------------------------------
 %\pagestyle{plain}
-\nocite{*} % show all entries of bibliography, even if they are not cited.
+%\nocite{*} % show all entries of bibliography, even if they are not cited.
 		
 		
 %\pagestyle{plain}
@@ -580,6 +578,8 @@ Einstein said something important\cite{einstein} and so did Dirac \cite{dirac}.
 
 
 So they both said something important \cite{dirac,einstein}.
+
+Also possible: Cite in text \citet{dirac}, cite in parentheses \citet{einstein}.
 
 And this is a reference to the glossary entry of \gls{computer}.
 
@@ -1037,14 +1037,8 @@ asdfghjklösdfghjklösdfghjklöasdfghjklösdfghjklösdfghj111klöasdfghjklösdfg
 %=============================================
 % Bibliography
 %=============================================
-%https://www.sharelatex.com/learn/Bibliography_management_in_LaTeX
-%\medskip % or: \bigskip to add some space
 
-
-\printbibliography
-%\printbibliography[heading=bibintoc,title={Set some title instead of "References"}]
-%if heading=bibintoc: set references in table of contents
-
+\bibliography{references}
 
 
 
