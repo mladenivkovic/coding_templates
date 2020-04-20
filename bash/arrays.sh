@@ -84,3 +84,22 @@ echo [9]: array len ${#ind_array[@]}
 echo [10.1]: before deleting element : ${ind_array[*]}
 unset ind_array[1]
 echo [10.2]: after deleting element  : ${ind_array[*]}
+
+
+
+
+#==================================
+# Integer for loops
+#==================================
+
+first_names=(John Bella)
+last_names=(Smith Bartok)
+
+
+echo
+echo
+echo "Loop over integers"
+for ((i=0; i<2; i++)); do
+    name="${first_names[i]} ${last_names[i]}"
+    echo $name
+done
