@@ -261,7 +261,7 @@ def get_density_fits(r, profile, rho0):
 
 
 
-    def sigma_nfw_for_fit(r, c, rho):
+    def sigma_nfw_for_fit(r, c, rho0):
         """
         get NFW surface density profile
         assumes r is a numpy array
