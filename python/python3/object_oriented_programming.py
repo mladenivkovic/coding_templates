@@ -7,9 +7,7 @@
 #=======================================================
 
 
-#================
 class Person:
-#================
 
     def __init__(self, first, last):
         self.firstname = first
@@ -23,10 +21,7 @@ class Person:
 
 
 
-#===========================
 class Employee(Person):
-#===========================
-
 
     def __init__(self, first, last, staffnum):
         Person.__init__(self,first, last)
