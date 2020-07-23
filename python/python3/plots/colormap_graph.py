@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-#=================================================================================
+# =================================================================================
 # Show a plot of all colormaps with their names
 #
 # based on https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/
-#=================================================================================
+# =================================================================================
 
 import matplotlib.pyplot as plt
 import matplotlib.colors
@@ -15,19 +15,20 @@ def grayify_cmap(cmap):
     """Return a grayscale version of the colormap"""
     cmap = plt.cm.get_cmap(cmap)
     colors = cmap(np.arange(cmap.N))
-    
+
     # convert RGBA to perceived greyscale luminance
     # cf. http://alienryderflex.com/hsp.html
     RGB_weight = [0.299, 0.587, 0.114]
     luminance = np.sqrt(np.dot(colors[:, :3] ** 2, RGB_weight))
     colors[:, :3] = luminance[:, np.newaxis]
-    
-    return matplotlib.colors.LinearSegmentedColormap.from_list(cmap.name + "_grayscale", colors, cmap.N)
+
+    return matplotlib.colors.LinearSegmentedColormap.from_list(
+        cmap.name + "_grayscale", colors, cmap.N
+    )
 
 
 fig, axes = plt.subplots(36, 6, figsize=(10, 7))
-fig.subplots_adjust(left=0, right=1, bottom=0, top=1,
-                    hspace=0.1, wspace=0.1)
+fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.1, wspace=0.1)
 
 im = np.outer(np.ones(10), np.arange(100))
 
@@ -36,7 +37,7 @@ cmaps.sort()
 
 axes = axes.T.ravel()
 for ax in axes:
-    ax.axis('off')
+    ax.axis("off")
 
 for cmap, color_ax, gray_ax, null_ax in zip(cmaps, axes[1::3], axes[2::3], axes[::3]):
     del null_ax
@@ -45,6 +46,5 @@ for cmap, color_ax, gray_ax, null_ax in zip(cmaps, axes[1::3], axes[2::3], axes[
     gray_ax.imshow(im, cmap=grayify_cmap(cmap))
 
 
-
-plt.savefig('colormaps.png', dpi=300)
+plt.savefig("colormaps.png", dpi=300)
 plt.show()

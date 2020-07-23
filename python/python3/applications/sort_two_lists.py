@@ -2,7 +2,7 @@
 
 
 lyst = [5, 3, 4, 2]
-ind  = list(range(len(lyst)))
+ind = list(range(len(lyst)))
 
 sortlist, sortind = zip(*sorted(zip(lyst, ind)))
 

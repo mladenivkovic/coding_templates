@@ -3,13 +3,13 @@
 # check if directory exists.
 
 import os
-import os.path 
+import os.path
 
-dirname='../applications/'
+dirname = "../applications/"
 if os.path.exists(dirname):
     print(dirname, "exists.")
 
-dirname='new_dir'
+dirname = "new_dir"
 if os.path.exists(dirname):
     print(dirname, "exists.")
 else:
