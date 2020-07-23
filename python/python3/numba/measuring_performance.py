@@ -7,18 +7,21 @@ import time
 
 x = np.arange(100).reshape(10, 10)
 
+
 @jit(nopython=True)
-def go_fast(a): # Function is compiled and runs in machine code
+def go_fast(a):  # Function is compiled and runs in machine code
     trace = 0.0
     for i in range(a.shape[0]):
         trace += np.tanh(a[i, i])
     return a + trace
+
 
 def go_slow(a):
     trace = 0.0
     for i in range(a.shape[0]):
         trace += np.tanh(a[i, i])
     return a + trace
+
 
 # DO NOT REPORT THIS... COMPILATION TIME IS INCLUDED IN THE EXECUTION TIME!
 start = time.time()
@@ -43,4 +46,3 @@ start = time.time()
 go_slow(x)
 end = time.time()
 print("Elapsed (after compilation) = {0:.3e}".format(end - start))
-
