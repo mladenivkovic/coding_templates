@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 
 
-#=======================================
+# =======================================
 # Reads in unformatted fortran dump
-#=======================================
+# =======================================
 
 
 from scipy.io import FortranFile
 import numpy as np
 
 
-fname = './fortran_unformatted_dump.dat'
+fname = "./fortran_unformatted_dump.dat"
 
-f = FortranFile(fname, mode='r')
+f = FortranFile(fname, mode="r")
 
 print(f.read_ints(dtype=np.int32))
 print(f.read_reals(dtype=np.float32))

@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 
 
-#======================================
+# ======================================
 # Read in the binary dump made with C
-#======================================
-
+# ======================================
 
 
 import numpy as np
 
-fname='binary_dump.dat'
+fname = "binary_dump.dat"
 
-f = open(fname, 'rb')
+f = open(fname, "rb")
 
 
-# integers 
-#---------------
+# integers
+# ---------------
 count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
 arr = np.fromfile(f, dtype=np.int32, count=count)
 print("INTEGERS")
@@ -24,9 +23,8 @@ print("Array:", arr)
 print()
 
 
-
-# floats 
-#---------------
+# floats
+# ---------------
 count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
 arr = np.fromfile(f, dtype=np.float32, count=count)
 print("FLOATS")
@@ -35,10 +33,8 @@ print("Array:", arr)
 print()
 
 
-
-
-# doubles 
-#---------------
+# doubles
+# ---------------
 count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
 arr = np.fromfile(f, dtype=np.float64, count=count)
 print("DOUBLES")
@@ -47,9 +43,8 @@ print("Array:", arr)
 print()
 
 
-
-# chars 
-#---------------
+# chars
+# ---------------
 count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
 arr = np.fromfile(f, dtype=np.int8, count=count)
 a_string = "".join([chr(item) for item in arr])
@@ -60,16 +55,19 @@ print("String:", a_string)
 print()
 
 
-
-# structs 
-#---------------
+# structs
+# ---------------
 
 # first define new datatype
-arbitrary_type = np.dtype([ ('someint', np.int32),
-                            ('somefloat', np.float32),
-                            ('somedouble', np.float64),
-                            ('somechar', np.int8)
-                            ], align=True)
+arbitrary_type = np.dtype(
+    [
+        ("someint", np.int32),
+        ("somefloat", np.float32),
+        ("somedouble", np.float64),
+        ("somechar", np.int8),
+    ],
+    align=True,
+)
 
 count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
 arr = np.fromfile(f, dtype=arbitrary_type, count=count)
@@ -77,7 +75,5 @@ print("STRUCTS")
 print("Count:", count)
 print("Array:")
 for e in arr:
-    print(e['someint'], e['somefloat'], e['somedouble'], chr(e['somechar']))
+    print(e["someint"], e["somefloat"], e["somedouble"], chr(e["somechar"]))
 print()
-
-
