@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-#------------------------------------------
+# ------------------------------------------
 # Create and fit NWF profiles.
-#------------------------------------------
+# ------------------------------------------
 
 
 import numpy as np
@@ -18,8 +18,8 @@ c = 5.0
 rho0 = 1.0
 
 
-
 r = np.linspace(1e-3, Rvir, 100)
+
 
 def rho_nfw(c, rho0, Rvir, r):
     """
@@ -27,8 +27,7 @@ def rho_nfw(c, rho0, Rvir, r):
     """
     Rs = Rvir / c
 
-    return rho0 / (r/Rs * (1 + r/Rs)**2)
-
+    return rho0 / (r / Rs * (1 + r / Rs) ** 2)
 
 
 orig_prof = rho_nfw(c, rho0, Rvir, r)
@@ -36,10 +35,10 @@ errmax = 0.5
 perturbed_prof = orig_prof * (1 + np.random.uniform(-errmax, errmax, r.shape[0]))
 
 
-
 def f(x, rho0, c):
-    Rs = Rvir / c # note that Rvir is not a parameter of the function!
-    return rho0 / (x/Rs * (1 + r/Rs)**2 )
+    Rs = Rvir / c  # note that Rvir is not a parameter of the function!
+    return rho0 / (x / Rs * (1 + r / Rs) ** 2)
+
 
 fopt, fcov = curve_fit(f, r, perturbed_prof)
 rhofit1, cfit1 = fopt
@@ -50,11 +49,9 @@ rhofit2, cfit2 = fopt
 second_fit = rho_nfw(cfit2, rhofit2, Rvir, r)
 
 
-
-
 def g(x, c):
-    Rs = Rvir / c # note that Rvir is not a parameter of the function
-    return rho0 / (x/Rs * (1 + r/Rs)**2 ) # neither is rho0
+    Rs = Rvir / c  # note that Rvir is not a parameter of the function
+    return rho0 / (x / Rs * (1 + r / Rs) ** 2)  # neither is rho0
 
 
 fopt, fcov = curve_fit(g, r, perturbed_prof)
@@ -68,8 +65,14 @@ third_fit = rho_nfw(cfit3, rho0, Rvir, r)
 plt.figure()
 plt.semilogy(r, orig_prof, label="original profile")
 plt.semilogy(r, perturbed_prof, label="noised up profile")
-plt.semilogy(r, first_fit, label="first fit; c = {0:.2f}, rho0 = {1:.2e}".format(cfit1, rhofit1))
-plt.semilogy(r, second_fit, label="second fit; c = {0:.2f}, rho0 = {1:.2e}".format(cfit2, rhofit2))
+plt.semilogy(
+    r, first_fit, label="first fit; c = {0:.2f}, rho0 = {1:.2e}".format(cfit1, rhofit1)
+)
+plt.semilogy(
+    r,
+    second_fit,
+    label="second fit; c = {0:.2f}, rho0 = {1:.2e}".format(cfit2, rhofit2),
+)
 plt.semilogy(r, third_fit, label="third fit; c = {0:.2f}".format(cfit3))
 plt.legend()
 plt.show()
