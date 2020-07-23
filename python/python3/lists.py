@@ -192,8 +192,6 @@ print("combined =  list(zip(fields, data))")
 print("combined = ", combined)
 
 
-
-
 print("")
 print("")
 print("===================")
@@ -202,7 +200,7 @@ print("===================")
 print("")
 
 lyst = [5, 3, 4, 2]
-ind  = list(range(len(lyst)))
+ind = list(range(len(lyst)))
 
 sortlist, sortind = zip(*sorted(zip(lyst, ind)))
 
