@@ -1,6 +1,11 @@
 #!/bin/bash
 # compile and run the program given as argument.
 
+if [ $# -lt 1 ]; then
+    echo "Give me a .c file to work with"
+    exit 1
+fi
+
 file=$1
 runfile=${file%.c}.o
 
