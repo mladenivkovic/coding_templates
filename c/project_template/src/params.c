@@ -4,12 +4,12 @@
 #include <string.h>
 
 void params_check(params *p) {
-  /*---------------------------------------------*/
-  /* This function checks the parameters         */
-  /* that have been read in and makes sure that  */
-  /* the simulation can be run with the given    */
-  /* parameters, or stops the run otherwise.     */
-  /*---------------------------------------------*/
+  /*---------------------------------------------
+   * This function checks the parameters
+   * that have been read in and makes sure that
+   * the simulation can be run with the given
+   * parameters, or stops the run otherwise.
+   *---------------------------------------------*/
 
   int error = 0;
 

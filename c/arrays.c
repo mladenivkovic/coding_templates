@@ -5,20 +5,14 @@
 #include <stdio.h>  /* input, output    */
 #include <stdlib.h> /* used for allocation stuff */
 
-/* ========================== */
 /*  Functions defined below */
-/* ========================== */
 void print_farr(long unsigned len, double *x);
 void print_fnarr(long unsigned len, double *x);
 void print_iarr(long unsigned len, int *x);
 void print_inarr(long unsigned len, int *x);
 
-/* ==================== */
-int main(void)
-/* ==================== */
-{
+int main(void) {
 
-  /* ================================= */
   /*  array declaration possibilities */
   /* ================================= */
 
@@ -28,7 +22,6 @@ int main(void)
   /* multidimensional */
   int multi[3][2] = {{11, 12}, {21, 22}, {31, 32}};
 
-  /* ======================== */
   /*  printing arrays */
   /* ======================== */
 
@@ -53,7 +46,6 @@ int main(void)
   }
   printf("\n");
 
-  /* ======================== */
   /*  dynamic allocation */
   /* ======================== */
 
@@ -85,7 +77,6 @@ int main(void)
 
   printf("\n");
 
-  /* ================================= */
   /*  WORKING WITH ARRAYS OF STRUCTS */
   /* ================================= */
 
@@ -115,7 +106,6 @@ int main(void)
   }
   printf("\n\n\n");
 
-  /* ======================== */
   /* Math with arrays         */
   /* ======================== */
 
@@ -138,17 +128,14 @@ int main(void)
   return (0);
 }
 
-/* Why passing the length as argument instead of computing it in the function?
- */
-/* The sizeof way is the right way iff you are dealing with arrays not received
- */
-/* as parameters. An array sent as a parameter to a function is treated as a */
-/* pointer, so sizeof will return the pointer's size, instead of the array's. */
+/* Why passing the length as argument instead of computing
+ * it in the function?
+ * The sizeof way is the right way if you are dealing with arrays not
+ * received as parameters. An array sent as a parameter to a function
+ * is treated as a pointer, so sizeof will return the pointer's size,
+ * instead of the array's. */
 
-/* ============================================== */
-void print_farr(long unsigned len, double *x)
-/* ============================================== */
-{
+void print_farr(long unsigned len, double *x) {
   /* prints an array of floats. */
 
   printf("Printing array using print_farr\n");
@@ -158,10 +145,7 @@ void print_farr(long unsigned len, double *x)
   }
 }
 
-/* ============================================== */
-void print_fnarr(long unsigned len, double *x)
-/* ============================================== */
-{
+void print_fnarr(long unsigned len, double *x) {
   /* prints a numbered array of floats. */
 
   printf("Printing array using print_fnarr\n");
@@ -171,10 +155,7 @@ void print_fnarr(long unsigned len, double *x)
   }
 }
 
-/* ============================================== */
-void print_iarr(long unsigned len, int *x)
-/* ============================================== */
-{
+void print_iarr(long unsigned len, int *x) {
   /* prints an array of integers. */
 
   printf("Printing array using print_iarr\n");
@@ -184,9 +165,7 @@ void print_iarr(long unsigned len, int *x)
   }
 }
 
-/* ============================================== */
 void print_inarr(long unsigned len, int *x) {
-  /* ============================================== */
   /* prints a numbered array of integers. */
 
   printf("Printing array using print_inarr\n");

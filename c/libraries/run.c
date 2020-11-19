@@ -1,6 +1,4 @@
-/*
- * compile with gcc -o program.exe mylib.c run.c
- */
+/* compile with gcc -o program.exe mylib.c run.c */
 
 #include "mylib.h"
 #include "myotherlib.h"

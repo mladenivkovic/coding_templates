@@ -1,5 +1,5 @@
 /* ======================================================= */
-/* Write some comments in here. */
+/* On floating point exceptions. */
 /* ======================================================= */
 
 #define _GNU_SOURCE
@@ -9,10 +9,7 @@
 #include <math.h>  /* math library; compile with -lm     */
 #include <stdio.h> /* input, output    */
 
-/* =================================== */
-int main()
-/* =================================== */
-{
+int main() {
 
   float zero = 0;
   float one = 1;

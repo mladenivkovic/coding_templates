@@ -1,7 +1,4 @@
-/*
- * Write some comments in here.
- * compile with -fopenmp flag (gcc)
- */
+/* compile with -fopenmp flag (gcc) */
 
 #include <omp.h>   /* openMP library     */
 #include <stdio.h> /* input, output    */

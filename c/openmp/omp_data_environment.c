@@ -1,6 +1,4 @@
-/*
- * compile with -fopenmp flag (gcc)
- */
+/* compile with -fopenmp flag (gcc) */
 
 #include <omp.h>   /* openMP library     */
 #include <stdio.h> /* input, output    */
@@ -15,10 +13,6 @@ int main(void) {
 
   return (0);
 }
-
-/*===========================================================*/
-/*===========================================================*/
-/*===========================================================*/
 
 void data_scopes(void) {
 
@@ -78,10 +72,6 @@ void data_scopes(void) {
       "lastprivate: %5d threadprivate: %5d\n",
       shared, prv, frstprvt, lstprvt, thrdprvt);
 }
-
-/*========================================================================*/
-/*========================================================================*/
-/*========================================================================*/
 
 void broadcasting_data(void) {
 

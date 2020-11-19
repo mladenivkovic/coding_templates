@@ -18,11 +18,8 @@ struct arbitrary_struct {
   char somechar;
 };
 
-/*=========================================================*/
 void print_array(void *arr, char which, size_t n) {
-  /*=========================================================*/
   /* Print arrays. */
-  /*---------------*/
 
   size_t i;
 
@@ -65,9 +62,7 @@ void print_array(void *arr, char which, size_t n) {
   printf("\n\n");
 }
 
-/* ======================= */
 int main() {
-  /* ======================= */
 
   /* Create and open file to dump into */
 

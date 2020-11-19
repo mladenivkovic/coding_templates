@@ -1,6 +1,4 @@
-/*
- * Writing your own header file.
- */
+/* Writing your own header file.  */
 
 #define PI 3.1415926
 

@@ -6,10 +6,7 @@
 #include <stdlib.h> /* atoi, atof       */
 #include <string.h> /* string stuff     */
 
-/* ==================== */
-int main(void)
-/* ==================== */
-{
+int main(void) {
 
   /* Strings are arrays of chars */
   char initv[20] = "Initial value";

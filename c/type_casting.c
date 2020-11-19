@@ -4,9 +4,7 @@
 
 #include <stdio.h>
 
-/* ================= */
 int main(void) {
-  /* ================= */
 
   int i1, i2 = 5;
   float f1, f2 = 4.5;

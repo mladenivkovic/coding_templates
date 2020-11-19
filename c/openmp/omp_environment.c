@@ -1,7 +1,4 @@
-/*
- * Write some comments in here.
- * compile with -fopenmp flag (gcc)
- */
+/* compile with -fopenmp flag (gcc) */
 
 #include <omp.h>   /* openMP library     */
 #include <stdio.h> /* input, output    */
@@ -46,7 +43,6 @@ int main(void) {
 
 #pragma omp parallel if (n > 100)
   {
-
     inpar = omp_in_parallel();  // is in parallel region?
     printf("\n\n Conditional parallel region: In parallel? = %d\n", inpar);
   }

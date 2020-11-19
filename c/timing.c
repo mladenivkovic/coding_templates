@@ -10,10 +10,7 @@
 #define N \
   100000000 /* if sourcearray not static, I'll be overflowing the stack. */
 
-/* =================== */
-int main(void)
-/* =================== */
-{
+int main(void) {
 
   clock_t start, end;
   double cpu_time_used;

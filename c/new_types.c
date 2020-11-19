@@ -8,22 +8,16 @@
 
 #define STRINGSIZE 30
 
-/* ==================== */
-/* enumerated type */
-/* ==================== */
-
-/* enumeration constants must be identifiers, they cannot be numeric,character,
- */
-/* or string literals */
-/* enum types are mainly used to make the code more readable. */
+/* enumerated type
+ * enumeration constants must be identifiers, they cannot be
+ * numeric,character, or string literals
+ * enum types are mainly used to make the code more readable. */
 
 typedef enum { student_id, grade, income } student;
 
 typedef enum { Mon, Tue, Wed, Thur, Fri, Sat, Sun } week;
 
-/* ==================== */
 /* struct type */
-/* ==================== */
 typedef struct {
   char name[STRINGSIZE]; /* name of planet */
   double diameter;       /* diameter in km */
@@ -32,9 +26,7 @@ typedef struct {
   double rotation_time;  /* time for one revolution in hrs */
 } planet;
 
-/* =========================== */
 /* functions using new types */
-/* =========================== */
 void printplanet(planet p) {
   printf("Name:          %s\n", p.name);
   printf("Diameter:      %f\n", p.diameter);
@@ -43,10 +35,7 @@ void printplanet(planet p) {
   printf("Rotation time: %f\n", p.orbit_time);
 }
 
-/* ==================== */
-int main(void)
-/* ==================== */
-{
+int main(void) {
 
   /* type enum */
 
@@ -106,7 +95,6 @@ int main(void)
   /* using functions */
   printplanet(jupiter);
 
-  /* ================================= */
   /* WORKING WITH ARRAYS OF STRUCTS */
   /* ================================= */
 

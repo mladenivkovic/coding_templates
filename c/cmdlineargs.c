@@ -1,7 +1,6 @@
 /* ==================================== */
 /* Handling command line arguments */
 /* ==================================== */
-//
 
 /* Note that the way we're handling cmdline args with getopt etc
  * is a gnu extension and not vanilla C following the C11 std */

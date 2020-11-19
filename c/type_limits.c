@@ -6,10 +6,7 @@
 #include <limits.h> /* library containing limits of data types */
 #include <stdio.h>  /* input, output    */
 
-/* ============== */
-int main(void)
-/* ============== */
-{
+int main(void) {
   printf("\n");
   printf(" -------------------\n");
   printf(" Chars \n");

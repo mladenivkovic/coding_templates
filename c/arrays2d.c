@@ -10,12 +10,8 @@ struct mystruct {
   float** some2darr;
 };
 
-/* ==================== */
-int main(void)
-/* ==================== */
-{
+int main(void) {
 
-  /* ================================= */
   /*  array declaration possibilities */
   /* ================================= */
 
@@ -55,7 +51,6 @@ int main(void)
     }
   }
 
-  /* ======================== */
   /*  printing arrays         */
   /* ======================== */
 

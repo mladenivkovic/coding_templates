@@ -9,10 +9,7 @@
 
 void select_sort_str(char *list[], int n);
 
-/* ==================== */
-int main(void)
-/* ==================== */
-{
+int main(void) {
 
   float *p; /* p is a POINTER VARIABLE of type "pointer to float". */
             /* it can store a the memory address of a type float. */
@@ -45,7 +42,6 @@ int main(void)
   printf("Pointer p         float n        \n");
   printf("%7.3f           %7.3f       \n", *p, n);
 
-  /* ===================== */
   /* arrays of pointers */
   /* ===================== */
 
@@ -112,9 +108,7 @@ int main(void)
   return (0);
 }
 
-/* ============================================ */
 void select_sort_str(char *list[], int n) {
-  /* ============================================ */
 
   /* Sort the elements of *list[] alphabetically. */
   int i;
@@ -127,9 +121,7 @@ void select_sort_str(char *list[], int n) {
   }
 }
 
-/* =================================================== */
 void find_next_str(char *list[], int imin, int imax) {
-  /* =================================================== */
   /* finds the string that comes next in alphabetical order between */
   /* the indices imin, imax */
   /* Used in select_sort_str: The lowest is sorted out, imin raised. */

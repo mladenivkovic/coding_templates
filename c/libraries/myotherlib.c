@@ -1,7 +1,5 @@
-/*
- * Define function that is also stated in mylib.h header
- * compile with gcc -o program.exe mylib.c run.c
- */
+/* Define function that is also stated in mylib.h header
+ * compile with gcc -o program.exe mylib.c run.c */
 
 #include "myotherlib.h"
 #include <stdio.h>

@@ -1,11 +1,9 @@
-/* ================================================================================
- */
-/* A parent process that creates 2 child processes, which each do their own
- * thing.  */
-/* The parent then waits for the children to finish, and wraps things up. */
-/* NOTE: THIS SPAWNS PROCESSES, NOT THREADS */
-/* ================================================================================
- */
+/* =======================================================================
+ * A parent process that creates 2 child processes, which each do
+ * their own thing.
+ * The parent then waits for the children to finish, and wraps things up.
+ * NOTE: THIS SPAWNS PROCESSES, NOT THREADS
+ * ======================================================================= */
 
 #include <stdio.h>
 #include <stdlib.h>

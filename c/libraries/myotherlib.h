@@ -1,6 +1,4 @@
-/*
- * Writing your own header file.
- */
+/* Writing your own header file.  */
 
 // allows new types
 typedef struct { /* rectangle */

@@ -4,10 +4,7 @@
 
 #include <stdio.h> /* input, output    */
 
-/* ================= */
-int main(void)
-/* ================= */
-{
+int main(void) {
 
   /* File pointer variables */
 

@@ -34,10 +34,6 @@ int main(void) {
   return (0);
 }
 
-/*=============================================================*/
-/*=============================================================*/
-/*=============================================================*/
-
 void forloop(void) {
 
   printf("=====================\n");
@@ -107,10 +103,6 @@ void forloop(void) {
   } /*end parallel region */
 }
 
-/*=============================================================*/
-/*=============================================================*/
-/*=============================================================*/
-
 void reduction(void) {
 
   /*====================================================*/
@@ -122,9 +114,7 @@ void reduction(void) {
   printf("REDUCTION\n");
   printf("=====================\n\n");
 
-  /*======*/
   /*set up*/
-  /*======*/
 
   long i;
   double summe = 0.0;
@@ -138,9 +128,7 @@ void reduction(void) {
     sourcearray[i] = ((double)(i)) * ((double)i) / 2.2034872;
   }
 
-  /*============*/
   /*measure time*/
-  /*============*/
 
   start = clock();
 
@@ -156,9 +144,7 @@ void reduction(void) {
   /*reset summe*/
   summe = 0;
 
-  /*===============*/
   /*parallel region*/
-  /*===============*/
 
 #pragma omp parallel shared(summe)
   {
@@ -188,42 +174,30 @@ void reduction(void) {
   }
 }
 
-/*=============================================================*/
-/*=============================================================*/
-/*=============================================================*/
-
 void scheduling(void) {
 
   printf("\n\n\n=====================\n");
   printf("SCHEDULING\n");
   printf("=====================\n");
 
-  /*========*/
   /* set up */
-  /*========*/
 
   int niter = 8;
 
-  /*===============*/
   /*parallel region*/
-  /*===============*/
 
 #pragma omp parallel
   {
     int id = omp_get_thread_num();
 
-    /*=================== */
     /* DEFAULT            */
-    /*=================== */
 
 #pragma omp for
     for (int i = 0; i < niter; i++) {
       printf("Schedule: None     ID %d has index %2d\n", id, i);
     }
 
-      /*=================== */
       /* STATIC             */
-      /*=================== */
 
       /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
@@ -236,9 +210,7 @@ void scheduling(void) {
       printf("Schedule: static   ID %d has index %2d\n", id, i);
     }
 
-      /*=================== */
       /* DYNAMIC            */
-      /*=================== */
 
       /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
@@ -251,9 +223,7 @@ void scheduling(void) {
       printf("Schedule: dynamic  ID %d has index %2d\n", id, i);
     }
 
-      /*=================== */
       /* GUIDED             */
-      /*=================== */
 
       /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
@@ -268,10 +238,6 @@ void scheduling(void) {
 
   } /* end parallel region */
 }
-
-/*=============================================================*/
-/*=============================================================*/
-/*=============================================================*/
 
 void sections(void) {
 

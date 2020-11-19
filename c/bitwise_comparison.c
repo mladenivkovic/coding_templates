@@ -6,9 +6,7 @@
 #include <stdio.h> /* input, output    */
 #include <stdlib.h>
 
-/* =================================== */
 char* binary(int a) {
-  /* =================================== */
   /* returns binary representation of integer a as a string, */
   /* ready to be printed */
 
@@ -32,10 +30,7 @@ char* binary(int a) {
   return (binary_string);
 }
 
-/* =================================== */
-int main()
-/* =================================== */
-{
+int main() {
 
   int a, b;
 

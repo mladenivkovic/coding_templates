@@ -144,7 +144,7 @@ void remove_trailing_comments(char* line) {
       strncpy(twochars, line + i, 2);
       if (line_is_comment(twochars)) {
         line[i] = '\n';
-        line[i+1] = '\0';
+        line[i + 1] = '\0';
         break;
       }
     }

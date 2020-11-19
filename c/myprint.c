@@ -16,19 +16,13 @@ void print_fnarr(long unsigned len, double *x);
 void print_iarr(long unsigned len, int *x);
 void print_inarr(long unsigned len, int *x);
 
-/* ============== */
-int main()
-/* ============== */
-{
+int main() {
   print(" Here I go using my own print! \n %d %.3f", 999, 89234.24243);
 
   return 0;
 }
 
-/* ==================================== */
-void print(const char *format, ...)
-/* ==================================== */
-{
+void print(const char *format, ...) {
   va_list arg; /* from stdarg.h; va_list type defined in stdarg.h */
   int done;
 
@@ -47,37 +41,28 @@ void print(const char *format, ...)
   }
 }
 
-/* ============================================ */
-void print_farr(long unsigned len, double *x)
-/* ============================================ */
-{
+void print_farr(long unsigned len, double *x) {
   /* prints an array of floats. */
   for (long unsigned i = 0; i < len; i++) {
     printf("%10.3g\n", x[i]);
   }
 }
 
-/* ============================================ */
 void print_fnarr(long unsigned len, double *x) {
-  /* ============================================ */
   /* prints a numbered array of floats. */
   for (long unsigned i = 0; i < len; i++) {
     printf("%lu , %10.3g\n", i, x[i]);
   }
 }
 
-/* ============================================ */
 void print_iarr(long unsigned len, int *x) {
-  /* ============================================ */
   /* prints an array of integers. */
   for (long unsigned i = 0; i < len; i++) {
     printf("%10d\n", x[i]);
   }
 }
 
-/* ============================================ */
 void print_inarr(long unsigned len, int *x) {
-  /* ============================================ */
   /* prints a numbered array of integers. */
   for (long unsigned i = 0; i < len; i++) {
     printf("%lu , %10d\n", i, x[i]);

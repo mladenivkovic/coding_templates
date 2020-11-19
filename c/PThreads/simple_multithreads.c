@@ -1,11 +1,9 @@
-/* ================================================================================
- */
-/* COMPILE WITH gcc -pthread simple_multithreads.c */
-/* A parent process that creates 2 child processes, which each do their own
- * thing.  */
-/* The parent then waits for the children to finish, and wraps things up. */
-/* ================================================================================
- */
+/* ======================================================================
+ * COMPILE WITH gcc -pthread simple_multithreads.c
+ * A parent process that creates 2 child processes, which each do their
+ * own thing.
+ * The parent then waits for the children to finish, and wraps things up.
+ * ====================================================================== */
 
 #include <pthread.h>
 #include <stdio.h>
