@@ -70,6 +70,7 @@
 FILE* outfilep;
 #endif
 
+
 unsigned long long ullpow(unsigned long long a, int b) {
   /* computes a^b for unsigned long long a and integer b */
   unsigned long long res = 1;
@@ -141,7 +142,7 @@ void assign_cellID(struct cell* c) {
   if (c->depth > 1) newID &= ~(1ULL << ((c->depth - 1) * 3 + 15));
 
   /* add marker for this depth */
-  unsigned long long marker = 1 << (c->depth * 3 + 15);
+  unsigned long long marker = 1ULL << (c->depth * 3 + 15);
   /* add marker for position in parent cell */
   marker |= c->pos_in_parent << ((c->depth - 1) * 3 + 15);
 
@@ -150,7 +151,7 @@ void assign_cellID(struct cell* c) {
   c->cellID = newID;
 
 #ifdef PRINT_STDOUT
-  printf("Depth %3d parent %s (%lld)\n", c->depth, binary(parentID), parentID);
+  printf("Depth %3d parent %s (%lld)\n", c->depth, binary(c->parentID), c->parentID);
   printf("      %3s     ID %s (%lld)\n", " ", binary(newID), newID);
 #endif
 }
