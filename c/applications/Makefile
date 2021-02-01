@@ -18,7 +18,7 @@ SRCDIR=.
 
 
 #Compiler to use
-CC=gcc-8 -I$(IDIR)
+CC=gcc -I$(IDIR)
 
 
 
@@ -26,7 +26,7 @@ CC=gcc-8 -I$(IDIR)
 #--------------------------
 
 
-OPTFLAGS = 	-Og 			# debug
+OPTFLAGS = 	-Og -g 		# debug
 # OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
 FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
@@ -68,6 +68,10 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 quicksort.o: quicksort.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+unique_cellIDs.o: unique_cellIDs.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 
 
 # Wildcard baby

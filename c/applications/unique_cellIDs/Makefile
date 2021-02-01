@@ -18,7 +18,7 @@ SRCDIR=.
 
 
 #Compiler to use
-CC=gcc 
+CC=gcc -I$(IDIR)
 
 
 
@@ -26,7 +26,7 @@ CC=gcc
 #--------------------------
 
 
-OPTFLAGS = 	-Og 		# debug
+OPTFLAGS = 	-Og -g 		# debug
 # OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
 FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
@@ -39,7 +39,7 @@ CFLAGS_MIN=		$(OPTFLAGS) 							    # so I can force errors for demonstration
 
 
 
-LDFLAGS= -lm 
+LDFLAGS= -lm
 
 
 #==================================
@@ -65,9 +65,14 @@ default: all
 
 all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
+unique_cellIDs.o: unique_cellIDs.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+
+
+# Wildcard baby
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
-
 
 
 
@@ -78,3 +83,4 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 clean:
 	rm -f $(EXECS)
+	# rm -f $(EXECS) $(EXECS_NOSTD) $(EXECS_NODEBUG)

@@ -26,7 +26,7 @@ CC=gcc
 #--------------------------
 
 
-OPTFLAGS = 	-Og 			# debug
+OPTFLAGS = 	-Og -g		# debug
 # OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
 FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
