@@ -45,7 +45,7 @@ Moving
 2w                      move 2 words ahead (to beginning of 3rd word)
 2e                      move 2 words ahead (to end of 2nd word)
 
-2b			move 2 words back (to beginning of 2nd word)
+2b			            move 2 words back (to beginning of 2nd word)
 
 0                       go to beginning of line
 $                       go to end of line

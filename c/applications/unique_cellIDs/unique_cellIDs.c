@@ -9,12 +9,12 @@
  *  32^3 unique top level cells. For every level of
  *  prodigy cells, we add three bits at the leftmost
  *  available position based on the prodigy cell's
- *  position within the parent cell. Finally, add a 
+ *  position within the parent cell. Finally, add a
  *  leading 1 to mark that the cell ID is taken at
  *  that level and to make it unique.
  *
  *  Simplified Example:
- *   - using 3 rightmostbits instead of 15 for top 
+ *   - using 3 rightmostbits instead of 15 for top
  *   level cells
  *   - dots every three digits are included for
  *   improved readability
@@ -47,7 +47,6 @@
  *  etc
  * ================================================= */
 
-
 #include <math.h>
 #include <stdio.h> /* input, output    */
 #include <stdlib.h>
@@ -68,17 +67,15 @@
 #define PRINT_FILE
 
 #ifdef PRINT_FILE
-FILE *outfilep;
+FILE* outfilep;
 #endif
 
-
-unsigned long long ullpow(unsigned long long a, int b){
+unsigned long long ullpow(unsigned long long a, int b) {
   /* computes a^b for unsigned long long a and integer b */
   unsigned long long res = 1;
   for (int i = 0; i < b; i++) res *= a;
   return res;
 }
-
 
 /* returns binary representation of integer a as a string,
  * ready to be printed */
@@ -104,7 +101,6 @@ char* binary(unsigned long long a) {
   /* } */
   /*  */
 
-
   /* get binary string with a dot after 15 digits from the left*/
 
   int bits = sizeof(unsigned long long) * 8;
@@ -115,7 +111,7 @@ char* binary(unsigned long long a) {
       binary_string[bits - i - 1] = '.';
       continue;
     }
-    unsigned long long pow2 = ullpow(2, i-1);
+    unsigned long long pow2 = ullpow(2, i - 1);
     unsigned long long div = a / pow2;
     if (div > 0ULL) {
       binary_string[bits - i - 1] = '1';
@@ -128,7 +124,6 @@ char* binary(unsigned long long a) {
   return (binary_string);
 }
 
-
 struct cell {
   unsigned long long cellID;
   unsigned long long parentID;
@@ -136,90 +131,82 @@ struct cell {
   int depth;
 };
 
-
-void assign_cellID(struct cell* c){
+void assign_cellID(struct cell* c) {
   /* Assign the cellID to a non-top level cell */
 
   unsigned long long newID = c->parentID;
 
   /* if parent isn't top level cell, we have to
    * zero out the marker of the previous depth first */
-  if (c->depth > 1)
-    newID &= ~(1ULL << ((c->depth - 1) * 3 + 15));
+  if (c->depth > 1) newID &= ~(1ULL << ((c->depth - 1) * 3 + 15));
 
   /* add marker for this depth */
   unsigned long long marker = 1 << (c->depth * 3 + 15);
   /* add marker for position in parent cell */
-  marker |= c->pos_in_parent << ((c->depth - 1)*3 + 15);
+  marker |= c->pos_in_parent << ((c->depth - 1) * 3 + 15);
 
   /* finish up */
   newID |= marker;
   c->cellID = newID;
 
 #ifdef PRINT_STDOUT
-  printf("Depth %3d parent %s (%lld)\n",
-          c->depth, binary(parentID), parentID);
-  printf("      %3s     ID %s (%lld)\n",
-          " ", binary(newID), newID);
+  printf("Depth %3d parent %s (%lld)\n", c->depth, binary(parentID), parentID);
+  printf("      %3s     ID %s (%lld)\n", " ", binary(newID), newID);
 #endif
 }
 
-
-
-void split_cell_recursively(struct cell* c){
+void split_cell_recursively(struct cell* c) {
   /* split a cell into 8 children recursively
    * until you reach MAXDEPTH */
 
   int newdepth = c->depth + 1;
   if (newdepth > MAXDEPTH) return;
 
-  for (unsigned long long i = 0; i < 8; i++){
+  for (unsigned long long i = 0; i < 8; i++) {
     struct cell child;
     child.pos_in_parent = i;
     child.depth = newdepth;
     child.parentID = c->cellID;
     assign_cellID(&child);
 #ifdef PRINT_FILE
-    fprintf(outfilep, "%lld, %lld, %d\n", child.cellID, child.parentID, newdepth);
+    fprintf(outfilep, "%lld, %lld, %d\n", child.cellID, child.parentID,
+            newdepth);
 #endif
     split_cell_recursively(&child);
   }
 }
 
-
 int main() {
 
   /* safety checks */
-  if (NTOPLEVEL > 32){
+  if (NTOPLEVEL > 32) {
     printf("ERROR: Can't work with > 32^3 top level cells\n");
-    return 1 ;
+    return 1;
   }
   if (MAXDEPTH > 16) {
     printf("ERROR: Can't work with MAXDEPTH > 16\n");
-    return 1 ;
+    return 1;
   }
 
-  /* open file for writing? */
+    /* open file for writing? */
 #ifdef PRINT_FILE
   outfilep = fopen("output_unique_cellIDs.txt", "w");
   fprintf(outfilep, "# cell, parent, depth\n");
 #endif
-
 
   /* create top level cells */
 
   int ntopcells = NTOPLEVEL * NTOPLEVEL * NTOPLEVEL;
   struct cell* topcells = malloc(ntopcells * sizeof(struct cell));
 
-  for (int c = 0; c < ntopcells; c++){
-    topcells[c].cellID = (unsigned long long) (c + 1);
+  for (int c = 0; c < ntopcells; c++) {
+    topcells[c].cellID = (unsigned long long)(c + 1);
     topcells[c].parentID = 0;
     topcells[c].pos_in_parent = 0;
     topcells[c].depth = 0;
   }
 
-
-  for (int c = 0; c < ntopcells; c++){
+  for (int c = 0; c < ntopcells; c++) {
 #ifdef PRINT_FILE
     struct cell tc = topcells[c];
     fprintf(outfilep, "%lld, %lld, %d\n", tc.cellID, tc.parentID, tc.depth);
@@ -227,10 +214,8 @@ int main() {
     split_cell_recursively(&topcells[c]);
   }
 
-
 #ifdef PRINT_FILE
   fclose(outfilep);
 #endif
-  return 0 ;
-
+  return 0;
 }

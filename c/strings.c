@@ -11,10 +11,10 @@ int main(void) {
   /* Strings are arrays of chars */
   char initv[20] = "Initial value";
 
-  /* Array of strings is multidim char array */
-  /* Don't forget to include space for the "\0" char, which marks the end of the
-   */
-  /* string! */
+  /* Array of strings is multidim char array
+   * Don't forget to include space for the "\0" char,
+   * which marks the end of the
+   * string! */
   char months_wrong[12][3] = {"Jan", "Feb", "Mar", "May", "Aug", "Jun",
                               "Jul", "Sep", "Oct", "Nov", "Dec"};
   char months[12][4] = {"Jan", "Feb", "Mar", "May", "Aug", "Jun",
