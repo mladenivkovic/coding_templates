@@ -74,7 +74,7 @@ ax.xaxis.set_major_locator(plt.NullLocator())
 ax.yaxis.set_major_locator(plt.NullLocator())
 
 
-fig.tight_layout(pad=0.0,)
+fig.tight_layout(pad=0.0)
 
 qual = [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 100]
 opt = [True, False]

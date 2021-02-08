@@ -11,9 +11,8 @@ import numpy as np
 
 
 # define some data
-data = np.random.normal(
-    0.5, 0.5, 100
-)  # 100 samples normal (Gaussian) distribution around 0.5 with sigma=0.5
+# 100 samples normal (Gaussian) distribution around 0.5 with sigma=0.5
+data = np.random.normal(0.5, 0.5, 100)
 
 plt.hist(
     data,  # data to plot

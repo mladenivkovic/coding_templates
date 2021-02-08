@@ -21,9 +21,7 @@ nrows = 3
 ncols = 4
 
 
-# ========================
 def main():
-    # ========================
 
     fig = plt.figure(figsize=(3.5 * ncols, 3.5 * nrows))
 

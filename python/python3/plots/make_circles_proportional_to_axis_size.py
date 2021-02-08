@@ -16,9 +16,7 @@ title = "Proportional clump sizes to image/axis dimensions plot"
 workdir = str(getcwd())
 
 
-# ============================
 if __name__ == "__main__":
-    # ============================
 
     # Set point parameters : Circle with center on (1,1) and radius 0.5
     x = [1]

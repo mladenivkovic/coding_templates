@@ -19,9 +19,7 @@ fontP = FontProperties()
 fontP.set_size("xx-small")
 
 
-# ================
 def get_data():
-    # ================
 
     print("Reading in data.")
 
@@ -36,9 +34,7 @@ def get_data():
     return data
 
 
-# ===============================
 if __name__ == "__main__":
-    # ===============================
 
     # ------------
     # get data

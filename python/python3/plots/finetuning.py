@@ -21,9 +21,7 @@ title = "Plot title."
 workdir = str(getcwd())
 
 
-# ================================
 def extract_ascii(filename):
-    # ================================
     # Der grösste Teil dieser Funkion ist unwichtig für die Vorlage.
     # Er bezieht sich hauptsächlich darauf, die Daten richtig
     # auszulesen und allfällige Nullen in Werte != 0 zu verwandeln,
@@ -57,9 +55,7 @@ def extract_ascii(filename):
     return data_map, minvalue, maxvalue, gridsize
 
 
-# ================================
 if __name__ == "__main__":
-    # ================================
 
     # ----------------------------------------
     # get data_map from part2map .map file

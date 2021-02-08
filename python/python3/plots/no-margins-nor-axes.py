@@ -63,7 +63,7 @@ ax.xaxis.set_major_locator(plt.NullLocator())
 ax.yaxis.set_major_locator(plt.NullLocator())
 
 
-fig.tight_layout(pad=0.0,)
+fig.tight_layout(pad=0.0)
 
 figname = "plot_no-margins-nor-axes.png"
 print("saving figure ", figname)
