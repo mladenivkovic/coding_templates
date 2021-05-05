@@ -27,5 +27,5 @@ modules.o: precision_specification.o physical_constants.o simple_math_module.o m
 	$(F90) $(F90FLAGS) -c modules.f90
 
 clean:
-	rm -f *.o *.mod 
+	rm -f *.o *.mod *.out
 
