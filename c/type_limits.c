@@ -62,8 +62,11 @@ int main(void) {
   printf(" Floats and Doubles\n");
   printf(" -------------------\n");
 
+  printf(" minimum value for a float %*.4e\n", 41, FLT_MIN);
   printf(" maximum value for a float %*.4e\n", 41, FLT_MAX);
+  printf(" minimum value for a double %*.4le\n", 40, DBL_MIN);
   printf(" maximum value for a double %*.4le\n", 40, DBL_MAX);
+  printf(" minimum value for a long double %*.4Le\n", 35, LDBL_MIN);
   printf(" maximum value for a long double %*.4Le\n", 35, LDBL_MAX);
   printf(
       " (Most negative values of float types are just the negative value of\n "
