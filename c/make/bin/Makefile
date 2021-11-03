@@ -1,34 +1,46 @@
 # This Makefile is used to compile the main_program.c code correctly.
-#
-# SYNTAX:
-#target: depencencies
-#[tab] 	system command
 
 #==================================
 # COMPILATION TIME PARAMETERS
 #==================================
 
-EXEC=my_program #executable name
-IDIR=../include #include headers from this directory
-SRCDIR=../src
+# executable name
+EXEC   = my_program
+# source directory
+SRCDIR = ../src
+# include directory
+IDIR = ../include
+# manual definitions
+DEFINES=-DNDIM=3
 
 
 #==================================
 # COMPILER OPTIONS AND DIRECTIVES
 #==================================
 
-
 #Compiler to use
-CC=gcc -I$(IDIR)
+CC = gcc 
+# additional options
+OPTIONS = -pedantic -std=c11 -fopenmp
+# optimization
+# OPT = -O3
+OPT = -Og
+# dev options
+# DEV =
+DEV = -g -Wall -Wextra -fsignaling-nans -Warray-bounds 
+# Warning: -ffinite-math-only assumes all math will be finite, 
+# and won't catch infs and nans
 
-
-
-# flags for gcc compiler
-CFLAGS= -g -Og -Wall -Wextra     # debug
-#CFLAGS= -O3  		 # performance
-
-
+# Additional libraries
+LIBS=
+# Additional header files
+INCLUDES= -I$(IDIR)
+# linking flags
 LDFLAGS= -lm
+
+CFLAGS = $(DEFINES) $(OPT) $(OPTIONS) $(DEV) $(INCLUDES)
+
+
 
 
 #==================================
@@ -50,7 +62,6 @@ OBJECTS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
 
 
 default: $(EXEC)
-
 
 $(EXEC): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)

@@ -15,7 +15,8 @@ void io_read_cmdlineargs(int argc, char* argv[], params* p) {
 
   if (argc < 3) {
     printf(
-        "Too few arguments given. Run this program with PROGRAMNAME paramfile "
+        "Too few arguments given. Run this program with ./PROGRAMNAME "
+        "paramfile "
         "datafile\n");
     exit(2);
   } else {

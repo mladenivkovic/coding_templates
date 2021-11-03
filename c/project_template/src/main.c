@@ -25,5 +25,5 @@ int main(int argc, char* argv[]) {
   params_check(&p);
   params_print(&p);
 
-  return (0);
+  return 0;
 }

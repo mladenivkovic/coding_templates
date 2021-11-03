@@ -6,4 +6,4 @@ levelmax = 3
 nstepmax = 10
 verbose = 1
 
-dx = a
+dx = this_should_be_an_unrecognized_parameter

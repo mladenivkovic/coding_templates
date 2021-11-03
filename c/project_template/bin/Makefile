@@ -1,16 +1,14 @@
 # This Makefile is used to compile the main.c code correctly.
-#
-# SYNTAX:
-#target: depencencies
-#[tab] 	system command
 
 #==================================
 # COMPILATION TIME PARAMETERS
 #==================================
 
-EXEC=my_program  #executable name
-SRCDIR=../src
-
+# executable name
+EXEC   = my_program
+# source directory
+SRCDIR = ../src
+# manual definitions
 DEFINES=-DNDIM=3
 
 
@@ -18,18 +16,30 @@ DEFINES=-DNDIM=3
 # COMPILER OPTIONS AND DIRECTIVES
 #==================================
 
-
 #Compiler to use
-CC=gcc -I$(IDIR) -fopenmp
+CC = gcc 
+# additional options
+OPTIONS = -pedantic -std=c11 -fopenmp
+# optimization
+# OPT = -O3
+OPT = -Og
+# dev options
+# DEV =
+DEV = -g -Wall -Wextra -fsignaling-nans -Warray-bounds 
+# Warning: -ffinite-math-only assumes all math will be finite, 
+# and won't catch infs and nans
 
-
-
-# flags for gcc compiler
-CFLAGS= -g -Og -Wall -Wextra -pedantic -std=c11 -fsignaling-nans  -ffinite-math-only -fno-signed-zeros -Warray-bounds $(DEFINES) # debug
-# CFLAGS= -O3  		 	   # performance
-
-
+# Additional libraries
+LIBS=
+# Additional header files
+# INCLUDES= -I../include # if you have an include dir, add it this way
+INCLUDES = 
+# linking flags
 LDFLAGS= -lm
+
+CFLAGS = $(DEFINES) $(OPT) $(OPTIONS) $(DEV) $(INCLUDES)
+
+
 
 
 #==================================
@@ -37,7 +47,6 @@ LDFLAGS= -lm
 #==================================
 
 #include paths. Will be followed in that order.
-
 VPATH=$(SRCDIR)
 
 
@@ -52,7 +61,6 @@ OBJECTS = main.o io.o params.o
 
 
 default: $(EXEC)
-
 
 $(EXEC): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
