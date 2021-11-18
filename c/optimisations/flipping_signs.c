@@ -21,16 +21,15 @@ int main(void) {
   clock_t start, end;
   double cpu_time_flip = 0, cpu_time_noflip = 0;
 
-  int repeat = 100;
+  int repeat = 1000;
   float val = 5.3;
-  float result;
 
   printf("%s\n", "Started non-flipped measurement");
 
   for (int r = 0; r < repeat; r++) {
     start = clock();
     for (long i = 0; i < N; i++) {
-      result = some_op(val);
+      some_op(val);
     }
     end = clock();
     cpu_time_noflip += (double)(end - start) / CLOCKS_PER_SEC;
@@ -41,7 +40,7 @@ int main(void) {
   for (int r = 0; r < repeat; r++) {
     start = clock();
     for (long i = 0; i < N; i++) {
-      result = some_op_flipped(val);
+      some_op_flipped(val);
     }
     end = clock();
     cpu_time_flip += (double)(end - start) / CLOCKS_PER_SEC;

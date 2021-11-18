@@ -10,8 +10,6 @@
 
 #executable name
 EXEC=
-#include headers from this directory
-IDIR=
 #directory where source files are
 SRCDIR=.
 
@@ -22,33 +20,43 @@ SRCDIR=.
 
 
 #Compiler to use
-CC=gcc -I$(IDIR)
+CC=gcc
 
 
+#Compiler to use
+CC = gcc 
+# additional options
+OPTIONS = -pedantic -std=c11 -fopenmp
+# optimization
+# OPT = -O3
+OPT = -Og
+# dev options
+# DEV =
+DEV = -g -Wall -Wextra -fsignaling-nans -Warray-bounds -fsanitize=address
+# Warning: -ffinite-math-only assumes all math will be finite, 
+# and won't catch infs and nans
 
-# flags for gcc compiler
-# Debug
-# CFLAGS= -g -O -Wall -Wextra -pedantic -std=c11 -fsignaling-nans -ffinite-math-only -fno-signed-zeros -Warray-bounds
-# CFLAGS_NOSTD= -g -O -Wall -Wextra -pedantic -fsignaling-nans -ffinite-math-only -fno-signed-zeros -Warray-bounds
-# CFLAGS= -O3  		 # performance
-CFLAGS= -O0  		 # performance
-
-
+# Additional libraries
+LIBS=
+# Additional header files
+# INCLUDES= -I../include # if you have an include dir, add it this way
+INCLUDES = 
+# linking flags
 LDFLAGS= -lm
+
+CFLAGS = $(DEFINES) $(OPT) $(OPTIONS) $(DEV) $(INCLUDES)
+
+
+
+
 
 
 #==================================
 # FILE LISTS
 #==================================
 
-#include paths. Will be followed in that order.
-
-VPATH=$(IDIR):$(SRCDIR)
-
-
 # EXECS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
-
-EXECS=flipping_signs.o
+EXECS=flipping_signs.o accessing_multidim_arrays.o
 
 EXECS_NOSTD=
 
