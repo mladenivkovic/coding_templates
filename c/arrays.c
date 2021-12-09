@@ -13,8 +13,8 @@ void print_inarr(long unsigned len, int *x);
 
 int main(void) {
 
-  /*  array declaration possibilities */
-  /* ================================= */
+  /* array declaration possibilities */
+  /* =============================== */
 
   double x[8];
   int y[] = {4, 7, 8, 9};
@@ -22,8 +22,8 @@ int main(void) {
   /* multidimensional */
   int multi[3][2] = {{11, 12}, {21, 22}, {31, 32}};
 
-  /*  printing arrays */
-  /* ======================== */
+  /* printing arrays */
+  /* =============== */
 
   printf("Simple array printing\n");
   for (int i = 0; i < 8; i++) {
@@ -46,8 +46,8 @@ int main(void) {
   }
   printf("\n");
 
-  /*  dynamic allocation */
-  /* ======================== */
+  /* dynamic allocation */
+  /* ================== */
 
   int *dynarr;
   int array_x_size = 10;
@@ -77,8 +77,8 @@ int main(void) {
 
   printf("\n");
 
-  /*  WORKING WITH ARRAYS OF STRUCTS */
-  /* ================================= */
+  /* WORKING WITH ARRAYS OF STRUCTS */
+  /* ============================== */
 
   /* define new struct */
   typedef struct {
