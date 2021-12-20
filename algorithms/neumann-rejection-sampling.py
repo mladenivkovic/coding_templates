@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
-# ===================================================================================
+# ===========================================================================
 # In numerical analysis and computational statistics, rejection sampling
 # is a basic technique used to generate observations from a distribution.
 # It is also commonly called the acceptance-rejection method or
 # "accept-reject algorithm" and is a type of exact simulation method.
 # The method works for any distribution in |R^m with a density.
-# ===================================================================================
+#
+# Note: If a cumulative probability density is known, has an analytical
+# solution, and is invertible, then a faster method is the inversion
+# sampling. See inversion_sampling.py
+# ===========================================================================
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -71,7 +75,11 @@ while keep < nsamples:
 
 
 plt.figure()
-plt.hist(samples, bins=200, label="what we got", density=True, range=[0, 1])
+plt.hist(samples, bins=500, label="what we got", density=True, range=[0, 1])
 plt.plot(x, pdf(x), label="what we want")
+plt.xlabel("x")
+plt.ylabel("PDF(x)")
 plt.legend()
-plt.show()
+
+#  plt.show()
+plt.savefig("rejection_sampling.png", dpi=300)
