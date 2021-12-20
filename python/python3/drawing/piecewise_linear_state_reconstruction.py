@@ -86,4 +86,5 @@ plt.figtext(0.475, 0.1, r"$\mathbf{U}_{i}$", usetex=True, fontsize=14)
 plt.figtext(0.725, 0.1, r"$\mathbf{U}_{i+1}$", usetex=True, fontsize=14)
 plt.figtext(0.07, 0.5, r"$\mathbf{U}(\mathbf{x})$", usetex=True, fontsize=14)
 
-plt.savefig("piecewise_linear.pdf", form="pdf")
+#  plt.savefig("piecewise_linear.pdf", form="pdf")
+plt.savefig("piecewise_linear.png")

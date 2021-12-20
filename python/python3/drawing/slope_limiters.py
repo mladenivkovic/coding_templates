@@ -99,4 +99,5 @@ ax.legend(loc="lower right")
 ax.set_xlabel(r"$r$")
 ax.set_ylabel(r"$\phi(r)$")
 
-plt.savefig("limiters.pdf")
+#  plt.savefig("slope_limiters.pdf")
+plt.savefig("slope_limiters.png")
