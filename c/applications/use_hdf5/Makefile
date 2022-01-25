@@ -39,7 +39,7 @@ CFLAGS_MIN=		$(OPTFLAGS) 							    # so I can force errors for demonstration
 
 
 
-LDFLAGS= -lm -I/$(HDF5_ROOT) -lhdf5
+LDFLAGS= -lm -I/$(HDF5_ROOT) -I/$(HDF5_ROOT)/include -L/$(HDF5_ROOT)/lib -lhdf5
 
 
 #==================================
