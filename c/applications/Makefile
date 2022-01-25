@@ -72,6 +72,8 @@ quicksort.o: quicksort.c
 unique_cellIDs.o: unique_cellIDs.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
+print_bits_of_vals.o: print_bits_of_vals.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 
 # Wildcard baby
