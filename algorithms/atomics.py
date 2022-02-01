@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
-#-------------------------------------------------
+# -------------------------------------------------
 # Some simple principles behind atomic operations
 # Note: These are not true atomic operations,
 # but just demonstrations on how to do them
-#-------------------------------------------------
+# -------------------------------------------------
 
 from lockable_variables import lockable_var
 import random
+
 
 def atomic_cas(v: lockable_var, old, new):
     """
@@ -18,7 +19,7 @@ def atomic_cas(v: lockable_var, old, new):
         True if successfully changed var,
         False otherwise
     """
-    
+
     # get a random key
     lockkey = random.randint(0, 4294967295)
 
@@ -36,7 +37,7 @@ def atomic_cas(v: lockable_var, old, new):
     return False
 
 
-def atomic_add(v:lockable_var, add):
+def atomic_add(v: lockable_var, add):
     """
     Atomic addition of a lockable_var.
 
@@ -49,7 +50,7 @@ def atomic_add(v:lockable_var, add):
         value = v.val
         # make sure that the value that we are adding to
         # is the same as it currently is in memory, and
-        # update it only then; Then the atomic_add will 
+        # update it only then; Then the atomic_add will
         # be done correctly.
         done = atomic_cas(v, value, value + add)
 
@@ -59,11 +60,11 @@ def atomic_add(v:lockable_var, add):
 if __name__ == "__main__":
 
     a = lockable_var(7)
-    if (atomic_cas(a, 7, 8)):
+    if atomic_cas(a, 7, 8):
         print("Success: updated a=", a)
     else:
         print("Failure:", a)
-    if (atomic_cas(a, 7, 8)):
+    if atomic_cas(a, 7, 8):
         print("Success: updated a=", a)
     else:
         print("Failure:", a)

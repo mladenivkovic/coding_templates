@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 
-#-------------------------------------------------
-# A class that allows certain attributes 
-# (in this case: "val") lockable, i.e. 
-# non-changeable until a lock is lifted by 
+# -------------------------------------------------
+# A class that allows certain attributes
+# (in this case: "val") lockable, i.e.
+# non-changeable until a lock is lifted by
 # the correct lock key.
-#-------------------------------------------------
+# -------------------------------------------------
+
 
 class LockError(Exception):
     pass
 
+
 class LockWarning(Warning):
     pass
 
-class lockable_var(object):
 
+class lockable_var(object):
     def __init__(self, val):
         self.locked = False
         self.lockKey = None
@@ -41,7 +43,7 @@ class lockable_var(object):
             super().__setattr__(name, value)
         return
 
-    def lock(self, lockKey = None):
+    def lock(self, lockKey=None):
         """
         Lock the variable.
         returns  True on success, False otherwise
@@ -53,7 +55,7 @@ class lockable_var(object):
         self.lockKey = lockKey
         return True
 
-    def unlock(self, lockKey = None):
+    def unlock(self, lockKey=None):
         """
         Lock the variable.
         returns  True on success, False otherwise
@@ -66,9 +68,13 @@ class lockable_var(object):
             self.lockKye = None
             return True
         else:
-            raise LockWarning("Can't unlock something somebody else locked. lockID =", lockKey, "var was locked by", self.lockKey)
+            raise LockWarning(
+                "Can't unlock something somebody else locked. lockID =",
+                lockKey,
+                "var was locked by",
+                self.lockKey,
+            )
             return False
-
 
 
 if __name__ == "__main__":
@@ -76,9 +82,9 @@ if __name__ == "__main__":
     test = lockable_var(3)
 
     # test printing override
-    print(test) 
+    print(test)
 
-    test.xyz = 421 # we can still treat it like a standard object and add attrs
+    test.xyz = 421  # we can still treat it like a standard object and add attrs
     print(test.xyz)
 
     # test the locks
