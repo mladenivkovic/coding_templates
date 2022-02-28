@@ -1,6 +1,6 @@
 \author{Mladen Ivkovic}
-% \RequirePackage[dvipsnames]{xcolor} % moved here I guess article class causes option clash with xcolor if used after loading the class
-\LoadClass[11pt]{article}
+\RequirePackage[dvipsnames]{xcolor} % moved here I guess article class causes option clash with xcolor if used after loading the class
+\LoadClass[12pt]{article}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{letterclass_mladen}[2021/02/28 Mladen's Letter Class]
 \RequirePackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry} % Document margins
@@ -18,14 +18,12 @@
 % Setup
 %--------------------------
 
-% \definecolor{SwishLineColour}{HTML}{6e95d4}
-% \definecolor{MarkerColour}{HTML}{3f64a1}
-% \definecolor{SectionColour}{HTML}{3f64a1}
+\definecolor{LinkColour}{HTML}{3f64a1}
 
-% \hypersetup{
-%     colorlinks=true,
-%     urlcolor=cyan,
-% }
+\hypersetup{
+    colorlinks=true,
+    urlcolor=LinkColour,
+}
 
 \newcommand*{\setname}[2]{\def\@firstname{#1}\def\@lastname{#2}}
 \newcommand*{\setstreet}[1]{\def\@street{#1}}
@@ -98,7 +96,7 @@
 }
 
 \newcommand{\signature}{%
-    \vspace{4ex}
+    \vspace{10ex}
     \noindent Sincerely, \\[2em]
     \@firstname \ \@lastname
 }
