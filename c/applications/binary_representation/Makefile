@@ -66,8 +66,9 @@ default: all
 all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 
-quicksort.o: quicksort.c
+binary_representation.o: binary_representation.c binary_representation.h
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 
 # Wildcard baby
 %.o: %.c
