@@ -31,7 +31,7 @@ int main(void) {
   SHOW(unsigned int, 1 << 16);
 
   /* You prefer a string? Have one! */
-  char intstr[STRLEN];
+  char intstr[BIN_REP_STRLEN];
   GET_BINARY_STRING(int, 17, intstr);
   printf("\nUsing returned string: 17 = %s\n", intstr);
 

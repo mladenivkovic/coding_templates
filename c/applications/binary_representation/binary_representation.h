@@ -14,17 +14,17 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "binary_representation.h"
-
 /* When returning strings: Use 149 spaces:
  * 16 bytes of 8 digits, + 1 space after each byte
  * 2 extra spaces for start and end brackets
  * 1 extra space for Null char */
-#define STRLEN 149
+#define BIN_REP_STRLEN 149
 
 /**
  * print a single byte as bits.  To be used repeatedly
  * while printing a single variable.
+ *
+ * @param val character to print
  **/
 void print_byte_as_bits(char val) {
   for (int i = 7; 0 <= i; i--) {
@@ -34,10 +34,15 @@ void print_byte_as_bits(char val) {
 
 /**
  * @brief print the bits of a type 'type' with value 'val'
+ *
+ * @param type text representation of name of the variable type to print
+ * @param val text representation of value of the passed variable to print
+ * @param bytes the actual bytes of the variable to print
+ * @param num_bytes size of variable, in bytes
  **/
 void print_bits(char* type, char* val, unsigned char* bytes, size_t num_bytes) {
   printf("(%*s) %*s = [ ", 15, type, 16, val);
-  for (size_t i = 0; i < num_bytes; i++) {
+  for (int i = num_bytes - 1; i >= 0; i--) {
     print_byte_as_bits(bytes[i]);
     printf(" ");
   }
@@ -53,6 +58,9 @@ void print_bits(char* type, char* val, unsigned char* bytes, size_t num_bytes) {
 
 /**
  * @brief Write a single byte into a given string.
+ *
+ * @param val the byte to convert to binary representation
+ * @param output the string to write result into
  **/
 void write_byte_as_bits(char val, char* output) {
   for (int i = 7; i >= 0; i--) {
@@ -62,9 +70,14 @@ void write_byte_as_bits(char val, char* output) {
 }
 
 /**
- * Write bits into string.
+ * @brief Write bits of a variable into a string.
+ *
+ * @param bytes the actual bytes of the variable to write
+ * @param num_bytes size of variable, in bytes
+ * @param output where the resulting string will be written into
  **/
-void write_bits(unsigned char* bytes, size_t num_bytes, char output[STRLEN]) {
+void write_bits(unsigned char* bytes, size_t num_bytes,
+                char output[BIN_REP_STRLEN]) {
 
   /* number of extra characters at start and end of string*/
   size_t offset = 1;
@@ -90,4 +103,4 @@ void write_bits(unsigned char* bytes, size_t num_bytes, char output[STRLEN]) {
     write_bits((unsigned char*)&x, sizeof(x), Output); \
   }
 
-#endif
+#endif /* defined BINARY_REPRESENTATION_H */
