@@ -1,0 +1,103 @@
+\documentclass[11pt]{beamer}
+
+
+\usepackage{lmodern} 		% Diese beiden packages sorgen für echte
+\usepackage[T1]{fontenc}	% Umlaute.
+
+\usepackage{amssymb, amsmath, color, graphicx, float, setspace, tipa}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+
+
+%\usepackage[pdfpagelabels,
+%			pdfstartview = FitH,
+%			bookmarksopen = true,
+%			bookmarksnumbered = true,
+%			linkcolor = black,
+%			plainpages = false,
+%			hypertexnames = false,
+%			citecolor = black,
+%			breaklinks]{hyperref}
+%\usepackage{url}
+\usepackage{longtable} 			% Tables along multiple pages
+
+%\newtheorem*{bem}{Bemerkung} 	% Neue Theorem-Umgebung: Bemerkung
+\newtheorem*{rem}{Remark} 		% New theorem-environment: Remark
+\newcommand{\fillframe}{\vskip0pt plus 1filll}
+
+
+% CAPTIONS
+\usepackage[justification=centering]{caption}
+\addto\captionsenglish{\renewcommand{\figurename}{}} % Redefine how figures are called
+\captionsetup{font={small,sf},
+				labelfont=bf,
+				format=plain,
+				labelformat=empty}
+% Use captionsetup below for no 'Figure' label
+%\captionsetup{font={small,tt}, labelformat=empty, format=plain}
+
+
+
+
+
+%===================
+% BIBLIOGRAPHY
+%===================
+\usepackage[]{natbib}
+\bibliographystyle{unsrtnat}
+
+
+
+
+
+
+
+
+%-----------------
+% BEAMER-SPECIFIC
+%-----------------
+
+\usefonttheme{serif}
+%\usefonttheme[onlymath]{serif} % Make math use serif. Can't call it simultaneously with \usefonttheme{serif}
+\usepackage[rm]{roboto}
+
+\usetheme{metropolis}
+\usecolortheme{metropolis-highcontrast}
+\metroset{sectionpage=none}
+\metroset{background=dark}
+
+% the line under the title/subtitle on first slide
+\setbeamercolor{title separator}{fg=red}
+\setbeamercolor{normal text}{fg=greyForText}
+\setbeamercolor{page number in head/foot}{fg=red, bg=blue}
+\setbeamercolor{page number in head}{fg=red, bg=blue}
+
+\setbeamercolor{frametitle}{fg=greyForText, bg=mDarkTeal!90}
+%\metroset{titleformat=smallcaps}
+%\metroset{numbering=counter}
+
+
+
+
+
+
+% You can look at different options for usetheme, usecolortheme und usefonttheme
+% here: http://deic.uab.es/~iblanes/beamer_gallery/
+
+
+% transparent Overlays (what's coming next on the slide is shown with reduced alpha)
+%\setbeamercovered{transparent}
+
+% Removes navigation symbols at the bottom
+%\beamertemplatenavigationsymbolsempty
+
+% Use page numbers as links
+%\setbeamertemplate{footline}[frame]
+%    \setbeamertemplate{footline}{%
+%    	\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[10pt]{\hyperlink{tableofcontents}{\scriptsize\insertframenumber}}}}}
+
+
+
+% include my definitions here
+\input{my_defines}

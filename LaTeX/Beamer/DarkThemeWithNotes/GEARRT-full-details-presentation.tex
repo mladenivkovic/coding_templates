@@ -1,0 +1,188 @@
+\include{header}
+
+%\usepackage{mathtools}
+
+\usepackage{pgfpages}
+% These slides also contain speaker notes. You can print just the slides,
+% just the notes, or both, depending on the setting below. Comment out the want
+% you want.
+
+%\setbeameroption{hide notes} % Only slides
+%\setbeameroption{show only notes} % Only notes
+\setbeameroption{show notes on second screen=right}
+
+
+
+
+%---------------------
+%  Metadata
+%---------------------
+
+\title[GEAR-RT]{GEAR-RT - Radiative Transfer with SWIFT}
+%     Title of the presentations
+\subtitle[]{Radiation Hydrodynamics with Meshless Methods, the M1 Closure, Interdependent Tasking, and Sub-Cycling with Individual Timestepping}
+%     Subtitle
+\author[M. Ivkovic]{Mladen Ivkovic}
+%     Set author
+\institute[LASTRO EPFL]{
+%    \begin{columns}
+%        \column{0.7\textwidth}
+            LASTRO \\
+            \'Ecole Polytechnique F\'ed\'erale de Lausanne
+%        \column{0.2\textwidth}
+%            \makebox[\textwidth][r]{\includegraphics[width=2cm]{figures/epfl-logo.pdf}}
+%    \end{columns}
+}
+
+
+
+
+%     Institute
+\date[12.08.2022]{12. August 2022}
+%	  Date of presentation. Alternatively you can use \today to set compilation time date automatically.
+% \logo{\pgfimage[width=2cm,height=2cm]{mylogo}}
+%     Add mylogo.pdf (bzw. mylogo.png, mylogo.jpg, mylogo.mps if you're using pdftex as Backend) as the logo on all slides, here using the package pgf.
+% \titlegraphic{\includegraphics[width=2cm,height=2cm]{mylogo}}
+%	  Add mylogo.pdf/png/jpg file as the logo only on the title packe using the graphicx package
+
+
+
+
+
+
+
+
+%===============================================================================%===============================================================================%===============================================================================
+
+
+
+\begin{document}
+
+
+\begin{frame}{}
+	\titlepage
+	\note{testing notes}
+\end{frame}
+
+
+%\begin{frame}{Outline}\label{tableofcontents}
+%   \tableofcontents
+%\end{frame}
+
+
+
+
+
+%---------------------------------------------------------
+\begin{frame}{Equations of Radiative Transfer}
+%---------------------------------------------------------
+	Can we assume $\DELDT{I_\nu} \approx 0$ ?
+
+	Yes, if we are primarily focussing on the \textbf{fluid flow} as opposed to the \textbf{radiation flow}.
+
+	\begin{itemize}
+	\item Optically thin regime:
+
+		$t_{fluid} \sim l / v$
+
+		$t_{rad} \sim l / c$
+
+		$\Rightarrow$ $t_{rad} / t_{fluid} = \mathcal{O}(v/c)$, $t_{rad} \ll t_{fluid}$
+	\end{itemize}
+
+	So the radiation field has ample time to adjust itself to the changes induced by the fluid.
+\end{frame}
+
+
+
+
+%---------------------------------------------------------
+\begin{frame}{Optical Depth}
+%---------------------------------------------------------
+
+	A few more words on $\tau_\nu$:
+
+	If $\x$ and $\x'$ are two points in the medium separated by $l = |\x' - \x|$, the optical depth \textbf{between them} is
+	%
+	\begin{align*}
+	\tau_\nu(\x, \x') = \int_0^l \alpha_\nu(\x + \mathbf{n}s; \mathbf{n}, \nu) \de s
+	\end{align*}
+
+	$	\tau_\nu(\x, \x')$ is equal to the number of mean free paths  between $\x$ and $\x'$
+\end{frame}
+
+
+
+
+
+
+
+
+
+%---------------------------------------------------------
+\section{Monte Carlo Radiative Transfer Method}
+%---------------------------------------------------------
+
+\begin{frame}{Monte Carlo Radiative Transfer Method}
+
+We have a nice equation for Radiative Transfer along the ray - so let's use it!
+
+Each radiation source emits \emph{photon packets} with
+
+\begin{itemize}
+	\item some direction $\theta$, $\phi$
+	\item some energy / photon number
+	\item some frequency
+\end{itemize}
+
+Follow the packets, and solve the RT equation along the path of the ray.
+
+
+\end{frame}
+
+
+
+
+
+
+%-------------------------------------------------
+\begin{frame}{Photon Packet Path Length}
+%-------------------------------------------------
+	\begin{columns}
+		\column{0.5\linewidth}{
+
+		   \begin{align*}
+   		   \de I_\nu &= -I_\nu\ n\ \sigma\ \de l \\
+   		   \Rightarrow \quad I_\nu &= \exp(-n \sigma l)
+		   \end{align*}
+
+		   \begin{itemize}
+		   \item $n \sigma$ is the fraction absorbed or scattered per length.
+
+		   \item $n \sigma \de l$ is also the probability of interaction over $\de l$. Therefore, the probability to \emph{not} interact is $(1 - n \sigma \de l)$.
+		   \end{itemize}
+		 }
+		\column{0.5\linewidth}{
+		\begin{figure}
+		\includegraphics[width=\linewidth]{figures/tikz/absorption.pdf}%
+		\end{figure}
+	}
+
+	\end{columns}
+
+\end{frame}
+
+
+
+
+
+
+%\begin{frame}{References}
+%    \cite{AHF}
+%
+%    \renewcommand*{\bibfont}{\footnotesize}
+%    \bibliography{references}
+%\end{frame}
+
+
+\end{document}
