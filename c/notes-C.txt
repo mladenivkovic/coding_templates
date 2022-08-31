@@ -110,3 +110,10 @@ GCC Compiling flags
     This enables some extra warning flags that are not enabled by -Wall
 
 
+# Disable optimization for a single function
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+your_function(){}
+#pragma GCC pop_options
+

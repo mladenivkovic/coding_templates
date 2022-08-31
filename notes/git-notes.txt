@@ -56,3 +56,10 @@ contributing to a project:
     - push changes to your remote
         git push origin branchname
     - create a pull request online
+    
+    
+    
+count individual line changes between two commits
+
+ $ git log --numstat --pretty="%H"  9e6654be8..HEAD | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("+%d, -%d\n", plus, minus)}'
+(older commit needs to be first)
