@@ -1,0 +1,28 @@
+%============================================================================================
+\chapter{First Appendix}
+%============================================================================================
+
+
+Consider the one dimensional Euler equations in the primitive variable formulation:
+
+\begin{align}
+    \deldt \W + A(\W) \deldx \W = 0 &&
+\end{align}
+
+with the primitive state vector $\W$ and Jacobi matrix $A(\W)$
+
+\begin{align}
+    \W = \begin{pmatrix}
+          \rho \\ v \\ p
+         \end{pmatrix}
+&&
+    A(\W) = \frac{\del \F(\W)}{\del \W} = 
+            \begin{pmatrix}
+              v & \rho & 0 \\
+              0 & v & 1/\rho \\
+              0 & \rho c_s^2 & v
+             \end{pmatrix}
+\end{align}
+
+Thanks for your consideration.
+
