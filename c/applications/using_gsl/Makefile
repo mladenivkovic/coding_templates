@@ -10,7 +10,7 @@ IDIR = ../include
 DEFINES=
 
 GSL_INCL = -I$(GSL_ROOT)/include
-GSL_LIBS = -I$(GSL_ROOT)/lib
+GSL_LIBS = -L$(GSL_ROOT)/lib
 
 #==================================
 # COMPILER OPTIONS AND DIRECTIVES
@@ -36,7 +36,7 @@ INCLUDES = -I$(IDIR) -I. $(GSL_INCL)
 # linking flags
 LDFLAGS  = -lm -lgsl
 
-CFLAGS = $(DEFINES) $(OPT) $(OPTIONS) $(DEV) $(INCLUDES) $(LIBS) $(LDFLAGS)
+CFLAGS = $(DEFINES) $(OPT) $(OPTIONS) $(DEV) $(INCLUDES) $(LIBS)
 
 
 
@@ -64,7 +64,7 @@ default: all
 all: $(EXECS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 
 
