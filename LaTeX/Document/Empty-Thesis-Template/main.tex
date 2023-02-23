@@ -1,0 +1,98 @@
+\include{header}
+
+
+\begin{document}
+
+%--------------------------------------------
+% Stuff that needs to be done before all else
+%--------------------------------------------
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt} %(needs to be before titlepage and frontmatter to keep the table of contents lists short)
+
+
+\frontmatter
+\include{head/titlepage}
+\include{head/dedication}
+\include{head/preprint_note}
+\setcounter{page}{0}
+\include{head/acknowledgements}
+\include{head/preface}
+\include{head/abstracts}
+
+
+\cleardoublepage
+\pdfbookmark{\contentsname}{toc}
+\tableofcontents
+
+% Lists of Figures and of Tables
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{List of Figures} % adds an entry to the table of contents
+% \listoffigures
+%
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{List of Tables} % adds an entry to the table of contents
+% \listoftables
+%
+
+
+% space before each new paragraph according to the template guidelines.
+%(needs to be after titlepage and frontmatter to keep the table of contents lists short)
+\setlength{\parskip}{1em}
+
+\mainmatter
+\include*{main/introduction}
+
+
+\part{The First Part}
+
+\include*{main/Part1/part1-chapter1}
+\include*{main/Part1/part1-chapter2}
+\include*{main/Part1/part1-chapter3}
+
+
+\part{The Second Part}
+
+\include*{main/Part2/part2-chapter1}
+\include*{main/Part2/part2-chapter2}
+\include*{main/Part2/part2-chapter3}
+
+
+\part{The Third Part}
+
+\include*{main/Part3/part3-chapter1}
+\include*{main/Part3/part3-chapter2}
+\include*{main/Part3/part3-chapter3}
+
+
+
+
+
+\part*{Appendix}
+\addcontentsline{toc}{part}{Appendix} % adds an entry to the table of contents
+\cleardoublepage
+
+\begin{appendices}
+\include*{appendix/app1-some-appendix}
+\include*{appendix/app2-some-appendix}
+\end{appendices}
+
+
+\backmatter
+
+% BIBLIOGRAPHY
+\cleardoublepage
+% Make unnumbered chapter, but add it to the table of contents regardless
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{tail/thesis_references}
+\cleardoublepage
+
+\include*{tail/cv}
+
+
+
+
+\end{document}

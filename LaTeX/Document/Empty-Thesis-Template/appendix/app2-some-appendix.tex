@@ -1,0 +1,23 @@
+%====================================================================================
+\chapter{Second Appendix}
+%====================================================================================
+
+Consider the linear advection equation
+
+\begin{align}
+ \deldt \uc + a \deldx \uc = 0 \label{eq:app-roe-linear-advection}
+\end{align}
+
+for a constant wave speed $a$. Consider a general scheme to solve the linear advection equation
+
+\begin{align}
+ \uc_i^{n+1} = \sum_\alpha A_\alpha u_{i+\alpha} ^ n \label{eq:app-roe-general-scheme}
+\end{align}
+
+where $\uc_i^n = \uc (i \Delta x, n \Delta t)$, and $\{A_\alpha \}$ is a finite set of constant
+nonzero coefficients. $\alpha$ denotes the indices of the stencil of the method. For example in
+Godunov's method, the update formula for $\uc_i^{n+1}$ depends on
+the states $\uc_{i-1}$ and $\uc_{i}$, and hence for that example $\alpha \in \{-1, 0 \}$.
+
+Thanks for your consideration.
+
