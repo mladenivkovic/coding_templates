@@ -48,7 +48,7 @@
 \usepackage{newclude} 		% use \include*{file} instead \include{} to omit pagebreak after include
 \usepackage{csquotes}		% nice in-line quotes
 
-
+\usepackage{listings}     % source code printer
 
 %===================
 % BIBLIOGRAPHY
@@ -929,6 +929,28 @@ Version 2:
 		\EndProcedure
 	\end{algorithmic}
 \end{algorithm}
+
+
+
+
+
+
+
+
+%=============================================
+\section{Code}
+%=============================================
+
+
+
+\begin{lstlisting}
+int main(void){
+
+    printf("Hello World!\n");
+    
+    return 0;
+}
+\end{lstlisting}
 
 
 
