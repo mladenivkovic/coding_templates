@@ -42,12 +42,12 @@ ax4 = fig.add_subplot(224, aspect="equal")
 x, y = np.meshgrid(np.arange(nx), np.arange(nx))
 
 # 1) with colour background
-ax1.set_title("Countour lines with colour background")
+ax1.set_title("Contour lines with colour background")
 conts = ax1.contourf(x, y, data)
 ax1.contour(conts, colors="k")
 
 # 2) without colour background
-ax2.set_title("Countour lines only")
+ax2.set_title("Contour lines only")
 ax2.contour(x, y, data, colors="k")
 
 
@@ -57,12 +57,12 @@ ax2.contour(x, y, data, colors="k")
 x, y = np.meshgrid(np.linspace(lowlim, uplim, nx), np.linspace(lowlim, uplim, nx))
 
 # 1) with colour background
-ax3.set_title("Countour lines with colour background")
+ax3.set_title("Contour lines with colour background")
 conts = ax3.contourf(x, y, data)
 ax3.contour(conts, colors="k")
 
 # 2) without colour background
-ax4.set_title("Countour lines only")
+ax4.set_title("Contour lines only")
 ax4.contour(x, y, data, colors="k")
 
 
