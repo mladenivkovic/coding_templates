@@ -76,7 +76,13 @@ functions.o: functions.cpp
 hello_world.o: hello_world.cpp
 	$(CXX) $< -o $@
 
-printing_to_stdout.o: printing_to_stdout.cpp
+namespaces.o: namespaces.cpp 
+	$(CXX) $< -o $@
+
+stdio.o: stdio.cpp
+	$(CXX) $< -o $@
+
+special_characters_for_printing.o: special_characters_for_printing.cpp
 	$(CXX) $< -o $@
 
 # Wildcard baby
