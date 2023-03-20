@@ -79,6 +79,9 @@ hello_world.o: hello_world.cpp
 namespaces.o: namespaces.cpp 
 	$(CXX) $< -o $@
 
+simple_type_limits.o: simple_type_limits.cpp
+	$(CXX) $< -o $@
+
 stdio.o: stdio.cpp
 	$(CXX) $< -o $@
 
