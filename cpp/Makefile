@@ -33,7 +33,7 @@ STDFLAGS= 	-std=c++20
 # CXXFLAGS=
 CXXFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS)
 CXXFLAGS_NOSTD=	$(OPTFLAGS) $(WFLAGS) $(FFLAGS)				# no standard
-# CXXFLAGS_MIN=	$(OPTFLAGS) 							    # so I can force errors for demonstration
+CXXFLAGS_MIN=	$(OPTFLAGS) 							    # so I can force errors for demonstration
 
 
 
@@ -71,25 +71,29 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 CXXTEST=g++ 
 
 casting_types.o: casting_types.cpp
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+enumerators.o: enumerators.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 functions.o: functions.cpp
+	# $(CXX) $(CXXFLAGS) $< -o $@
 	$(CXX) $< -o $@
 
 hello_world.o: hello_world.cpp
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 namespaces.o: namespaces.cpp 
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 simple_type_limits.o: simple_type_limits.cpp
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 special_characters_for_printing.o: special_characters_for_printing.cpp
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 stdio.o: stdio.cpp
-	$(CXX) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 # Wildcard baby
 %.o: %.cpp
