@@ -6,6 +6,8 @@
 
 // using namespace std; // skip this for now to explicitly trace where you get things from
 
+
+/* TODO: clean this */
 /**
  * Make a template to write a printing function for any variable type.
  */
