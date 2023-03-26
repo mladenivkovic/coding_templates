@@ -23,16 +23,16 @@ CC=g++
 #--------------------------
 
 
-# OPTFLAGS = 	-Og -g 			# debug
+OPTFLAGS = 	-Og -g 			# debug
 # OPTFLAGS = 	-O3  		# performance
-# WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
-# FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros
-# STDFLAGS= 	-std=c11
+WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
+FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros
+STDFLAGS= 	-std=c++20
 
 
 # CXXFLAGS=
-# CXXFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS)
-# CXXFLAGS_NOSTD=	$(OPTFLAGS) $(WFLAGS) $(FFLAGS)				# no standard
+CXXFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS)
+CXXFLAGS_NOSTD=	$(OPTFLAGS) $(WFLAGS) $(FFLAGS)				# no standard
 # CXXFLAGS_MIN=	$(OPTFLAGS) 							    # so I can force errors for demonstration
 
 
@@ -70,6 +70,9 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 CXXTEST=g++ 
 
+casting_types.o: casting_types.cpp
+	$(CXX) $< -o $@
+
 functions.o: functions.cpp
 	$(CXX) $< -o $@
 
@@ -82,10 +85,10 @@ namespaces.o: namespaces.cpp
 simple_type_limits.o: simple_type_limits.cpp
 	$(CXX) $< -o $@
 
-stdio.o: stdio.cpp
+special_characters_for_printing.o: special_characters_for_printing.cpp
 	$(CXX) $< -o $@
 
-special_characters_for_printing.o: special_characters_for_printing.cpp
+stdio.o: stdio.cpp
 	$(CXX) $< -o $@
 
 # Wildcard baby
