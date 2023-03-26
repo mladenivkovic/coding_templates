@@ -83,6 +83,9 @@ functions.o: functions.cpp
 hello_world.o: hello_world.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+logical_operators.o: logical_operators.cpp 
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 namespaces.o: namespaces.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
