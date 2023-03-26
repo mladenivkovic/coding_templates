@@ -11,7 +11,40 @@ void drawline(){
 
 
 /**
- * Find greatest common denominator
+ * Find greatest common denominator using the Euclidean algorithm.
+ *
+ * The idea is the following: To find the greatest common denominator
+ * between integers m and n, we make use of the fact that you can write
+ * them as 
+ *
+ *    m = m1 * g;   n = n1 * g;
+ *
+ * where g is the greatest common denominator. Let m >= n.
+ * If m % n == 0, then n is the greatest common denominator.
+ * Otherwise, we can write
+ *
+ *    m - n = (m1 - n1) * g
+ *
+ * which obviously still has the same greatest common denominator g.
+ * Furthermore, we don't have to subtract n from m only once. We can
+ * do it as many times as we want, as long as the result remains >= 0.
+ * Let d1 = m // n, where '//' denotes an integer division. Then
+ *
+ *    m - d1 * n = (m1 - d1 * n1) * g
+ *
+ * still contains the same greatest denominator g. This operation above
+ * is the same as taking the remainder:
+ *
+ *    m - d1 * n = m % n = (m1 - d1 * n1) * g
+ *
+ * By definition of the remainder, m % n will always be smaller than n.
+ * We can now re-name
+ *
+ *    m <- n
+ *    n <- m % n
+ *
+ * and repeat the algorithm using increasingly smaller numbers for m and n, 
+ * which makes it converge as we approach n = 1.
  **/
 void greatest_common_denominator(int m, int n){
 
