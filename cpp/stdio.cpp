@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ios>
 #include <iostream> // IO library
 #include <string>   // string type
 #include <iomanip>  // manipulations, e.g. formatting
@@ -60,6 +62,9 @@ int main(){
 
 
   std::cout << "\n\nFLOATS\n\n" << std::endl;
+
+  const auto default_precision {std::cout.precision()}; // store this for later
+
   std::cout << "Setting width to 24:";
   std::cout << std::setw(24) << f << std::endl;
   std::cout << "Setting width to 24, and filling up with '-':" << std::setfill('-') << std::setw(24) << f << std::endl;
@@ -79,7 +84,48 @@ int main(){
   std::cout << "Setting precision to 4: " << std::setprecision(4) << f << std::endl;
   std::cout << "Setting precision to 12: " << std::setw(15) << std::setprecision(12) << f <<  std::setw(15) << f << std::endl;
 
+  // reset to defaults first before playing again
+  std::cout << std::setprecision(default_precision);
+  std::cout << std::setfill(' ') << std::endl;
+  // Now let's party
+  std::cout << std::left << std::setw(25) << "Number = 0.0 ";
+    std::cout << std::setw(14) << "defaultfloat:";
+    std::cout << std::defaultfloat << 0.0 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.0 ";
+    std::cout << std::setw(14) << "fixed:";
+    std::cout << std::fixed << 0.0 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.0 ";
+    std::cout << std::setw(14) << "scientific:";
+    std::cout << std::scientific << 0.0 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.0 ";
+    std::cout << std::setw(14) << "hexfloat:";
+    std::cout << std::hexfloat << 0.0 << std::endl;
 
+  std::cout << std::left << std::setw(25) << "Number = 0.01 ";
+    std::cout << std::setw(14) << "defaultfloat:";
+    std::cout << std::defaultfloat << 0.01 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.01 ";
+    std::cout << std::setw(14) << "fixed:";
+    std::cout << std::fixed << 0.01 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.01 ";
+    std::cout << std::setw(14) << "scientific:";
+    std::cout << std::scientific << 0.01 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.01 ";
+    std::cout << std::setw(14) << "hexfloat:";
+    std::cout << std::hexfloat << 0.01 << std::endl;
+
+  std::cout << std::left << std::setw(25) << "Number = 0.0001 ";
+    std::cout << std::setw(14) << "defaultfloat:";
+    std::cout << std::defaultfloat << 0.0001 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.0001 ";
+    std::cout << std::setw(14) << "fixed:";
+    std::cout << std::fixed << 0.0001 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.0001 ";
+    std::cout << std::setw(14) << "scientific:";
+    std::cout << std::scientific << 0.0001 << std::endl;
+  std::cout << std::left << std::setw(25) << "Number = 0.0001 ";
+    std::cout << std::setw(14) << "hexfloat:";
+    std::cout << std::hexfloat << 0.0001 << std::endl;
 
   return 0;
 }
