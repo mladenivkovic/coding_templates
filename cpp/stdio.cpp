@@ -24,19 +24,19 @@ int main(){
 
   // Using the iostream
   // =================================
-  // int a = -1;
-  // std::cout << "\nEnter some integer: ";
-  // std::cin >> a;
-  // // NOTE: `std::cin >> int i` works (compiles) too, but `i` will not be in scope
-  // // in the following lines.
-  // std::cout << "\nyou gave me " << a << std::endl;
-  //
-  //
-  // // \a should be an "alert", but apparently it doesn't do much nowadays.
-  // std::cerr << "\aThis is an error written to stderr." << std::endl;
-  // // check that this works when running the program e.g. by redirecting stderr
-  // // to /dev/null : `./stdio.o 2> /dev/null `
-  
+  int a = -1;
+  std::cout << "\nEnter some integer: ";
+  std::cin >> a;
+  // NOTE: `std::cin >> int i` works (compiles) too, but `i` will not be in scope
+  // in the following lines.
+  std::cout << "\nyou gave me " << a << std::endl;
+
+
+  // \a should be an "alert", but apparently it doesn't do much nowadays.
+  std::cerr << "\aThis is an error written to stderr." << std::endl;
+  // check that this works when running the program e.g. by redirecting stderr
+  // to /dev/null : `./stdio.o 2> /dev/null `
+
 
   // Some Formatting
   // =================================

@@ -70,17 +70,24 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 CXXTEST=g++ 
 
+bitwise_operations.o: bitwise_operations.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 casting_types.o: casting_types.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 enumerators.o: enumerators.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@
+	# skip CXXFLAGS: allow unused variables
+	$(CXX) $< -o $@
 
 functions.o: functions.cpp
 	# $(CXX) $(CXXFLAGS) $< -o $@
 	$(CXX) $< -o $@
 
 hello_world.o: hello_world.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+loops.o: loops.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 logical_operators.o: logical_operators.cpp 
