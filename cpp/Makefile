@@ -76,6 +76,9 @@ bitwise_operations.o: bitwise_operations.cpp
 casting_types.o: casting_types.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+classes.o: classes.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 enumerators.o: enumerators.cpp
 	# skip CXXFLAGS: allow unused variables
 	$(CXX) $< -o $@
@@ -106,6 +109,9 @@ special_characters_for_printing.o: special_characters_for_printing.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 stdio.o: stdio.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+structs.o: structs.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 vectors.o: vectors.cpp
