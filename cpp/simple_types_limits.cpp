@@ -1,7 +1,7 @@
 #include <iostream> // IO library
-#include <climits>
-#include <limits>
-#include <float.h>
+#include <climits>  // char, int, long limits
+#include <limits>   // std::numeric_limits
+#include <float.h>  // float mins, maxs, epsilons
 
 int main(){
 

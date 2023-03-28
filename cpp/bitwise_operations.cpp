@@ -1,5 +1,4 @@
 #include <iostream> // IO library
-#include <string>   // string type
 #include <iomanip>
 
 bool verbose = false;

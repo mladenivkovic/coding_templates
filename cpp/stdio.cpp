@@ -1,7 +1,4 @@
-#include <cstdlib>
-#include <ios>
 #include <iostream> // IO library
-#include <string>   // string type
 #include <iomanip>  // manipulations, e.g. formatting
 
 // using namespace std; // skip this for now to explicitly trace where you get things from
@@ -131,5 +128,3 @@ int main(){
 
   return 0;
 }
-
-
