@@ -87,6 +87,9 @@ functions.o: functions.cpp
 hello_world.o: hello_world.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+lists.o: lists.cpp 
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 loops.o: loops.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
