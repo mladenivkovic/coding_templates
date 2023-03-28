@@ -1,5 +1,4 @@
 #include <iostream> // IO library
-#include <string>   // string type
 
 // using namespace std; // skip this for now to explicitly trace where you get things from
 

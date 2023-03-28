@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <iostream> // IO library
 #include <string>   // string type
 
