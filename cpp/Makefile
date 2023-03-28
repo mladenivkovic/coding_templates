@@ -105,6 +105,9 @@ special_characters_for_printing.o: special_characters_for_printing.cpp
 stdio.o: stdio.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+vectors.o: vectors.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 # Wildcard baby
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
