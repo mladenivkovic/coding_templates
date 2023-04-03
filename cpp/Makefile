@@ -66,7 +66,6 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 
 # then in alphabetical order
-#
 
 CXXTEST=g++ 
 
