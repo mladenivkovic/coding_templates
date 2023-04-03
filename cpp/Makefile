@@ -101,6 +101,9 @@ logical_operators.o: logical_operators.cpp
 namespaces.o: namespaces.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+scopes.o: scopes.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 simple_type_limits.o: simple_type_limits.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
@@ -109,6 +112,13 @@ special_characters_for_printing.o: special_characters_for_printing.cpp
 
 stdio.o: stdio.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
+
+storage_classes.o: storage_classes.cpp storage_classes_header.h storage_classes_second_file.o
+	$(CXX) $(CXXFLAGS) storage_classes_second_file.o $< -o $@
+
+storage_classes_second_file.o: storage_classes_second_file.cpp
+	# compile, but don't link
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 structs.o: structs.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
