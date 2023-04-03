@@ -92,6 +92,9 @@ functions.o: functions.cpp
 hello_world.o: hello_world.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+IOtoFile.o: IOtoFile.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 lists.o: lists.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
