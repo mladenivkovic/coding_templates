@@ -52,6 +52,32 @@ int main(){
   intlist2.pop_back();
   print_list(intlist2, "Removed element in back:");
 
+  // Deleting elements via iterators
+  // WARNING: Don't try to erase stuff while you're iterating over the list.
+  std::list<int>::iterator index_to_erase;
+  for (std::list<int>::iterator i=intlist2.begin(); i!=intlist2.end(); i++){
+    if (*i == 3) index_to_erase = i;
+  }
+  intlist2.erase(index_to_erase);
+  print_list(intlist2, "Removed element with value 3:");
+
+
+  // Deleting elements from starting iterator to end iterator
+  // WARNING: Don't try to erase stuff while you're iterating over the list.
+  std::list<int>::iterator start_erase;
+  std::list<int>::iterator stop_erase;
+  for (std::list<int>::iterator i=intlist2.begin(); i!=intlist2.end(); i++){
+    if (*i == 2) start_erase = i;
+    if (*i == 5) stop_erase = i;
+  }
+
+  intlist2.erase(start_erase, stop_erase);
+  print_list(intlist2, "Removed all elements starting with element of value 2, stoppinng with element with value 4:");
+
+  intlist2 = {1, 2, 3, 4, 5};
+  print_list(intlist2, "Restored intlist2 to:");
+
+
   // Reverse order of elements
   intlist2.reverse();
   print_list(intlist2, "Reversed:");
