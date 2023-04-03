@@ -113,6 +113,9 @@ stdio.o: stdio.cpp
 structs.o: structs.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+switch.o: switch.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 vectors.o: vectors.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
