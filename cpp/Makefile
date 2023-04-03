@@ -69,6 +69,9 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 
 CXXTEST=g++ 
 
+array.o: array.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 bitwise_operations.o: bitwise_operations.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
