@@ -98,7 +98,7 @@ loops.o: loops.cpp
 logical_operators.o: logical_operators.cpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-namespaces.o: namespaces.cpp 
+namespaces.o: namespaces.cpp namespaces_header.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 scopes.o: scopes.cpp
