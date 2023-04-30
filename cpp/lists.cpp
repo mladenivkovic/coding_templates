@@ -1,11 +1,10 @@
 #include <iostream> // IO library
 #include <string>   // string type
-// #include <iomanip>   // string type
 #include <list>
 
 
 /**
- * print all elements of a vector in a line.
+ * print all elements of a list in a line.
  * Optionally, add a message.
  **/
 template <typename T>

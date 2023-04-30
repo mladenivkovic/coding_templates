@@ -72,6 +72,9 @@ CXXTEST=g++
 binary_representation.o: binary_representation.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+remove_elements_from_list_while_iterating_over_it.o: remove_elements_from_list_while_iterating_over_it.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 # Wildcard baby
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
