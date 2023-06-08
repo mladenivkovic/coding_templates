@@ -1,0 +1,96 @@
+\input{./header}
+
+
+
+%------------------------------------------
+%: Metadata
+
+\title{Title of Paper}
+\author{Mladen Ivkovic}
+%\affil{Laboratory of Astrophysics \\ \'Ecole Polytechnique F\'ed\'erale de Lausanne}
+\date{\today}
+
+%------------------------------------------
+
+
+
+
+
+\begin{document}
+
+%--------------------------------------------
+% Stuff that needs to be done before all else
+%--------------------------------------------
+%\pagestyle{plain}
+\nocite{*} % show all entries of bibliography, even if they are not cited.
+
+
+% ============================================================================
+% Title page
+
+\onecolumn
+
+
+
+\begin{center}
+\begin{Huge}
+	\textbf{\MyTitle}\\
+\end{Huge}
+\end{center}
+
+\vspace{.5cm}
+
+\begin{Large}
+Mladen Ivkovic $^{\,1,2,3}$ \\
+\end{Large}
+
+$^{1}$Laboratoire d'astrophysique, \'{E}cole Polytechnique F\'{e}d\'{e}rale de Lausanne (EPFL), 1290
+Sauverny, Switzerland\\
+$^{2}$Observatoire de Gen\`{e}ve, Universit\'{e} de Gen\`{e}ve, Chemin Pegasi 51, 1290 Versoix,
+Switzerland\\
+$^{3}$Department of Computer Science, Durham University, Upper Mountjoy Campus, Stockton Road,  Durham,
+United Kingdom\\
+
+\vspace{.5cm}
+
+\input{abstract}
+
+\vspace{.5cm}
+
+\textbf{Keywords} key1 -- key2 -- key3
+
+\twocolumn
+% ============================================================================
+
+
+
+
+
+% ============================================================================
+% The Good Stuff
+
+\input{introduction}
+
+
+
+
+
+% ============================================================================
+% Bibliography
+
+\bibliography{references}
+
+
+
+
+
+
+
+% ============================================================================
+% Appendix
+
+\input{./appendix}
+
+
+
+\end{document}
