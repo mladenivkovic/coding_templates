@@ -92,6 +92,9 @@ functions.o: functions.cpp
 hello_world.o: hello_world.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+initializations_in_header.o: initializations_in_header.cpp header_for_initializations.h
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 IOtoFile.o: IOtoFile.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
