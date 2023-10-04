@@ -1,0 +1,27 @@
+site_name: CMake tutorial
+theme:
+  name: material
+nav:
+  - Introduction: introduction.md
+  - Getting started: getting_started.md
+  - Configuration: configuration.md
+  - Writing a CMake package: structure.md
+  - Trouble shooting: trouble_shooting.md
+  - Resources: resources.md
+
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
