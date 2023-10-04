@@ -18,6 +18,9 @@ int main(){
   myClass obj = myClass();
 
   DUMP(obj.static_var);
+  DUMP(obj.s);
+
+  obj.print_sarr();
 
   return 0;
 }
