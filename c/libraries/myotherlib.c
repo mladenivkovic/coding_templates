@@ -2,6 +2,7 @@
  * compile with gcc -o program.exe mylib.c run.c */
 
 #include "myotherlib.h"
+
 #include <stdio.h>
 
 void print_rectangle_surface(rectangle_t r) {

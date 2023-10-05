@@ -7,12 +7,11 @@
 #define BINARY_REPRESENTATION_H
 
 #include <errno.h>
-#include <math.h>
-#include <stdio.h>
-
 #include <float.h>
 #include <limits.h>
+#include <math.h>
 #include <stdint.h>
+#include <stdio.h>
 
 /* When returning strings: Use 149 spaces:
  * 16 bytes of 8 digits, + 1 space after each byte

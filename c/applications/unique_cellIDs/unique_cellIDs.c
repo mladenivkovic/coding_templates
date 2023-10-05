@@ -189,7 +189,7 @@ int main() {
     return 1;
   }
 
-    /* open file for writing? */
+  /* open file for writing? */
 #ifdef PRINT_FILE
   outfilep = fopen("output_unique_cellIDs.txt", "w");
   fprintf(outfilep, "# cell, parent, depth\n");
