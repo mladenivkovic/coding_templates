@@ -81,6 +81,9 @@ casting_types.o: casting_types.cpp
 classes.o: classes.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+classes_member_qualifiers.o: classes_member_qualifiers.cpp print_var_and_name.h
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 enumerators.o: enumerators.cpp
 	# skip CXXFLAGS: allow unused variables
 	$(CXX) $< -o $@
@@ -92,7 +95,7 @@ functions.o: functions.cpp
 hello_world.o: hello_world.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-initializations_in_header.o: initializations_in_header.cpp header_for_initializations.h
+initializations_in_header.o: initializations_in_header.cpp header_for_initializations.h print_var_and_name.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 IOtoFile.o: IOtoFile.cpp
