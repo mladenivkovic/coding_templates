@@ -1,26 +1,21 @@
 #include <iostream> // IO library
-#include <string>   // string type
 #include <list>
-
+#include <string> // string type
 
 /**
  * print all elements of a list in a line.
  * Optionally, add a message.
  **/
-template <typename T>
-void print_list(std::list<T> list, std::string s=""){
+template <typename T> void print_list(std::list<T> list, std::string s = "") {
   std::cout << s;
-  for (T element: list) std::cout << " " << element ;
+  for (T element : list)
+    std::cout << " " << element;
   std::cout << std::endl;
 }
 
-void empty_line(){
-  std::cout << std::endl;
-}
+void empty_line() { std::cout << std::endl; }
 
-
-int main(){
-
+int main() {
 
   // Declaration
   std::list<int> intlist1;
@@ -38,7 +33,6 @@ int main(){
   intlist2.push_back(-2);
   print_list(intlist2, "Added element in back:");
 
-
   // Accessing elements
   std::cout << "First element:" << intlist2.front() << std::endl;
   std::cout << "Last element:" << intlist2.back() << std::endl;
@@ -54,40 +48,42 @@ int main(){
   // Deleting elements via iterators
   // WARNING: Don't try to erase stuff while you're iterating over the list.
   std::list<int>::iterator index_to_erase;
-  for (std::list<int>::iterator i=intlist2.begin(); i!=intlist2.end(); i++){
-    if (*i == 3) index_to_erase = i;
+  for (std::list<int>::iterator i = intlist2.begin(); i != intlist2.end();
+       i++) {
+    if (*i == 3)
+      index_to_erase = i;
   }
   intlist2.erase(index_to_erase);
   print_list(intlist2, "Removed element with value 3:");
-
 
   // Deleting elements from starting iterator to end iterator
   // WARNING: Don't try to erase stuff while you're iterating over the list.
   std::list<int>::iterator start_erase;
   std::list<int>::iterator stop_erase;
-  for (std::list<int>::iterator i=intlist2.begin(); i!=intlist2.end(); i++){
-    if (*i == 2) start_erase = i;
-    if (*i == 5) stop_erase = i;
+  for (std::list<int>::iterator i = intlist2.begin(); i != intlist2.end();
+       i++) {
+    if (*i == 2)
+      start_erase = i;
+    if (*i == 5)
+      stop_erase = i;
   }
 
   intlist2.erase(start_erase, stop_erase);
-  print_list(intlist2, "Removed all elements starting with element of value 2, stoppinng with element with value 4:");
+  print_list(intlist2, "Removed all elements starting with element of value 2, "
+                       "stoppinng with element with value 4:");
 
   intlist2 = {1, 2, 3, 4, 5};
   print_list(intlist2, "Restored intlist2 to:");
-
 
   // Reverse order of elements
   intlist2.reverse();
   print_list(intlist2, "Reversed:");
 
-
   // Reverse order of elements
   intlist2.sort();
   print_list(intlist2, "Sorted:");
 
-
-  std::list <int> intlist3 = { 3, 4, 4, 5, 4, 5, 5, 7};
+  std::list<int> intlist3 = {3, 4, 4, 5, 4, 5, 5, 7};
   print_list(intlist3, "New list to work with:        ");
 
   // Remove consecutive duplicates
@@ -126,9 +122,7 @@ int main(){
   print_list(l3, "\tAfter merge L3 = ");
   print_list(l4, "\tAfter merge L4 = ");
 
-
   // TODO: Iterators
-
 
   return 0;
 }

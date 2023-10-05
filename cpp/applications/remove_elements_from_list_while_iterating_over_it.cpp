@@ -1,8 +1,7 @@
 #include <iostream> // IO library
-#include <string>   // string type
 #include <list>
+#include <string> // string type
 #include <vector>
-
 
 // ===========================================
 // Remove elements from a list while looping
@@ -14,26 +13,25 @@
  * print all elements of a list in a line.
  * Optionally, add a message.
  **/
-template <typename T>
-void print_list(std::list<T> list, std::string s=""){
-// void print_list(std::list<T> list, std::string s=""){
+template <typename T> void print_list(std::list<T> list, std::string s = "") {
+  // void print_list(std::list<T> list, std::string s=""){
   std::cout << s;
-  for (T element: list) std::cout << " " << element ;
+  for (T element : list)
+    std::cout << " " << element;
   std::cout << std::endl;
 }
 
-template <typename T>
-void print_list(std::vector<T> list, std::string s=""){
-// void print_list(std::list<T> list, std::string s=""){
+template <typename T> void print_list(std::vector<T> list, std::string s = "") {
+  // void print_list(std::list<T> list, std::string s=""){
   std::cout << s;
-  for (T element: list) std::cout << " " << element ;
+  for (T element : list)
+    std::cout << " " << element;
   std::cout << std::endl;
 }
-
 
 /**
- * Remove elements from a list while looping over it. 
- * Simultaneously copy elements from a second vector to 
+ * Remove elements from a list while looping over it.
+ * Simultaneously copy elements from a second vector to
  * a third resulting vector. Also store which elements have
  * been removed.
  *
@@ -45,14 +43,12 @@ void print_list(std::vector<T> list, std::string s=""){
  * with the `list_to_purge`.
  */
 template <typename T>
-void purge_list_wrong(
-    std::list<T> *list_to_purge,
-    std::list<T> *list_of_purged_elements,
-    std::vector<T> *extra_data,
-    std::vector<T> *extra_data_of_purged_elements,
-    T divisor
-    ){
-  
+void purge_list_wrong(std::list<T> *list_to_purge,
+                      std::list<T> *list_of_purged_elements,
+                      std::vector<T> *extra_data,
+                      std::vector<T> *extra_data_of_purged_elements,
+                      T divisor) {
+
   auto it = list_to_purge->begin();
   auto end = list_to_purge->end();
 
@@ -76,10 +72,9 @@ void purge_list_wrong(
   }
 }
 
-
 /**
- * Remove elements from a list while looping over it. 
- * Simultaneously copy elements from a second vector to 
+ * Remove elements from a list while looping over it.
+ * Simultaneously copy elements from a second vector to
  * a third resulting vector. Also store which elements have
  * been removed.
  *
@@ -87,14 +82,11 @@ void purge_list_wrong(
  * parameter `divisor` is zero.
  */
 template <typename T>
-void purge_list(
-    std::list<T> *list_to_purge,
-    std::list<T> *list_of_purged_elements,
-    std::vector<T> *extra_data,
-    std::vector<T> *extra_data_of_purged_elements,
-    T divisor
-    ){
-  
+void purge_list(std::list<T> *list_to_purge,
+                std::list<T> *list_of_purged_elements,
+                std::vector<T> *extra_data,
+                std::vector<T> *extra_data_of_purged_elements, T divisor) {
+
   auto it = list_to_purge->begin();
   auto end = list_to_purge->end();
 
@@ -118,12 +110,7 @@ void purge_list(
   }
 }
 
-
-
-
-
-
-int main(){
+int main() {
 
   // list where we remove elements from
   std::list<int> list_to_purge;
@@ -132,13 +119,12 @@ int main(){
   std::vector<int> extra_data;
 
   // Initialize the lists with identical elements
-  for (int i = 1; i < 51; i++){
+  for (int i = 1; i < 51; i++) {
     list_to_purge.push_back(i);
     extra_data.push_back(i);
   }
   print_list(list_to_purge, "list to purge:\n\t");
   print_list(extra_data, "extra data:\n\t");
-
 
   // Store purged elements here
   std::list<int> list_of_purged_elements;
@@ -154,16 +140,14 @@ int main(){
   // // purge_list_wrong(&list_to_purge, &list_of_purged_elements,
   //     &extra_data, &extra_data_of_purged_elements, 3);
 
-  purge_list(&list_to_purge, &list_of_purged_elements, 
-      &extra_data, &extra_data_of_purged_elements, 2);
-  purge_list(&list_to_purge, &list_of_purged_elements, 
-      &extra_data, &extra_data_of_purged_elements, 3);
-
+  purge_list(&list_to_purge, &list_of_purged_elements, &extra_data,
+             &extra_data_of_purged_elements, 2);
+  purge_list(&list_to_purge, &list_of_purged_elements, &extra_data,
+             &extra_data_of_purged_elements, 3);
 
   print_list(list_of_purged_elements, "purged elements:\n\t");
-  print_list(extra_data_of_purged_elements, "extra data of purged elements:\n\t");
+  print_list(extra_data_of_purged_elements,
+             "extra data of purged elements:\n\t");
 
   return 0;
 }
-
-

@@ -1,9 +1,9 @@
-#include <iostream> // IO library
 #include <climits>  // char, int, long limits
-#include <limits>   // std::numeric_limits
 #include <float.h>  // float mins, maxs, epsilons
+#include <iostream> // IO library
+#include <limits>   // std::numeric_limits
 
-int main(){
+int main() {
 
   // these need #include <climits>
   std::cout << "bits per char:          " << CHAR_BIT << std::endl;
@@ -30,12 +30,12 @@ int main(){
 
   // this needs #include <limits>
   std::cout << "Also an option: std::numeric_limits<type>::max()" << std::endl;
-  std::cout << "   long minimum:           " << std::numeric_limits<long>::min() << std::endl;
-  std::cout << "   long maximum:           " << std::numeric_limits<long>::max() << std::endl;
-  std::cout << "   double max:             " << std::numeric_limits<double>::max() << std::endl;
-
+  std::cout << "   long minimum:           " << std::numeric_limits<long>::min()
+            << std::endl;
+  std::cout << "   long maximum:           " << std::numeric_limits<long>::max()
+            << std::endl;
+  std::cout << "   double max:             "
+            << std::numeric_limits<double>::max() << std::endl;
 
   return 0;
 }
-
-

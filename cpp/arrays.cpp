@@ -6,30 +6,28 @@
  * Optionally pass a message as a string as well.
  */
 template <typename T>
-void print_array(T array[], int size, std::string s = ""){
+void print_array(T array[], int size, std::string s = "") {
 
   std::cout << s << " ";
-  for (int i = 0; i < size; i++){
+  for (int i = 0; i < size; i++) {
     std::cout << array[i] << " ";
   }
   std::cout << std::endl;
 }
 
-
 /**
  * "Allocate" an array in this function, and access it
  * from outside the scope of this function.
  */
-int* get_array_allocd_in_function(void){
+int *get_array_allocd_in_function(void) {
   const int size = 6;
-  int * array = new int[size];
-  for (int i = 0; i < size; i++) array[i] = i+6;
+  int *array = new int[size];
+  for (int i = 0; i < size; i++)
+    array[i] = i + 6;
   return array;
 }
 
-
-int main(){
-
+int main() {
 
   // Initialization
   // ===========================
@@ -46,17 +44,16 @@ int main(){
 
   // "allocate" memory manually
   const int size = 5;
-  int * array4 = new int[size];
-  for (int i = 0; i < size; i++) array4[i] = i+3;
+  int *array4 = new int[size];
+  for (int i = 0; i < size; i++)
+    array4[i] = i + 3;
   print_array(array4, size, "array4: created with `new`:");
   delete[] array4;
 
   // you can access the memory outside the scope of the function now.
-  int* array5 = get_array_allocd_in_function();
+  int *array5 = get_array_allocd_in_function();
   print_array(array5, 6, "array alloc'd in function:");
   delete[] array5;
 
   return 0;
 }
-
-
