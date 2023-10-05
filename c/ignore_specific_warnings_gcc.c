@@ -10,8 +10,8 @@
 
 int main() {
 
-/* These variables trigger the '-Wunused-variable' warning.  */
-/* But not if we disable the -Wunused flag in the code. */
+  /* These variables trigger the '-Wunused-variable' warning.  */
+  /* But not if we disable the -Wunused flag in the code. */
 
 #pragma GCC diagnostic ignored "-Wunused-variable"
   int unused1 = 0;

@@ -3,9 +3,11 @@
  */
 
 #include "init.h"
+
 #include <stdio.h>  /* input, output    */
 #include <stdlib.h> /* some other string manipulation, alloc */
 #include <string.h> /* string manipulation */
+
 #include "commons.h"
 
 void readparams(int argc,

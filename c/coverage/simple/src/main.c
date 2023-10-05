@@ -1,6 +1,7 @@
 /* Contains main program.  */
 
 #include <stdio.h> /* input, output    */
+
 #include "something.h"
 
 int main() {

@@ -197,9 +197,9 @@ void scheduling(void) {
       printf("Schedule: None     ID %d has index %2d\n", id, i);
     }
 
-      /* STATIC             */
+    /* STATIC             */
 
-      /*Tell threads to wait for all to arrive here*/
+    /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
 
 #pragma omp single
@@ -210,9 +210,9 @@ void scheduling(void) {
       printf("Schedule: static   ID %d has index %2d\n", id, i);
     }
 
-      /* DYNAMIC            */
+    /* DYNAMIC            */
 
-      /*Tell threads to wait for all to arrive here*/
+    /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
 
 #pragma omp single
@@ -223,9 +223,9 @@ void scheduling(void) {
       printf("Schedule: dynamic  ID %d has index %2d\n", id, i);
     }
 
-      /* GUIDED             */
+    /* GUIDED             */
 
-      /*Tell threads to wait for all to arrive here*/
+    /*Tell threads to wait for all to arrive here*/
 #pragma omp barrier
 
 #pragma omp single

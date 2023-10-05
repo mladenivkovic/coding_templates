@@ -175,9 +175,9 @@ void mutex(void) {
       sum += somearray[j];
     }
 
-      /*sum up private sums into shared result*/
-      /* "critical" only allows one thread to access this part.
-       * you may even call other functions in this part. */
+    /*sum up private sums into shared result*/
+    /* "critical" only allows one thread to access this part.
+     * you may even call other functions in this part. */
 #pragma omp critical
     {
       printf("Thread %d accessing result variable\n", id);
@@ -204,10 +204,10 @@ void mutex(void) {
       sum += somearray[j];
     }
 
-      /*sum up private sums into shared result*/
-      /* "atomic" is only valid for the first line after the instruction.
-       * it is used to update shared variables, just like "result" in this case.
-       */
+    /*sum up private sums into shared result*/
+    /* "atomic" is only valid for the first line after the instruction.
+     * it is used to update shared variables, just like "result" in this case.
+     */
 #pragma omp atomic
     result += sum;
   }
@@ -319,10 +319,10 @@ void locks(void) {
 
 #pragma omp parallel
   {
-  /*===================================================*/
-  /* count how many times a number is in array numbers */
-  /* store that information in array counting          */
-  /*===================================================*/
+    /*===================================================*/
+    /* count how many times a number is in array numbers */
+    /* store that information in array counting          */
+    /*===================================================*/
 
 #pragma omp for
     for (int i = 0; i < 20; i++) {

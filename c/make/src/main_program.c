@@ -3,6 +3,7 @@
  */
 
 #include <stdio.h> /* input, output    */
+
 #include "commons.h"
 #include "init.h"
 
