@@ -2,15 +2,14 @@
 
 #include "storage_classes_header.h"
 
-
 // Every variable and function in C++ kernel language has two attributes, type
 // and storage class.
 // The storage classes are `automatic`, `external`, `register`, and `static`.
 
-
 // functions are always assumed `external`, i.e. compilers look for it either
 // in this file, or in some other file.
-// This particular function is declared here, but defined in storage_classes_second_file.cpp
+// This particular function is declared here, but defined in
+// storage_classes_second_file.cpp
 int some_int_function(int a);
 
 /**
@@ -30,40 +29,37 @@ void func_testing_static(void) {
  * A static function is only available in the scope of the file
  * where it is defined.
  */
-static void some_static_function(void){
+static void some_static_function(void) {
   std::cout << "called some static function" << std::endl;
 }
 
-
-
-int main(){
-
+int main() {
 
   // AUTO
   // ===============
-  // NOTE:  In C++11 this keyword was repurposed to be used for implicit type deduction. 
-  // So the two lines below would throw an error "error: two or more data types in declaration of ‘i’"
+  // NOTE:  In C++11 this keyword was repurposed to be used for implicit type
+  // deduction. So the two lines below would throw an error "error: two or more
+  // data types in declaration of ‘i’"
   //
   // "auto" is the default storage class. The variables are available
   // withing the scope of the enclosing compunt statement (i.e. within {})
   // auto int i = 10;        // might as well have written `int i = 10;`
   // auto float f = 23.231;  // might as well have written `float f = 23.231;`
 
-
   // EXTERN
   // ===============
-  // Variable defined in some other object file (in this case, in storage_classes_second_file.cpp)
-  // See instructions therein.
+  // Variable defined in some other object file (in this case, in
+  // storage_classes_second_file.cpp) See instructions therein.
   extern int extern_int;
   std::cout << "Extern variable: " << extern_int << std::endl;
 
   // Directly included headers do not need to be declared extern
   // extern int extern_header_int; // this works
-  std::cout << "Extern header variable: " << extern_header_int << std::endl; // this works too
+  std::cout << "Extern header variable: " << extern_header_int
+            << std::endl; // this works too
   // functions are always assumed extern
   int sif = some_int_function(3);
   std::cout << "Result is = " << sif << std::endl;
-
 
   // REGISTER
   // ===============
@@ -74,8 +70,6 @@ int main(){
   //   std::cout << " " << i;
   // }
   // std::cout << std::endl;
-  
-
 
   // STATIC
   // ==============
@@ -96,9 +90,5 @@ int main(){
   // Code won't compile like this.
   // some_second_static_function();
 
-
-
   return 0;
 }
-
-

@@ -1,22 +1,19 @@
+#include <fstream>  // file stream library
 #include <iostream> // IO library
-#include <fstream> // file stream library
-#include <string> // strings
+#include <string>   // strings
 
-
-
-int main(){
+int main() {
 
   // Writing files
   // ==========================
-  
+
   std::cout << "Writing to file 'example_output_to_file.txt'" << std::endl;
 
   // open file
-  std::ofstream myOutputFile ("example_output_to_file.txt");
+  std::ofstream myOutputFile("example_output_to_file.txt");
 
   // check whether it's open
-  if (myOutputFile.is_open())
-  {
+  if (myOutputFile.is_open()) {
     // write stuff
     myOutputFile << "This is a line.\n";
     myOutputFile << "This is another line.\n";
@@ -25,8 +22,8 @@ int main(){
     myOutputFile.close();
   }
 
-  // myOutputFile << "This is another line.\n"; // this does nothing... throws no error, doesn't write into file.
-
+  // myOutputFile << "This is another line.\n"; // this does nothing... throws
+  // no error, doesn't write into file.
 
   // Reading files
   // ==========================
@@ -38,20 +35,16 @@ int main(){
   std::string line; // buffer to store read in line again
 
   // open file
-  std::ifstream myInputFile ("example_output_to_file.txt");
+  std::ifstream myInputFile("example_output_to_file.txt");
   // check is open correctly
-  if (myInputFile.is_open())
-  {
+  if (myInputFile.is_open()) {
     // read line by line
-    while ( std::getline(myInputFile,line) )
-    {
+    while (std::getline(myInputFile, line)) {
       std::cout << ">>" << line << '\n';
     }
     myInputFile.close();
-  }
-  else std::cout << "Unable to open file"; 
-
-
+  } else
+    std::cout << "Unable to open file";
 
   // More generic way of opening file streams:
   // =========================================
@@ -60,15 +53,19 @@ int main(){
   // stream is an instance of
   //   ofstream   for output
   //   ifstream   for input
-  //   fstream    either input or output. must specify mode  ios::in | ios::out (see below)
+  //   fstream    either input or output. must specify mode  ios::in | ios::out
+  //   (see below)
   //
   // choices for 'mode':
   //   ios::in      Open for input operations.
   //   ios::out     Open for output operations.
   //   ios::binary  Open in binary mode.
-  //   ios::ate     Set the initial position at the end of the file.  If this flag is not set, the initial position is the beginning of the file.
-  //   ios::app     All output operations are performed at the end of the file, appending the content to the current content of the file.
-  //   ios::trunc   If the file is opened for output operations and it already existed, its previous content is deleted and replaced by the new one.
+  //   ios::ate     Set the initial position at the end of the file.  If this
+  //   flag is not set, the initial position is the beginning of the file.
+  //   ios::app     All output operations are performed at the end of the file,
+  //   appending the content to the current content of the file. ios::trunc   If
+  //   the file is opened for output operations and it already existed, its
+  //   previous content is deleted and replaced by the new one.
   //
   // All these flags can be combined using the bitwise operator OR (|). e.g.
   //   std::open("whatever.txt", ios::in | ios::binary | ios::app )
@@ -79,19 +76,19 @@ int main(){
     myStream << "hello there\n";
     myStream << "General Kenobi\n";
     myStream.close();
-  } else std::cout << "Couldn't open fstream myStream\n";
+  } else
+    std::cout << "Couldn't open fstream myStream\n";
 
   myStream.open("example_general_open.txt", std::ios::in | std::ios::binary);
   std::string binaryline;
   if (myStream.is_open()) {
-    while ( std::getline(myStream,binaryline) ) {
+    while (std::getline(myStream, binaryline)) {
       std::cout << "'" << binaryline << "'";
     }
     myStream.close();
-  } else std::cout << "Couldn't open fstream myStream\n";
+  } else
+    std::cout << "Couldn't open fstream myStream\n";
   std::cout << "\n";
 
   return 0;
 }
-
-
