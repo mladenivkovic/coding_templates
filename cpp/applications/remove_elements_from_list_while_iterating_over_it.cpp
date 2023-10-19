@@ -80,12 +80,17 @@ void purge_list_wrong(std::list<T> *list_to_purge,
  *
  * Remove elements if their modulo with provided integer
  * parameter `divisor` is zero.
+ *
+ * NOTE: The vector removal stuff doesn't work. And I don't remember
+ * what I was trying to do there any more.
  */
 template <typename T>
 void purge_list(std::list<T> *list_to_purge,
                 std::list<T> *list_of_purged_elements,
                 std::vector<T> *extra_data,
                 std::vector<T> *extra_data_of_purged_elements, T divisor) {
+
+  std::cout << "Purging list with divisor = " << divisor << std::endl;
 
   auto it = list_to_purge->begin();
   auto end = list_to_purge->end();
@@ -102,7 +107,7 @@ void purge_list(std::list<T> *list_to_purge,
       // copy extra data.
       T extraval = (*extra_data)[index];
       extra_data_of_purged_elements->push_back(extraval);
-      extra_data->erase(index);
+      // extra_data->erase(extraval);
     } else {
       index++;
       it++;
@@ -124,7 +129,7 @@ int main() {
     extra_data.push_back(i);
   }
   print_list(list_to_purge, "list to purge:\n\t");
-  print_list(extra_data, "extra data:\n\t");
+  // print_list(extra_data, "extra data:\n\t");
 
   // Store purged elements here
   std::list<int> list_of_purged_elements;
@@ -142,12 +147,22 @@ int main() {
 
   purge_list(&list_to_purge, &list_of_purged_elements, &extra_data,
              &extra_data_of_purged_elements, 2);
+
+  print_list(list_of_purged_elements, "purged elements:\n\t");
+  print_list(list_to_purge, "list is now:\n\t");
+  // print_list(extra_data_of_purged_elements,
+  //            "extra data of purged elements:\n\t");
+
+  std::cout << "\n";
+  list_of_purged_elements.clear();
+
   purge_list(&list_to_purge, &list_of_purged_elements, &extra_data,
              &extra_data_of_purged_elements, 3);
 
   print_list(list_of_purged_elements, "purged elements:\n\t");
-  print_list(extra_data_of_purged_elements,
-             "extra data of purged elements:\n\t");
+  print_list(list_to_purge, "list is now:\n\t");
+  // print_list(extra_data_of_purged_elements,
+  //            "extra data of purged elements:\n\t");
 
   return 0;
 }
