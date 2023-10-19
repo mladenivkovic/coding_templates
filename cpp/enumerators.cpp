@@ -11,7 +11,7 @@ enum ages { aaron = 7, beth, charlie = 42, dora };
 // enumerators can be defined without a name
 enum { anonymous_enum1, anonymous_enum2, anonymous_enum3 = 42 };
 
-int main() {
+int main(void) {
 
   std::cout << "Card Suits" << std::endl;
   std::cout << "clubs:    " << clubs << std::endl;
