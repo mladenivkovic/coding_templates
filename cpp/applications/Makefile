@@ -78,6 +78,9 @@ print_var_with_name_macro.o: print_var_with_name_macro.cpp
 remove_elements_from_list_while_iterating_over_it.o: remove_elements_from_list_while_iterating_over_it.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+templated_functions_as_function_arguments.o: templated_functions_as_function_arguments.cpp PeanoPart.h templated_functions_as_function_arguments.h
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 # Wildcard baby
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDFLAGS)
