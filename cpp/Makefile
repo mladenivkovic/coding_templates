@@ -92,6 +92,9 @@ functions.o: functions.cpp
 	# $(CXX) $(CXXFLAGS) $< -o $@
 	$(CXX) $< -o $@
 
+functions_as_function_arguments.o: functions_as_function_arguments.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 hello_world.o: hello_world.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
