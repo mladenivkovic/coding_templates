@@ -87,7 +87,7 @@ double avg_arr_overloaded(const double arr[], int size) {
   return avg;
 }
 
-int main() {
+int main(void) {
 
   void_func_with_no_args();
   void_func_with_single_arg("single argument passed");
