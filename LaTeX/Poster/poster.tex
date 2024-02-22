@@ -1,0 +1,194 @@
+\documentclass{beamer}
+%% Possible paper sizes: a0, a0b, a1, a2, a3, a4.
+%% Possible orientations: portrait, landscape
+%% Font sizes can be changed using the scale option.
+\usepackage[size=a0,orientation=portrait,scale=1.1]{beamerposter}
+\usetheme{LLT-poster}
+% \usecolortheme{ComingClean}
+% \usecolortheme{Entrepreneur}
+% \usecolortheme{ConspicuousCreep}  %% VERY garish.
+\usecolortheme{Durham}  %% VERY garish.
+
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\usepackage[UKenglish]{babel}
+
+
+% \usepackage{wrapfig}
+\usepackage{caption}
+\captionsetup{labelformat=simple, font={footnotesize,sl}, labelfont={bf,footnotesize},
+format=plain,labelsep=space}
+
+
+% \usepackage{xspace}
+% \newcommand{\swift}{\textsc{Swift}\xspace}
+% \newcommand{\peano}{\textsc{Peano}\xspace}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage[scaled=0.92]{inconsolata}
+\usepackage[libertine]{newtxmath}
+
+\author[mladen.ivkovic@durham.ac.uk]{\textit{\textmd{Cristian Barrera-Hinojosa}}, \textmd{Mladen
+Ivkovic}, \textit{\textmd{Pawel Radtke}}, \textit{\textmd{Tobias Weinzierl}}}
+\title{SWIFT 2 : Keeping the Good, Discussing the Bad, Removing the Ugly}
+% \subtitle{test} // DOESN'T WORK
+\institute{Durham University}
+% Optional foot image
+\footimage{\includegraphics[height=4.55cm]{figures/logo-placeholder.png}\includegraphics[height=4.55cm]{figures/logo-placeholder.png}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%=========================================================
+%=========================================================
+
+\begin{document}
+\begin{frame}[fragile]\centering
+
+
+
+
+%=========================================================
+%=========================================================
+\begin{block}{Long Block at Top}
+    Lorem Ipsum
+\end{block}
+
+
+
+
+\begin{columns}[T]
+
+
+
+%=========================================================
+%=========================================================
+%=========================================================
+%=========================================================
+%%%% First Column
+\begin{column}{.48\textwidth}
+
+\begin{block}{Overview}
+
+Hic Forum Est
+
+\end{block}
+
+\end{column}
+
+
+
+
+
+
+%%%% Second Column
+%=========================================================
+%=========================================================
+%=========================================================
+%=========================================================
+\begin{column}{.48\textwidth}
+
+
+
+
+
+
+\begin{block}{Our Goals}
+
+\begin{itemize}
+\item SWIFT's \textbf{task-based parallelism} has been proven successful. We aim to build and
+expand on that in the context of particle based cosmological simulations.
+\item SWIFT's engine needs to be replaced with a more flexible variant:
+\begin{itemize}
+ \item SWIFT 2 needs to be able to make effective use of \textbf{heterogeneous architectures}.
+ \item Citations: \citet{weinzierlTwoParticleingridRealisations2016} \citet{reinarzExaHyPEEngineParallel2020} \citep{schayeFLAMINGOProjectCosmological2023}
+\end{itemize}
+\end{itemize}
+
+\end{block}
+
+
+
+
+
+% ==========================================================
+% ==========================================================
+
+
+
+
+\begin{block}{How Does It Work?}
+
+\begin{minipage}{0.63\textwidth}
+
+
+\begin{itemize}
+\item While PEANO provides the adaptive mesh and mesh traversals, we need to tell it what physics
+to solve.
+\item We still use particles as discretisation elements. The adaptive mesh is
+used to sort particles spatially and to allow for quick access to ``neighbouring'' particles.
+\item Particles are stored using a ``dual tree'' management strategy
+\citep{weinzierlTwoParticleingridRealisations2016}: One tree holds the particles
+within the grid cells, while the other holds them within the grid vertices.
+\end{itemize}
+\vspace{.5em}
+
+
+\end{minipage}\hfill
+%
+%
+\begin{minipage}{0.35\textwidth}
+%
+\begin{figure}
+\fbox{
+\includegraphics[width=.95\linewidth]{figures/random_image.png}
+}
+\caption{The layers of PEANO.}
+\label{fig:peano}
+\end{figure}
+%
+\end{minipage}
+
+
+\end{block}
+
+
+
+
+
+
+\begin{block}{References}
+   \renewcommand*{\bibfont}{\scriptsize}
+   \bibliography{references}
+\end{block}
+
+
+
+
+\end{column}
+\end{columns}
+
+
+%=========================================================
+%=========================================================
+\begin{block}{Long Block at End}
+    Lorem Ipsum
+\end{block}
+
+
+
+\end{frame}
+\end{document}
