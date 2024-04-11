@@ -6,6 +6,8 @@
 # https://www.askpython.com/python/examples/storing-retrieving-passwords-securely
 # ==============================================
 
+# needs PyCryptodome
+import Crypto.Protocol.KDF
 
 import os
 import hashlib
@@ -17,7 +19,13 @@ ENCODING = "utf-8"
 ITERATIONS = 100_000
 
 
-def create_password_hash(
+def password_correct(passworddata1, passworddata2):
+
+    return passworddata1["password_hash"] == passworddata2["password_hash"]
+
+
+
+def create_password_hash_hashlib(
     password,
     hash_algo=HASH_ALGO,
     encoding=ENCODING,
@@ -47,26 +55,56 @@ def create_password_hash(
     return pwddata
 
 
-def password_correct(passworddata1, passworddata2):
+def create_password_hash_pycryptodome(
+    password,
+    hash_algo=HASH_ALGO,
+    encoding=ENCODING,
+    salt=None,
+    iterations=ITERATIONS,
+    pepper=PEPPER,
+):
+    """
+    generate a secure salted hash.
+    """
+    if salt is None:
+        salt = os.urandom(16)
 
-    return passworddata1["password_hash"] == passworddata2["password_hash"]
+    hash_value = Crypto.Protocol.KDF.PBKDF2(password, salt, dkLen=16, count=iterations, prf=None, hmac_hash_module=None)
+
+    password_hash = salt + hash_value + pepper.encode(encoding)
+
+    pwddata = {
+        "salt": salt,
+        "pepper": pepper,
+        "hash_algo": hash_algo,
+        "encoding": encoding,
+        "iterations": iterations,
+        "password_hash": password_hash,
+    }
+
+    return pwddata
 
 
-if __name__ == "__main__":
+
+
+
+
+
+
+def set_and_check_password(hash_generating_function):
 
     password = "my_password"
 
     # First, generate the secure hash.
-    pwddata = create_password_hash(password)
+    pwddata = hash_generating_function(password)
 
     attempts = 10
     a = 0
     while a < attempts:
         a += 1
         entry = getpass(f"[Attempt {a}/{attempts}] Password:")
-        print(entry)
 
-        entrydata = create_password_hash(
+        entrydata = hash_generating_function(
             entry,
             hash_algo=pwddata["hash_algo"],
             encoding=pwddata["encoding"],
@@ -84,3 +122,10 @@ if __name__ == "__main__":
         if a == attempts:
             print("Too many attempts.")
             quit()
+
+
+
+if __name__ == "__main__":
+
+    #  set_and_check_password(create_password_hash_hashlib)
+    set_and_check_password(create_password_hash_pycryptodome)
