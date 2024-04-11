@@ -24,7 +24,6 @@ def password_correct(passworddata1, passworddata2):
     return passworddata1["password_hash"] == passworddata2["password_hash"]
 
 
-
 def create_password_hash_hashlib(
     password,
     hash_algo=HASH_ALGO,
@@ -69,7 +68,9 @@ def create_password_hash_pycryptodome(
     if salt is None:
         salt = os.urandom(16)
 
-    hash_value = Crypto.Protocol.KDF.PBKDF2(password, salt, dkLen=16, count=iterations, prf=None, hmac_hash_module=None)
+    hash_value = Crypto.Protocol.KDF.PBKDF2(
+        password, salt, dkLen=16, count=iterations, prf=None, hmac_hash_module=None
+    )
 
     password_hash = salt + hash_value + pepper.encode(encoding)
 
@@ -83,12 +84,6 @@ def create_password_hash_pycryptodome(
     }
 
     return pwddata
-
-
-
-
-
-
 
 
 def set_and_check_password(hash_generating_function):
@@ -122,7 +117,6 @@ def set_and_check_password(hash_generating_function):
         if a == attempts:
             print("Too many attempts.")
             quit()
-
 
 
 if __name__ == "__main__":
