@@ -57,14 +57,6 @@ namespace toolbox {
 
           std::string toString() const;
 
-        private:
-
-          /**
-           * Never create a particle identifier manually
-           *
-           * Instead, use Database::createParticleIdentifier() to construct
-           * one. This routine takes care of floating point in accuracies.
-           */
           ParticleIdentifier(
             const std::string&                           particleName__,
             const tarch::la::Vector<Dimensions, double>& particleX__,

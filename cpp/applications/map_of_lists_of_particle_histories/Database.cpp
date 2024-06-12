@@ -461,7 +461,7 @@ std::string toolbox::particles::assignmentchecks::internal::Database::sweepHisto
 }
 
 
-
+// checked
 std::string toolbox::particles::assignmentchecks::internal::Database::
   particleHistory(const ParticleIdentifier& identifier) {
   // tarch::multicore::MultiReadSingleWriteLock
@@ -473,55 +473,75 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
     << "============================" << std::endl
     << identifier.toString() << std::endl
     << "============================";
-  // int snapshot = _data.size() - 1;
-  //
-  // bool               hasPredecessor = false;
-  // ParticleIdentifier predecessor(identifier);
-  // auto               p = _data.crbegin();
 
-  /* while (p != _data.crend()) { */
-  /*   if ((*p).count(identifier) > 0) { */
-  /*     msg << std::endl << "sweep #" << snapshot << " (" << p->getName() << "):\n\t  "; */
-  /*     bool firstEntry = false; */
-  /*     for (const auto& event : p->at(identifier)) { */
-  /*       if (not firstEntry) { */
-  /*         firstEntry = true; */
-  /*       } else { */
-  /*         msg << "\n\t->"; */
-  /*       } */
-  /*       msg << event.toString(); */
-  /*       if (event.type == Event::Type::MoveWhileAssociatedToVertex and hasPredecessor) { */
-  /*         msg */
-  /*           << " [particle has been moved on multiple ranks - only one taken into account]"; */
-  /*       } else if (event.type == Event::Type::MoveWhileAssociatedToVertex and not hasPredecessor) { */
-  /*         hasPredecessor = true; */
-  /*         predecessor    = _database.createParticleIdentifier( */
-  /*           predecessor.particleName, */
-  /*           event.previousParticleX, */
-  /*           predecessor.particleID, */
-  /*           predecessor.positionTolerance */
-  /*         ); */
-  /*       } */
-  /*     } */
-  /*   } */
-  /*   snapshot--; */
-  /*   p++; */
-  /* } */
-/*  */
-  // if (hasPredecessor) {
-  //   return msg.str() + particleHistory(predecessor);
-  // }
+  ParticleEvents& history = _data[identifier];
+  auto ev = history.crbegin();
+
+  // mesh sweep index of the previous event.
+  int prevMeshSweepInd = -1;
+
+  while (ev != history.crend()){
+
+    int meshSweepInd = ev->meshSweepIndex;
+
+    if (meshSweepInd == prevMeshSweepInd){
+      // next event during the same sweep
+      msg << "->" << ev->toString() << "\n\t";
+    } else {
+      // We're starting new sweep. Print header.
+      msg << std::endl << "sweep #" << meshSweepInd << " (" << _meshSweepData.at(meshSweepInd).getName() << "):\n\t";
+    }
+
+    prevMeshSweepInd = meshSweepInd;
+    ev++;
+  }
+
   return msg.str();
 }
 
+// checked
 void toolbox::particles::assignmentchecks::internal::Database::addEvent(
   ParticleIdentifier identifier,
-  const Event&       event
+  Event&       event
 ) {
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Write);
+  //
 
-  /* assertion(not _data.empty()); */
+  // Take note of the current mesh sweep index.
+  event.meshSweepIndex = _database.getCurrentMeshSweepIndex();
+
+  int count = _data.count(identifier) ;
+  if (count == 0){
+    ParticleEvents newEventHistory = ParticleEvents();
+    newEventHistory.push_back(event);
+    _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( identifier, newEventHistory ) );
+    // TODO: Re-Insert
+    // logDebug(
+std::cout <<
+      "addEvent(...) " <<
+      "add new particle history thread for "
+        << identifier.toString()
+<< std::endl;
+    // );
+
+    //
+  } else {
+
+    ParticleEvents& history = _data[identifier];
+    history.push_back(event);
+
+std::cout <<
+      "addEvent(...)" <<
+      " add new EVENT for "
+        << identifier.toString()
+        << " "
+        << event.toString()
+<< std::endl;
+
+  }
+
+  // assertion(not _data.empty());
   /* MeshSweepData& snapshot = *_data.rbegin(); */
   /* if (snapshot.count(identifier) == 0) { */
   /*   snapshot.insert(std::pair<ParticleIdentifier, ParticleEvents>( */

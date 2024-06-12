@@ -237,7 +237,7 @@ namespace toolbox {
            * This assignment will then eliminate previous "expired"
            * information as per the description above.
            */
-          void addEvent(ParticleIdentifier identifier, const Event& event);
+          void addEvent(ParticleIdentifier identifier, Event& event);
 
           /**
            * Dump the whole database
