@@ -34,6 +34,7 @@ namespace toolbox {
           tarch::la::Vector<Dimensions, double> vertexH;
           int                                   treeId;
           std::string                           trace;
+          int  meshSweepIndex;
 
           /**
            * Construct an event which identifies a vertex assignment or the
