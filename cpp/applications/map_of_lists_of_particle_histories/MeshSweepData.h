@@ -13,21 +13,17 @@ namespace toolbox {
 
 
         /**
-         * Mesh sweep data set
+         * Mesh sweep data.
          *
-         * TODO: Docu wrong
-         * All the traces bookkept for one single mesh sweep. This is a plain
-         * extension of the std::map which simply adds a unique name on top.
-         * So all the original semantics of a map are preserved.
+         * For now, only contains the name of the current sweep as a string.
+         * Keeping this as a separate class in case we decide one day that
+         * we need more associated data, e.g. current simulation time,
+         * timings, or whatnot.
          *
-         * Please see ParticleIdentifier for an in-depth discussion of the
-         * comparison key to be used here.
          */
 
-        using ParticleEvents = std::vector<Event>;
+        class MeshSweepData{
 
-        class MeshSweepData:
-          public std::map<ParticleIdentifier, ParticleEvents> {
         public:
           MeshSweepData(const std::string& meshSweepName);
 
