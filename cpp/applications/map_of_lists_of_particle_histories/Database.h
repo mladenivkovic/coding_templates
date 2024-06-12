@@ -23,7 +23,12 @@ namespace toolbox {
         private:
           /* tarch::multicore::MultiReadSingleWriteSemaphore _semaphore; */
 
-          std::list<MeshSweepData> _data;
+          std::vector<MeshSweepData> _meshSweepData;
+          int _currentMeshSweepIndex;
+
+          using ParticleEvents = std::vector<Event>;
+
+          std::map<ParticleIdentifier, ParticleEvents> _data;
 
           /**
            * Of how many previous associations do we want to keep track
@@ -103,7 +108,7 @@ namespace toolbox {
           );
 
           /**
-           * Add a new snapshot for a new mesh sweep
+           * Add an entry for a new mesh sweep
            */
           void startMeshSweep(const std::string& meshSweepName);
 
@@ -161,18 +166,6 @@ namespace toolbox {
             const double                    pastSearchTolerance = 1.,
             int                             firstNRecentSweepsToSkip = SearchWholeDatabase
           );
-
-
-          /**
-           * ToDo Mladen: Document this
-           */
-          tarch::la::Vector<Dimensions, double> getPreviousParticlePosition(
-            const ParticleIdentifier& identifier,
-            const int                       spacetreeId,
-            const double                    idSearchTolerance = 1.,
-            const double                    pastSearchTolerance = 1.,
-            const int                       firstNRecentSweepsToSkip = SearchWholeDatabase
-            );
 
           /**
            * Print history of one particle
@@ -287,8 +280,32 @@ namespace toolbox {
            * new unit test expects an empty database.
            */
           void reset();
-        };
-      } // namespace internal
+
+          /**
+           * Grab the current index of mesh sweeps.
+           */
+          int getCurrentMeshSweepIndex() const;
+
+          /**
+           * Get a handle on the mesh sweep data of the database.
+           * You shouldn't ever need this in your code. This only exists to verify
+           * the database integrity in unit tests.
+           */
+          std::vector<MeshSweepData>& getMeshSweepData();
+
+
+          /**
+           * Get history of stored sweeps.
+           */
+          std::string sweepHistory() const;
+          };
+        } // namespace internal
+
+
+      /**
+       * Get history of stored sweeps.
+       */
+      std::string sweepHistory();
 
       /**
        * Inform API that this is the end of a grid run-throuch
@@ -557,16 +574,17 @@ namespace toolbox {
        * This one is usually called after eliminateExistingParticles() and will
        * leave the user only with particles which have "magically" disappeared.
        *
-       * This routine uess exit(-1) if no assertions are enabled.
+       * This routine uses exit(-1) if no assertions are enabled.
        */
       void ensureDatabaseIsEmpty();
 
       /**
        * Get a handle on the database.
-       * You should NEVER need this in your code. This only exists to verify the
-       * database integrity in unit tests.
+       * You shouldn't ever need this in your code. This only exists to verify
+       * the database integrity in unit tests.
        */
-      internal::Database getInstance();
+      internal::Database& getDatabaseInstance();
+
     } // namespace assignmentchecks
   }   // namespace particles
 } // namespace toolbox

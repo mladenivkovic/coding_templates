@@ -23,15 +23,16 @@ DEFINES= -DDimensions=2 -DPeanoDebug=4
 #--------------------------
 
 
-OPTFLAGS = 	-Og -g 			# debug
+OPTFLAGS = 	-O0 -g 			# debug
 # OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
 FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros
 STDFLAGS= 	-std=c++20
 INCLUDES= -I./tarch/ -I./tarch/la/
+DEVFLAGS= -Wno-unused-parameter -Wno-unused-function
 
 # CXXFLAGS=
-CXXFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS) $(DEFINES) $(INCLUDES)
+CXXFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS) $(DEFINES) $(INCLUDES) $(DEVFLAGS)
 # CXXFLAGS_NOSTD=	$(OPTFLAGS) $(WFLAGS) $(FFLAGS)				# no standard
 # CXXFLAGS_MIN=	$(OPTFLAGS) 							    # so I can force errors for demonstration
 
@@ -81,4 +82,4 @@ ScalarOperations.o: tarch/la/ScalarOperations.cpp
 .PHONY: clean # keeps makefile from doing something with a file named clean
 
 clean:
-	rm -f $(OBJECTS) particle_history
+	rm -f main.o $(OBJECTS) particle_history
