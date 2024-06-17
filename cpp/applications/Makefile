@@ -72,6 +72,9 @@ CXXTEST=g++
 binary_representation.o: binary_representation.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+maps_with_fuzzy_search.o: maps_with_fuzzy_search.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 print_var_with_name_macro.o: print_var_with_name_macro.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
