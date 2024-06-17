@@ -43,27 +43,40 @@ namespace toolbox {
 
         struct ParticleIdentifier {
 
-          static double Precision;
-
-          friend class Database;
+          /* friend class Database; */
 
           std::string                           particleName;
           tarch::la::Vector<Dimensions, double> particleX;
           int                                   particleID;
-          double                                positionTolerance;
-
-          bool numericalEquals(const ParticleIdentifier& rhs) const;
-          bool operator<(const ParticleIdentifier& rhs) const;
 
           std::string toString() const;
 
+          bool numericalEquals(const ParticleIdentifier& rhs) const;
+          bool numericalSmaller(const ParticleIdentifier& rhs) const;
+          bool numericalSmallerWithTolerance(const ParticleIdentifier& rhs, const double tolerance) const;
+
           ParticleIdentifier(
+            const std::string&                           particleName__,
+            const tarch::la::Vector<Dimensions, double>& particleX__,
+            const int                                    particleID__
+          );
+        };
+
+
+        struct ParticleSearchIdentifier: ParticleIdentifier {
+
+          /* friend class Database; */
+
+          double positionTolerance;
+
+          ParticleSearchIdentifier(
             const std::string&                           particleName__,
             const tarch::la::Vector<Dimensions, double>& particleX__,
             const int                                    particleID__,
             const double                                 positionTolerance__
           );
         };
+
       }
     }
   }
@@ -86,4 +99,32 @@ bool operator!=(
   const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& lhs,
   const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
 );
+bool operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& lhs,
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
+);
+
+bool operator==(
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& lhs,
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& rhs
+);
+bool operator!=(
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& lhs,
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& rhs
+);
+bool operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& lhs,
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& rhs
+);
+
+bool operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& lhs,
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& rhs
+);
+
+bool operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& lhs,
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
+);
+
 
