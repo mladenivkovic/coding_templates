@@ -2,9 +2,9 @@
 // use, please see the copyright notice at www.peano-framework.org
 #pragma once
 
-#include <list>
 #include <map>
 #include <vector>
+#include <functional> // needed for std::less
 
 #include "tarch/la/Vector.h"
 
@@ -28,7 +28,11 @@ namespace toolbox {
 
           using ParticleEvents = std::vector<Event>;
 
-          std::map<ParticleIdentifier, ParticleEvents> _data;
+          // tell the map to use std::less<> as comparator instead
+          // of std::less<key>. std::less<> invokes the `<` operator.
+          // We want that to be able to use our bespoke `<` operator
+          // for different search and ID keys.
+          std::map<ParticleIdentifier, ParticleEvents, std::less<> > _data;
 
           /**
            * Of how many previous associations do we want to keep track
@@ -73,39 +77,6 @@ namespace toolbox {
           static constexpr int DoNotFollowParticleMovementsInDatabase = -2;
 
           Database(size_t maxParticleSnapshotsToKeepTrackOf = 16);
-
-          /**
-           * Create a particle identifier
-           *
-           * This routine runs through the whole database and looks for a
-           * particle identifier which is equal to the parameters. Equal here
-           * uses the comparison operator of ParticleIdentifier::operator==()
-           * and hence is floating-point aware.
-           *
-           * If it finds no matching entry, it returns a new identifier with
-           * the precise arguments. If it finds one "close enough", it returns
-           * this one instead of one matching the precise arguments. See
-           * ParticleIdentifier's discussion on map storage for further
-           * details.
-           *
-           * Cannot be const as we have a semaphore to be thread-safe.
-           *
-           * @param idSearchTolerance is the search tolerance that we
-           *   use to determine the ID of the particle. See the
-           *   `positionTolerance` parameter in ParticleIdentifier.
-           * @param pastSearchTolerance is the search tolerance that we
-           *   use when we crawl through the database to find a previous
-           *   entry of this particle so we can return that entry instead.
-           *   See documentation above.
-           *  @TODO Mladen is pastSearchTolerance still needed?
-           */
-          ParticleIdentifier createParticleIdentifier(
-            const std::string&                           particleName,
-            const tarch::la::Vector<Dimensions, double>& particleX,
-            const int                                    particleID,
-            const double                                 idSearchTolerance,
-            const double pastSearchTolerance = ParticleIdentifier::Precision
-          );
 
           /**
            * Add an entry for a new mesh sweep
