@@ -30,15 +30,15 @@ namespace {
 
 
 
-toolbox::particles::assignmentchecks::internal::ParticleIdentifier toolbox::particles::assignmentchecks::internal::Database::createParticleIdentifier(
-    const std::string&                           particleName,
-    const tarch::la::Vector<Dimensions, double>& particleX,
-    const int                                    particleID,
-    const double                                 idSearchTolerance,
-    const double                                 pastSearchTolerance
-  ) {
-
-  ParticleIdentifier result(particleName, particleX, particleID, idSearchTolerance);
+// toolbox::particles::assignmentchecks::internal::ParticleIdentifier toolbox::particles::assignmentchecks::internal::Database::createParticleIdentifier(
+//     const std::string&                           particleName,
+//     const tarch::la::Vector<Dimensions, double>& particleX,
+//     const int                                    particleID,
+//     const double                                 idSearchTolerance,
+//     const double                                 pastSearchTolerance
+//   ) {
+//
+  // ParticleIdentifier result(particleName, particleX, particleID, idSearchTolerance);
   /* // need a different tolerance for the past event/record search */
   /* ParticleIdentifier */
   /*   pastSearchID(particleName, particleX, particleID, pastSearchTolerance); */
@@ -72,8 +72,8 @@ toolbox::particles::assignmentchecks::internal::ParticleIdentifier toolbox::part
   /*   } */
   /* } */
 /*  */
-  return result;
-}
+//   return result;
+// }
 
 
 // checked
@@ -379,33 +379,38 @@ std::pair<
 
 
 
-
+// checked
 std::string toolbox::particles::assignmentchecks::internal::Database::toString(
 ) {
+  // TODO: Add back in
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
 
   std::ostringstream msg;
 
-/*   int snapshotCounter = 0; */
-  /* for (auto& snapshot : _data) { */
-  /*   msg << std::endl */
-  /*       << "sweep #" << snapshotCounter << " (" << snapshot.getName() << "):"; */
-  /*   for (const auto& identifier : snapshot) { */
-  /*     msg << std::endl << "- " << identifier.first.toString() << ": "; */
-  /*     bool firstEntry = false; */
-  /*     for (const auto& event : identifier.second) { */
-  /*       if (firstEntry) { */
-  /*         firstEntry = true; */
-  /*       } else { */
-  /*         msg << "\n\t->"; */
-  /*       } */
-  /*       msg << event.toString(); */
-  /*     } */
-  /*   } */
-  /*   snapshotCounter++; */
-  /* } */
-/*  */
+  msg << "--------------------------\n";
+  msg << "Full database dump\n";
+  msg << "--------------------------\n";
+
+  for (auto entry = _data.cbegin(); entry != _data.cend(); entry++){
+    ParticleIdentifier identifier = entry->first;
+    ParticleEvents history = entry->second;
+
+    msg << "\n" << identifier.toString();
+    int meshSweepIndex = -1;
+
+    for (auto event = history.crbegin(); event != history.crend(); event++){
+      if (event->meshSweepIndex != meshSweepIndex){
+        std::string sweepname = _meshSweepData.at(event->meshSweepIndex).getName();
+        msg << "\n\t[Sweep " << sweepname << "]:";
+      }
+      meshSweepIndex = event->meshSweepIndex;
+      msg << "\n\t\t->" << event->toString();
+    }
+  }
+
+  msg << "\n";
+
   return msg.str();
 }
 
@@ -417,9 +422,9 @@ int toolbox::particles::assignmentchecks::internal::Database::totalEntries(
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
 
   int result = 0;
-  // for (auto& p : _data) {
-  //   result += p.count(identifier);
-  // }
+  for (auto& entry : _data) {
+    result += entry.second.size();
+  }
   return result;
 }
 
@@ -448,14 +453,12 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
 std::string toolbox::particles::assignmentchecks::internal::Database::sweepHistory() const {
 
   std::ostringstream msg;
-  auto sweep = _meshSweepData.cbegin();
   int counter = 0;
-  while (sweep != _meshSweepData.cend()){
+  for (auto sweep = _meshSweepData.cbegin(); sweep != _meshSweepData.cend(); sweep++){
     msg << std::endl << "sweep #" << counter << ": " << sweep->getName() ;
-    sweep++;
     counter++;
   }
-  msg << std::endl;
+  msg << "\n";
 
   return msg.str();
 }
@@ -474,26 +477,30 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
     << identifier.toString() << std::endl
     << "============================";
 
-  ParticleEvents& history = _data[identifier];
-  auto ev = history.crbegin();
+  auto search = _data.find(identifier);
+  if (search != _data.end()){
 
-  // mesh sweep index of the previous event.
-  int prevMeshSweepInd = -1;
+    ParticleEvents& history = search->second;
+    auto ev = history.crbegin();
 
-  while (ev != history.crend()){
+    // mesh sweep index of the previous event.
+    int prevMeshSweepInd = -1;
 
-    int meshSweepInd = ev->meshSweepIndex;
+    while (ev != history.crend()){
 
-    if (meshSweepInd == prevMeshSweepInd){
-      // next event during the same sweep
-      msg << "->" << ev->toString() << "\n\t";
-    } else {
-      // We're starting new sweep. Print header.
-      msg << std::endl << "sweep #" << meshSweepInd << " (" << _meshSweepData.at(meshSweepInd).getName() << "):\n\t";
+      int meshSweepInd = ev->meshSweepIndex;
+
+      if (meshSweepInd == prevMeshSweepInd){
+        // next event during the same sweep
+        msg << "->" << ev->toString() << "\n\t";
+      } else {
+        // We're starting new sweep. Print header.
+        msg << std::endl << "sweep #" << meshSweepInd << " (" << _meshSweepData.at(meshSweepInd).getName() << "):\n\t";
+      }
+
+      prevMeshSweepInd = meshSweepInd;
+      ev++;
     }
-
-    prevMeshSweepInd = meshSweepInd;
-    ev++;
   }
 
   return msg.str();
@@ -513,6 +520,7 @@ void toolbox::particles::assignmentchecks::internal::Database::addEvent(
 
   int count = _data.count(identifier) ;
   if (count == 0){
+    // This is a new particle.
     ParticleEvents newEventHistory = ParticleEvents();
     newEventHistory.push_back(event);
     _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( identifier, newEventHistory ) );
@@ -525,7 +533,6 @@ std::cout <<
 << std::endl;
     // );
 
-    //
   } else {
 
     ParticleEvents& history = _data[identifier];

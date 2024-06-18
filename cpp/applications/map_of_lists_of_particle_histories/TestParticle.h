@@ -2,7 +2,6 @@
 // use, please see the copyright notice at www.peano-framework.org
 #pragma once
 
-#include "mladenAdditions/Globals.h"
 #include "tarch/la/Vector.h"
 
 namespace toolbox {

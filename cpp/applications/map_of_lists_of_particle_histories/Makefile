@@ -14,6 +14,7 @@ SRCDIR=.
 
 
 #Compiler to use
+# CXX=icpx
 CXX=g++
 
 DEFINES= -DDimensions=2 -DPeanoDebug=4
@@ -26,7 +27,7 @@ DEFINES= -DDimensions=2 -DPeanoDebug=4
 OPTFLAGS = 	-O0 -g 			# debug
 # OPTFLAGS = 	-O3  		# performance
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
-FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros
+FFLAGS= 	-ffinite-math-only -fno-signed-zeros
 STDFLAGS= 	-std=c++20
 INCLUDES= -I./tarch/ -I./tarch/la/
 DEVFLAGS= -Wno-unused-parameter -Wno-unused-function
@@ -68,11 +69,11 @@ particle_history: main.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ main.o $(OBJECTS) $(LDFLAGS) $(LIBFLAGS)
 
 ScalarOperations.o: tarch/la/ScalarOperations.cpp
-	$(CXX) $(CXXFLAGS) -c $@ $< $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $< -c -o $@ $(LDFLAGS)
 
 # Wildcard baby
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $@ $< $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $< -c -o $@ $(LDFLAGS)
 
 
 
