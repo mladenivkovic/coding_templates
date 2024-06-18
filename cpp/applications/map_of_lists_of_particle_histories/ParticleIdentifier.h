@@ -81,6 +81,8 @@ namespace toolbox {
 
           // friend class Database;
 
+          static constexpr double shiftTolerance = 0.3;
+
           double positionTolerance;
 
           bool operator<(const ParticleIdentifier& rhs) const;

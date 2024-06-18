@@ -359,7 +359,7 @@ void testAddingParticleMovingEvents(bool verbose=false){
     particleX(i) = 1.;
     vertexX(i) = 1.;
     vertexH(i) = 1.;
-    dx(i) = 0.0005;
+    dx(i) = 0.05;
   }
 
 

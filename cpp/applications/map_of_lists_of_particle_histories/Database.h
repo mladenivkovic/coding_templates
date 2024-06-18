@@ -214,6 +214,10 @@ namespace toolbox {
            * element), we'll very likely get a new assignment in a second.
            * This assignment will then eliminate previous "expired"
            * information as per the description above.
+           *
+           * ------------------------------------------
+           *  - will refresh identifier if moved past tolerance
+           *  - will delete events if there are too many
            */
           void addEvent(ParticleSearchIdentifier identifier, Event& event);
 
