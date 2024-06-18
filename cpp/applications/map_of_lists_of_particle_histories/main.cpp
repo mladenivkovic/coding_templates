@@ -7,14 +7,21 @@
 #include "tarch/la/Vector.h"
 // #include "TestParticle.h"
 
-// #include "Database.h"
+#include "Database.h"
 
 
 /**
  * Test whether ParticleIdentifier and ParticleSearchIdentifier
  * work as intended in a map for a fuzzy search.
  */
-void testTruthTableSearchAndIDKeys(){
+void testTruthTableSearchAndIDKeys(bool verbose=false){
+
+  if (verbose) {
+    std::cout <<
+      "------------------------------------------\n" <<
+      "Running testTruthTableSearchAndIDKeys()\n" <<
+      "------------------------------------------\n" << std::endl;
+  }
 
   namespace ac = ::toolbox::particles::assignmentchecks;
 
@@ -86,66 +93,71 @@ void testTruthTableSearchAndIDKeys(){
 
 
 
-/*  */
-/*  */
-/*  */
-/*  */
 /**
  * Make sure that adding mesh sweeps to the database works.
  */
-/* void test_adding_sweeps_to_database(void){ */
-/*  */
-/*   namespace ac = ::toolbox::particles::assignmentchecks; */
-/*  */
-/*   ac::internal::Database& eventDatabase = ac::getDatabaseInstance(); */
-/*   eventDatabase.reset(); */
-/*   ac::ensureDatabaseIsEmpty(); */
-/*  */
-/*  */
-/*   std::vector<std::string> meshSweepNames = {"initial", "alpha", "beta", "gamma", "delta"}; */
-/*  */
-/*  */
-/*   std::vector<std::string>::iterator sweep = meshSweepNames.begin(); */
-/*   // Skip first, which gets automatically added to the database. */
-/*   sweep++; */
-/*  */
-/*   while (sweep != meshSweepNames.end()){ */
-/*     ac::startMeshSweep(*sweep); */
-/*     sweep++; */
-/*   } */
-/*  */
-/*   // Check number of sweeps correct */
-/*   assertion3(eventDatabase.getMeshSweepData().size() == meshSweepNames.size(), */
-/*       "Wrong number of mesh sweeps in database", */
-/*       eventDatabase.getMeshSweepData().size(), */
-/*       meshSweepNames.size() */
-/*       ); */
-/*  */
-/*   // Check our bookkeeping */
-/*   assertion3((eventDatabase.getCurrentMeshSweepIndex() + 1) == meshSweepNames.size(), */
-/*       "Wrong count of mesh sweeps in database", */
-/*       eventDatabase.getMeshSweepData().size(), */
-/*       meshSweepNames.size() */
-/*       ); */
-/*  */
-/*  */
-/*   auto databaseSweep = eventDatabase.getMeshSweepData().begin(); */
-/*   sweep = meshSweepNames.begin(); */
-/*  */
-/*   while (sweep != meshSweepNames.end()){ */
-/*  */
-/*     assertion3(*sweep == databaseSweep->getName(), "Wrong Sweep Name", *sweep, databaseSweep->getName()); */
-/*     sweep++; */
-/*     databaseSweep++; */
-/*   } */
-/*  */
-/*   // Clean up after yourself. */
-/*   eventDatabase.reset(); */
-/*   ac::ensureDatabaseIsEmpty(); */
-/* } */
-/*  */
-/*  */
-/*  */
+void testAddingSweepsToDatabase(bool verbose=false){
+
+  if (verbose) {
+    std::cout <<
+      "------------------------------------------\n" <<
+      "Running testAddingSweepsToDatabase()\n" <<
+      "------------------------------------------\n" << std::endl;
+  }
+
+  namespace ac = ::toolbox::particles::assignmentchecks;
+
+  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  eventDatabase.reset();
+  ac::ensureDatabaseIsEmpty();
+
+
+  std::vector<std::string> meshSweepNames = {"initial", "alpha", "beta", "gamma", "delta"};
+
+
+  std::vector<std::string>::iterator sweep = meshSweepNames.begin();
+  // Skip first, which gets automatically added to the database.
+  sweep++;
+
+  while (sweep != meshSweepNames.end()){
+    ac::startMeshSweep(*sweep);
+    sweep++;
+  }
+
+  // Check number of sweeps correct
+  assertion3(eventDatabase.getMeshSweepData().size() == meshSweepNames.size(),
+      "Wrong number of mesh sweeps in database",
+      eventDatabase.getMeshSweepData().size(),
+      meshSweepNames.size()
+      );
+
+  // Check our bookkeeping
+  assertion3((eventDatabase.getCurrentMeshSweepIndex() + 1) == meshSweepNames.size(),
+      "Wrong count of mesh sweeps in database",
+      eventDatabase.getMeshSweepData().size(),
+      meshSweepNames.size()
+      );
+
+
+  // Check that names have been stored correctly
+
+  auto databaseSweep = eventDatabase.getMeshSweepData().begin();
+  sweep = meshSweepNames.begin();
+
+  while (sweep != meshSweepNames.end()){
+
+    assertion3(*sweep == databaseSweep->getName(), "Wrong Sweep Name", *sweep, databaseSweep->getName());
+    sweep++;
+    databaseSweep++;
+  }
+
+  // Clean up after yourself.
+  eventDatabase.reset();
+  ac::ensureDatabaseIsEmpty();
+}
+
+
+
 /**
  * Test the adding of particle events to the database.
  * This also serves as a unit test for all possible events: I let
@@ -158,233 +170,267 @@ void testTruthTableSearchAndIDKeys(){
  * We're also adding events without them having any meaning. Proper
  * event tracing including consistency checks will also be done later.
  */
-/* void test_adding_particle_events(bool verbose=false){ */
-/*  */
-/*   namespace ac = ::toolbox::particles::assignmentchecks; */
-/*  */
-/*   ac::internal::Database& eventDatabase = ac::getDatabaseInstance(); */
-/*   eventDatabase.reset(); */
-/*   ac::ensureDatabaseIsEmpty(); */
-/*   // make sure we're not deleting anything just yet. */
-/*   // re-initialize with enough "space". */
-/*   eventDatabase = ac::internal::Database(100); */
-/*  */
-/*   int treeId = 1; */
-/*   bool isLocal = true; */
-/*   double positionTolerance = 1.; */
-/*   tarch::la::Vector<Dimensions, double> particleX; */
-/*   tarch::la::Vector<Dimensions, double> vertexX; */
-/*   tarch::la::Vector<Dimensions, double> vertexH; */
-/*  */
-/*   std::string trace; */
-/*  */
-/*   std::vector<std::string> meshSweepNames = {"alpha", "beta", "gamma", "delta"}; */
-/*  */
-/*  */
-/*   int nparts = 10; */
-/*   std::vector<std::string>::iterator sweep = meshSweepNames.begin(); */
-/*   while (sweep != meshSweepNames.end()){ */
-/*     ac::startMeshSweep(*sweep); */
-/*  */
-/*     for (int p = 1; p < nparts+1; p++){ */
-/*  */
-/*       int particleID = p; */
-/*  */
-/*       for (int i = 0; i < Dimensions; i++){ */
-/*         particleX(i) = p; */
-/*         vertexX(i) = p; */
-/*         vertexH(i) = p; */
-/*       } */
-/*  */
-/*       ac::internal::ParticleIdentifier identifier = ac::internal::ParticleIdentifier( */
-/*           "DummyParticle", */
-/*           particleX, */
-/*           particleID, */
-/*           positionTolerance */
-/*       ); */
-/*  */
-/*       // vertex assignment event */
-/*       trace = "Assign/sweep:" + *sweep; */
-/*       ac::internal::Event vassEvent = ac::internal::Event( */
-/*           ac::internal::Event::Type::AssignToVertex, */
-/*           isLocal, */
-/*           vertexX, */
-/*           particleX, */
-/*           vertexH, */
-/*           treeId, */
-/*           trace); */
-/*  */
-/*       eventDatabase.addEvent(identifier, vassEvent); */
-/*  */
-/*       // move event */
-/*       trace = "Move/sweep:" + *sweep; */
-/*       ac::internal::Event moveEvent = ac::internal::Event( */
-/*           ac::internal::Event::Type::MoveWhileAssociatedToVertex, */
-/*           vertexX, */
-/*           particleX, */
-/*           vertexH, */
-/*           treeId, */
-/*           trace); */
-/*       eventDatabase.addEvent(identifier, moveEvent); */
-/*  */
-/*       // sieve event */
-/*       trace = "Sieve/sweep:" + *sweep; */
-/*       ac::internal::Event sievEvent = ac::internal::Event( */
-/*           ac::internal::Event::Type::AssignToSieveSet, */
-/*           isLocal, */
-/*           treeId, */
-/*           trace); */
-/*       eventDatabase.addEvent(identifier, sievEvent); */
-/*  */
-/*       // invalid event */
-/*       trace = "NotFound/sweep:" + *sweep; */
-/*       ac::internal::Event invalidEvent = ac::internal::Event( */
-/*           ac::internal::Event::Type::NotFound); */
-/*       eventDatabase.addEvent(identifier, invalidEvent); */
-/*  */
-/*     } */
-/*  */
-/*     sweep++; */
-/*   } */
-/*  */
-/*  */
-/*   if (verbose) { */
-/*     // Print out particle histories */
-/*     for (int p = 1; p < nparts+1; p++){ */
-/*  */
-/*       int particleID = p; */
-/*  */
-/*       for (int i = 0; i < Dimensions; i++){ */
-/*         particleX(i) = p; */
-/*         vertexX(i) = p; */
-/*         vertexH(i) = p; */
-/*       } */
-/*  */
-/*       ac::internal::ParticleIdentifier identifier = ac::internal::ParticleIdentifier( */
-/*           "DummyParticle", */
-/*           particleX, */
-/*           particleID, */
-/*           positionTolerance */
-/*       ); */
-/*  */
-/*       std::cout << eventDatabase.particleHistory(identifier); */
-/*     } */
-/*   } */
-/*  */
-/*   // Clean up after yourself. */
-/*   eventDatabase.reset(); */
-/*   ac::ensureDatabaseIsEmpty(); */
-/* } */
-/*  */
-/*  */
+void testAddingParticleEvents(bool verbose=false){
+
+  if (verbose) {
+    std::cout <<
+      "------------------------------------------\n" <<
+      "Running testAddingParticleEvents()\n" <<
+      "------------------------------------------\n" << std::endl;
+  }
+
+  namespace ac = ::toolbox::particles::assignmentchecks;
+
+  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  eventDatabase.reset();
+  ac::ensureDatabaseIsEmpty();
+  // make sure we're not deleting anything just yet.
+  // re-initialize with enough "space".
+  eventDatabase = ac::internal::Database(100);
+
+  int treeId = 1;
+  bool isLocal = true;
+  double positionTolerance = 1.;
+  tarch::la::Vector<Dimensions, double> particleX;
+  tarch::la::Vector<Dimensions, double> vertexX;
+  tarch::la::Vector<Dimensions, double> vertexH;
+
+  std::string trace;
+
+  std::vector<std::string> meshSweepNames = {"alpha", "beta", "gamma", "delta"};
+
+
+  int nparts = 10;
+  std::vector<std::string>::iterator sweep = meshSweepNames.begin();
+  while (sweep != meshSweepNames.end()){
+    ac::startMeshSweep(*sweep);
+
+    for (int p = 1; p < nparts+1; p++){
+
+      int particleID = p;
+
+      for (int i = 0; i < Dimensions; i++){
+        particleX(i) = p;
+        vertexX(i) = p;
+        vertexH(i) = p;
+      }
+
+      ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+          "DummyParticle",
+          particleX,
+          particleID,
+          positionTolerance
+      );
+
+      // vertex assignment event
+      trace = "Assign/sweep:" + *sweep;
+      ac::internal::Event vassEvent = ac::internal::Event(
+          ac::internal::Event::Type::AssignToVertex,
+          isLocal,
+          vertexX,
+          particleX,
+          vertexH,
+          treeId,
+          trace);
+
+      eventDatabase.addEvent(identifier, vassEvent);
+
+      // move event
+      trace = "Move/sweep:" + *sweep;
+      ac::internal::Event moveEvent = ac::internal::Event(
+          ac::internal::Event::Type::MoveWhileAssociatedToVertex,
+          vertexX,
+          particleX,
+          vertexH,
+          treeId,
+          trace);
+      eventDatabase.addEvent(identifier, moveEvent);
+
+      // sieve event
+      trace = "Sieve/sweep:" + *sweep;
+      ac::internal::Event sievEvent = ac::internal::Event(
+          ac::internal::Event::Type::AssignToSieveSet,
+          isLocal,
+          treeId,
+          trace);
+      eventDatabase.addEvent(identifier, sievEvent);
+
+      // invalid event
+      trace = "NotFound/sweep:" + *sweep;
+      ac::internal::Event invalidEvent = ac::internal::Event(
+          ac::internal::Event::Type::NotFound);
+      eventDatabase.addEvent(identifier, invalidEvent);
+
+    }
+
+    sweep++;
+  }
+
+
+  // is particle count correct?
+  assertion3(eventDatabase.getNumberOfTracedParticles() == static_cast<int>(nparts),
+      eventDatabase.getNumberOfTracedParticles(),
+      nparts,
+      "Wrong particle count in database"
+      );
+
+  // Is number of events per particle correct?
+  for (int p = 1; p < nparts+1; p++){
+
+    int particleID = p;
+
+    for (int i = 0; i < Dimensions; i++){
+      particleX(i) = p;
+      vertexX(i) = p;
+      vertexH(i) = p;
+    }
+
+    ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+        "DummyParticle",
+        particleX,
+        particleID,
+        positionTolerance
+    );
+
+    size_t nEntries = eventDatabase.getTotalParticleEntries(identifier);
+    // we add 4 events per sweep.
+    assertion4(nEntries == (meshSweepNames.size() * 4),
+        "Wrong number of entries for particle ",
+        p,
+        nEntries,
+        meshSweepNames.size() * 4
+        );
+
+    if (verbose) {
+      // Print out particle histories
+      std::cout << eventDatabase.particleHistory(identifier);
+    }
+  }
+
+
+  // Clean up after yourself.
+  eventDatabase.reset();
+  ac::ensureDatabaseIsEmpty();
+}
+
+
 /**
  * Test the adding of particle events to the database with a moving
- * particle. The catch is that a moving particle will eventually
- * need to change its identifier in the database.
+ * particle. The catch is twofold: Firstly, the fuzzy search needs to work.
+ * Secondly, a moving particle will eventually need to change its identifier
+ * in the database. This tests both of these cases, but not the event
+ * deletion when the database becomes too large.
  *
  * We're also adding events without them having any meaning. Proper
  * event tracing including consistency checks will also be done later.
  */
-/* void test_adding_moving_particle_events(bool verbose=false){ */
-/*  */
-/*   namespace ac = ::toolbox::particles::assignmentchecks; */
-/*  */
-/*   ac::internal::Database& eventDatabase = ac::getDatabaseInstance(); */
-/*   eventDatabase.reset(); */
-/*   ac::ensureDatabaseIsEmpty(); */
-/*   // make sure we're not deleting anything just yet. */
-/*   // re-initialize with enough "space". */
-/*   eventDatabase = ac::internal::Database(100); */
-/*  */
-/*   int particleID = 1; */
-/*   int treeId = 1; */
-/*   // bool isLocal = true; */
-/*   double positionTolerance = 1.; */
-/*   double dt = 1.; */
-/*  */
-/*   tarch::la::Vector<Dimensions, double> particleX; */
-/*   tarch::la::Vector<Dimensions, double> vertexX; */
-/*   tarch::la::Vector<Dimensions, double> vertexH; */
-/*  */
-/*   // particle displacement each step */
-/*   tarch::la::Vector<Dimensions, double> dx; */
-/*  */
-/*   for (int i = 0; i < Dimensions; i++){ */
-/*     particleX(i) = 1.; */
-/*     vertexX(i) = 1.; */
-/*     vertexH(i) = 1.; */
-/*     dx(i) = 0.0005; */
-/*   } */
-/*  */
-/*  */
-/*  */
-/*   for (int sweep = 0; sweep < 100; sweep++){ */
-/*  */
-/*     std::string sweepname = "Sweep" + std::to_string(sweep); */
-/*     ac::startMeshSweep(sweepname); */
-/*  */
-/*     // move particle */
-/*     for (int i = 0; i < Dimensions; i++){ */
-/*       particleX(i) += dx(i) * dt; */
-/*     } */
-/*  */
-/*     // generate new identifier */
-/*     ac::internal::ParticleIdentifier identifier = ac::internal::ParticleIdentifier( */
-/*         "DummyParticle", */
-/*         particleX, */
-/*         particleID, */
-/*         positionTolerance */
-/*     ); */
-/*  */
-/*  */
-/*     // move event */
-/*     std::string trace = "Move/sweep:" + std::to_string(sweep); */
-/*     ac::internal::Event moveEvent = ac::internal::Event( */
-/*         ac::internal::Event::Type::MoveWhileAssociatedToVertex, */
-/*         vertexX, */
-/*         particleX, */
-/*         vertexH, */
-/*         treeId, */
-/*         trace); */
-/*     eventDatabase.addEvent(identifier, moveEvent); */
-/*  */
-/*   } */
-/*  */
-/*  */
-/*   if (verbose) { */
-/*     // Print out particle histories */
-/*  */
-/*     ac::internal::ParticleIdentifier identifier = ac::internal::ParticleIdentifier( */
-/*         "DummyParticle", */
-/*         particleX, */
-/*         particleID, */
-/*         positionTolerance */
-/*     ); */
-/*  */
-/*     std::cout << eventDatabase.particleHistory(identifier); */
-/*   } */
-/*  */
-/*  */
-/*   std::cout << "DATABASE DUMP\n\n" << eventDatabase.toString(); */
-/*  */
-/*  */
-/*   // Clean up after yourself. */
-/*   eventDatabase.reset(); */
-/*   ac::ensureDatabaseIsEmpty(); */
-/* } */
-/*  */
-/*  */
+void testAddingParticleMovingEvents(bool verbose=false){
+
+  if (verbose) {
+    std::cout <<
+      "------------------------------------------\n" <<
+      "Running testAddingParticleMovingEvents()\n" <<
+      "------------------------------------------\n" << std::endl;
+  }
+
+  namespace ac = ::toolbox::particles::assignmentchecks;
+
+  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  eventDatabase.reset();
+  ac::ensureDatabaseIsEmpty();
+  // make sure we're not deleting anything just yet.
+  // re-initialize with enough "space".
+  eventDatabase = ac::internal::Database(100);
+
+  int particleID = 1;
+  int treeId = 1;
+  // bool isLocal = true;
+  double positionTolerance = 1.;
+  double dt = 1.;
+
+  tarch::la::Vector<Dimensions, double> particleX;
+  tarch::la::Vector<Dimensions, double> vertexX;
+  tarch::la::Vector<Dimensions, double> vertexH;
+
+  // particle displacement each step
+  tarch::la::Vector<Dimensions, double> dx;
+
+  for (int i = 0; i < Dimensions; i++){
+    particleX(i) = 1.;
+    vertexX(i) = 1.;
+    vertexH(i) = 1.;
+    dx(i) = 0.0005;
+  }
+
+
+  // run through sweeps and add move events.
+  for (int sweep = 0; sweep < 100; sweep++){
+
+    std::string sweepname = "Sweep" + std::to_string(sweep);
+    ac::startMeshSweep(sweepname);
+
+    // move particle
+    for (int i = 0; i < Dimensions; i++){
+      particleX(i) += dx(i) * dt;
+    }
+
+    // generate new identifier
+    ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+        "DummyParticle",
+        particleX,
+        particleID,
+        positionTolerance
+    );
+
+
+    // move event
+    std::string trace = "Move/sweep:" + std::to_string(sweep);
+    ac::internal::Event moveEvent = ac::internal::Event(
+        ac::internal::Event::Type::MoveWhileAssociatedToVertex,
+        vertexX,
+        particleX,
+        vertexH,
+        treeId,
+        trace);
+    eventDatabase.addEvent(identifier, moveEvent);
+
+  }
+
+
+  if (verbose) {
+    // Print out particle histories
+
+    ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+        "DummyParticle",
+        particleX,
+        particleID,
+        positionTolerance
+    );
+
+    std::cout << eventDatabase.particleHistory(identifier);
+  }
+
+
+  // std::cout << "DATABASE DUMP\n\n" << eventDatabase.toString();
+
+
+  // Clean up after yourself.
+  eventDatabase.reset();
+  ac::ensureDatabaseIsEmpty();
+}
+
+
 
 
 
 
 int main(void) {
 
-  bool verbose = false;
-  testTruthTableSearchAndIDKeys();
-  // test_adding_sweeps_to_database();
-  // test_adding_particle_events(false);
-  // test_adding_moving_particle_events(true);
+  bool verbose = true;
+  // testTruthTableSearchAndIDKeys(verbose);
+  // testAddingSweepsToDatabase(verbose);
+  // testAddingParticleEvents(verbose);
+  testAddingParticleMovingEvents(true);
 
   std::cout << "Done. Bye!" <<  std::endl;
 
