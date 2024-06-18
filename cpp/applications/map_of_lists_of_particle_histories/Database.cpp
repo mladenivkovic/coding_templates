@@ -498,13 +498,12 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
 
       int meshSweepInd = ev->meshSweepIndex;
 
-      if (meshSweepInd == prevMeshSweepInd){
-        // next event during the same sweep
-        msg << "->" << ev->toString() << "\n\t";
-      } else {
+      if (meshSweepInd != prevMeshSweepInd){
         // We're starting new sweep. Print header.
         msg << std::endl << "sweep #" << meshSweepInd << " (" << _meshSweepData.at(meshSweepInd).getName() << "):\n\t";
       }
+        // next event during the same sweep
+        msg << "->" << ev->toString() << "\n\t";
 
       prevMeshSweepInd = meshSweepInd;
       ev++;
@@ -526,9 +525,11 @@ void toolbox::particles::assignmentchecks::internal::Database::addEvent(
   // Take note of the current mesh sweep index.
   event.meshSweepIndex = _database.getCurrentMeshSweepIndex();
 
-  int count = _data.count(identifier) ;
-  if (count == 0){
+  auto search = _data.find(identifier);
+
+  if (search == _data.end()){
     // This is a new particle.
+
     ParticleEvents newEventHistory = ParticleEvents();
     newEventHistory.push_back(event);
     _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( identifier, newEventHistory ) );
@@ -543,7 +544,7 @@ std::cout <<
 
   } else {
 
-    ParticleEvents& history = _data[identifier];
+    ParticleEvents& history = search->second;
     history.push_back(event);
 
 std::cout <<
