@@ -28,10 +28,10 @@ namespace toolbox {
 
           using ParticleEvents = std::vector<Event>;
 
-          // tell the map to use std::less<> as comparator instead
-          // of std::less<key>. std::less<> invokes the `<` operator.
+          // tell the map to use std::less<> as comparator instead of the
+          // default std::less<key>. std::less<> invokes the `<` operator.
           // We want that to be able to use our bespoke `<` operator
-          // for different search and ID keys.
+          // for different search and ID key identifier objects.
           std::map<ParticleIdentifier, ParticleEvents, std::less<> > _data;
 
           /**
@@ -54,7 +54,7 @@ namespace toolbox {
            * i.e. does not acquire a write lock.
            */
           void removeTrajectory(
-            const ParticleIdentifier& lastIdentifier,
+            const ParticleSearchIdentifier& lastIdentifier,
             int                       spacetreeId,
             int firstNRecentEntriesToSkip = 0
           );
@@ -131,7 +131,7 @@ namespace toolbox {
            *   returned event.
            */
           std::pair<Event, ParticleIdentifier> getEntry(
-            const ParticleIdentifier& identifier,
+            const ParticleSearchIdentifier& identifier,
             const int                       spacetreeId,
             const double                    idSearchTolerance = 1.,
             const double                    pastSearchTolerance = 1.,
@@ -157,9 +157,15 @@ namespace toolbox {
            * account. Multiple moves might occur if several particles
            * "hop through" the same spatial position in the database. Only
            * the most recent one however is relevant for identifier.
+           *
+           * --------------------------------
+           * Events of type NotFound will not be added to the history.
            */
-          std::string particleHistory(const ParticleIdentifier& identifier);
+          std::string particleHistory(const ParticleSearchIdentifier& identifier);
 
+          /**
+           * Returns the recorded events of the latest mesh sweep.
+           */
           std::string lastMeshSweepSnapshot();
 
           /**
@@ -167,7 +173,7 @@ namespace toolbox {
            *
            * Cannot be const as we have a semaphore to be thread-safe.
            */
-          int totalEntries(const ParticleIdentifier& identifier);
+          int getTotalParticleEntries(const ParticleSearchIdentifier& identifier);
 
           /**
            * Return number of snapshots
@@ -185,6 +191,7 @@ namespace toolbox {
            * snapshot, we create one. Afterwards, we append event to this
            * new dataset for particle identifier and clean up the database,
            * i.e. throw away irrelevant old data.
+           *
            *
            *
            * ## Garbage/history collection
@@ -208,7 +215,7 @@ namespace toolbox {
            * This assignment will then eliminate previous "expired"
            * information as per the description above.
            */
-          void addEvent(ParticleIdentifier identifier, Event& event);
+          void addEvent(ParticleSearchIdentifier identifier, Event& event);
 
           /**
            * Dump the whole database
@@ -244,7 +251,6 @@ namespace toolbox {
            */
           void eliminateExistingParticles();
 
-
           /**
            * Delete all entries in the database and reset it to the initial
            * state. This is intended for use in unit tests only, as running a
@@ -255,7 +261,12 @@ namespace toolbox {
           /**
            * Grab the current index of mesh sweeps.
            */
-          int getCurrentMeshSweepIndex() const;
+          size_t getCurrentMeshSweepIndex() const;
+
+          /**
+           * Get the number of currently traced particles in the database.
+           */
+          int getNumberOfTracedParticles() const;
 
           /**
            * Get a handle on the mesh sweep data of the database.
@@ -264,12 +275,12 @@ namespace toolbox {
            */
           std::vector<MeshSweepData>& getMeshSweepData();
 
-
           /**
-           * Get history of stored sweeps.
+           * Get the history of stored mesh sweep (names).
            */
           std::string sweepHistory() const;
           };
+
         } // namespace internal
 
 

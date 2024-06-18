@@ -49,6 +49,10 @@ namespace toolbox {
 
           // friend class Database;
 
+          // don't make these functions virtual: I need to be able to pass
+          // &ParticleSearchIdentifier and have it be treated like
+          // &ParticleIdentifier in function arguments.
+
           std::string                           particleName;
           tarch::la::Vector<Dimensions, double> particleX;
           int                                   particleID;

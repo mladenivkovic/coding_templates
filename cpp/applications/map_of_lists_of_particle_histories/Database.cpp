@@ -119,8 +119,13 @@ std::vector<toolbox::particles::assignmentchecks::internal::MeshSweepData>& tool
 }
 
 // checked
-int toolbox::particles::assignmentchecks::internal::Database::getCurrentMeshSweepIndex() const {
+size_t toolbox::particles::assignmentchecks::internal::Database::getCurrentMeshSweepIndex() const {
   return _currentMeshSweepIndex;
+}
+
+// checked
+int toolbox::particles::assignmentchecks::internal::Database::getNumberOfTracedParticles() const {
+  return _data.size();
 }
 
 
@@ -216,7 +221,7 @@ void toolbox::particles::assignmentchecks::internal::Database::
 
 
 void toolbox::particles::assignmentchecks::internal::Database::removeTrajectory(
-  const ParticleIdentifier& identifier,
+  const ParticleSearchIdentifier& identifier,
   int                       spacetreeId,
   int                       firstNRecentEntriesToSkip
 ) {
@@ -232,7 +237,7 @@ void toolbox::particles::assignmentchecks::internal::Database::removeTrajectory(
   /*     auto historyEventIterator = meshSweepData.at(identifier).rbegin(); */
   /*     while (historyEventIterator != meshSweepData.at(identifier).rend()) { */
   /*       if (historyEventIterator->treeId == spacetreeId and historyEventIterator->type == Event::Type::MoveWhileAssociatedToVertex) { */
-  /*         ParticleIdentifier previousIdentifier = identifier; */
+  /*         ParticleSearchIdentifier previousIdentifier = identifier; */
   /*         previousIdentifier.particleX = historyEventIterator->previousParticleX; */
   /*         // TODO: Re-Insert */
   /*         // logDebug( */
@@ -275,7 +280,7 @@ std::pair<
   toolbox::particles::assignmentchecks::internal::Event,
   toolbox::particles::assignmentchecks::internal::ParticleIdentifier>
   toolbox::particles::assignmentchecks::internal::Database::getEntry(
-    const ParticleIdentifier& identifier,
+    const ParticleSearchIdentifier& identifier,
     const int                       spacetreeId,
     const double                    idSearchTolerance,
     const double                    pastSearchTolerance,
@@ -286,7 +291,7 @@ std::pair<
 
 /*   auto currentSnapshot = _data.crbegin(); */
 /*  */
-/*   const ParticleIdentifier pastSearchIdentifier = ParticleIdentifier( */
+/*   const ParticleSearchIdentifier pastSearchIdentifier = ParticleSearchIdentifier( */
 /*       // identifier.particleName, identifier.particleX, identifier.particleID, idSearchTolerance */
 /*       identifier.particleName, identifier.particleX, identifier.particleID, pastSearchTolerance */
 /*       ); */
@@ -321,8 +326,8 @@ std::pair<
 /*               " PASTSEARCHTOL " << pastSearchTolerance << */
 /*               " PARTX " << identifier.particleX << std::endl; */
 /*  */
-/*           const ParticleIdentifier previousIdentifier */
-/*             = _database.createParticleIdentifier( */
+/*           const ParticleSearchIdentifier previousIdentifier */
+/*             = _database.createParticleSearchIdentifier( */
 /*               identifier.particleName, */
 /*               event->previousParticleX, */
 /*               identifier.particleID, */
@@ -330,7 +335,7 @@ std::pair<
 /*               pastSearchTolerance */
 /*             ); */
 /*  */
-/*           // _database.createParticleIdentifier may return a previous identifier */
+/*           // _database.createParticleSearchIdentifier may return a previous identifier */
 /*           // with a different, less strict positionTolerance than we want here. */
 /*           // This may lead to wrong positives. We want a strict(er) one, so check */
 /*           // for that as well. */
@@ -415,18 +420,21 @@ std::string toolbox::particles::assignmentchecks::internal::Database::toString(
 }
 
 
-int toolbox::particles::assignmentchecks::internal::Database::totalEntries(
-  const ParticleIdentifier& identifier
+// checked
+int toolbox::particles::assignmentchecks::internal::Database::getTotalParticleEntries(
+  const ParticleSearchIdentifier& identifier
 ) {
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
 
-  int result = 0;
-  for (auto& entry : _data) {
-    result += entry.second.size();
+  auto search = _data.find(identifier);
+  if (search != _data.end()){
+    int result = search->second.size();
+    return result;
   }
-  return result;
+  return 0;
 }
+
 
 std::string toolbox::particles::assignmentchecks::internal::Database::
   lastMeshSweepSnapshot() {
@@ -434,7 +442,7 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
 
   std::ostringstream msg;
-  /*   if (not _data.empty()) { */
+    // if (not _data.empty()) {
     /* const auto& lastMeshSnapshot = *_data.crbegin(); */
     /* msg */
     /*   << "#" << (_data.size() - 1) << "(" << lastMeshSnapshot.getName() << "):"; */
@@ -466,7 +474,7 @@ std::string toolbox::particles::assignmentchecks::internal::Database::sweepHisto
 
 // checked
 std::string toolbox::particles::assignmentchecks::internal::Database::
-  particleHistory(const ParticleIdentifier& identifier) {
+  particleHistory(const ParticleSearchIdentifier& identifier) {
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
 
@@ -508,7 +516,7 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
 
 // checked
 void toolbox::particles::assignmentchecks::internal::Database::addEvent(
-  ParticleIdentifier identifier,
+  ParticleSearchIdentifier identifier,
   Event&       event
 ) {
   // tarch::multicore::MultiReadSingleWriteLock
@@ -551,7 +559,7 @@ std::cout <<
   // assertion(not _data.empty());
   /* MeshSweepData& snapshot = *_data.rbegin(); */
   /* if (snapshot.count(identifier) == 0) { */
-  /*   snapshot.insert(std::pair<ParticleIdentifier, ParticleEvents>( */
+  /*   snapshot.insert(std::pair<ParticleSearchIdentifier, ParticleEvents>( */
   /*     identifier, */
   /*     ParticleEvents() */
   /*   )); */
@@ -572,7 +580,7 @@ std::cout <<
   /*  */
   /*   // re-add element */
   /*   if (snapshot.count(identifier) == 0) { */
-  /*     snapshot.insert(std::pair<ParticleIdentifier, ParticleEvents>( */
+  /*     snapshot.insert(std::pair<ParticleSearchIdentifier, ParticleEvents>( */
   /*       identifier, */
   /*       ParticleEvents() */
   /*     )); */
@@ -618,7 +626,7 @@ std::cout <<
   /*  */
   /*   // re-add element */
   /*   if (snapshot.count(identifier) == 0) { */
-  /*     snapshot.insert(std::pair<ParticleIdentifier, ParticleEvents>( */
+  /*     snapshot.insert(std::pair<ParticleSearchIdentifier, ParticleEvents>( */
   /*       identifier, */
   /*       ParticleEvents() */
   /*     )); */
@@ -670,7 +678,7 @@ void toolbox::particles::assignmentchecks::eraseParticle(
   // );
 
 
-  /*   internal::ParticleIdentifier identifier = _database.createParticleIdentifier( */
+  /*   internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier( */
   /*   particleName, */
   /*   particleX, */
   /*   particleID, */
@@ -721,7 +729,7 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
   /* constexpr bool checkNewParticles = false; */
   /*  */
   /* if ((not checkNewParticles) and particleIsNew) { */
-  /*   internal::ParticleIdentifier identifier = _database.createParticleIdentifier( */
+  /*   internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier( */
   /*     particleName, */
   /*     particleX, */
   /*     particleID, */
@@ -741,7 +749,7 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
   /*  */
   /* } else { */
   /*  */
-  /*   internal::ParticleIdentifier identifier = _database.createParticleIdentifier( */
+  /*   internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier( */
   /*     particleName, */
   /*     particleX, */
   /*     particleID, */
@@ -839,23 +847,23 @@ void toolbox::particles::assignmentchecks::moveParticle(
   // we use this as leeway to find a particle in the past.
   // Divide py ::Precision because it will be multiplied again in numericalEquals().
   // We want to be able to search the entire vertex size through the past.
-  // const double pastSearchTolerance = tarch::la::max(vertexH) / internal::ParticleIdentifier::Precision;
+  // const double pastSearchTolerance = tarch::la::max(vertexH) / internal::ParticleSearchIdentifier::Precision;
   // const double dx_old = tarch::la::norm2(newParticleX - oldParticleX);
 
   // TODO: THIS IS VERY VERY WRONG
   // const double minDx = 1.;
 
 
-  // internal::ParticleIdentifier newIdentifier = _database.createParticleIdentifier(
+  // internal::ParticleSearchIdentifier newIdentifier = _database.createParticleSearchIdentifier(
   //   particleName,
   //   newParticleX,
   //   particleID,
   //   idSearchTolerance
   // );
 
-  // auto previousEntry = _database.getEntry(oldIdentifier, treeId, internal::ParticleIdentifier::getMinDx(), pastSearchTolerance);
+  // auto previousEntry = _database.getEntry(oldIdentifier, treeId, internal::ParticleSearchIdentifier::getMinDx(), pastSearchTolerance);
   // internal::Event previousEvent = previousEntry.first;
-  // internal::ParticleIdentifier previousIdentifier = previousEntry.second;
+  // internal::ParticleSearchIdentifier previousIdentifier = previousEntry.second;
 
 
 
@@ -874,7 +882,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   // std::cout << "\n\tNEW " << newIdentifier.particleX <<
   //   "\n\tPREV " << previousParticleX <<
   //   "\n\tDIFF " << newParticleX - previousParticleX <<
-  //   "\n\tTOLERANCE " << idSearchTolerance * internal::ParticleIdentifier::Precision <<
+  //   "\n\tTOLERANCE " << idSearchTolerance * internal::ParticleSearchIdentifier::Precision <<
   //   std::endl;
   //
   //   const double dx_since_last_entry = tarch::la::norm2(newParticleX - previousParticleX);
@@ -884,7 +892,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
     // First check: Are we even close enough for our set precision limit?
     // Second check: Do we want to trace this particle's motion?
     /* if (//not (newIdentifier.numericalEquals(previousIdentifier)) and */
-  /*       dx_since_last_entry >= idSearchTolerance * internal::ParticleIdentifier::Precision */
+  /*       dx_since_last_entry >= idSearchTolerance * internal::ParticleSearchIdentifier::Precision */
   /*       // not tarch::la::equals( */
   /*       //   newParticleX, */
   /*       //   previousEvent.previousParticleX, */
@@ -892,7 +900,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   /*     ) { */
   /*  */
   /*  */
-  /*       internal::ParticleIdentifier oldIdentifier = _database.createParticleIdentifier( */
+  /*       internal::ParticleSearchIdentifier oldIdentifier = _database.createParticleSearchIdentifier( */
   /*         particleName, */
   /*         oldParticleX, */
   /*         particleID, */
@@ -919,8 +927,8 @@ void toolbox::particles::assignmentchecks::moveParticle(
   /*             newIdentifier, */
   /*             internal::Database::AnyTree, */
   /*             0.5 * minDx , */
-  /*             // 0.5 * dx_since_last_entry / internal::ParticleIdentifier::Precision).first; */
-  /*             dx_since_last_entry / internal::ParticleIdentifier::Precision).first; */
+  /*             // 0.5 * dx_since_last_entry / internal::ParticleSearchIdentifier::Precision).first; */
+  /*             dx_since_last_entry / internal::ParticleSearchIdentifier::Precision).first; */
   /*       internal::Event existingNewEventOnAnyTree */
   /*         = _database.getEntry( */
   /*             newIdentifier, */
@@ -951,7 +959,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   /* - We trace position updates only if positions have changed significantly. */
   /*   Significantly here is formalised via */
   /*  */
-  /*       toolbox::particles::assignmentchecks::internal::ParticleIdentifier::Precision */
+  /*       toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier::Precision */
   /*  */
   /*   That is, if particles are closer together than this delta, we do not write */
   /*   logs into our database. This ensures that the database is not filled with */
@@ -975,7 +983,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   /*         _database.getNumberOfSnapshots(), */
   /*         treeId, */
   /*         trace, */
-  /*         internal::ParticleIdentifier::Precision, */
+  /*         internal::ParticleSearchIdentifier::Precision, */
   /*         _database.totalEntries(newIdentifier), */
   /*         _database.particleHistory(newIdentifier), */
   /*         errorMessage0 */
@@ -1018,7 +1026,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   /*         _database.getNumberOfSnapshots(), */
   /*         treeId, */
   /*         trace, */
-  /*         internal::ParticleIdentifier::Precision, */
+  /*         internal::ParticleSearchIdentifier::Precision, */
   /*         _database.totalEntries(newIdentifier), */
   /*         _database.particleHistory(newIdentifier), */
   /*         errorMessage1 */
@@ -1072,7 +1080,7 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
     /* treeId */
   /* ) */;
 
-  /* internal::ParticleIdentifier identifier = _database.createParticleIdentifier( */
+  /* internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier( */
   /*   particleName, */
   /*   particleX, */
   /*   particleID, */
@@ -1095,7 +1103,7 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
   /*     identifier, */
   /*     treeId, */
   /*     // identifier.positionTolerance, */
-  /*     // internal::ParticleIdentifier::getMinDx() , */
+  /*     // internal::ParticleSearchIdentifier::getMinDx() , */
   /*     0.1, */
   /*     identifier.positionTolerance).first; */
   /*  */
@@ -1162,7 +1170,7 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
   /*     << " to global sieve set on tree " << treeId */
   /* ); */
   /*  */
-  // internal::ParticleIdentifier identifier = _database.createParticleIdentifier(
+  // internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier(
   //   particleName,
   //   particleX,
   //   particleID,

@@ -96,7 +96,6 @@ std::string toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
          + ::toString(particleX) + ")";
 }
 
-
 bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator==(
   const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
 ) const {
