@@ -269,9 +269,9 @@ void testAddingParticleEvents(bool verbose=false){
 
   // is particle count correct?
   assertion3(eventDatabase.getNumberOfTracedParticles() == static_cast<int>(nparts),
+      "Wrong particle count in database",
       eventDatabase.getNumberOfTracedParticles(),
-      nparts,
-      "Wrong particle count in database"
+      nparts
       );
 
   // Is number of events per particle correct?
@@ -323,8 +323,12 @@ void testAddingParticleEvents(bool verbose=false){
  *
  * We're also adding events without them having any meaning. Proper
  * event tracing including consistency checks will also be done later.
+ *
+ * @param nsweeps How many mesh sweeps to simulate.
+ * @param nEventsToKeep How many events per particle the database should keep.
+ *  If < `nsweeps`, then events from the database will be purged.
  */
-void testAddingParticleMovingEvents(bool verbose=false){
+void testAddingParticleMovingEvents(int nsweeps = 100, int nEventsToKeep=1000, bool verbose=false){
 
   if (verbose) {
     std::cout <<
@@ -340,7 +344,7 @@ void testAddingParticleMovingEvents(bool verbose=false){
   ac::ensureDatabaseIsEmpty();
   // make sure we're not deleting anything just yet.
   // re-initialize with enough "space".
-  eventDatabase = ac::internal::Database(100);
+  eventDatabase = ac::internal::Database(nEventsToKeep);
 
   int particleID = 1;
   int treeId = 1;
@@ -364,7 +368,7 @@ void testAddingParticleMovingEvents(bool verbose=false){
 
 
   // run through sweeps and add move events.
-  for (int sweep = 0; sweep < 100; sweep++){
+  for (int sweep = 0; sweep < nsweeps; sweep++){
 
     std::string sweepname = "Sweep" + std::to_string(sweep);
     ac::startMeshSweep(sweepname);
@@ -397,22 +401,38 @@ void testAddingParticleMovingEvents(bool verbose=false){
   }
 
 
+  // is particle count correct?
+  assertion2(eventDatabase.getNumberOfTracedParticles() == 1,
+      "Wrong particle count in database, should be 1",
+      eventDatabase.getNumberOfTracedParticles()
+      );
+
+
+  // Did we record correct number of events?
+  ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+      "DummyParticle",
+      particleX,
+      particleID,
+      positionTolerance
+  );
+
+  int nEntries = eventDatabase.getTotalParticleEntries(identifier);
+  // reduce nEventsToKeep by 1 here, as we always substitute the past
+  // trajectory with the last event (and modify its trace to signify that)
+  assertion6(nEntries == (nsweeps % (nEventsToKeep - 1)),
+      "Wrong number of entries for particle ",
+      nEntries,
+      nsweeps,
+      nEventsToKeep,
+      nsweeps % (nEventsToKeep-1),
+      eventDatabase.particleHistory(identifier)
+      );
+
+
   if (verbose) {
-    // Print out particle histories
-
-    ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
-        "DummyParticle",
-        particleX,
-        particleID,
-        positionTolerance
-    );
-
+    // Print out particle history
     std::cout << eventDatabase.particleHistory(identifier);
   }
-
-
-  // std::cout << "DATABASE DUMP\n\n" << eventDatabase.toString();
-
 
   // Clean up after yourself.
   eventDatabase.reset();
@@ -430,7 +450,11 @@ int main(void) {
   // testTruthTableSearchAndIDKeys(verbose);
   // testAddingSweepsToDatabase(verbose);
   // testAddingParticleEvents(verbose);
-  testAddingParticleMovingEvents(true);
+
+  // test shifting particle identifier without trimming database
+  // testAddingParticleMovingEvents(100, 1000, verbose);
+  // test shifting particle identifier and trimming database
+  testAddingParticleMovingEvents(100, 16, false);
 
   std::cout << "Done. Bye!" <<  std::endl;
 

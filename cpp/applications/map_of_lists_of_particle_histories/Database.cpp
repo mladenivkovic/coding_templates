@@ -481,10 +481,9 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
 
   std::ostringstream msg;
   msg
-    << std::endl
-    << "============================" << std::endl
-    << identifier.toString() << std::endl
-    << "============================";
+    << "\n============================\n"
+    << identifier.toString()
+    << "\n============================\n";
 
   auto search = _data.find(identifier);
   if (search != _data.end()){
@@ -501,15 +500,17 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
 
       if (meshSweepInd != prevMeshSweepInd){
         // We're starting new sweep. Print header.
-        msg << std::endl << "sweep #" << meshSweepInd << " (" << _meshSweepData.at(meshSweepInd).getName() << "):\n\t";
+        msg << "\nsweep #" << meshSweepInd <<
+          " (" << _meshSweepData.at(meshSweepInd).getName() << "):";
       }
-        // next event during the same sweep
-        msg << "->" << ev->toString() << "\n\t";
+      msg << "\n\t->" << ev->toString();
 
       prevMeshSweepInd = meshSweepInd;
       ev++;
     }
   }
+
+  msg << "\n";
 
   return msg.str();
 }
@@ -548,6 +549,22 @@ std::cout <<
     ParticleEvents& history = search->second;
 
     // First: Do we need to downsize the history?
+    if (history.size() >= _maxParticleSnapshotsToKeepTrackOf){
+
+      Event last = history.back();
+
+      // TODO: Re-Insert
+      // logDebug(
+std::cout <<
+        "addEvent(...) " <<
+        "shortening history to " << last.toString()
+<< std::endl;
+      // );
+
+      last.trace = "substitute-for-whole-trajectory/" + last.trace;
+      history.clear();
+      history.push_back(last);
+    }
 
 
     // Second: Do we need to shift the identifier?
@@ -562,14 +579,14 @@ std::cout <<
 
     if (shift){
       // delete old entry in database and add the new one.
-    // TODO: Re-Insert
-    // logDebug(
+      // TODO: Re-Insert
+      // logDebug(
 std::cout <<
-      "addEvent(...) " <<
-      "shifting particle identifier from "
-        << key.particleX << " to " << identifier.particleX
+        "addEvent(...) " <<
+        "shifting particle identifier from "
+          << key.particleX << " to " << identifier.particleX
 << std::endl;
-    // );
+      // );
 
 
       ParticleEvents historyCopy = history;
