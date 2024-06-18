@@ -1,6 +1,7 @@
 #include "Database.h"
 #include "ParticleIdentifier.h"
 #include "Event.h"
+#include "VectorVectorOperations.h"
 
 #include <iterator>
 #include <limits>
@@ -545,6 +546,37 @@ std::cout <<
   } else {
 
     ParticleEvents& history = search->second;
+
+    // First: Do we need to downsize the history?
+
+
+    // Second: Do we need to shift the identifier?
+    ParticleIdentifier key = search->first;
+    // TODO MLADEN: use tarch::la::oneGreater here
+    bool shift = false;
+    for (int i = 0; i < Dimensions; i++){
+      if (std::abs(key.particleX(i) - identifier.particleX(i)) > ParticleSearchIdentifier::shiftTolerance * identifier.positionTolerance){
+        shift = true;
+      }
+    }
+
+    if (shift){
+      // delete old entry in database and add the new one.
+    // TODO: Re-Insert
+    // logDebug(
+std::cout <<
+      "addEvent(...) " <<
+      "shifting particle identifier from "
+        << key.particleX << " to " << identifier.particleX
+<< std::endl;
+    // );
+
+
+      ParticleEvents historyCopy = history;
+      _data.erase(key);
+      _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( identifier, historyCopy));
+    }
+
     history.push_back(event);
 
 std::cout <<
