@@ -1,5 +1,6 @@
 // This file is part of the Peano project. For conditions of distribution and
 // use, please see the copyright notice at www.peano-framework.org
+
 #pragma once
 
 #include "tarch/la/Vector.h"
@@ -41,6 +42,9 @@ namespace toolbox {
     namespace assignmentchecks {
       namespace internal {
 
+        struct ParticleIdentifier;
+        struct ParticleSearchIdentifier;
+
         struct ParticleIdentifier {
 
           // friend class Database;
@@ -52,12 +56,13 @@ namespace toolbox {
           std::string toString() const;
 
           bool numericalEquals(const ParticleIdentifier& rhs) const;
-          bool numericalSmaller(const ParticleIdentifier& rhs) const;
+          bool numericalSmaller(const ParticleIdentifier& rhs) const ;
           bool numericalSmallerWithTolerance(const ParticleIdentifier& rhs, const double tolerance) const;
 
-          bool operator<(const ParticleIdentifier& rhs);
-          bool operator==(const ParticleIdentifier& rhs);
-          bool operator!=(const ParticleIdentifier& rhs);
+          bool operator==(const ParticleIdentifier& rhs) const;
+          bool operator!=(const ParticleIdentifier& rhs) const;
+          bool operator<(const ParticleIdentifier& rhs) const;
+          bool operator<(const ParticleSearchIdentifier& rhs) const;
 
 
           ParticleIdentifier(
@@ -74,7 +79,7 @@ namespace toolbox {
 
           double positionTolerance;
 
-          bool operator<(const ParticleIdentifier& rhs);
+          bool operator<(const ParticleIdentifier& rhs) const;
 
           ParticleSearchIdentifier(
             const std::string&                           particleName__,
@@ -139,28 +144,6 @@ namespace toolbox {
 
 /* namespace { */
 /*  */
-bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator==(
-  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
-) {
-  return numericalEquals(rhs);
-}
-bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator!=(
-  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
-) {
-  return not numericalEquals(rhs);
-}
-bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator<(
-  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs){
-  return numericalSmaller(rhs);
-}
-
-
-bool toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier::operator<(
-  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs){
-  return numericalSmallerWithTolerance(rhs, positionTolerance);
-}
-
-
 
 /* bool operator==( */
 /*   const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& lhs, */

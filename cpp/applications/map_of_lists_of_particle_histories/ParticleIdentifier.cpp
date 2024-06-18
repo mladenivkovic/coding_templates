@@ -31,7 +31,7 @@ toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier::
 
 // double toolbox::particles::assignmentchecks::internal::ParticleIdentifier::Precision = 1e-2;
 
-const bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   numericalEquals(const ParticleIdentifier& rhs) const {
 
   return (particleName == rhs.particleName) and (particleID == rhs.particleID)
@@ -39,7 +39,7 @@ const bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
 }
 
 
-const bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   numericalSmaller(const ParticleIdentifier& rhs) const {
   if (*this == rhs) {
     return false;
@@ -66,7 +66,7 @@ const bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   return false;
 }
 
-const bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   numericalSmallerWithTolerance(const ParticleIdentifier& rhs, const double tolerance) const {
 
   if (particleName < rhs.particleName) {
@@ -94,6 +94,35 @@ std::string toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   toString() const {
   return "(" + particleName + ",ID=" + std::to_string(particleID) + ","
          + ::toString(particleX) + ")";
+}
+
+
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator==(
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
+) const {
+  return numericalEquals(rhs);
+}
+
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator!=(
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs
+) const {
+  return not numericalEquals(rhs);
+}
+
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs) const{
+  return numericalSmaller(rhs);
+}
+
+
+bool toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier::operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleIdentifier& rhs) const{
+  return numericalSmallerWithTolerance(rhs, positionTolerance);
+}
+
+bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::operator<(
+  const toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier& rhs) const {
+  return numericalSmallerWithTolerance(rhs, rhs.positionTolerance);
 }
 
 
