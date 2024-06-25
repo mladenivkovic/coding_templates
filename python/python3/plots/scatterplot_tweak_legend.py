@@ -74,7 +74,7 @@ ax1.set_xlim(0.00, 1.00)
 ax1.set_ylim(0.00, 1.00)
 lgnd1 = ax1.legend(loc=0, scatterpoints=1, prop=fontP)  # ,scatteryoffsets=[5,5,5,5])
 for l in range(3):  # range 3: exactly as many as there are labelled plots!
-    lgnd1.legendHandles[l]._sizes = [20]
+    lgnd1.legend_handles[l]._sizes = [20]
 
 
 print("Figure created")

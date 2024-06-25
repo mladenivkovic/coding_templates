@@ -133,3 +133,4 @@ ax1.scatter(xpart3, ypart3, fc="blue", s=3, marker=".")
 
 #  plt.show()
 plt.savefig("plot_imshow_and_scatter_plot.png", dpi=200)
+print("saved plot_imshow_and_scatter_plot.png")

@@ -16,8 +16,8 @@ nx = 500
 
 
 # make up some data
-data_positive_nonzero = np.zeros((nx, nx), dtype=np.float)
-data_no_rules = np.zeros((nx, nx), dtype=np.float)
+data_positive_nonzero = np.zeros((nx, nx), dtype=float)
+data_no_rules = np.zeros((nx, nx), dtype=float)
 
 dx = (uplim - lowlim) / (nx)
 

@@ -43,7 +43,7 @@ ax1 = fig.add_subplot(111, aspect="equal", clip_on=True)
 
 
 # setting colorbar and colormap:
-cm = plt.cm.get_cmap("RdYlBu")  # choose colormap
+cm = matplotlib.colormaps.get_cmap("RdYlBu")  # choose colormap
 # extract colormap's color list:
 
 # create bounds and discrete norm
@@ -61,8 +61,6 @@ sc = ax1.scatter(
     x,
     y,
     c=z,
-    vmin=zmin,
-    vmax=zmax,
     s=50,
     alpha=1,
     marker="o",

@@ -60,9 +60,7 @@ im = ax.imshow(
     cmap="inferno",
     origin="lower",
     extent=(0, 1, 0, 1),
-    norm=LogNorm(),
-    vmin=1e-10,
-    vmax=1,
+    norm=LogNorm( vmin=1e-10, vmax=1),
 )
 
 
@@ -85,8 +83,8 @@ if not os.path.isdir(newdir):
     os.mkdir(newdir)
 
 
-times = np.zeros((len(qual), len(opt) * len(prog)), dtype=np.float)
-fsizes = np.zeros((len(qual), len(opt) * len(prog)), dtype=np.float)
+times = np.zeros((len(qual), len(opt) * len(prog)), dtype=float)
+fsizes = np.zeros((len(qual), len(opt) * len(prog)), dtype=float)
 titles = ["" for i in range(times[0].shape[0])]
 
 # ================================================
@@ -123,10 +121,12 @@ for o in opt:
 
             figname += "quality-" + str(q).zfill(3) + ".jpg"
 
+
+
             start = time.time()
             #  print("saving figure ", figname)
             plt.savefig(
-                figname, form="jpg", optimize=o, progressive=p, quality=q, dpi=fig.dpi
+                    figname, dpi=fig.dpi, format="jpg", pil_kwargs={"optimize":o, "progressive":p, "quality":q},
             )
             stop = time.time()
 
