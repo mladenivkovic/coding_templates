@@ -60,7 +60,7 @@ im = ax.imshow(
     cmap="inferno",
     origin="lower",
     extent=(0, 1, 0, 1),
-    norm=LogNorm( vmin=1e-10, vmax=1),
+    norm=LogNorm(vmin=1e-10, vmax=1),
 )
 
 
@@ -121,12 +121,13 @@ for o in opt:
 
             figname += "quality-" + str(q).zfill(3) + ".jpg"
 
-
-
             start = time.time()
             #  print("saving figure ", figname)
             plt.savefig(
-                    figname, dpi=fig.dpi, format="jpg", pil_kwargs={"optimize":o, "progressive":p, "quality":q},
+                figname,
+                dpi=fig.dpi,
+                format="jpg",
+                pil_kwargs={"optimize": o, "progressive": p, "quality": q},
             )
             stop = time.time()
 
