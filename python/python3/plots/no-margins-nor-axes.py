@@ -49,7 +49,7 @@ im = ax.imshow(
     cmap="inferno",
     origin="lower",
     extent=(0, 1, 0, 1),
-    norm=LogNorm( vmin=7e-9, vmax=3e-3)
+    norm=LogNorm(vmin=7e-9, vmax=3e-3),
 )
 
 
