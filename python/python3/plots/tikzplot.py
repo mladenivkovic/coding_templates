@@ -10,7 +10,7 @@
 import matplotlib.pyplot as plt
 import random as r
 import numpy as np
-from matplotlib2tikz import save as tikz_save
+from tikzplotlib import save as tikz_save
 
 
 # -------------------

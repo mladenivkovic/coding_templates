@@ -53,6 +53,7 @@ print(
 
 
 plt.savefig("plot_mpl_scatter_density.png", dpi=200)
+print("saved plot_mpl_scatter_density.png")
 
 
 plt.close()

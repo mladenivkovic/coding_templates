@@ -17,7 +17,7 @@ uplim = 1
 nx = 20
 
 
-data = np.zeros((nx, nx), dtype=np.float)
+data = np.zeros((nx, nx), dtype=float)
 dx = (uplim - lowlim) / (nx)
 
 # get radially symmetric data

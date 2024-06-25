@@ -49,9 +49,7 @@ im = ax.imshow(
     cmap="inferno",
     origin="lower",
     extent=(0, 1, 0, 1),
-    norm=LogNorm(),
-    vmin=7e-9,
-    vmax=3e-3,
+    norm=LogNorm( vmin=7e-9, vmax=3e-3)
 )
 
 
@@ -67,4 +65,4 @@ fig.tight_layout(pad=0.0)
 
 figname = "plot_no-margins-nor-axes.png"
 print("saving figure ", figname)
-plt.savefig(figname, form="png", dpi=100)
+plt.savefig(figname, dpi=100)

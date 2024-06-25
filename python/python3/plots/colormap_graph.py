@@ -13,7 +13,7 @@ import numpy as np
 
 def grayify_cmap(cmap):
     """Return a grayscale version of the colormap"""
-    cmap = plt.cm.get_cmap(cmap)
+    cmap = matplotlib.colormaps.get_cmap(cmap)
     colors = cmap(np.arange(cmap.N))
 
     # convert RGBA to perceived greyscale luminance

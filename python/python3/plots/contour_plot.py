@@ -16,7 +16,7 @@ nx = 200
 
 
 # get data
-data = np.zeros((nx, nx), dtype=np.float)
+data = np.zeros((nx, nx), dtype=float)
 dx = (uplim - lowlim) / (nx)
 
 for i in range(nx):

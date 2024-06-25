@@ -110,8 +110,6 @@ sc2 = ax2.scatter(
     x,
     y,
     c=zdis,
-    vmin=zmind,
-    vmax=zmaxd + 1,
     s=50,
     alpha=1,
     marker="o",

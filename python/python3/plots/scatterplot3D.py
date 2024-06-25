@@ -148,7 +148,7 @@ if __name__ == "__main__":
 
         lgnd = ax.legend(loc=0, scatterpoints=1, prop=fontP, framealpha=0.5)
         for l in range(3):
-            lgnd.legendHandles[l]._sizes = [20]
+            lgnd.legend_handles[l]._sizes = [20]
 
     fig.tight_layout()
     plt.subplots_adjust(left=0.01, right=0.99, top=0.9, bottom=0.02, wspace=0.05)
