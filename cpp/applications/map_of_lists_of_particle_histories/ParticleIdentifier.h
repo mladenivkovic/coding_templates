@@ -47,8 +47,6 @@ namespace toolbox {
 
         struct ParticleIdentifier {
 
-          // friend class Database;
-
           // don't make these functions virtual: I need to be able to pass
           // &ParticleSearchIdentifier and have it be treated like
           // &ParticleIdentifier in function arguments.
@@ -78,8 +76,6 @@ namespace toolbox {
 
 
         struct ParticleSearchIdentifier: ParticleIdentifier {
-
-          // friend class Database;
 
           static constexpr double shiftTolerance = 0.3;
 

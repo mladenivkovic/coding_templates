@@ -2,7 +2,14 @@
 // use, please see the copyright notice at www.peano-framework.org
 #pragma once
 
+// TODO: put back in
+/* #include "peano4/datamanagement/CellMarker.h" */
+/* #include "peano4/utils/Globals.h" */
+
+// TODO: remove again
 #include "tarch/la/Vector.h"
+
+// #include <concepts>
 
 namespace toolbox {
   namespace particles {
