@@ -53,7 +53,7 @@ LIBFLAGS=
 # VPATH=$(IDIR):$(SRCDIR)
 
 
-OBJECTS = TestParticle.o ScalarOperations.o Event.o ParticleIdentifier.o MeshSweepData.o Database.o
+OBJECTS = TestParticle.o ScalarOperations.o Event.o ParticleIdentifier.o MeshSweepData.o Database.o TestHelpers.o
 
 
 

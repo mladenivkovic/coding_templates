@@ -9,6 +9,8 @@
 
 #include "Database.h"
 
+#include "TestHelpers.h"
+
 
 /**
  * Test whether ParticleIdentifier and ParticleSearchIdentifier
@@ -36,7 +38,6 @@ void testTruthTableSearchAndIDKeys(bool verbose=false){
   // create a key and assign it a value in the map
   ac::internal::ParticleIdentifier a = ac::internal::ParticleIdentifier("DummyParticle", particleAX, 1);
   ac::internal::ParticleIdentifier b = ac::internal::ParticleIdentifier("DummyParticle", particleBX, 2);
-
 
   // std::cout << "a < b:" << (a < b) << "(1) a==b:" << (a == b) <<
   //   "(0) a==a:" <<  (a == a) << "(1) b==b:" << (b == b) << "(1)" << std::endl;
@@ -348,7 +349,6 @@ void testAddingParticleMovingEvents(int nsweeps = 100, int nEventsToKeep=1000, b
 
   int particleID = 1;
   int treeId = 1;
-  // bool isLocal = true;
   double positionTolerance = 1.;
   double dt = 1.;
 
@@ -446,15 +446,20 @@ void testAddingParticleMovingEvents(int nsweeps = 100, int nEventsToKeep=1000, b
 
 int main(void) {
 
-  bool verbose = true;
-  // testTruthTableSearchAndIDKeys(verbose);
-  // testAddingSweepsToDatabase(verbose);
-  // testAddingParticleEvents(verbose);
+  bool verbose = false;
+  testTruthTableSearchAndIDKeys(verbose);
+  testAddingSweepsToDatabase(verbose);
+  testAddingParticleEvents(verbose);
 
   // test shifting particle identifier without trimming database
-  // testAddingParticleMovingEvents(100, 1000, verbose);
+  testAddingParticleMovingEvents(100, 1000, verbose);
   // test shifting particle identifier and trimming database
-  testAddingParticleMovingEvents(100, 16, false);
+  testAddingParticleMovingEvents(100, 16, verbose);
+
+
+  toolbox::particles::assignmentchecks::tests::TestHelpers runner = toolbox::particles::assignmentchecks::tests::TestHelpers();
+  runner.testParticleWalkSameTreeLevel();
+
 
   std::cout << "Done. Bye!" <<  std::endl;
 

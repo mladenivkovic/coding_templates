@@ -268,7 +268,7 @@ struct tarch::la::Vector {
 #include "tarch/la/ScalarOperations.h"
 #include "tarch/la/Vector.cpph"
 #include "tarch/la/VectorOperations.h"
-/* #include "tarch/la/VectorScalarOperations.h" */
+#include "tarch/la/VectorScalarOperations.h"
 #include "tarch/la/VectorVectorOperations.h"
 /* #include "tarch/la/VectorSlice.h" */
 

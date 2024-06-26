@@ -19,14 +19,14 @@ namespace toolbox {
     namespace assignmentchecks {
       namespace internal {
 
+        using ParticleEvents = std::vector<Event>;
+
         class Database {
         private:
           /* tarch::multicore::MultiReadSingleWriteSemaphore _semaphore; */
 
           std::vector<MeshSweepData> _meshSweepData;
           int _currentMeshSweepIndex;
-
-          using ParticleEvents = std::vector<Event>;
 
           // tell the map to use std::less<> as comparator instead of the
           // default std::less<key>. std::less<> invokes the `<` operator.
@@ -46,30 +46,6 @@ namespace toolbox {
            * garbage collection on the history.
            */
           size_t _maxParticleSnapshotsToKeepTrackOf;
-
-          /**
-           * Remove the particle trajectory that ends up in lastIdentifier
-           *
-           * This is typically invoked by addEvent(). It is not thread-safe,
-           * i.e. does not acquire a write lock.
-           */
-          void removeTrajectory(
-            const ParticleSearchIdentifier& lastIdentifier,
-            int                       spacetreeId,
-            int firstNRecentEntriesToSkip = 0
-          );
-
-          /**
-           * Not thread-safe
-           *
-           * Run through the individual snapshots and remove those trajectory
-           * entries which are now empty. If a whole snapshot becomes empty, we
-           * delete it but if and only if it is not the very last one. If we
-           * deleted the very last one, we'd confuse the timeline of some
-           * particles as the ordering of the snapshots carries temporal
-           * causalities.
-           */
-          void removeEmptyDatabaseSnapshots();
 
         public:
           static constexpr int SearchWholeDatabase                    = 0;
@@ -91,10 +67,6 @@ namespace toolbox {
            * position and name. If there's none or the last logged entry for
            * this particle is an erase event, then the routine returns an
            * invalid event.
-           *
-           * We expect that identifier has been constructed through
-           * createParticleIdentifier() to accommodate floating-point
-           * inaccuracies.
            *
            * Cannot be const as we have a semaphore to be thread-safe.
            *
@@ -129,13 +101,14 @@ namespace toolbox {
            *   However, if the particle has moved, the result identifier
            *   will identify the spatial position corresponding to the
            *   returned event.
+           *
+           *   --------------------
+           *   Will alloc a new ParticleEvents and add a single
+           *   event of type NotFound if there is no history.
+           *   Make sure to delete that after you use it.
            */
-          std::pair<Event, ParticleIdentifier> getEntry(
-            const ParticleSearchIdentifier& identifier,
-            const int                       spacetreeId,
-            const double                    idSearchTolerance = 1.,
-            const double                    pastSearchTolerance = 1.,
-            int                             firstNRecentSweepsToSkip = SearchWholeDatabase
+          ParticleEvents& getParticleHistory(
+            const ParticleSearchIdentifier& identifier
           );
 
           /**
@@ -218,8 +191,9 @@ namespace toolbox {
            * ------------------------------------------
            *  - will refresh identifier if moved past tolerance
            *  - will delete events if there are too many
+           *  - returns ref to particleEvents
            */
-          void addEvent(ParticleSearchIdentifier identifier, Event& event);
+          ParticleEvents& addEvent(ParticleSearchIdentifier identifier, Event& event);
 
           /**
            * Dump the whole database
@@ -227,33 +201,6 @@ namespace toolbox {
            * Cannot be const as we have a semaphore to be thread-safe.
            */
           std::string toString();
-
-          /**
-           * Eliminate existing particles, so only those that are "forgotten"
-           * remain
-           *
-           * This routine runs through the particles for which we have
-           * recorded events in the last snapshot. If the event
-           *
-           * - affects a remote particle;
-           * - is a move;
-           * - is an assignment to vertex,
-           *
-           * we know that it cannot eliminate existing particles. So we
-           * remote their trajectories via removeTrajectory(). If the
-           * last snapshot is empty, we remove it completely.
-           *
-           * After a sweep through the last snapshot, we run through the
-           * algorithm again, maybe eliminating further data (if we got
-           * rid of a snapshot).
-           *
-           * Once this routine has terminated, we get the stuff in the
-           * database for particles that seem to have been left over. We also
-           * get a lot of historic data, but if we plot the database and
-           * study solely the last snapshot, we typically get a good idea of
-           * which particles got lost.
-           */
-          void eliminateExistingParticles();
 
           /**
            * Delete all entries in the database and reset it to the initial
@@ -284,6 +231,15 @@ namespace toolbox {
            */
           std::string sweepHistory() const;
           };
+
+          /**
+           * get the previous event from a particle history.
+           *
+           * nFirstEventsToSkip: skip this many events. Useful if you've just
+           * added something to the database using addEvent and are trying to
+           * re-use the history it returns.
+           */
+          Event getPreviousEvent(ParticleEvents& particleHistory, int spacetreeId, size_t nFirstEventsToSkip = 0);
 
         } // namespace internal
 
@@ -353,23 +309,6 @@ namespace toolbox {
         int                                          treeId,
         const std::string&                           trace
       );
-
-      /**
-       * Eliminate all "live" particles from database
-       *
-       * This routine can be used to find "lost" particles. It runs through the
-       * database and eliminates all those particles which do still exist.
-       *
-       * This routine is not called routinely, as it can be very expensive.
-       *
-       * @param numberOfParticles Specify the number of particles you are
-       *   searching for or pass in a negative number to indicate that all
-       *   particles still have to be in the domain.
-       *
-       * @param eliminateExistingParticlesFromDatabase This operation prunes
-       *   the database and speeds up the validation process significantly.
-       */
-      void eliminateExistingParticles();
 
       /**
        * Assign a particle to a vertex
