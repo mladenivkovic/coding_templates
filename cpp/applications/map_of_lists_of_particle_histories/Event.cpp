@@ -24,6 +24,27 @@ toolbox::particles::assignmentchecks::internal::Event::Event(
   const tarch::la::Vector<Dimensions, double>& particleX_,
   const tarch::la::Vector<Dimensions, double>& vertexH_,
   int                                          treeId_,
+  const std::string&                           trace_,
+  const int                                    meshSweepIndex_
+):
+  type(type_),
+  isLocal(isLocal_),
+  vertexX(vertexX_),
+  previousParticleX(particleX_),
+  vertexH(vertexH_),
+  treeId(treeId_),
+  trace(trace_),
+  meshSweepIndex(meshSweepIndex_){}
+
+
+
+toolbox::particles::assignmentchecks::internal::Event::Event(
+  Type                                         type_,
+  bool                                         isLocal_,
+  const tarch::la::Vector<Dimensions, double>& vertexX_,
+  const tarch::la::Vector<Dimensions, double>& particleX_,
+  const tarch::la::Vector<Dimensions, double>& vertexH_,
+  int                                          treeId_,
   const std::string&                           trace_
 ):
   type(type_),
@@ -109,6 +130,12 @@ std::string toolbox::particles::assignmentchecks::internal::Event::toString(
   case Type::MoveWhileAssociatedToVertex:
     msg
       << "moved-while-associated-to-vertex"
+      << "," << previousParticleX << "->x_new,tree=" << treeId
+      << ",trace=" << trace;
+    break;
+  case Type::ConsecutiveMoveWhileAssociatedToVertex:
+    msg
+      << "consecutive-moved-while-associated-to-vertex"
       << "," << previousParticleX << "->x_new,tree=" << treeId
       << ",trace=" << trace;
     break;

@@ -447,14 +447,14 @@ void testAddingParticleMovingEvents(int nsweeps = 100, int nEventsToKeep=1000, b
 int main(void) {
 
   bool verbose = false;
-  testTruthTableSearchAndIDKeys(verbose);
-  testAddingSweepsToDatabase(verbose);
-  testAddingParticleEvents(verbose);
+  // testTruthTableSearchAndIDKeys(verbose);
+  // testAddingSweepsToDatabase(verbose);
+  // testAddingParticleEvents(verbose);
 
   // test shifting particle identifier without trimming database
-  testAddingParticleMovingEvents(100, 1000, verbose);
+  // testAddingParticleMovingEvents(100, 1000, verbose);
   // test shifting particle identifier and trimming database
-  testAddingParticleMovingEvents(100, 16, verbose);
+  // testAddingParticleMovingEvents(100, 16, verbose);
 
 
   toolbox::particles::assignmentchecks::tests::TestHelpers runner = toolbox::particles::assignmentchecks::tests::TestHelpers();

@@ -24,7 +24,8 @@ namespace toolbox {
             AssignToVertex,
             Erase,
             DetachFromVertex,
-            MoveWhileAssociatedToVertex
+            MoveWhileAssociatedToVertex,
+            ConsecutiveMoveWhileAssociatedToVertex
           };
 
           Type                                  type;
@@ -35,6 +36,21 @@ namespace toolbox {
           int                                   treeId;
           std::string                           trace;
           int  meshSweepIndex;
+
+          /**
+           * Construct an event where you can specify all the fields.
+           */
+          Event(
+            Type                                         type_,
+            bool                                         isLocal_,
+            const tarch::la::Vector<Dimensions, double>& vertexX_,
+            const tarch::la::Vector<Dimensions, double>& particleX,
+            const tarch::la::Vector<Dimensions, double>& vertexH_,
+            int                                          treeId_,
+            const std::string&                           trace_,
+            int                                          meshSweepIndex_
+          );
+
 
           /**
            * Construct an event which identifies a vertex assignment or the

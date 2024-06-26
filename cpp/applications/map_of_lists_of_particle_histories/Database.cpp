@@ -270,11 +270,11 @@ toolbox::particles::assignmentchecks::internal::ParticleEvents& toolbox::particl
     _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( identifier, newEventHistory ) );
     // TODO: Re-Insert
     // logDebug(
-// std::cout <<
-//       "addEvent(...) " <<
-//       "add new particle history thread for "
-//         << identifier.toString()
-// << std::endl;
+std::cout <<
+      "addEvent(...) " <<
+      "add new particle history thread for "
+        << identifier.toString()
+<< std::endl;
     // );
     return _data.at(identifier);
 
@@ -289,10 +289,10 @@ toolbox::particles::assignmentchecks::internal::ParticleEvents& toolbox::particl
 
       // TODO: Re-Insert
       // logDebug(
-// std::cout <<
-//         "addEvent(...) " <<
-//         "shortening history to " << last.toString()
-// << std::endl;
+std::cout <<
+        "addEvent(...) " <<
+        "shortening history to " << last.toString()
+<< std::endl;
       // );
 
       last.trace = "substitute-for-whole-trajectory/" + last.trace;
@@ -317,11 +317,11 @@ toolbox::particles::assignmentchecks::internal::ParticleEvents& toolbox::particl
       // delete old entry in database and add the new one.
       // TODO: Re-Insert
       // logDebug(
-// std::cout <<
-//         "addEvent(...) " <<
-//         "shifting particle identifier from "
-//           << key.particleX << " to " << identifier.particleX
-// << std::endl;
+std::cout <<
+        "addEvent(...) " <<
+        "shifting particle identifier from "
+          << key.particleX << " to " << identifier.particleX
+<< std::endl;
       // );
 
       ParticleEvents historyCopy = history;
@@ -428,6 +428,7 @@ void toolbox::particles::assignmentchecks::eraseParticle(
 }
 
 
+// checked
 void toolbox::particles::assignmentchecks::assignParticleToVertex(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& particleX,
@@ -474,14 +475,11 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
     trace
   );
 
-  if (particleIsNew and (not checkNewParticles)){
-    _database.addEvent(identifier, event);
-  }
+  ParticleEvents& history = _database.addEvent(identifier, event);
 
-  else {
-    ParticleEvents& history = _database.getParticleHistory(identifier);
-    Event previousEvent = getPreviousEvent(history, treeId);
-    _database.addEvent(identifier, event);
+  if (not (particleIsNew and (not checkNewParticles))){
+    // skip the newly added event.
+    Event previousEvent = getPreviousEvent(history, treeId, 1);
 
     const bool isDropping = previousEvent.type == internal::Event::Type::DetachFromVertex
                             and tarch::la::allGreater(previousEvent.vertexH, vertexH);
@@ -537,7 +535,7 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
   // logTraceOut("assignParticleToVertex(...)");
 }
 
-
+// checked
 void toolbox::particles::assignmentchecks::moveParticle(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& oldParticleX,
@@ -549,8 +547,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   const std::string&                           trace
 ) {
 
-  assert(false);
-    // TODO: Re-Insert
+  // TODO: Re-Insert
   // logTraceInWith3Arguments(
   //   "moveParticle(...)",
   //   particleName,
@@ -558,219 +555,143 @@ void toolbox::particles::assignmentchecks::moveParticle(
   //   newParticleX
   // );
 
-  // we use this to correctly ID a particle
-  // const double idSearchTolerance = tarch::la::max(vertexH);
-  // we use this as leeway to find a particle in the past.
-  // Divide py ::Precision because it will be multiplied again in numericalEquals().
-  // We want to be able to search the entire vertex size through the past.
-  // const double pastSearchTolerance = tarch::la::max(vertexH) / internal::ParticleSearchIdentifier::Precision;
-  // const double dx_old = tarch::la::norm2(newParticleX - oldParticleX);
+  using namespace internal;
 
-  // TODO: THIS IS VERY VERY WRONG
-  // const double minDx = 1.;
+  // use old particle position to find history.
+  ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
+      particleName,
+      newParticleX,
+      particleID,
+      tarch::la::max(vertexH)
+  );
 
+std::cout << "IN MOVE\n" << _database.particleHistory(identifier) << std::endl;
 
-  // internal::ParticleSearchIdentifier newIdentifier = _database.createParticleSearchIdentifier(
-  //   particleName,
-  //   newParticleX,
-  //   particleID,
-  //   idSearchTolerance
-  // );
+  ParticleEvents& history = _database.getParticleHistory(identifier);
+  // We assume that we can't be moving a particle without having done anything else first.
+  assert(history.size() > 0 );
 
-  // auto previousEntry = _database.getEntry(oldIdentifier, treeId, internal::ParticleSearchIdentifier::getMinDx(), pastSearchTolerance);
-  // internal::Event previousEvent = previousEntry.first;
-  // internal::ParticleSearchIdentifier previousIdentifier = previousEntry.second;
+  Event previousEvent = getPreviousEvent(history, treeId);
+  Event anyPreviousEvent = getPreviousEvent(history, Database::AnyTree);
 
+  // We need to have at least 1 event somewhere.
+  // Even if the database had been trimmed, at least 1 event remains. But the remaining
+  // event may have been on a different tree.
+  assertion(anyPreviousEvent.type != internal::Event::Type::NotFound);
 
+  // We must still be on the same vertex, or something is wrong.
+  assertion3(anyPreviousEvent.vertexH == vertexH,
+      "Vertices not the same",
+      anyPreviousEvent.vertexH,
+      vertexH
+      );
+  assertion3(anyPreviousEvent.vertexX == vertexX,
+      "Vertices not the same",
+      anyPreviousEvent.vertexX,
+      vertexX
+      );
 
-  // Find the last recorded particle position. Since we're moving particles here,
-  // they must've been assigned to a vertex in the past, so at least 1 event must exist.
-  // tarch::la::Vector<Dimensions, double> previousParticleX =
-  //   _database.getPreviousParticlePosition(newIdentifier, treeId, minDx, pastSearchTolerance);
+  if (previousEvent.type != Event::Type::NotFound){
+    // This must be on the same tree then.
+    // We can apply stricter checks.
 
-  // assertion(previousEvent.type != internal::Event::Type::NotFound);
-  // assertion(
-  //     previousEvent.type == internal::Event::Type::AssignToVertex
-  // );
+    // TODO: Check sieve set sieve set assignment
+    assertion(
+        previousEvent.type == Event::Type::AssignToVertex or
+        previousEvent.type == Event::Type::MoveWhileAssociatedToVertex or
+        previousEvent.type == Event::Type::ConsecutiveMoveWhileAssociatedToVertex
+    );
 
+    // We must still be on the same vertex, or something is wrong.
+    assertion3(previousEvent.vertexH == vertexH,
+        "Vertices not the same",
+        previousEvent.vertexH,
+        vertexH
+        );
+    assertion3(previousEvent.vertexX == vertexX,
+        "Vertices not the same",
+        previousEvent.vertexX,
+        vertexX
+        );
+    // TODO: this should be redundant, Remove later.
+    assertion3(previousEvent.treeId == treeId,
+        "Tree not the same",
+        previousEvent.treeId,
+        treeId
+        );
+  }
 
+  if ((previousEvent.type == Event::Type::MoveWhileAssociatedToVertex) or (previousEvent.type == Event::Type::ConsecutiveMoveWhileAssociatedToVertex)){
 
-  // std::cout << "\n\tNEW " << newIdentifier.particleX <<
-  //   "\n\tPREV " << previousParticleX <<
-  //   "\n\tDIFF " << newParticleX - previousParticleX <<
-  //   "\n\tTOLERANCE " << idSearchTolerance * internal::ParticleSearchIdentifier::Precision <<
-  //   std::endl;
-  //
-  //   const double dx_since_last_entry = tarch::la::norm2(newParticleX - previousParticleX);
-  //
+    Event newEvent = Event(Event::Type::NotFound);
 
+    if (previousEvent.type == Event::Type::MoveWhileAssociatedToVertex) {
+      // we turn it into a ConsecutiveMoveWhileAssociatedToVertex and
+      // store the current particle position.
+      std::ostringstream pastTrace;
+      pastTrace << "Consecutive Move starting at x=[" <<
+        // TODO: Add this back in
+        // previousEvent.previousParticleX.toString() << "] at sweep " <<
+        _database.getMeshSweepData().at(previousEvent.meshSweepIndex).getName() <<
+        " | old trace: " << previousEvent.trace;
+        " | new trace: " + trace;
 
-    // First check: Are we even close enough for our set precision limit?
-    // Second check: Do we want to trace this particle's motion?
-    /* if (//not (newIdentifier.numericalEquals(previousIdentifier)) and */
-  /*       dx_since_last_entry >= idSearchTolerance * internal::ParticleSearchIdentifier::Precision */
-  /*       // not tarch::la::equals( */
-  /*       //   newParticleX, */
-  /*       //   previousEvent.previousParticleX, */
-  /*       //   idSearchTolerance) */
-  /*     ) { */
-  /*  */
-  /*  */
-  /*       internal::ParticleSearchIdentifier oldIdentifier = _database.createParticleSearchIdentifier( */
-  /*         particleName, */
-  /*         oldParticleX, */
-  /*         particleID, */
-  /*         0.5 * minDx, */
-  /*         0.5 * dx_since_last_entry */
-  /*         // idSearchTolerance */
-  /*         // pastSearchTolerance */
-  /*       ); */
-  /*  */
-  /*  */
-  /* std::cout << "\n\n HELLO THEREEEEEEEEEEEEEEEEEE \n\n"; */
-  /*  */
-  /*       internal::Event newEvent( */
-  /*         internal::Event::Type::MoveWhileAssociatedToVertex, */
-  /*         vertexX, */
-  /*         newIdentifier.particleX, */
-  /*         vertexH, */
-  /*         treeId, */
-  /*         trace */
-  /*       ); */
-  /*  */
-  /*       internal::Event previousEvent */
-  /*         = _database.getEntry( */
-  /*             newIdentifier, */
-  /*             internal::Database::AnyTree, */
-  /*             0.5 * minDx , */
-  /*             // 0.5 * dx_since_last_entry / internal::ParticleSearchIdentifier::Precision).first; */
-  /*             dx_since_last_entry / internal::ParticleSearchIdentifier::Precision).first; */
-  /*       internal::Event existingNewEventOnAnyTree */
-  /*         = _database.getEntry( */
-  /*             newIdentifier, */
-  /*             internal::Database::AnyTree, */
-  /*             minDx , */
-  /*             minDx).first; */
-  /*       internal::Event existingNewEventOnLocalTree */
-  /*         = _database.getEntry( */
-  /*             newIdentifier, */
-  /*             treeId, */
-  /*             minDx , */
-  /*             minDx).first; */
-  /*  */
-  /*       const std::string errorMessage0 = R"( */
-  /* ============= */
-  /* Explanation */
-  /* ============= */
-  /* The tracer has been informed of a particle movement. When it tried to bookmark */
-  /* the particle with its new position, it found out that there is already a */
-  /* particle registered at this place. It seems that a particle overlaps with */
-  /* another one. */
-  /*  */
-  /* This might mean that there is actually a particle here, but could also result */
-  /* from two other situations: */
-  /*  */
-  /* - We trace position updates one after the other. If particle A takes the */
-  /*   position of a particle B, we might simply not have updated B yet. */
-  /* - We trace position updates only if positions have changed significantly. */
-  /*   Significantly here is formalised via */
-  /*  */
-  /*       toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier::Precision */
-  /*  */
-  /*   That is, if particles are closer together than this delta, we do not write */
-  /*   logs into our database. This ensures that the database is not filled with */
-  /*   tiny update entries. */
-  /*  */
-  /* As the tracing cannot handle either situation, we are left with two options. */
-  /* We can dramatically reduce Precision at the cost of a higher overhead. */
-  /* Alternatively, it might be appropriate to check the time step sizes */
-  /* employed: If particles move too fast, the probability that A ends up at a */
-  /* position just previously held by B (which is not yet updated) is higher. */
-  /*  */
-  /* )"; */
-  /*       assertion13( */
-  /*         existingNewEventOnLocalTree.type == internal::Event::Type::NotFound, */
-  /*         newIdentifier.toString(), */
-  /*         oldIdentifier.toString(), */
-  /*         previousEvent.toString(), */
-  /*         newEvent.toString(), */
-  /*         existingNewEventOnLocalTree.toString(), */
-  /*         existingNewEventOnAnyTree.toString(), */
-  /*         _database.getNumberOfSnapshots(), */
-  /*         treeId, */
-  /*         trace, */
-  /*         internal::ParticleSearchIdentifier::Precision, */
-  /*         _database.totalEntries(newIdentifier), */
-  /*         _database.particleHistory(newIdentifier), */
-  /*         errorMessage0 */
-  /*       ); */
-  /*       const std::string errorMessage1 = R"( */
-  /* ============= */
-  /* Explanation */
-  /* ============= */
-  /* The tracer has been informed of a particle movement. When it tried to bookmark */
-  /* the particle with its new position, it found out that there is already a */
-  /* particle registered at this place. That is fine, as particles might be held */
-  /* redundantly on different trees - either as halo copies or as they sit exactly */
-  /* on the face between two subdomains. */
-  /*  */
-  /* If that happens, they however have to be tied to the same vertex in the domain */
-  /* although the vertex might be replicated on a different tree. Alternatively, the */
-  /* other rank might already have moved it and come to the conclusion that it has */
-  /* to be assigned to the sieve set. The present tree is not there yet, i.e. is */
-  /* just about to move it, but will eventually also raise its particle to the */
-  /* sieve set. */
-  /* )"; */
-  /*       assertion13( */
-  /*         existingNewEventOnAnyTree.type == internal::Event::Type::NotFound */
-  /*         or */
-  /*         existingNewEventOnAnyTree.type == internal::Event::Type::AssignToSieveSet */
-  /*         or */
-  /*         ( */
-  /*           existingNewEventOnAnyTree.type == internal::Event::Type::AssignToVertex */
-  /*           and */
-  /*           existingNewEventOnAnyTree.vertexX == previousEvent.vertexX */
-  /*           and */
-  /*           existingNewEventOnAnyTree.vertexH == previousEvent.vertexH */
-  /*         ), */
-  /*         oldIdentifier.toString(), */
-  /*         newIdentifier.toString(), */
-  /*         previousEvent.toString(), */
-  /*         newEvent.toString(), */
-  /*         existingNewEventOnLocalTree.toString(), */
-  /*         existingNewEventOnAnyTree.toString(), */
-  /*         _database.getNumberOfSnapshots(), */
-  /*         treeId, */
-  /*         trace, */
-  /*         internal::ParticleSearchIdentifier::Precision, */
-  /*         _database.totalEntries(newIdentifier), */
-  /*         _database.particleHistory(newIdentifier), */
-  /*         errorMessage1 */
-  /*       ); */
-  /*       assertion12( */
-  /*         previousEvent.type == internal::Event::Type::AssignToVertex, */
-  /*         // or previousEvent.type == internal::Event::Type::MoveWhileAssociatedToVertex, */
-  /*         oldIdentifier.toString(), */
-  /*         previousEvent.toString(), */
-  /*         newIdentifier.toString(), */
-  /*         newEvent.toString(), */
-  /*         _database.getNumberOfSnapshots(), */
-  /*         treeId, */
-  /*         trace, */
-  /*         _database.totalEntries(oldIdentifier), */
-  /*         _database.particleHistory(oldIdentifier), */
-  /*         _database.totalEntries(newIdentifier), */
-  /*         _database.particleHistory(newIdentifier), */
-  /*         _database.toString() */
-  /*       ); */
-  /*  */
-  /* std::cout << "     ADDING MOVE EVENT" << std::endl; */
-  /*       _database.addEvent(newIdentifier, newEvent); */
-  /*     } */
-  /*   // } */
-  /*  */
-    // TODO: Re-Insert
-    // logTraceOut("moveParticle(...)");
+      // Create new event.
+      newEvent = Event(
+          Event::Type::ConsecutiveMoveWhileAssociatedToVertex,
+          previousEvent.isLocal,
+          vertexX,
+          oldParticleX,
+          vertexH,
+          treeId,
+          pastTrace.str(),
+          -1 // will be modified in _database.addEvent
+          );
+    } else {
+      newEvent = Event(
+          Event::Type::ConsecutiveMoveWhileAssociatedToVertex,
+          previousEvent.isLocal,
+          vertexX,
+          previousEvent.previousParticleX,
+          vertexH,
+          treeId,
+          previousEvent.trace,
+          -1 // will be modified in _database.addEvent
+          );
+    }
+
+    // In either case, delete old event from history and then re-add it so that
+    // all the mechanisms in addEvent (shortening history, modifying
+    // identifier coordinates) trigger.
+    for (auto it = history.begin(); it != history.end(); it++){
+      if ((it->meshSweepIndex == previousEvent.meshSweepIndex)
+        and (it->type == previousEvent.type)
+          and (it->treeId == previousEvent.treeId)
+          and (it->isLocal == previousEvent.isLocal)){
+        history.erase(it);
+        break;
+      }
+    }
+
+    // Add new event now.
+    _database.addEvent(identifier, newEvent);
+  }
+  else {
+    // Add a new move event.
+    Event newEvent = Event(
+        Event::Type::MoveWhileAssociatedToVertex,
+        vertexX,
+        oldParticleX,
+        vertexH,
+        treeId,
+        trace
+        );
+
+    _database.addEvent(identifier, newEvent);
+  }
+
+  // TODO: Re-Insert
+  // logTraceOut("moveParticle(...)");
 }
 
 
@@ -785,7 +706,6 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
   const std::string&                           trace
 ) {
 
-  assert(false);
   // TODO: Re-Insert
   /* logTraceInWith6Arguments( */
     /* "detachParticleFromVertex(...)", */
@@ -795,68 +715,62 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
     /* vertexX, */
     /* vertexH, */
     /* treeId */
-  /* ) */;
+  // );
 
-  /* internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier( */
-  /*   particleName, */
-  /*   particleX, */
-  /*   particleID, */
-  /*   tarch::la::max(vertexH) */
-  /* ); */
-  /* // TODO MLADEN: CHECK *3 above */
-  /* internal::Event event{ */
-  /*   internal::Event::Type::DetachFromVertex, */
-  /*   isLocal, */
-  /*   vertexX, */
-  /*   particleX, */
-  /*   vertexH, */
-  /*   treeId, */
-  /*   trace}; */
-  /*  */
-  /* // tarch::la::Vector<Dimensions, double> previousParticleX = */
-  /* //   _database.getPreviousParticlePosition(newIdentifier, treeId, minDx, pastSearchTolerance); */
-  /*  */
-  /* internal::Event previousEvent = _database.getEntry( */
-  /*     identifier, */
-  /*     treeId, */
-  /*     // identifier.positionTolerance, */
-  /*     // internal::ParticleSearchIdentifier::getMinDx() , */
-  /*     0.1, */
-  /*     identifier.positionTolerance).first; */
-  /*  */
-  /* assertion8( */
-  /*   previousEvent.type == internal::Event::Type::AssignToVertex, */
-  /*   // or previousEvent.type == internal::Event::Type::MoveWhileAssociatedToVertex, */
-  /*   identifier.toString(), */
-  /*   event.toString(), */
-  /*   previousEvent.toString(), */
-  /*   treeId, */
-  /*   _database.getNumberOfSnapshots(), */
-  /*   trace, */
-  /*   _database.particleHistory(identifier), */
-  /*   _database.toString() */
-  /* ); */
-  /* assertion7( */
-  /*   tarch::la::equals(previousEvent.vertexX, vertexX), */
-  /*   identifier.toString(), */
-  /*   event.toString(), */
-  /*   previousEvent.toString(), */
-  /*   treeId, */
-  /*   _database.getNumberOfSnapshots(), */
-  /*   trace, */
-  /*   _database.particleHistory(identifier) */
-  /* ); */
-  /* assertion6( */
-  /*   tarch::la::equals(previousEvent.vertexH, vertexH), */
-  /*   identifier.toString(), */
-  /*   event.toString(), */
-  /*   previousEvent.toString(), */
-  /*   treeId, */
-  /*   trace, */
-  /*   _database.particleHistory(identifier) */
-  /* ); */
-  /*  */
-  /* _database.addEvent(identifier, event); */
+  using namespace internal;
+
+  ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
+      particleName,
+      particleX,
+      particleID,
+      tarch::la::max(vertexH)
+  );
+
+  Event event(
+    Event::Type::DetachFromVertex,
+    isLocal,
+    vertexX,
+    particleX,
+    vertexH,
+    treeId,
+    trace
+  );
+
+  ParticleEvents& history = _database.addEvent(identifier, event);
+  Event previousEvent = getPreviousEvent(history, treeId, 1);
+
+
+  assertion6(
+    previousEvent.type == internal::Event::Type::AssignToVertex
+    or previousEvent.type == internal::Event::Type::MoveWhileAssociatedToVertex
+    or previousEvent.type == internal::Event::Type::ConsecutiveMoveWhileAssociatedToVertex,
+    identifier.toString(),
+    event.toString(),
+    previousEvent.toString(),
+    treeId,
+    _database.getNumberOfSnapshots(),
+    trace
+  );
+  assertion7(
+    tarch::la::equals(previousEvent.vertexX, vertexX),
+    identifier.toString(),
+    event.toString(),
+    previousEvent.toString(),
+    treeId,
+    _database.getNumberOfSnapshots(),
+    trace,
+    _database.particleHistory(identifier)
+  );
+  assertion6(
+    tarch::la::equals(previousEvent.vertexH, vertexH),
+    identifier.toString(),
+    event.toString(),
+    previousEvent.toString(),
+    treeId,
+    trace,
+    _database.particleHistory(identifier)
+  );
+
   // TODO: Re-Insert
   // logTraceOut("detachParticleFromVertex(...)");
 }

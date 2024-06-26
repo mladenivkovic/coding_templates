@@ -14,6 +14,11 @@
 // TODO: temporary
 #include "Assertions.h"
 
+
+// TODO in documentation:
+// - write down that database tracks all events on all spacetrees on this rank
+// - ConsecutiveMoveEvent stores original particleX
+
 namespace toolbox {
   namespace particles {
     namespace assignmentchecks {
@@ -133,6 +138,7 @@ namespace toolbox {
            *
            * --------------------------------
            * Events of type NotFound will not be added to the history.
+           * TODO: rename
            */
           std::string particleHistory(const ParticleSearchIdentifier& identifier);
 

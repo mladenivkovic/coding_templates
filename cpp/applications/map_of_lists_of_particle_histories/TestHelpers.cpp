@@ -156,8 +156,8 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testParticleWalkS
   // After that, entries will be purged. One sweep is added by default ('init').
   // We've already added another sweep ('InitUnitTest'). So if you go beyond 14,
   // it'll start deleting stuff before the end.
-  int max_sweeps = 14;
-  for (int sweep = 0; sweep < max_sweeps; sweep++){
+  size_t max_sweeps = 14;
+  for (size_t sweep = 0; sweep < max_sweeps; sweep++){
 
     ac::startMeshSweep( "MySweep" + std::to_string(sweep) );
 
@@ -233,13 +233,27 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testParticleWalkS
       eventDatabase.getNumberOfTracedParticles()
       );
 
-  assertion3(eventDatabase.getNumberOfSnapshots() == static_cast<int>(max_sweeps),
+  // There is 1 more mesh sweep registered (intialization) than we
+  // actually do.
+  assertion3(eventDatabase.getCurrentMeshSweepIndex() == max_sweeps + 1,
       "Wrong mesh sweep count in database",
-      eventDatabase.getNumberOfSnapshots(),
+      eventDatabase.getCurrentMeshSweepIndex(),
       max_sweeps
       );
 
-  // TODO: Test for how many events particle actually has.
+  ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+      "TestParticle",
+      localPartX,
+      particleID,
+      vertexH(0)
+  );
+
+  // 8 is hardcoded here. Modify manually if you change test setup.
+  assertion3(eventDatabase.getTotalParticleEntries(identifier) == 8,
+      "Wrong number of snapshots stored for particle",
+      eventDatabase.getTotalParticleEntries(identifier),
+      eventDatabase.particleHistory(identifier)
+  );
 
 
   // Clean up after yourself
