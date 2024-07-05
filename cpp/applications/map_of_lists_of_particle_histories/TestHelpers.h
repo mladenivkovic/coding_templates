@@ -71,6 +71,7 @@ class toolbox::particles::assignmentchecks::tests::TestHelpers {
 
 /* TODO: Make private again */
 /* TODO: Verbose parameters */
+  // TODO: Better documentation. Describe how each test works.
   /* private: */
   public:
 
@@ -140,13 +141,18 @@ void testAddingParticleMovingEvents(int nsweeps = 100, int nEventsToKeep=1000, b
     void testParticleWalk();
 
     /**
-    Particles are identified in the events database using their unique ID.
-    However, if we have periodic boundary conditions, we may find that
-    particles with the same ID exist several times on the same tree, on
-    either side of the boundary, provided the tree spans both edges of the
-    domain. So check that we indeed find the correct ancestors.
+    * Particles are identified in the events database using their unique ID.
+    * However, if we have periodic boundary conditions, we may find that
+    * particles with the same ID exist several times on the same tree, on
+    * either side of the boundary, provided the tree spans both edges of the
+    * domain. So check that we indeed find the correct ancestors.
     */
     void testPeriodicBoundaryConditions();
+
+    /**
+     * Test particle assignments to sieve sets.
+     */
+    void testSieveSet();
 
   public:
     TestHelpers();

@@ -1,6 +1,8 @@
 #include "Database.h"
 // #include "ParticleIdentifier.h"
 #include "Event.h"
+#include "ParticleIdentifier.h"
+#include "Vector.h"
 #include "VectorVectorOperations.h"
 
 #include <iterator>
@@ -308,36 +310,51 @@ std::cout <<
         "added event " << event.toString() << identifier.particleX
 << std::endl;
 
-
-    // Do we need to shift the coordinates of the identifier?
-    ParticleIdentifier key = search->first;
-    // TODO MLADEN: use tarch::la::oneGreater here
-    bool shift = false;
-    for (int i = 0; i < Dimensions; i++){
-      if (std::abs(key.particleX(i) - identifier.particleX(i)) > ParticleSearchIdentifier::shiftTolerance * identifier.positionTolerance){
-        shift = true;
-      }
-    }
-
-    if (shift){
-      // delete old entry in database and add the new one.
-      // TODO: Re-Insert
-      // logDebug(
-std::cout <<
-        "addEvent(...) " <<
-        "shifting particle identifier from "
-          << key.particleX << " to " << identifier.particleX
-<< std::endl;
-      // );
-
-      ParticleEvents historyCopy = history;
-      _data.erase(key);
-      _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( identifier, historyCopy));
-    }
-
     return history;
   }
 }
+
+
+void toolbox::particles::assignmentchecks::internal::Database::shiftIdentifierCoordinates(toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier identifier, tarch::la::Vector<Dimensions, double> newParticleX)
+{
+
+  auto search = _data.find(identifier);
+
+  assertion1(search != _data.end(), "Particle not found through its identifier");
+
+  // Do we need to shift the coordinates of the identifier?
+  // Use the one the search gives you back, because we allow for a fuzzy search.
+  // You need to compare to the actually stored coordinates, not to whatever
+  // you think they currently may be.
+  ParticleIdentifier key = search->first;
+  ParticleEvents& history = search->second;
+
+  // TODO MLADEN: use tarch::la::oneGreater here
+  bool shift = false;
+  for (int i = 0; i < Dimensions; i++){
+    if (std::abs(key.particleX(i) - newParticleX(i)) > ParticleSearchIdentifier::shiftTolerance * identifier.positionTolerance){
+      shift = true;
+    }
+  }
+
+  if (shift){
+    // delete old entry in database and add the new one.
+    // TODO: Re-Insert
+    // logDebug(
+std::cout <<
+      "addEvent(...) " <<
+      "shifting particle identifier from "
+        << key.particleX << " to " <<  newParticleX
+<< std::endl;
+    // );
+
+    ParticleEvents historyCopy = history;
+    _data.erase(key);
+    ParticleIdentifier newIdentifier = ParticleIdentifier(identifier.particleName, newParticleX, identifier.particleID);
+    _data.insert(std::pair<ParticleIdentifier, ParticleEvents>( newIdentifier, historyCopy));
+  }
+}
+
 
 // checked
 toolbox::particles::assignmentchecks::internal::Event toolbox::particles::assignmentchecks::internal::getPreviousEvent(ParticleEvents& particleHistory, int spacetreeId, size_t nFirstEventsToSkip) {
@@ -566,7 +583,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
   // use old particle position to find history.
   ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
       particleName,
-      newParticleX,
+      oldParticleX,
       particleID,
       tarch::la::max(vertexH)
   );
@@ -694,6 +711,12 @@ void toolbox::particles::assignmentchecks::moveParticle(
     _database.addEvent(identifier, newEvent);
   }
 
+  // Finally, since the particle moved, do we need to modify the coordinates
+  // of the identifier? We need to use the coordinates as well to ensure the
+  // correct particle identity. If the particle has moved too far, we need
+  // to update that information.
+  _database.shiftIdentifierCoordinates(identifier, newParticleX);
+
   // TODO: Re-Insert
   // logTraceOut("moveParticle(...)");
 }
@@ -779,7 +802,7 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
   // logTraceOut("detachParticleFromVertex(...)");
 }
 
-
+//checked
 void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& particleX,
@@ -790,7 +813,6 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
   const std::string&                           trace
 ) {
 
-  assert(false);
   // TODO: Re-Insert
   /*   logTraceInWith4Arguments( */
   /*   "assignParticleToSieveSet(...)", */
@@ -807,28 +829,33 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
   /*     << " to global sieve set on tree " << treeId */
   /* ); */
   /*  */
-  // internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier(
-  //   particleName,
-  //   particleX,
-  //   particleID,
-  //   tarch::la::max(vertexH)
-  // );
-  // internal::Event
-  //   event{internal::Event::Type::AssignToSieveSet, isLocal, treeId, trace};
-  //
-  // internal::Event previousEvent = _database.getEntry(identifier, treeId).first;
-  //
-  // assertion5(
-  //   previousEvent.type == internal::Event::Type::DetachFromVertex,
-  //   identifier.toString(),
-  //   event.toString(),
-  //   previousEvent.toString(),
-  //   treeId,
-  //   _database.particleHistory(identifier)
-  // );
-  //
-  // _database.addEvent(identifier, event);
-  // // TODO: Re-Insert
+
+  using namespace internal;
+
+  ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
+      particleName,
+      particleX,
+      particleID,
+      tarch::la::max(vertexH)
+  );
+
+
+  internal::Event
+    event{internal::Event::Type::AssignToSieveSet, isLocal, treeId, trace};
+
+  ParticleEvents& history = _database.addEvent(identifier, event);
+  Event previousEvent = getPreviousEvent(history, treeId, 1);
+
+  assertion5(
+    previousEvent.type == internal::Event::Type::DetachFromVertex,
+    identifier.toString(),
+    event.toString(),
+    previousEvent.toString(),
+    treeId,
+    _database.particleHistory(identifier)
+  );
+
+  // TODO: Re-Insert
   // logTraceOut("assignParticleToSieveSet(...)");
 }
 
