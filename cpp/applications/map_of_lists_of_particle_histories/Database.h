@@ -18,6 +18,7 @@
 // TODO in documentation:
 // - write down that database tracks all events on all spacetrees on this rank
 // - ConsecutiveMoveEvent stores original particleX
+// - checks will fail if particles move too much. They can't have arbitrary motions in the grid. THey're limited by the vertexH.
 
 namespace toolbox {
   namespace particles {
