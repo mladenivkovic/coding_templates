@@ -440,6 +440,8 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testAddingParticl
         trace);
     eventDatabase.addEvent(identifier, moveEvent);
 
+    // Do we need to shift the identifier's coordinates?
+    eventDatabase.shiftIdentifierCoordinates(identifier, particleX);
   }
 
 
