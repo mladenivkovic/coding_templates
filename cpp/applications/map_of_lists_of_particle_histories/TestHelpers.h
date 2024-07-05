@@ -84,9 +84,11 @@ class toolbox::particles::assignmentchecks::tests::TestHelpers {
      */
     void testParticleLiftDrop();
 
+    /**
+     * Test a particle walking through the box using lift-drop vertex
+     * assignments.
+     */
     void testParticleWalk();
-
-    void testLongParticleWalk();
 
     /**
     Particles are identified in the events database using their unique ID.

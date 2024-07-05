@@ -172,6 +172,7 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
   lastMeshSweepSnapshot() {
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
+  assert(false);
 
   std::ostringstream msg;
     // if (not _data.empty()) {
@@ -302,6 +303,11 @@ std::cout <<
 
     // Add the new event now.
     history.push_back(event);
+std::cout <<
+        "addEvent(...) " <<
+        "added event " << event.toString() << identifier.particleX
+<< std::endl;
+
 
     // Do we need to shift the coordinates of the identifier?
     ParticleIdentifier key = search->first;
@@ -333,17 +339,10 @@ std::cout <<
   }
 }
 
-
+// checked
 toolbox::particles::assignmentchecks::internal::Event toolbox::particles::assignmentchecks::internal::getPreviousEvent(ParticleEvents& particleHistory, int spacetreeId, size_t nFirstEventsToSkip) {
 
   if (particleHistory.size() <= nFirstEventsToSkip){
-    // TODO: Put back in
-    // logWarning(
-std::cout << "Searching in empty particleHistory " <<
-  particleHistory.size() <<
-  nFirstEventsToSkip
-<< std::endl;
-        // );
     return Event(Event::Type::NotFound);
   }
 
@@ -360,8 +359,6 @@ std::cout << "Searching in empty particleHistory " <<
     if (it->treeId == spacetreeId) return *it;
     it++;
   }
-
-  // TODO: exception handle shortened history. We may have deleted the event.
 
   return Event(Event::Type::NotFound);
 }
@@ -380,7 +377,7 @@ void toolbox::particles::assignmentchecks::startMeshSweep(
   _database.startMeshSweep(meshSweepName);
 }
 
-
+// checked
 void toolbox::particles::assignmentchecks::eraseParticle(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& particleX,
@@ -391,9 +388,7 @@ void toolbox::particles::assignmentchecks::eraseParticle(
   const std::string&                           trace
 ) {
 
-  assert(false);
-
-    // TODO: Re-Insert
+  // TODO: Re-Insert
   // logTraceInWith4Arguments(
   //   "eraseParticle(...)",
   //   particleName,
@@ -402,28 +397,36 @@ void toolbox::particles::assignmentchecks::eraseParticle(
   //   treeId
   // );
 
+  using namespace internal;
 
-  /*   internal::ParticleSearchIdentifier identifier = _database.createParticleSearchIdentifier( */
-  /*   particleName, */
-  /*   particleX, */
-  /*   particleID, */
-  /*   tarch::la::max(vertexH) */
-  /* ); */
-  /* internal::Event event(internal::Event::Type::Erase, isLocal, treeId, trace); */
-  /*  */
-  /* internal::Event previousLocalParticle = _database.getEntry(identifier, treeId, identifier.positionTolerance, identifier.positionTolerance) */
-  /*                                           .first; */
-  /* assertion5( */
-  /*   previousLocalParticle.type == internal::Event::Type::DetachFromVertex, */
-  /*   identifier.toString(), */
-  /*   event.toString(), */
-  /*   previousLocalParticle.toString(), */
-  /*   treeId, */
-  /*   _database.particleHistory(identifier) */
-  /* ); */
-  /*  */
-  /* _database.addEvent(identifier, event); */
-    // TODO: Re-Insert
+  ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
+      particleName,
+      particleX,
+      particleID,
+      tarch::la::max(vertexH)
+  );
+
+  Event event(
+    Event::Type::Erase,
+    isLocal,
+    treeId,
+    trace
+  );
+
+  ParticleEvents& history = _database.addEvent(identifier, event);
+  Event previousEvent = getPreviousEvent(history, treeId, 1);
+
+
+  assertion5(
+    previousEvent.type == internal::Event::Type::DetachFromVertex,
+    identifier.toString(),
+    event.toString(),
+    previousEvent.toString(),
+    treeId,
+    _database.particleHistory(identifier)
+  );
+
+  // TODO: Re-Insert
   // logTraceOut("eraseParticle(...)");
 }
 
@@ -491,6 +494,9 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
         (previousEvent.type == internal::Event::Type::DetachFromVertex) :
         (previousEvent.type == internal::Event::Type::DetachFromVertex and not previousEvent.isLocal);
 
+    const bool virtualPartThatHasBeenErased =
+        (previousEvent.type == internal::Event::Type::Erase and (not previousEvent.isLocal));
+
     if (isLocal) {
       assertion7(
         previousEvent.type == internal::Event::Type::NotFound
@@ -518,8 +524,8 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
           or
           (isDropping and not previousEvent.isLocal)
           or
-          (previousEvent.type == internal::Event::Type::DetachFromVertex and
-          previousEvent.isLocal),
+          (previousEvent.type == internal::Event::Type::DetachFromVertex and previousEvent.isLocal)
+          or virtualPartThatHasBeenErased,
           identifier.toString(),
           event.toString(),
           previousEvent.toString(),
@@ -564,8 +570,6 @@ void toolbox::particles::assignmentchecks::moveParticle(
       particleID,
       tarch::la::max(vertexH)
   );
-
-std::cout << "IN MOVE\n" << _database.particleHistory(identifier) << std::endl;
 
   ParticleEvents& history = _database.getParticleHistory(identifier);
   // We assume that we can't be moving a particle without having done anything else first.

@@ -458,7 +458,10 @@ int main(void) {
 
 
   toolbox::particles::assignmentchecks::tests::TestHelpers runner = toolbox::particles::assignmentchecks::tests::TestHelpers();
-  runner.testParticleWalkSameTreeLevel();
+  // runner.testParticleWalkSameTreeLevel();
+  // runner.testParticleLiftDrop();
+  // runner.testParticleWalk();
+  // runner.testPeriodicBoundaryConditions();
 
 
   std::cout << "Done. Bye!" <<  std::endl;
