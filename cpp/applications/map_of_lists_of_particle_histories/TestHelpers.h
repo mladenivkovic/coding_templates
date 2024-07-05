@@ -57,6 +57,7 @@ namespace toolbox {
             const tarch::la::Vector<Dimensions, double> x,
             const tarch::la::Vector<Dimensions, double> vertexH
           );
+
         } // namespace internal
       }   // namespace tests
     }     // namespace assignmentchecks
@@ -69,8 +70,56 @@ namespace toolbox {
 class toolbox::particles::assignmentchecks::tests::TestHelpers {
 
 /* TODO: Make private again */
+/* TODO: Verbose parameters */
   /* private: */
   public:
+
+/**
+ * Test whether ParticleIdentifier and ParticleSearchIdentifier
+ * work as intended in a map for a fuzzy search.
+ */
+void testTruthTableSearchAndIDKeys(bool verbose=false);
+
+
+/**
+ * Make sure that adding mesh sweeps to the database works.
+ */
+void testAddingSweepsToDatabase(bool verbose=false);
+
+
+/**
+ * Test the adding of particle events to the database.
+ * This also serves as a unit test for all possible events: I let
+ * the particles run through some meaningless mesh sweeps, and add
+ * all the event types.
+ *
+ * Here, I only use static particles, so the identifier remains
+ * the same all the time. Switching particle identifiers will be
+ * done in a separate test.
+ * We're also adding events without them having any meaning. Proper
+ * event tracing including consistency checks will also be done later.
+ */
+void testAddingParticleEvents(bool verbose=false);
+
+
+/**
+ * Test the adding of particle events to the database with a moving
+ * particle. The catch is twofold: Firstly, the fuzzy search needs to work.
+ * Secondly, a moving particle will eventually need to change its identifier
+ * in the database. This tests both of these cases, but not the event
+ * deletion when the database becomes too large.
+ *
+ * We're also adding events without them having any meaning. Proper
+ * event tracing including consistency checks will also be done later.
+ *
+ * @param nsweeps How many mesh sweeps to simulate.
+ * @param nEventsToKeep How many events per particle the database should keep.
+ *  If < `nsweeps`, then events from the database will be purged.
+ */
+void testAddingParticleMovingEvents(int nsweeps = 100, int nEventsToKeep=1000, bool verbose=false);
+
+
+
 
     /**
      * Test a particle walking from vertex to vertex on the same depth of
