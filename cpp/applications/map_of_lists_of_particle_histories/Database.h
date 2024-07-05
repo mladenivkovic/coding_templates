@@ -19,6 +19,7 @@
 // - write down that database tracks all events on all spacetrees on this rank
 // - ConsecutiveMoveEvent stores original particleX
 // - checks will fail if particles move too much. They can't have arbitrary motions in the grid. THey're limited by the vertexH.
+// - database dump and particle history dump will print out last event first
 
 namespace toolbox {
   namespace particles {
@@ -201,6 +202,13 @@ namespace toolbox {
            *  - returns ref to particleEvents
            */
           ParticleEvents& addEvent(ParticleSearchIdentifier identifier, Event& event);
+
+          /**
+           * Change the particle's coordinates if it moved too much
+           * compared to the coordinates stored in its identifier in
+           * the database.
+           */
+          void shiftIdentifierCoordinates(ParticleSearchIdentifier identifier, tarch::la::Vector<Dimensions, double> newParticleX);
 
           /**
            * Dump the whole database

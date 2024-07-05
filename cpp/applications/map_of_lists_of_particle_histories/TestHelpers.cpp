@@ -8,6 +8,8 @@
 #include "TracingAPI.h"
 #include "Utils.h"
 
+// TODO: All the "Verbose" parameters everywhere
+// TODO: Add actual  assertions everywhere
 
 #ifdef UseTestSpecificCompilerSettings
 #pragma optimize("", off)
@@ -1345,11 +1347,187 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testPeriodicBound
 
 
 
+void toolbox::particles::assignmentchecks::tests::TestHelpers::testSieveSet() {
+
+#if PeanoDebug > 0
+  const bool verbose = false;
+
+  namespace ac = toolbox::particles::assignmentchecks;
+
+  if (verbose) std::cout << ">>>>>>>>>>>> RUNNING testSieveSet() in " << Dimensions << "D" << std::endl;
+
+  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  eventDatabase = ac::internal::Database(1000);
+
+  // IMPORTANT: Needs to be the same as the particle class name you use!
+  // In traceParticleMovements(), this will be derived from the class name.
+  std::string particleName = "TestParticle";
+
+  // (Initial) particle position
+  tarch::la::Vector<Dimensions, double> localPartX_init;
+  // particle displacement each step
+  tarch::la::Vector<Dimensions, double> dx;
+
+  tarch::la::Vector<Dimensions, double> vertexH, prevVertexH;
+  tarch::la::Vector<Dimensions, double> vertexX, prevVertexX;
+
+  // Initialise values
+  double vertexH_default = 3.;
+  double dt = 1.;
+
+  for (int i = 0; i < Dimensions; i++){
+    localPartX_init(i) = 7.5;
+    dx(i) = 2. * vertexH_default;
+    vertexH(i) = vertexH_default;
+  }
+
+  int particleID = 1;
+  int spacetreeId = 1;
+
+  // generate (minimal) particle
+  ac::tests::TestParticle* localPart = new ac::tests::TestParticle(localPartX_init, particleID, true);
+  localPart->setVertexH(vertexH);
+  localPart->setDepth(1); // dummy val
+
+  // pretend to have a ParticleContainer
+  std::vector<ac::tests::TestParticle*> particleSet = {localPart};
+
+  // Find initial pseudo-"vertex" particle is assigned to.
+  vertexX = internal::findVertexX(localPart->getX(), localPart->getVertexH());
+
+  // First assignments
+  ac::startMeshSweep( "InitUnitTest" );
+  ac::assignParticleToVertex(
+      particleName,
+      localPart->getX(),
+      localPart->getPartid(),
+      localPart->isLocal(),
+      vertexX,
+      localPart->getVertexH(),
+      spacetreeId,
+      "initialAssign"
+  );
+
+
+
+  // Do some mesh sweeps.
+  size_t nsweeps = 10;
+  for (size_t sweep = 0; sweep < nsweeps; sweep++){
+
+    ac::startMeshSweep( "MySweep" + std::to_string(sweep) );
+
+    // record old particle positions.
+    auto oldParticlePositions = ac::recordParticlePositions(particleSet);
+
+    // Now drift
+    for (auto p: particleSet){
+
+      // Grab the vertex X before you move the particle! You need
+      // to know what vertex it's currently assigned to, not what
+      // it may be assigned to later.
+      vertexX = internal::findVertexX(p->getX(), p->getVertexH());
+
+      // update particle position.
+      tarch::la::Vector<Dimensions, double> partX = p->getX();
+      partX += dt * dx;
+      p->setX(partX);
+
+      // Trace the movement.
+      ac::traceParticleMovements(particleSet, oldParticlePositions, vertexX, p->getVertexH(), spacetreeId);
+      if (verbose) std::cout << ">>>>>>>>>>>> Moving particle to " << partX << std::endl;
+
+      // First we detach the moved particle.
+      prevVertexH = p->getVertexH();
+      prevVertexX = vertexX;
+
+      ac::detachParticleFromVertex(
+          particleName,
+          p->getX(),
+          p->getPartid(),
+          p->isLocal(),
+          prevVertexX,
+          prevVertexH,
+          spacetreeId,
+          "vertexDetach"
+      );
+
+      // Assign it to the sieve set
+      ac::assignParticleToSieveSet(
+          particleName,
+          p->getX(),
+          p->getPartid(),
+          p->isLocal(),
+          p->getVertexH(),
+          spacetreeId,
+          "assignToSieveSet"
+      );
+      // Now "sieve it" into the right vertex
+      vertexX = internal::findVertexX(p->getX(), p->getVertexH());
+
+      ac::assignParticleToVertex(
+          particleName,
+          p->getX(),
+          p->getPartid(),
+          p->isLocal(),
+          vertexX,
+          p->getVertexH(),
+          spacetreeId,
+          "vertexAssign::Sieve"
+      );
+    } // Drift loop
+
+  } // mesh sweep loops
+
+  // is particle count correct?
+  assertion2(eventDatabase.getNumberOfTracedParticles() == 1,
+      "Wrong particle count in database",
+      eventDatabase.getNumberOfTracedParticles()
+      );
+
+
+    ac::internal::ParticleSearchIdentifier identifier = ac::internal::ParticleSearchIdentifier(
+        "TestParticle",
+        localPart->getX(),
+        localPart->getPartid(),
+        vertexH(0)
+    );
+
+    size_t nEntries = eventDatabase.getTotalParticleEntries(identifier);
+    // we add 4 events per sweep, and 1 initial one
+    assertion5(nEntries == (nsweeps * 4 + 1),
+        "Wrong number of entries for particle ",
+        nEntries,
+        nsweeps * 4 + 1,
+        eventDatabase.particleHistory(identifier),
+        eventDatabase.toString()
+        );
+
+    if (verbose) {
+      // Print out particle histories
+      std::cout << eventDatabase.particleHistory(identifier);
+    }
+
+
+  // if (verbose) {
+    std::cout << ">>>>>>>>>>>> DATA DUMP END " << std::endl;
+    std::cout << eventDatabase.toString() << std::endl;
+  // }
+
+  // Clean up after yourself
+  eventDatabase.reset();
+
+#endif
+}
+
+
+
+
 
 
 
 
 // void toolbox::particles::assignmentchecks::tests::TestHelpers::run() {
+// TODO: add everything from main.cpp in here
   // testMethod(testParticleWalkSameTreeLevel);
   // testMethod(testParticleLiftDrop);
   // testMethod(testParticleWalk);
