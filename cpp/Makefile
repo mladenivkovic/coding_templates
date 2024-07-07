@@ -119,6 +119,9 @@ namespaces.o: namespaces.cpp namespaces_header.h
 scopes.o: scopes.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+singleton.o: singleton.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 simple_type_limits.o: simple_type_limits.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
