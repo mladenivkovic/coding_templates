@@ -1,3 +1,6 @@
+// This file is part of the Peano project. For conditions of distribution and
+// use, please see the copyright notice at www.peano-framework.org
+
 #include "Database.h"
 #include "Event.h"
 #include "ParticleIdentifier.h"
