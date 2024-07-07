@@ -1,18 +1,5 @@
 #include <iostream>
-#include <memory>
-#include <string>
-#include <vector>
-
-#include "ParticleIdentifier.h"
-#include "tarch/la/Vector.h"
-// #include "TestParticle.h"
-
-#include "Database.h"
-
 #include "TestHelpers.h"
-
-
-
 
 int main(void) {
 

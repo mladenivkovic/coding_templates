@@ -12,10 +12,10 @@ namespace toolbox {
         /**
          * Event
          *
-         * An event is an assocation or de-association of a particle and a
-         * vertex.
+         * An event is any event related to the particle-grid association. That
+         * can be an assignmend or detaching to a vertex or sieve set, or particles
+         * being moved in space.
          *
-         * TODO: update documentation here.
          */
         struct Event {
           enum class Type {

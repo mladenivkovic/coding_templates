@@ -574,7 +574,6 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testParticleWalkS
     if (sweep > 8 and sweep < 12) {
       // TODO: fix this
       dt_use *= 1e-2;
-      // dt_use *= ac::internal::ParticleIdentifier::Precision * 1e-2;
     }
 
     // update particle position.
@@ -1531,11 +1530,17 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testSieveSet() {
 
 // void toolbox::particles::assignmentchecks::tests::TestHelpers::run() {
 // TODO: add everything from main.cpp in here
+  // testMethod(testTruthTableSearchAndIDKeys(verbose));
+  // testMethod(testAddingSweepsToDatabase(verbose));
+  // testMethod(testAddingParticleEvents(verbose));
+  // runner.testAddingParticleMovingEvents(100, 1000, verbose);
+  // runner.testAddingParticleMovingEvents(100, 16, verbose);
   // testMethod(testParticleWalkSameTreeLevel);
   // testMethod(testParticleLiftDrop);
   // testMethod(testParticleWalk);
   // testMethod(testLongParticleWalk);
   // testMethod(testPeriodicBoundaryConditions);
+  // testMethod(testSieveSet);
 // }
 
 #ifdef UseTestSpecificCompilerSettings
