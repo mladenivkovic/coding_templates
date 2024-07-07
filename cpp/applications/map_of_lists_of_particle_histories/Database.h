@@ -34,28 +34,27 @@ namespace toolbox {
 
         using ParticleEvents = std::vector<Event>;
 
+        /**
+         * @class The Database class stores the actual particle histories.
+         * Particles are traced via a map, where the keys are
+         * instances of the ParticleIdentifier class. The database itself
+         * is implemented as a singleton. To access it, use the getInstance()
+         * method.
+         *
+         * The database will track all events on all spacetrees on this
+         * MPI rank. Per particle, we store up to _maxParticleSnapshotsToKeepTrackOf
+         * particle events. Once that number is exceeded, the past history will
+         * be condensed into a single event, signifying that it had been compacted.
 
-
-        *
-@class The Database class stores the actual particle histories.
-Particles are traced via a map, where the keys are
-instances of the ParticleIdentifier class. The database itself
-is implemented as a singleton. To access it, use the getInstance()
-method.
-
-The database will track all events on all spacetrees on this
-MPI rank. Per particle, we store up to _maxParticleSnapshotsToKeepTrackOf
-particle events. Once that number is exceeded, the past history will
-be condensed into a single event, signifying that it had been compacted.
-
-Additionally, something we come across very often is that particles,
-once assigned to a vertex, very often stay assigned to the same
-vertex for a long time (=many sweeps) and only experiences small movements.
-Rather than tracing every single move event individually, the database
-will mark consecutive move events using a special event type,
-Event::Type::ConsecutiveMoveEvent. It will also keep track the original
-position of the particle, before the first move event of that sequence
-has occurred, as well as the current particle position.
+         * Additionally, something we come across very often is that particles,
+         * once assigned to a vertex, very often stay assigned to the same
+         * vertex for a long time (=many sweeps) and only experiences small movements.
+         * Rather than tracing every single move event individually, the database
+         * will mark consecutive move events using a special event type,
+         * Event::Type::ConsecutiveMoveEvent. It will also keep track the original
+         * position of the particle, before the first move event of that sequence
+         * has occurred, as well as the current particle position.
+         */
 
         class Database {
 
