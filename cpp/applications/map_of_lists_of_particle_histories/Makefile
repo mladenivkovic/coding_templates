@@ -53,7 +53,7 @@ LIBFLAGS=
 # VPATH=$(IDIR):$(SRCDIR)
 
 
-OBJECTS = TestParticle.o ScalarOperations.o Event.o ParticleIdentifier.o MeshSweepData.o Database.o TestHelpers.o
+OBJECTS = TestParticle.o ScalarOperations.o Event.o ParticleIdentifier.o TestHelpers.o MeshSweepData.o TracingAPI.o  Database.o
 
 
 
@@ -63,7 +63,6 @@ OBJECTS = TestParticle.o ScalarOperations.o Event.o ParticleIdentifier.o MeshSwe
 
 
 default: particle_history
-
 
 particle_history: main.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ main.o $(OBJECTS) $(LDFLAGS) $(LIBFLAGS)
