@@ -3,12 +3,10 @@
 
 #if defined(AssignmentChecks)
 
-// checked
 std::string toolbox::particles::assignmentchecks::sweepHistory() {
   return internal::Database::getInstance().sweepHistory();
 }
 
-// checked
 void toolbox::particles::assignmentchecks::startMeshSweep(
   const std::string& meshSweepName
 ) {
@@ -16,7 +14,6 @@ void toolbox::particles::assignmentchecks::startMeshSweep(
   d.startMeshSweep(meshSweepName);
 }
 
-// checked
 void toolbox::particles::assignmentchecks::eraseParticle(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& particleX,
@@ -38,7 +35,7 @@ void toolbox::particles::assignmentchecks::eraseParticle(
 
   using namespace internal;
 
-  Database& _database = Database::getInstance();
+  Database& database = Database::getInstance();
 
   ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
       particleName,
@@ -54,7 +51,7 @@ void toolbox::particles::assignmentchecks::eraseParticle(
     trace
   );
 
-  ParticleEvents& history = _database.addEvent(identifier, event);
+  ParticleEvents& history = database.addEvent(identifier, event);
   Event previousEvent = getPreviousEvent(history, treeId, 1);
 
 
@@ -64,7 +61,7 @@ void toolbox::particles::assignmentchecks::eraseParticle(
     event.toString(),
     previousEvent.toString(),
     treeId,
-    _database.particleHistory(identifier)
+    database.particleHistory(identifier)
   );
 
   // TODO: Re-Insert
@@ -72,7 +69,6 @@ void toolbox::particles::assignmentchecks::eraseParticle(
 }
 
 
-// checked
 void toolbox::particles::assignmentchecks::assignParticleToVertex(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& particleX,
@@ -101,7 +97,7 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
   using namespace internal;
 
   constexpr bool checkNewParticles = false;
-  Database& _database = Database::getInstance();
+  Database& database = Database::getInstance();
 
   ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
       particleName,
@@ -120,7 +116,7 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
     trace
   );
 
-  ParticleEvents& history = _database.addEvent(identifier, event);
+  ParticleEvents& history = database.addEvent(identifier, event);
 
   if (not (particleIsNew and (not checkNewParticles))){
     // skip the newly added event.
@@ -154,9 +150,9 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
         event.toString(),
         previousEvent.toString(),
         treeId,
-        _database.getNumberOfSnapshots(),
+        database.getNumberOfSnapshots(),
         trace,
-        _database.particleHistory(identifier)
+        database.particleHistory(identifier)
       );
     } else {
         assertion7(
@@ -172,9 +168,9 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
           event.toString(),
           previousEvent.toString(),
           treeId,
-          _database.getNumberOfSnapshots(),
+          database.getNumberOfSnapshots(),
           trace,
-          _database.particleHistory(identifier)
+          database.particleHistory(identifier)
         );
     }
   }
@@ -183,7 +179,6 @@ void toolbox::particles::assignmentchecks::assignParticleToVertex(
   // logTraceOut("assignParticleToVertex(...)");
 }
 
-// checked
 void toolbox::particles::assignmentchecks::moveParticle(
   const std::string&                           particleName,
   const tarch::la::Vector<Dimensions, double>& oldParticleX,
@@ -204,7 +199,11 @@ void toolbox::particles::assignmentchecks::moveParticle(
   // );
 
   using namespace internal;
-  Database& _database = Database::getInstance();
+  Database& database = Database::getInstance();
+
+  // TODO: Add check dx < max(vertexH)
+  // search will fail otherwise.
+  // tarch::la::Vector dx = oldParticleX - newParticleX;
 
   // use old particle position to find history.
   ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
@@ -214,7 +213,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
       tarch::la::max(vertexH)
   );
 
-  ParticleEvents& history = _database.getParticleHistory(identifier);
+  ParticleEvents& history = database.getParticleHistory(identifier);
   // We assume that we can't be moving a particle without having done anything else first.
   assert(history.size() > 0 );
 
@@ -279,7 +278,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
       pastTrace << "Consecutive Move starting at x=[" <<
         // TODO: Add this back in
         // previousEvent.previousParticleX.toString() << "] at sweep " <<
-        _database.getMeshSweepData().at(previousEvent.meshSweepIndex).getName() <<
+        database.getMeshSweepData().at(previousEvent.meshSweepIndex).getName() <<
         " | old trace: " << previousEvent.trace;
         " | new trace: " + trace;
 
@@ -292,7 +291,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
           vertexH,
           treeId,
           pastTrace.str(),
-          -1 // will be modified in _database.addEvent
+          -1 // will be modified in database.addEvent
           );
     } else {
       newEvent = Event(
@@ -303,7 +302,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
           vertexH,
           treeId,
           previousEvent.trace,
-          -1 // will be modified in _database.addEvent
+          -1 // will be modified in database.addEvent
           );
     }
 
@@ -321,7 +320,7 @@ void toolbox::particles::assignmentchecks::moveParticle(
     }
 
     // Add new event now.
-    _database.addEvent(identifier, newEvent);
+    database.addEvent(identifier, newEvent);
   }
   else {
     // Add a new move event.
@@ -334,14 +333,14 @@ void toolbox::particles::assignmentchecks::moveParticle(
         trace
         );
 
-    _database.addEvent(identifier, newEvent);
+    database.addEvent(identifier, newEvent);
   }
 
   // Finally, since the particle moved, do we need to modify the coordinates
   // of the identifier? We need to use the coordinates as well to ensure the
   // correct particle identity. If the particle has moved too far, we need
   // to update that information.
-  _database.shiftIdentifierCoordinates(identifier, newParticleX);
+  database.shiftIdentifierCoordinates(identifier, newParticleX);
 
   // TODO: Re-Insert
   // logTraceOut("moveParticle(...)");
@@ -371,7 +370,7 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
   // );
 
   using namespace internal;
-  Database& _database = Database::getInstance();
+  Database& database = Database::getInstance();
 
   ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
       particleName,
@@ -402,7 +401,7 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
     event.toString(),
     previousEvent.toString(),
     treeId,
-    _database.getNumberOfSnapshots(),
+    database.getNumberOfSnapshots(),
     trace
   );
   assertion7(
@@ -411,9 +410,9 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
     event.toString(),
     previousEvent.toString(),
     treeId,
-    _database.getNumberOfSnapshots(),
+    database.getNumberOfSnapshots(),
     trace,
-    _database.particleHistory(identifier)
+    database.particleHistory(identifier)
   );
   assertion6(
     tarch::la::equals(previousEvent.vertexH, vertexH),
@@ -422,7 +421,7 @@ void toolbox::particles::assignmentchecks::detachParticleFromVertex(
     previousEvent.toString(),
     treeId,
     trace,
-    _database.particleHistory(identifier)
+    database.particleHistory(identifier)
   );
 
   // TODO: Re-Insert
@@ -458,7 +457,7 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
   /*  */
 
   using namespace internal;
-  Database& _database = Database::getInstance();
+  Database& database = Database::getInstance();
 
   ParticleSearchIdentifier identifier = ParticleSearchIdentifier(
       particleName,
@@ -471,7 +470,7 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
   internal::Event
     event{internal::Event::Type::AssignToSieveSet, isLocal, treeId, trace};
 
-  ParticleEvents& history = _database.addEvent(identifier, event);
+  ParticleEvents& history = database.addEvent(identifier, event);
   Event previousEvent = getPreviousEvent(history, treeId, 1);
 
   assertion5(
@@ -480,7 +479,7 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
     event.toString(),
     previousEvent.toString(),
     treeId,
-    _database.particleHistory(identifier)
+    database.particleHistory(identifier)
   );
 
   // TODO: Re-Insert
@@ -491,18 +490,18 @@ void toolbox::particles::assignmentchecks::assignParticleToSieveSet(
 // checked
 void toolbox::particles::assignmentchecks::ensureDatabaseIsEmpty() {
 
-  internal::Database& _database = internal::Database::getInstance();
+  internal::Database& database = internal::Database::getInstance();
 
-  if (_database.getNumberOfSnapshots() != 0) {
+  if (database.getNumberOfSnapshots() != 0) {
   // TODO: Re-Insert
     // logInfo(
     //   "ensureDatabaseIsEmpty()"
     std::cout <<
-      "database still holds " << _database.getNumberOfSnapshots()
+      "database still holds " << database.getNumberOfSnapshots()
       << " snapshots"
       << std::endl; // TODO: rm endl
     // );
-    // logError("ensureDatabaseIsEmpty()", _database.toString());
+    // logError("ensureDatabaseIsEmpty()", database.toString());
     assertion(false);
     exit(-1);
   }

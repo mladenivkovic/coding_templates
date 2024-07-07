@@ -364,7 +364,6 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testAddingParticl
     }
   }
 
-
   // Clean up after yourself.
   eventDatabase.reset();
   ac::ensureDatabaseIsEmpty();
