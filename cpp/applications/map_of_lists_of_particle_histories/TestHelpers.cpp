@@ -1,5 +1,4 @@
 #include "TestHelpers.h"
-#include "Database.h"
 #include "TestParticle.h"
 
 // TODO: Clean up again
@@ -175,7 +174,7 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testAddingSweepsT
 
   namespace ac = ::toolbox::particles::assignmentchecks;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
   eventDatabase.reset();
   ac::ensureDatabaseIsEmpty();
 
@@ -193,17 +192,19 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testAddingSweepsT
   }
 
   // Check number of sweeps correct
-  assertion3(eventDatabase.getMeshSweepData().size() == meshSweepNames.size(),
+  assertion4(eventDatabase.getMeshSweepData().size() == meshSweepNames.size(),
       "Wrong number of mesh sweeps in database",
       eventDatabase.getMeshSweepData().size(),
-      meshSweepNames.size()
+      meshSweepNames.size(),
+      eventDatabase.toString()
       );
 
   // Check our bookkeeping
-  assertion3((eventDatabase.getCurrentMeshSweepIndex() + 1) == meshSweepNames.size(),
+  assertion4((eventDatabase.getCurrentMeshSweepIndex() + 1) == meshSweepNames.size(),
       "Wrong count of mesh sweeps in database",
       eventDatabase.getMeshSweepData().size(),
-      meshSweepNames.size()
+      meshSweepNames.size(),
+      eventDatabase.toString()
       );
 
 
@@ -237,12 +238,12 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testAddingParticl
 
   namespace ac = ::toolbox::particles::assignmentchecks;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
   eventDatabase.reset();
   ac::ensureDatabaseIsEmpty();
-  // make sure we're not deleting anything just yet.
+  // make sure we're not deleting anything just yet by having too many snapshots.
   // re-initialize with enough "space".
-  eventDatabase = ac::internal::Database(100);
+  eventDatabase.setMaxParticleSnapshotsToKeepTrackOf(100);
 
   int treeId = 1;
   bool isLocal = true;
@@ -382,12 +383,12 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testAddingParticl
 
   namespace ac = ::toolbox::particles::assignmentchecks;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
   eventDatabase.reset();
   ac::ensureDatabaseIsEmpty();
   // make sure we're not deleting anything just yet.
   // re-initialize with enough "space".
-  eventDatabase = ac::internal::Database(nEventsToKeep);
+  eventDatabase.setMaxParticleSnapshotsToKeepTrackOf(nEventsToKeep);
 
   int particleID = 1;
   int treeId = 1;
@@ -501,7 +502,7 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testParticleWalkS
 
   if (verbose) std::cout << ">>>>>>>>>>>> RUNNING testParticleWalkSameTreeLevel() in " << Dimensions << "D" << std::endl;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
 
   // IMPORTANT: Needs to be the same as the particle class name you use!
   // In traceParticleMovements(), this will be derived from the class name.
@@ -678,7 +679,7 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testParticleLiftD
 
   if (verbose) std::cout << ">>>>>>>>>>>> RUNNING testParticleLiftDrop() in " << Dimensions << "D" << std::endl;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
 
   // IMPORTANT: Needs to be the same as the particle class name you use!
   // In traceParticleMovements(), this will be derived from the class name.
@@ -841,7 +842,7 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testParticleWalk(
 
   if (verbose) std::cout << ">>>>>>>>>>>> RUNNING testLongParticleWalk() in " << Dimensions << "D" << std::endl;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
 
   // IMPORTANT: Needs to be the same as the particle class name you use!
   // In traceParticleMovements(), this will be derived from the class name.
@@ -1019,8 +1020,8 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testPeriodicBound
 
   if (verbose) std::cout << ">>>>>>>>>>>> RUNNING testPeriodicBoundaryConditions() in " << Dimensions << "D" << std::endl;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
-  eventDatabase = ac::internal::Database(1000);
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
+  eventDatabase.setMaxParticleSnapshotsToKeepTrackOf(1000);
 
   // IMPORTANT: Needs to be the same as the particle class name you use!
   // In traceParticleMovements(), this will be derived from the class name.
@@ -1358,8 +1359,8 @@ void toolbox::particles::assignmentchecks::tests::TestHelpers::testSieveSet() {
 
   if (verbose) std::cout << ">>>>>>>>>>>> RUNNING testSieveSet() in " << Dimensions << "D" << std::endl;
 
-  ac::internal::Database& eventDatabase = ac::getDatabaseInstance();
-  eventDatabase = ac::internal::Database(1000);
+  ac::internal::Database& eventDatabase = ac::internal::Database::getInstance();
+  eventDatabase.setMaxParticleSnapshotsToKeepTrackOf(1000);
 
   // IMPORTANT: Needs to be the same as the particle class name you use!
   // In traceParticleMovements(), this will be derived from the class name.
