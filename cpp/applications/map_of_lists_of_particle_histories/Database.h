@@ -257,8 +257,7 @@ namespace toolbox {
 
           /**
            * Delete all entries in the database and reset it to the initial
-           * state. This is intended for use in unit tests only, as running a
-           * new unit test expects an empty database.
+           * state. Then re-initialize the database.
            */
           void reset();
 

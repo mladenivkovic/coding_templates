@@ -18,12 +18,10 @@
 // } // namespace
 
 
-// checked
 void toolbox::particles::assignmentchecks::internal::Database::setMaxParticleSnapshotsToKeepTrackOf(const size_t n){
   _maxParticleSnapshotsToKeepTrackOf = n;
 }
 
-// checked
 void toolbox::particles::assignmentchecks::internal::Database::startMeshSweep(
   const std::string& meshSweepName
 ) {
@@ -42,33 +40,28 @@ void toolbox::particles::assignmentchecks::internal::Database::startMeshSweep(
 };
 
 
-// checked
 int toolbox::particles::assignmentchecks::internal::Database::
   getNumberOfSnapshots() const {
   return _data.size();
 }
 
 
-// checked
 std::vector<toolbox::particles::assignmentchecks::internal::MeshSweepData>& toolbox::particles::assignmentchecks::internal::Database::
   getMeshSweepData() {
   return _meshSweepData;
 }
 
 
-// checked
 size_t toolbox::particles::assignmentchecks::internal::Database::getCurrentMeshSweepIndex() const {
   return _currentMeshSweepIndex;
 }
 
 
-// checked
 int toolbox::particles::assignmentchecks::internal::Database::getNumberOfTracedParticles() const {
   return _data.size();
 }
 
 
-// checked
 void toolbox::particles::assignmentchecks::internal::Database::
   reset() {
 
@@ -104,7 +97,6 @@ toolbox::particles::assignmentchecks::internal::ParticleEvents&
 
 
 
-// checked
 std::string toolbox::particles::assignmentchecks::internal::Database::toString(
 ) {
   // TODO: Add back in
@@ -156,29 +148,36 @@ int toolbox::particles::assignmentchecks::internal::Database::getTotalParticleEn
 }
 
 
-std::string toolbox::particles::assignmentchecks::internal::Database::
-  lastMeshSweepSnapshot() {
+// TODO: THIS
+std::string toolbox::particles::assignmentchecks::internal::Database::lastMeshSweepSnapshot() {
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);
-  assert(false);
 
   std::ostringstream msg;
-    // if (not _data.empty()) {
-    /* const auto& lastMeshSnapshot = *_data.crbegin(); */
-    /* msg */
-    /*   << "#" << (_data.size() - 1) << "(" << lastMeshSnapshot.getName() << "):"; */
-    /* for (const auto& particleTrace : lastMeshSnapshot) { */
-    /*   msg << std::endl << "-" << particleTrace.first.toString() << ": "; */
-    /*   for (const auto& event : particleTrace.second) { */
-    /*     msg << event.toString(); */
-    /*   } */
-    /* } */
-  /* } */
+
+  msg << "--------------------------\n";
+  msg << "Last sweep dump: Sweep [" << _meshSweepData.at(_currentMeshSweepIndex).getName() << "]\n";
+  msg << "--------------------------\n";
+
+  for (auto entry = _data.cbegin(); entry != _data.cend(); entry++){
+    ParticleIdentifier identifier = entry->first;
+    ParticleEvents history = entry->second;
+
+    msg << "\n" << identifier.toString();
+
+    for (auto event = history.crbegin(); event != history.crend(); event++){
+      if (event->meshSweepIndex != _currentMeshSweepIndex) {
+        break;
+      }
+      msg << "\n\t->" << event->toString();
+    }
+
+  }
+
   return msg.str();
 }
 
 
-// checked
 std::string toolbox::particles::assignmentchecks::internal::Database::sweepHistory() const {
 
   std::ostringstream msg;
@@ -193,7 +192,6 @@ std::string toolbox::particles::assignmentchecks::internal::Database::sweepHisto
 }
 
 
-// checked
 std::string toolbox::particles::assignmentchecks::internal::Database::
   particleHistory(const ParticleSearchIdentifier& identifier) {
   // tarch::multicore::MultiReadSingleWriteLock
@@ -235,7 +233,7 @@ std::string toolbox::particles::assignmentchecks::internal::Database::
   return msg.str();
 }
 
-// checked
+
 toolbox::particles::assignmentchecks::internal::ParticleEvents& toolbox::particles::assignmentchecks::internal::Database::addEvent(
   ParticleSearchIdentifier identifier,
   Event&       event
@@ -342,7 +340,6 @@ std::cout <<
 }
 
 
-// checked
 toolbox::particles::assignmentchecks::internal::Event toolbox::particles::assignmentchecks::internal::getPreviousEvent(ParticleEvents& particleHistory, int spacetreeId, size_t nFirstEventsToSkip) {
 
   if (particleHistory.size() <= nFirstEventsToSkip){
