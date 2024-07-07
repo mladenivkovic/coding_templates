@@ -3,20 +3,6 @@
 // TODO: temporary
 #include "tarch/Assertions.h"
 
-// #include <iterator>
-// #include <limits>
-// #include <ranges>
-
-// #include "tarch/multicore/MultiReadSingleWriteLock.h"
-
-
-// #if !defined(AssignmentChecks) and !defined(noAssignmentChecks)
-//   and PeanoDebug > 0
-// #define AssignmentChecks
-// #endif
-//
-// #ifdef AssignmentChecks
-
 toolbox::particles::assignmentchecks::internal::Event::Event(
   Type                                         type_,
   bool                                         isLocal_,
@@ -144,6 +130,3 @@ std::string toolbox::particles::assignmentchecks::internal::Event::toString(
 
   return msg.str();
 }
-
-// #endif
-// #undef AssignmentChecks

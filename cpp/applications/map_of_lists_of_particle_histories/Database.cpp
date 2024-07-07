@@ -148,7 +148,6 @@ int toolbox::particles::assignmentchecks::internal::Database::getTotalParticleEn
 }
 
 
-// TODO: THIS
 std::string toolbox::particles::assignmentchecks::internal::Database::lastMeshSweepSnapshot() {
   // tarch::multicore::MultiReadSingleWriteLock
   //   lock(_semaphore, tarch::multicore::MultiReadSingleWriteLock::Read);

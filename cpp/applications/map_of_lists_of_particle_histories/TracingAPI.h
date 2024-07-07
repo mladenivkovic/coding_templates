@@ -3,24 +3,50 @@
 #pragma once
 
 
-/* #include "peano4/datamanagement/CellMarker.h" */
-/* #include "peano4/datamanagement/VertexEnumerator.h" */
 #include "tarch/la/Vector.h"
-/* #include "tarch/multicore/MultiReadSingleWriteSemaphore.h" */
-
-/* #include "Database.h" */
 
 namespace toolbox {
   namespace particles {
+    /**
+     * @namespace toolbox::particles::assignmentchecks Correctness checks of
+     * particle-mesh assignment
+     *
+     * This API is inspired by SWIFT's swift2::dependencychecks as introduced
+     * by Mladen: We keep some history of particle-mesh associations, trace new
+     * mesh assignments and validate them against the recorded history. All the
+     * tracing degenerates to empty routines if we work in release mode, so
+     * there should not be any overhead.
+     *
+     * Most toolbox routines do automatically report against this API. However,
+     * to make the checks work, you have to report particle movements manually.
+     *
+     * Furthermore, you might want to invoke
+     * toolbox::particles::assignmentchecks::startMeshSweep() prior to your
+     * traversals to ensure that you get a nice break-down of all mesh
+     * transitions.
+     *
+     * ## Enable assignment checks
+     *
+     * By default, the assignment checks are enabled as soon as PeanoDebug is
+     * set to a value greater than 0. However, you can explicitly disable it
+     * by adding
+     *
+     * -DnoAssignmentChecks
+     *
+     * to your compile flags. This is important as assignment checks are very
+     * expensive. The checks also might yield invalid errors once you run them
+     * over multiple ranks, i.e with -DParallel.
+     */
+
     namespace assignmentchecks {
 
       /**
-       * Get history of stored sweeps.
+       * Get the history of stored sweeps.
        */
       std::string sweepHistory();
 
       /**
-       * Inform API that this is the end of a grid run-throuch
+       * Inform API that this is the end of a grid run-throuch.
        *
        * Delegates to the corresponding method in the database.
        */
@@ -47,27 +73,14 @@ namespace toolbox {
        * Record the movement of a particle
        *
        * We insert a new entry which memorises the particle movements. However,
-       * we don't want to hold arbitrary small wiggles. So we construct the old
-       * and the new particle identifier (name + position) and if they are
-       * different, subject the ParticleIdentifier comparison operator and its
-       * precision, then we log the new event.
-       * If oldParticleX however equals newParticleX, the function degenerates
-       * to nop and nothing is traced.
-       *
-       * This means that we might skip a few (tiny) particle movements. So if
-       * we finally search for the origin particle, we have to pick a bigger
-       * tolerance. After all, we might have skipped quite a lot of moves. In
-       * theory, it should be enough if we increased the tolerance by a factor
-       * of two. In practice, this is still too restrictive. We did
-       * make good experiences with increasing the tolerance by one order of
-       * magnitude.
-       *
-       * As we work with this tolerances and therefore skip particles, we have
-       * to be careful which old particle x we dump into the database. We
-       * could use oldParticleX, but we have just discussed above that we
-       * search for a corresponding entry which might be off slightly.
-       * Therefore, we do not bookmark oldParticleX -> newParticleX, but
-       * instead store found old particleX -> newParticleX.
+       * something we come across very often is that particles, once assigned to
+       * a vertex, very often stay assigned to the same vertex for a long time
+       * (=many sweeps) and only experiences small movements. Rather than tracing
+       * every single move event individually, the database will mark consecutive
+       * move events using a special event type, Event::Type::ConsecutiveMoveEvent.
+       * It will also keep track the original position of the particle, before the
+       * first move event of that sequence has occurred, as well as the current
+       * particle position.
        */
       void moveParticle(
         const std::string&                           particleName,
@@ -188,8 +201,9 @@ namespace toolbox {
        *                      particle sorting/bookkeeping algorithm allows
        *                      for a particle to be reassigned from one vertex
        *                      to another vertex on the same depth in the tree
-       *                      directly. Otherwise, expect the particle to be
-       *                      sorted either via sieves, lifts, or drops.
+       *                      directly (through its movement). Otherwise,
+       *                      expect the particle to be sorted either via
+       *                      sieves, lifts, or drops.
        */
       void assignParticleToVertex(
         const std::string&                           particleName,

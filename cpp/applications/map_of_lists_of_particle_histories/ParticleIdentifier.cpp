@@ -1,13 +1,9 @@
+#pragma once
 #include "ParticleIdentifier.h"
 
 // TODO: temporary
 #include "Assertions.h"
 
-
-#if !defined(AssignmentChecks) and !defined(noAssignmentChecks) \
-  and PeanoDebug > 0
-#define AssignmentChecks
-#endif
 
 toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   ParticleIdentifier(
@@ -29,7 +25,6 @@ toolbox::particles::assignmentchecks::internal::ParticleSearchIdentifier::
   ParticleIdentifier(particleName__, particleX__, particleID__),
   positionTolerance(positionTolerance__) {}
 
-// double toolbox::particles::assignmentchecks::internal::ParticleIdentifier::Precision = 1e-2;
 
 bool toolbox::particles::assignmentchecks::internal::ParticleIdentifier::
   numericalEquals(const ParticleIdentifier& rhs) const {
