@@ -15,12 +15,10 @@
 #include "Assertions.h"
 
 
-// Define this here so files that include Database.h can access it
 #if !defined(AssignmentChecks) and !defined(noAssignmentChecks) \
   and PeanoDebug > 0
 #define AssignmentChecks
 #endif
-
 
 
 // TODO in documentation:

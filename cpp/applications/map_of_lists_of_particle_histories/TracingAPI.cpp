@@ -1,5 +1,6 @@
 #include "TracingAPI.h"
-#include "Database.h"
+#include "Database.h" // needed for defined(AssignmentChecks) macro and ::internal namespace
+
 
 #if defined(AssignmentChecks)
 

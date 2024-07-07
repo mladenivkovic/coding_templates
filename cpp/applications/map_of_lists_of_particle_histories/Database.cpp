@@ -132,7 +132,6 @@ std::string toolbox::particles::assignmentchecks::internal::Database::toString(
 }
 
 
-// checked
 int toolbox::particles::assignmentchecks::internal::Database::getTotalParticleEntries(
   const ParticleSearchIdentifier& identifier
 ) {
