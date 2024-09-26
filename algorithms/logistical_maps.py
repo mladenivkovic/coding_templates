@@ -9,7 +9,7 @@ import numpy as np
 
 
 M = 500
-r = 4. * np.linspace(0., 1., M)
+r = 4.0 * np.linspace(0.0, 1.0, M)
 
 
 def iterate(x, r, N):
@@ -18,7 +18,7 @@ def iterate(x, r, N):
     """
     xi = x
     for i in range(N):
-        xi = r * xi * (1. - xi)
+        xi = r * xi * (1.0 - xi)
 
     return xi
 
@@ -33,7 +33,6 @@ def iterate_all(start, stop, step):
 
     res = []
 
-
     for i in range(start, stop, step):
         xi = 0.5 * np.ones(M)
         xi = iterate(xi, r, i)
@@ -46,7 +45,7 @@ def plot_on_axis(ax, results, title):
 
     colors = plt.cm.jet(np.linspace(0, 1, len(results)))
 
-    for i,res in enumerate(results):
+    for i, res in enumerate(results):
         ax.plot(r, res, color=colors[i])
 
     ax.set_xlabel("r")
@@ -54,12 +53,9 @@ def plot_on_axis(ax, results, title):
     ax.set_title(title)
 
 
-
-
 fig = plt.figure()
 ax1 = fig.add_subplot(1, 2, 1)
 ax2 = fig.add_subplot(1, 2, 2)
-
 
 
 res1 = iterate_all(1, 100, 1)
@@ -72,4 +68,3 @@ plot_on_axis(ax2, res2, "1->10001 iterations in steps of 100")
 
 plt.show()
 plt.close()
-
