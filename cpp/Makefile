@@ -116,6 +116,9 @@ logical_operators.o: logical_operators.cpp
 namespaces.o: namespaces.cpp namespaces_header.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+numerical_limits.o: numerical_limits.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 scopes.o: scopes.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
