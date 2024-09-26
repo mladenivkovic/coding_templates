@@ -54,7 +54,7 @@ def get_low_index(i, x, r):
         x: particle position
         r: particle "radius" (half square edge lenght)
 
-    returns: 
+    returns:
         ilo: lowest cell index
     """
 
@@ -78,7 +78,7 @@ def get_high_index(i, x, r):
         x: particle position
         r: particle "radius" (half square edge lenght)
 
-    returns: 
+    returns:
         ihi: highest cell index
     """
     ihi = i
@@ -103,7 +103,7 @@ def get_volume_fractions(ilo, ihi, x, r):
         x: position of particle
         r: particle "radius" (half square edge lenght)
 
-    returns: 
+    returns:
         [(ilo, volume portion in this index), ..., (ihi, volume portion)]
         # it's a list of tuples
     """

@@ -15,7 +15,7 @@ def atomic_cas(v: lockable_var, old, new):
     Atomic compare and swap.
     if `v.val == old`, set to `new`
 
-    returns: 
+    returns:
         True if successfully changed var,
         False otherwise
     """

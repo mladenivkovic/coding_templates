@@ -47,7 +47,7 @@ class lockable_var(object):
         """
         Lock the variable.
         returns  True on success, False otherwise
-            """
+        """
         if self.locked:
             raise LockError("trying to lock already locked variable")
             return False

@@ -13,8 +13,7 @@ import numpy as np
 
 
 # Actual, analytical value
-phi_ana = (1. + np.sqrt(5.)) * 0.5
-
+phi_ana = (1.0 + np.sqrt(5.0)) * 0.5
 
 
 def phi(n):
@@ -23,9 +22,9 @@ def phi(n):
     """
 
     if n == 0:
-        return 1.;
+        return 1.0
 
-    return 1. + 1. / (phi(n - 1))
+    return 1.0 + 1.0 / (phi(n - 1))
 
 
 nlist = []
@@ -36,8 +35,7 @@ for n in range(30):
     p = phi(n)
     nlist.append(n)
     philist.append(p)
-    difflist.append(np.abs((phi_ana - p)/ phi_ana))
-
+    difflist.append(np.abs((phi_ana - p) / phi_ana))
 
 
 plt.figure()
