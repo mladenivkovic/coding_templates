@@ -46,5 +46,5 @@ for cmap, color_ax, gray_ax, null_ax in zip(cmaps, axes[1::3], axes[2::3], axes[
     gray_ax.imshow(im, cmap=grayify_cmap(cmap))
 
 
-plt.savefig("colormaps.png", dpi=300)
+plt.savefig("plot_colormap_graph.png", dpi=300)
 plt.show()
