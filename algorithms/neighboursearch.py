@@ -538,7 +538,7 @@ def get_neighbours_naive(x, y, h, fact=1.0, L=1.0, periodic=True):
     L:          boxsize
     periodic:   Whether you assume periodic boundary conditions
 
-    
+
     returns:
         neighbours:     list of lists of all neighbours for each particle
         nneigh:         numpy array of now many neighbours each particle has

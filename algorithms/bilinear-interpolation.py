@@ -14,7 +14,7 @@ import numpy as np
 
 def linear_interpol_1D(x, dx, i, yi, yj):
     """
-    Linearly interpolate between (xi, yi) and 
+    Linearly interpolate between (xi, yi) and
     (yj, xj) at the point x with xi < x < xj.
 
     x:      point where you want the interpolation
