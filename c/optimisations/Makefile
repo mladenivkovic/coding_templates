@@ -32,7 +32,7 @@ OPTIONS = -pedantic -std=c11 -fopenmp
 OPT = -Og
 # dev options
 # DEV =
-DEV = -g -Wall -Wextra -fsignaling-nans -Warray-bounds -fsanitize=address
+DEV = -g -Wall -Wextra
 # Warning: -ffinite-math-only assumes all math will be finite, 
 # and won't catch infs and nans
 
@@ -56,7 +56,7 @@ CFLAGS = $(DEFINES) $(OPT) $(OPTIONS) $(DEV) $(INCLUDES)
 #==================================
 
 # EXECS = $(notdir $(patsubst %.c, %.o, $(wildcard $(SRCDIR)/*.c)))
-EXECS=flipping_signs.o accessing_multidim_arrays.o
+EXECS=flipping_signs.o accessing_multidim_arrays.o recursion.o
 
 EXECS_NOSTD=
 
