@@ -21,9 +21,7 @@ nelements = int(2 ** round(exp + 0.5, 0))
 sl = [None for i in range(nelements)]
 
 
-# -----------------------------
 def get_in_heap(val, i):
-    # -----------------------------
     if sl[i] is None:
         sl[i] = val
     else:
