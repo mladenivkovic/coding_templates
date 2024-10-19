@@ -109,7 +109,7 @@ fig = plt.figure()
 ax = fig.add_subplot(111)
 
 im = ax.imshow(density, origin="lower", extent=(0, boxlen, 0, boxlen))
-ax.scatter(x, y, facecolor="white", edgecolor="black", linewidth="1", s=10)
+ax.scatter(x, y, facecolor="white", edgecolor="black", linewidth=1, s=10)
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 

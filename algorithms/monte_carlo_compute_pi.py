@@ -28,7 +28,7 @@ def compute_pi(N):
 
     xr = np.random.uniform(-1, 1, N)
     yr = np.random.uniform(-1, 1, N)
-    is_in = np.zeros(N, dtype=np.int)
+    is_in = np.zeros(N, dtype=int)
     count = 0
 
     for i in range(N):
