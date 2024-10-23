@@ -62,7 +62,7 @@ void print_array(void *arr, char which, size_t n) {
   printf("\n\n");
 }
 
-int main() {
+int main(void) {
 
   /* Create and open file to dump into */
 
@@ -70,7 +70,7 @@ int main() {
   fp = fopen("binary_dump.dat", "wb");
 
   size_t i;
-  int exit;
+  int exitCode = 0;
 
   /* Start dumping stuff */
 
@@ -166,32 +166,32 @@ int main() {
 
   /* Integers   */
   /*------------*/
-  exit = fread(&count_int, sizeof(size_t), 1, fp);
-  exit = fread(intarr, sizeof(int32_t), count_int, fp);
+  exitCode = fread(&count_int, sizeof(size_t), 1, fp);
+  exitCode = fread(intarr, sizeof(int32_t), count_int, fp);
   print_array((void *)intarr, 'i', count_int);
 
   /* Floats     */
   /*------------*/
-  exit = fread(&count_float, sizeof(size_t), 1, fp);
-  exit = fread(floatarr, sizeof(float), count_float, fp);
+  exitCode = fread(&count_float, sizeof(size_t), 1, fp);
+  exitCode = fread(floatarr, sizeof(float), count_float, fp);
   print_array((void *)floatarr, 'f', count_float);
 
   /* doubles    */
   /*------------*/
-  exit = fread(&count_double, sizeof(size_t), 1, fp);
-  exit = fread(doublearr, sizeof(double), count_double, fp);
+  exitCode = fread(&count_double, sizeof(size_t), 1, fp);
+  exitCode = fread(doublearr, sizeof(double), count_double, fp);
   print_array((void *)doublearr, 'd', count_double);
 
   /* chars      */
   /*------------*/
-  exit = fread(&count_char, sizeof(size_t), 1, fp);
-  exit = fread(chararr, sizeof(char), count_char, fp);
+  exitCode = fread(&count_char, sizeof(size_t), 1, fp);
+  exitCode = fread(chararr, sizeof(char), count_char, fp);
   print_array((void *)chararr, 'c', count_char);
 
   /* structs    */
   /*------------*/
-  exit = fread(&count_struct, sizeof(size_t), 1, fp);
-  exit = fread(structarr, sizeof(struct arbitrary_struct), count_struct, fp);
+  exitCode = fread(&count_struct, sizeof(size_t), 1, fp);
+  exitCode = fread(structarr, sizeof(struct arbitrary_struct), count_struct, fp);
   print_array((void *)structarr, 's', count_struct);
 
   fclose(fp);

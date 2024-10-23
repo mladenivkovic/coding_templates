@@ -37,11 +37,11 @@ def phiA(x):
 
 
 def xofPhiA(phi, sign):
-    """ 
+    """
     find x at which phiA(x) = phi
     just the inverse function of phiA(x)
 
-    sign: +1 or -1, for whichever value of the 
+    sign: +1 or -1, for whichever value of the
     square root you want
     """
 
@@ -53,11 +53,11 @@ def phiB(x):
 
 
 def xofPhiB(phi, sign):
-    """ 
+    """
     find x at which phiA(x) = phi
     just the inverse function of phiA(x)
 
-    sign: +1 or -1, for whichever value of the 
+    sign: +1 or -1, for whichever value of the
     square root you want
     """
 
@@ -131,6 +131,6 @@ ax.annotate(r"Clump $B$", [2.0, -15.5], color="b", va="top", ha="center")
 ax.annotate(r"Clump $A$", [12.0, -15.5], color="r", va="top", ha="center")
 
 
-plt.tight_layout()
+#  plt.tight_layout()
 #  plt.savefig("potentials.pdf")
 plt.savefig("potentials.png")

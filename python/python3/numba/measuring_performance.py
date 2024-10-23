@@ -5,7 +5,7 @@ from numba import jit
 import numpy as np
 import time
 
-x = np.arange(100).reshape(10, 10)
+x = np.arange(1000000).reshape(1000, 1000)
 
 
 @jit(nopython=True)
@@ -39,10 +39,5 @@ print("Elapsed (after compilation) = {0:.3e}".format(end - start))
 start = time.time()
 go_slow(x)
 end = time.time()
-print("Elapsed (with compilation) = {0:.3e}".format(end - start))
+print("Elapsed (no numba) = {0:.3e}".format(end - start))
 
-# NOW THE FUNCTION IS COMPILED, RE-TIME IT EXECUTING FROM CACHE
-start = time.time()
-go_slow(x)
-end = time.time()
-print("Elapsed (after compilation) = {0:.3e}".format(end - start))
