@@ -8,3 +8,4 @@ C/openmp/pdf
 *.log
 *.synctex.gz
 compile_commands.json
+**/.cache
