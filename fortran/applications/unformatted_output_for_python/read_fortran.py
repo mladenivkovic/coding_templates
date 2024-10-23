@@ -20,7 +20,7 @@ print(f.read_reals(dtype=np.float64))
 print(f.read_reals(dtype=np.float64))
 
 char = f.read_record(dtype=np.int8)
-print(char, "->", chr(char))
+print(char, "->", chr(char.item()))
 string = f.read_record(dtype=np.int8)
 print(string, "->", "".join(chr(c) for c in string))
 

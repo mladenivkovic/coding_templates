@@ -25,7 +25,7 @@ for i in range(4):
     for j in range(6):
         data[i][j] = i * 10 + j
 
-dataset["dset"] = data
+dataset[:] = data
 
 f.close()
 

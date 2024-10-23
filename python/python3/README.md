@@ -15,6 +15,7 @@ Some directory contents explained:
 	
 - make_a_package
 	How to make a python package that can be installed with pip
+  Note: Still uses the old setup.py method, should be ported to pyproject.toml
 	
 - plots
 	matplotlib stuff

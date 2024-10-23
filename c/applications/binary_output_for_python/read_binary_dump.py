@@ -15,8 +15,9 @@ f = open(fname, "rb")
 
 # integers
 # ---------------
-count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
-arr = np.fromfile(f, dtype=np.int32, count=count)
+# 'count' is returned as array. use ndarray.item() to get the content.
+count = np.fromfile(f, dtype=np.uint, count=1)
+arr = np.fromfile(f, dtype=np.int32, count=count.item())
 print("INTEGERS")
 print("Count:", count)
 print("Array:", arr)
@@ -25,8 +26,9 @@ print()
 
 # floats
 # ---------------
-count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
-arr = np.fromfile(f, dtype=np.float32, count=count)
+# 'count' is returned as array. use ndarray.item() to get the content.
+count = np.fromfile(f, dtype=np.uint, count=1)
+arr = np.fromfile(f, dtype=np.float32, count=count.item())
 print("FLOATS")
 print("Count:", count)
 print("Array:", arr)
@@ -35,8 +37,9 @@ print()
 
 # doubles
 # ---------------
-count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
-arr = np.fromfile(f, dtype=np.float64, count=count)
+# 'count' is returned as array. use ndarray.item() to get the content.
+count = np.fromfile(f, dtype=np.uint, count=1)
+arr = np.fromfile(f, dtype=np.float64, count=count.item())
 print("DOUBLES")
 print("Count:", count)
 print("Array:", arr)
@@ -45,8 +48,9 @@ print()
 
 # chars
 # ---------------
-count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
-arr = np.fromfile(f, dtype=np.int8, count=count)
+# 'count' is returned as array. use ndarray.item() to get the content.
+count = np.fromfile(f, dtype=np.uint, count=1)
+arr = np.fromfile(f, dtype=np.int8, count=count.item())
 a_string = "".join([chr(item) for item in arr])
 print("CHARS AND STRINGS")
 print("Count:", count)
@@ -69,8 +73,9 @@ arbitrary_type = np.dtype(
     align=True,
 )
 
-count = np.asscalar(np.fromfile(f, dtype=np.uint, count=1))
-arr = np.fromfile(f, dtype=arbitrary_type, count=count)
+# 'count' is returned as array. use ndarray.item() to get the content.
+count = np.fromfile(f, dtype=np.uint, count=1)
+arr = np.fromfile(f, dtype=arbitrary_type, count=count.item())
 print("STRUCTS")
 print("Count:", count)
 print("Array:")
