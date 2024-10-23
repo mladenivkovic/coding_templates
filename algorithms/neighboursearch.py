@@ -26,7 +26,7 @@ def main():
     np.random.seed(10)
     x = np.random.random(size=npart) * L[0]
     y = np.random.random(size=npart) * L[1]
-    h = np.ones(npart, dtype=np.float) * h_glob
+    h = np.ones(npart, dtype=float) * h_glob
 
     # if you want to manually set a particle, set it here
     part_to_plot = 0
@@ -94,10 +94,10 @@ def get_neighbours_rect(x, y, h, fact=1.0, L=[1.0, 1.0], periodic=True):
         def __init__(self):
             self.npart = 0
             self.size = 100
-            self.parts = np.zeros(self.size, dtype=np.int)
-            self.x = np.zeros(self.size, dtype=np.float)
-            self.y = np.zeros(self.size, dtype=np.float)
-            self.h = np.zeros(self.size, dtype=np.float)
+            self.parts = np.zeros(self.size, dtype=int)
+            self.x = np.zeros(self.size, dtype=float)
+            self.y = np.zeros(self.size, dtype=float)
+            self.h = np.zeros(self.size, dtype=float)
             self.xmin = 1e300
             self.xmax = -1e300
             self.ymin = 1e300
@@ -209,7 +209,7 @@ def get_neighbours_rect(x, y, h, fact=1.0, L=[1.0, 1.0], periodic=True):
         grid[i][j].add_particle(p, x[p], y[p], h[p])
 
     neighbours = [[] for i in x]
-    nneigh = np.zeros(npart, dtype=np.int)
+    nneigh = np.zeros(npart, dtype=int)
 
     # main loop: find and store all neighbours;
     # go cell by cell
@@ -342,10 +342,10 @@ def get_neighbours_square(x, y, h, fact=1.0, L=1.0, periodic=True):
         def __init__(self):
             self.npart = 0
             self.size = 100
-            self.parts = np.zeros(self.size, dtype=np.int)
-            self.x = np.zeros(self.size, dtype=np.float)
-            self.y = np.zeros(self.size, dtype=np.float)
-            self.h = np.zeros(self.size, dtype=np.float)
+            self.parts = np.zeros(self.size, dtype=int)
+            self.x = np.zeros(self.size, dtype=float)
+            self.y = np.zeros(self.size, dtype=float)
+            self.h = np.zeros(self.size, dtype=float)
             return
 
         def add_particle(self, ind, xp, yp, hp):
@@ -353,10 +353,10 @@ def get_neighbours_square(x, y, h, fact=1.0, L=1.0, periodic=True):
             Add a particle, store the index, positions and h
             """
             if self.npart == self.size:
-                self.parts = np.append(self.parts, np.zeros(self.size, dtype=np.int))
-                self.x = np.append(self.x, np.zeros(self.size, dtype=np.float))
-                self.y = np.append(self.y, np.zeros(self.size, dtype=np.float))
-                self.h = np.append(self.h, np.zeros(self.size, dtype=np.float))
+                self.parts = np.append(self.parts, np.zeros(self.size, dtype=int))
+                self.x = np.append(self.x, np.zeros(self.size, dtype=float))
+                self.y = np.append(self.y, np.zeros(self.size, dtype=float))
+                self.h = np.append(self.h, np.zeros(self.size, dtype=float))
                 self.size *= 2
 
             self.parts[self.npart] = ind
@@ -422,12 +422,12 @@ def get_neighbours_square(x, y, h, fact=1.0, L=1.0, periodic=True):
         grid[i][j].add_particle(p, x[p], y[p], h[p])
 
     neighbours = [[] for i in x]
-    nneigh = np.zeros(npart, dtype=np.int)
+    nneigh = np.zeros(npart, dtype=int)
 
     if ncells < 4:
         # you'll always need to check all cells, so just do that
-        i_search = np.zeros(ncells * ncells, dtype=np.int)
-        j_search = np.zeros(ncells * ncells, dtype=np.int)
+        i_search = np.zeros(ncells * ncells, dtype=int)
+        j_search = np.zeros(ncells * ncells, dtype=int)
         ind = 0
         for i in range(ncells):
             for j in range(ncells):
@@ -597,7 +597,7 @@ def get_neighbours_naive(x, y, h, fact=1.0, L=1.0, periodic=True):
         )
 
     # get neighbour counts array
-    nneigh = np.zeros((npart), dtype=np.int)
+    nneigh = np.zeros((npart), dtype=int)
     for i in range(npart):
         nneigh[i] = len(neighbours[i])
 
