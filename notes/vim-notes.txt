@@ -1,12 +1,24 @@
- /$$    /$$ /$$$$$$ /$$      /$$       /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$$$  /$$$$$$ 
-| $$   | $$|_  $$_/| $$$    /$$$      | $$$ | $$ /$$__  $$|__  $$__/| $$_____/ /$$__  $$
-| $$   | $$  | $$  | $$$$  /$$$$      | $$$$| $$| $$  \ $$   | $$   | $$      | $$  \__/
-|  $$ / $$/  | $$  | $$ $$/$$ $$      | $$ $$ $$| $$  | $$   | $$   | $$$$$   |  $$$$$$ 
- \  $$ $$/   | $$  | $$  $$$| $$      | $$  $$$$| $$  | $$   | $$   | $$__/    \____  $$
-  \  $$$/    | $$  | $$\  $ | $$      | $$\  $$$| $$  | $$   | $$   | $$       /$$  \ $$
-   \  $/    /$$$$$$| $$ \/  | $$      | $$ \  $$|  $$$$$$/   | $$   | $$$$$$$$|  $$$$$$/
-    \_/    |______/|__/     |__/      |__/  \__/ \______/    |__/   |________/ \______/ 
-                                                                                        
+=============================
+Frequently Looked Up
+=============================
+
+
+.                       repeat last normal command
+@/                      repeat last / command
+@:                      repeat last search/replace command 
+
+ctrl-W T                Move current split window into its own tab
+
+:set spell 		turn spellcheck on
+]s			next misspelt word
+[s			previous misspelt word
+z=		  	when cursor on misspelt word, suggest fixes	
+zg			add "misspelt" word to dictionary
+zw			add "correctly spelled" word to dictionary as incorrect
+
+
+color
+
 
 
 
@@ -14,7 +26,7 @@
 Inserting/Changing Text
 =============================
 i                       insert (before cursor)
-I                       intert at beginning of line
+I                       insert at beginning of line
 
 a                       append after cursor
 A                       append at end of line
