@@ -17,8 +17,22 @@ zg			add "misspelt" word to dictionary
 zw			add "correctly spelled" word to dictionary as incorrect
 
 
-color
 
+==============================
+YouCompleteMe
+==============================
+
+,d          go to definition
+,D          go to declaration
+,H          show documentation
+,h          show documentation as pop-up
+,u          go to callers
+,a          go to alternate file (.c <-> .h)
+,t          get type
+\h          toggle inlay hints
+F5          compile and do diagnostics
+,yfw        find symbol in workspace
+,zfd        find symbol in document
 
 
 
@@ -198,4 +212,19 @@ VIMDIFF
 =============================
 
 set diffopt+=iwhite     ignore whitespace
+
+
+
+
+
+==============================
+Spellcheck
+==============================
+
+:set spell 		turn spellcheck on
+]s			next misspelt word
+[s			previous misspelt word
+z=		  	when cursor on misspelt word, suggest fixes	
+zg			add "misspelt" word to dictionary
+zw			add "correctly spelled" word to dictionary as incorrect
 
