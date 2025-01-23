@@ -1,0 +1,16 @@
+CXX=icpx
+
+
+OPTFLAGS = 	-O2 -g 
+WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
+STDFLAGS= 	-std=c++20
+
+CXXFLAGS=   $(OPTFLAGS) $(WFLAGS) $(STDFLAGS)
+
+
+
+timer_example.o: timer_example.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+clean:
+	rm -f *.o
