@@ -147,6 +147,9 @@ structs.o: structs.cpp
 switch.o: switch.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+timing.o: timing.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 vectors.o: vectors.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
