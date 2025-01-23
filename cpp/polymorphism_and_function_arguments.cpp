@@ -1,35 +1,35 @@
 #include <iostream>
 
-
 class A {
 protected:
   int val;
+
 public:
-  void print(){ std:: cout << "Hello from A! My val is=" << val << std::endl;};
-  void virtual vprint(){ std:: cout << "Hello from virtual A! My val is=" << val << std::endl;};
-  A(int _val){ val = _val; };
+  void print() { std::cout << "Hello from A! My val is=" << val << std::endl; };
+  void virtual vprint() {
+    std::cout << "Hello from virtual A! My val is=" << val << std::endl;
+  };
+  A(int _val) { val = _val; };
 };
 
 class B : public A {
 public:
-  void print(){ std:: cout << "Hello from B! My val is=" << val << std::endl;};
-  void virtual vprint(){ std:: cout << "Hello from virtual B! My val is=" << val << std::endl;};
-  B(int _val): A(_val) { };
+  void print() { std::cout << "Hello from B! My val is=" << val << std::endl; };
+  void virtual vprint() {
+    std::cout << "Hello from virtual B! My val is=" << val << std::endl;
+  };
+  B(int _val) : A(_val) {};
 };
 
-
-
-
-void f_by_value(A a){
+void f_by_value(A a) {
   a.print();
   a.vprint();
 }
 
-void f_by_ref(A& a){
+void f_by_ref(A &a) {
   a.print();
   a.vprint();
 }
-
 
 // --------------------------------------------------
 

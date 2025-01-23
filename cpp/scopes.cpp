@@ -13,7 +13,7 @@ int main() {
     int a = 7;        // inner block a
     std::cout << a << std::endl;   // prints 7
     std::cout << ++a << std::endl; // prints 8
-  }                                // exit inner block
-  std::cout << ++a << std::endl;   // 3 is printed
+  } // exit inner block
+  std::cout << ++a << std::endl; // 3 is printed
   return 0;
 }

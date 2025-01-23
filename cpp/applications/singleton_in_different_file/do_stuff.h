@@ -1,8 +1,8 @@
 #pragma once
 
-namespace doStuff{
+namespace doStuff {
 
-  void foo();
-  void bar();
+void foo();
+void bar();
 
-}
+} // namespace doStuff

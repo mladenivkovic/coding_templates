@@ -1,11 +1,12 @@
-#include <iostream>
 #include "TestHelpers.h"
+#include <iostream>
 
 int main(void) {
 
   bool verbose = true;
 
-  toolbox::particles::assignmentchecks::tests::TestHelpers runner = toolbox::particles::assignmentchecks::tests::TestHelpers();
+  toolbox::particles::assignmentchecks::tests::TestHelpers runner =
+      toolbox::particles::assignmentchecks::tests::TestHelpers();
   runner.testTruthTableSearchAndIDKeys(verbose);
   runner.testAddingSweepsToDatabase(verbose);
   runner.testAddingParticleEvents(verbose);
@@ -14,7 +15,6 @@ int main(void) {
   // test shifting particle identifier and trimming database
   runner.testAddingParticleMovingEvents(100, 16, verbose);
 
-
   runner.testParticleWalkSameTreeLevel();
   runner.testParticleLiftDrop();
   runner.testParticleWalk();
@@ -22,6 +22,5 @@ int main(void) {
 
   runner.testSieveSet();
 
-  std::cout << "Done. Bye!" <<  std::endl;
-
+  std::cout << "Done. Bye!" << std::endl;
 }
