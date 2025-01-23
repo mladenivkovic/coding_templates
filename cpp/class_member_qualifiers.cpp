@@ -27,7 +27,7 @@ public:
   static constexpr int myStaticConstExprInt = -5;
 
   // Constructor 1
-  MyClass(){};
+  MyClass() {};
 
   // Constructor 2
   MyClass(int _myInt, int _myIntWithInitval,

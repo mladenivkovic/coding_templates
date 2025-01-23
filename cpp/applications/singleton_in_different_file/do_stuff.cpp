@@ -3,10 +3,9 @@
 
 #include <iostream>
 
+void doStuff::foo() {
 
-void doStuff::foo(){
-
-  singleton::S& s = singleton::S::getInstance();
+  singleton::S &s = singleton::S::getInstance();
   std::cout << "In foo: Got singleton ref at         " << &s << std::endl;
 
   s.getVar();
@@ -15,14 +14,13 @@ void doStuff::foo(){
   s.setOtherVar(18);
   s.getVar();
   s.getOtherVar();
-
 }
 
-namespace doStuff{
-  singleton::S& s_outer = singleton::S::getInstance();
+namespace doStuff {
+singleton::S &s_outer = singleton::S::getInstance();
 }
 
-void doStuff::bar(){
+void doStuff::bar() {
 
   std::cout << "In foo: Got singleton ref at         " << &s_outer << std::endl;
 
@@ -32,7 +30,4 @@ void doStuff::bar(){
   s_outer.setOtherVar(180);
   s_outer.getVar();
   s_outer.getOtherVar();
-
 }
-
-

@@ -6,11 +6,6 @@
 #include "PeanoPart.h"
 #include "templated_functions_as_function_arguments.h"
 
-
-
-
-
-
 int main(void) {
 
   hydroPartSet myPartSet = generateDummyPartSet(10);
@@ -19,13 +14,10 @@ int main(void) {
 
   call_function_with_one_templated_parameter(myPartSet, &workOnPart);
 
-
-
   // Sanity check
   // for (auto p : myPartSet){
   //   std::cout << p->getPartID() << " " << *(p->getX().begin()) << "\n";
   // }
 
   return 0;
-
 }

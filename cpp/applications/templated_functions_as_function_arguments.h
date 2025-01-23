@@ -5,13 +5,7 @@
 // #include <functional> // needed for std::function
 /* #include <iostream> */
 
-
 #include "PeanoPart.h"
-
-
-
-
-
 
 // template <typename ParticleContainer>
 
@@ -20,13 +14,11 @@
  */
 template <typename ParticleContainer>
 void call_function_with_one_templated_parameter(
-  const ParticleContainer&    localParticles,
-  bool (*workOnParticle)(hydroPart &)
-) {
+    const ParticleContainer &localParticles,
+    bool (*workOnParticle)(hydroPart &)) {
 
-  for (auto* particle: localParticles) {
-    if (workOnParticle(*particle)) particle->sayHello();
+  for (auto *particle : localParticles) {
+    if (workOnParticle(*particle))
+      particle->sayHello();
   }
 }
-
-

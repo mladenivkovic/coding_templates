@@ -2,37 +2,37 @@
 // use, please see the copyright notice at www.peano-framework.org
 #pragma once
 
-#include <string>
 #include <bitset>
-#include <sstream>
-#include <initializer_list>
 #include <cassert>
+#include <initializer_list>
+#include <sstream>
+#include <string>
 
 #ifdef MACHINE_PRECISION
-    constexpr double NUMERICAL_ZERO_DIFFERENCE = MACHINE_PRECISION;
+constexpr double NUMERICAL_ZERO_DIFFERENCE = MACHINE_PRECISION;
 #else
-    constexpr double NUMERICAL_ZERO_DIFFERENCE = 1.0e-8;
+constexpr double NUMERICAL_ZERO_DIFFERENCE = 1.0e-8;
 #endif
 
 #define InlineMethod
 
 namespace tarch {
-  namespace la {
-    template <int Size, typename Scalar>
-    struct Vector;
+namespace la {
+template <int Size, typename Scalar> struct Vector;
 
-    template <typename NewScalarType, int Size, typename Scalar>
-    tarch::la::Vector<Size,NewScalarType> convertScalar(const tarch::la::Vector<Size,Scalar>&  vector);
-  }
-}
+template <typename NewScalarType, int Size, typename Scalar>
+tarch::la::Vector<Size, NewScalarType>
+convertScalar(const tarch::la::Vector<Size, Scalar> &vector);
+} // namespace la
+} // namespace tarch
 
 /**
  * Pipes the elements of a vector into a std::string and returns the string.
  *
  * Not a member of the class as I otherwise can't translate it for GPUs.
  */
-template<int Size, typename Scalar>
-std::string toString( const tarch::la::Vector<Size,Scalar>&  vector );
+template <int Size, typename Scalar>
+std::string toString(const tarch::la::Vector<Size, Scalar> &vector);
 
 /**
  * Simple vector class
@@ -108,162 +108,168 @@ std::string toString( const tarch::la::Vector<Size,Scalar>&  vector );
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * #include "tarch/accelerator/sycl/Device.h"
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<2,double> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<2,double> >:
+ * std::true_type {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<3,double> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<3,double> >:
+ * std::true_type {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<4,double> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<4,double> >:
+ * std::true_type {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<5,double> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<5,double> >:
+ * std::true_type {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<2,int> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<2,int> >: std::true_type
+ * {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<3,int> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<3,int> >: std::true_type
+ * {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<4,int> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<4,int> >: std::true_type
+ * {};
  *
  * template<>
- * struct sycl::is_device_copyable< tarch::la::Vector<5,int> >: std::true_type {};
+ * struct sycl::is_device_copyable< tarch::la::Vector<5,int> >: std::true_type
+ * {};
  *
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
  */
-template <int Size, typename Scalar>
-struct tarch::la::Vector {
-  private:
-    Scalar _values[Size];
+template <int Size, typename Scalar> struct tarch::la::Vector {
+private:
+  Scalar _values[Size];
 
-  public:
-    /**
-     * Clang requires the always_inline attribute, as it otherwise makes weird decisions.
-     */
-    Vector() InlineMethod = default;
+public:
+  /**
+   * Clang requires the always_inline attribute, as it otherwise makes weird
+   * decisions.
+   */
+  Vector() InlineMethod = default;
 
-    Vector( const Scalar* values ) InlineMethod;
+  Vector(const Scalar *values) InlineMethod;
 
-    /**
-     * Initialisation via initialisation list.
-     *
-     * You can't inline an initialisation list, as the realisation of this
-     * routine relies on an iterator and the iterator within the C++ std lib
-     * won't be inlined.
-     */
-    Vector( std::initializer_list<Scalar> values );
+  /**
+   * Initialisation via initialisation list.
+   *
+   * You can't inline an initialisation list, as the realisation of this
+   * routine relies on an iterator and the iterator within the C++ std lib
+   * won't be inlined.
+   */
+  Vector(std::initializer_list<Scalar> values);
 
-    Vector( const std::bitset<Size>& values ) InlineMethod;
+  Vector(const std::bitset<Size> &values) InlineMethod;
 
-    /**
-     * Construct new vector and initialize all components with initialValue.
-     */
-    Vector(const Scalar& initialValue);
+  /**
+   * Construct new vector and initialize all components with initialValue.
+   */
+  Vector(const Scalar &initialValue);
 
-    /**
-     * Assignment operator for any vector type.
-     *
-     * <h2> Vectorisation </h2>
-     *
-     * We do not allow assignment of a vector this itself. Consequently, we can
-     * insert an ivdep statement and thus allow the compiler to optimise.
-     */
-    inline Vector<Size,Scalar>& operator= (const Vector<Size,Scalar>& toAssign) InlineMethod;
+  /**
+   * Assignment operator for any vector type.
+   *
+   * <h2> Vectorisation </h2>
+   *
+   * We do not allow assignment of a vector this itself. Consequently, we can
+   * insert an ivdep statement and thus allow the compiler to optimise.
+   */
+  inline Vector<Size, Scalar> &
+  operator=(const Vector<Size, Scalar> &toAssign) InlineMethod;
 
-    /**
-     * Copy constructor to copy from any vector type.
-     *
-     * The only way to accomplish this with enable-if is to specify a second
-     * dummy argument with default value, which is (hopefully) optimized away.
-     *
-     * @see operator= for a discussion of SSE optimisation.
-     */
-    Vector(const Vector<Size,Scalar>&  toCopy);
+  /**
+   * Copy constructor to copy from any vector type.
+   *
+   * The only way to accomplish this with enable-if is to specify a second
+   * dummy argument with default value, which is (hopefully) optimized away.
+   *
+   * @see operator= for a discussion of SSE optimisation.
+   */
+  Vector(const Vector<Size, Scalar> &toCopy);
 
-    /**
-     * Returns the number of components of the vector.
-     */
-    int size() const;
+  /**
+   * Returns the number of components of the vector.
+   */
+  int size() const;
 
-    /**
-     * Returns read-only ref. to component of given index.
-     *
-     * <h2> SSE Optimisation </h2>
-     *
-     * - We have to manually inline this operation. Otherwise, icc interprets operator
-     *   calls, i.e. vector element accesses, as function calls and does not vectorise
-     *   loops containing vector element accesses.
-     */
-    inline const Scalar& operator[] (int index) const InlineMethod {
+  /**
+   * Returns read-only ref. to component of given index.
+   *
+   * <h2> SSE Optimisation </h2>
+   *
+   * - We have to manually inline this operation. Otherwise, icc interprets
+   * operator calls, i.e. vector element accesses, as function calls and does
+   * not vectorise loops containing vector element accesses.
+   */
+  inline const Scalar &operator[](int index) const InlineMethod {
 #if defined(GPUOffloadingOff)
-          assertion3 ( index >= 0, index, Size, ::toString(*this) );
-          assertion4 ( index < Size, index, Size, ::toString(*this), "you may not take the indexth entry from a vector with only Size components" );
+    assertion3(index >= 0, index, Size, ::toString(*this));
+    assertion4(index < Size, index, Size, ::toString(*this),
+               "you may not take the indexth entry from a vector with only "
+               "Size components");
 #endif
-        return _values[index];
-    }
+    return _values[index];
+  }
 
-    /**
-     * Returns ref. to component of given index.
-     *
-     * @see operator[] for remarks on SSE
-     */
-    inline Scalar& operator[] (int index) InlineMethod {
+  /**
+   * Returns ref. to component of given index.
+   *
+   * @see operator[] for remarks on SSE
+   */
+  inline Scalar &operator[](int index) InlineMethod {
 #if defined(GPUOffloadingOff)
-          assertion3 ( index >= 0, index, Size, ::toString(*this) );
-          assertion3 ( index < Size, index, Size, ::toString(*this) );
+    assertion3(index >= 0, index, Size, ::toString(*this));
+    assertion3(index < Size, index, Size, ::toString(*this));
 #endif
-        return _values[index];
-    }
+    return _values[index];
+  }
 
-    /**
-     * Returns read-only ref. to component of given index.
-     *
-     * If we use the vector on the GPU, we cannot have assertions. If we use
-     * SYCL on the CPU for the multitasking, we cannot have assertions in the
-     * SYCL part either, as SYCL aims to be platform-independent, i.e. has to
-     * assume that the code generated also will be deployed to a GPU. See
-     * discussion on @ref tarch_accelerator_SYCL.
-     *
-     * @see operator[] for remarks on SSE
-     */
-    inline const Scalar& operator() (int index) const InlineMethod {
+  /**
+   * Returns read-only ref. to component of given index.
+   *
+   * If we use the vector on the GPU, we cannot have assertions. If we use
+   * SYCL on the CPU for the multitasking, we cannot have assertions in the
+   * SYCL part either, as SYCL aims to be platform-independent, i.e. has to
+   * assume that the code generated also will be deployed to a GPU. See
+   * discussion on @ref tarch_accelerator_SYCL.
+   *
+   * @see operator[] for remarks on SSE
+   */
+  inline const Scalar &operator()(int index) const InlineMethod {
 #if defined(GPUOffloadingOff)
-          assertion3 ( index >= 0, index, Size, ::toString(*this) );
-          assertion3 ( index < Size, index, Size, ::toString(*this) );
+    assertion3(index >= 0, index, Size, ::toString(*this));
+    assertion3(index < Size, index, Size, ::toString(*this));
 #endif
-        return _values[index];
-    }
+    return _values[index];
+  }
 
-    /**
-     * Returns ref. to component of given index.
-     *
-     * @see operator[] for remarks on SSE
-     */
-    inline Scalar& operator() (int index) InlineMethod {
+  /**
+   * Returns ref. to component of given index.
+   *
+   * @see operator[] for remarks on SSE
+   */
+  inline Scalar &operator()(int index) InlineMethod {
 #if defined(GPUOffloadingOff)
-        assertion3 ( index >= 0, index, Size, ::toString(*this) );
-        assertion3 ( index < Size, index, Size, ::toString(*this) );
+    assertion3(index >= 0, index, Size, ::toString(*this));
+    assertion3(index < Size, index, Size, ::toString(*this));
 #endif
-       return _values[index];
-     }
+    return _values[index];
+  }
 
-    /**
-     * This routine returns a pointer to the first data element. Not a
-     * beautiful one as it harms the OO idea, but in many cases it is
-     * convenient to have this operation.
-     */
-    Scalar* data() {
-      return _values;
-    }
+  /**
+   * This routine returns a pointer to the first data element. Not a
+   * beautiful one as it harms the OO idea, but in many cases it is
+   * convenient to have this operation.
+   */
+  Scalar *data() { return _values; }
 
-    const Scalar * data() const {
-      return _values;
-    }
+  const Scalar *data() const { return _values; }
 };
-
 
 #include "tarch/la/ScalarOperations.h"
 #include "tarch/la/Vector.cpph"
@@ -271,4 +277,3 @@ struct tarch::la::Vector {
 #include "tarch/la/VectorScalarOperations.h"
 #include "tarch/la/VectorVectorOperations.h"
 /* #include "tarch/la/VectorSlice.h" */
-
