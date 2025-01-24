@@ -7,38 +7,43 @@
 
 namespace timer {
 
+  // Alias the namespace for convenience.
+  namespace chr = std::chrono;
+
+  // Rename time units for convenience.
   namespace unit {
-    using ms = std::chrono::milliseconds;
-    using ns = std::chrono::nanoseconds;
-    using mus = std::chrono::microseconds;
-    using s = std::chrono::seconds;
+    using ms = chr::milliseconds;
+    using ns = chr::nanoseconds;
+    using mus = chr::microseconds;
+    using s = chr::seconds;
   }
 
   using default_time_units = unit::ms;
 
   /**
-   * @brief a small class to help with timing.
-   * Either print out timing when the object destructs, or
-   * do it manually using timer::timer.end()
+   * @brief a small class to time code execution.
+   * Usage: Create a Timer object. Time count starts at instantiation.
+   * The timing is printed out when the object destructs, or do it manually
+   * using timer::Timer.end()
    */
 template <typename time_units = default_time_units>
-  class timer {
+  class Timer {
 
 private:
 
-  std::chrono::time_point<std::chrono::high_resolution_clock> _start;
+  chr::time_point<chr::high_resolution_clock> _start;
   std::string _msg;
   bool _printed;
 
   void _start_timing(void) {
-    _start = std::chrono::high_resolution_clock::now();
+    _start = chr::high_resolution_clock::now();
   }
 
   /**
    * @brief get duration since object was created.
    */
   long _get_duration(void) {
-    std::chrono::time_point<std::chrono::high_resolution_clock> _stop = std::chrono::high_resolution_clock::now();
+    chr::time_point<chr::high_resolution_clock> _stop = chr::high_resolution_clock::now();
     auto duration = duration_cast<time_units>(_stop - _start);
     return duration.count();
   }
@@ -48,17 +53,17 @@ private:
    */
   std::string _units_str() {
 
-    if (typeid(time_units) == typeid(std::chrono::nanoseconds)) {
+    if (typeid(time_units) == typeid(chr::nanoseconds)) {
       return "[ns]";
-    } else if (typeid(time_units) == typeid(std::chrono::microseconds)) {
+    } else if (typeid(time_units) == typeid(chr::microseconds)) {
       return "[mus]";
-    } else if (typeid(time_units) == typeid(std::chrono::milliseconds)) {
+    } else if (typeid(time_units) == typeid(chr::milliseconds)) {
       return "[ms]";
-    } else if (typeid(time_units) == typeid(std::chrono::seconds)) {
+    } else if (typeid(time_units) == typeid(chr::seconds)) {
       return "[s]";
-    } else if (typeid(time_units) == typeid(std::chrono::minutes)) {
+    } else if (typeid(time_units) == typeid(chr::minutes)) {
       return "[min]";
-    } else if (typeid(time_units) == typeid(std::chrono::hours)) {
+    } else if (typeid(time_units) == typeid(chr::hours)) {
       return "[h]";
     } else {
       return "[unknown units]";
@@ -84,19 +89,19 @@ private:
 public:
 
     // Constructor
-    timer() {
+    Timer() {
       _start_timing();
       _printed = false;
     }
 
-    timer(std::string msg) :
+    Timer(std::string msg) :
       _msg(msg)
     {
       _start_timing();
       _printed = false;
     }
 
-    ~timer() {
+    ~Timer() {
       if (not _printed) {
         _print_timing();
       }
@@ -106,4 +111,4 @@ public:
       _print_timing(msg);
     }
   };
-}
+} // namespace timer
