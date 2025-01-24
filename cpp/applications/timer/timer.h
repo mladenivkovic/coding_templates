@@ -3,16 +3,25 @@
 #include <chrono>
 #include <iostream>
 #include <string>
+#include <typeinfo>
 
 namespace timer {
 
-  using time_units = std::chrono::microseconds;
+  namespace unit {
+    using ms = std::chrono::milliseconds;
+    using ns = std::chrono::nanoseconds;
+    using mus = std::chrono::microseconds;
+    using s = std::chrono::seconds;
+  }
+
+  using default_time_units = unit::ms;
 
   /**
    * @brief a small class to help with timing.
    * Either print out timing when the object destructs, or
-   * do it manually using TODO.
+   * do it manually using timer::timer.end()
    */
+template <typename time_units = default_time_units>
   class timer {
 
 private:
@@ -35,18 +44,40 @@ private:
   }
 
   /**
+   * Get the used units as a string.
+   */
+  std::string _units_str() {
+
+    if (typeid(time_units) == typeid(std::chrono::nanoseconds)) {
+      return "[ns]";
+    } else if (typeid(time_units) == typeid(std::chrono::microseconds)) {
+      return "[mus]";
+    } else if (typeid(time_units) == typeid(std::chrono::milliseconds)) {
+      return "[ms]";
+    } else if (typeid(time_units) == typeid(std::chrono::seconds)) {
+      return "[s]";
+    } else if (typeid(time_units) == typeid(std::chrono::minutes)) {
+      return "[min]";
+    } else if (typeid(time_units) == typeid(std::chrono::hours)) {
+      return "[h]";
+    } else {
+      return "[unknown units]";
+    }
+  }
+
+
+  /**
    * @brief compute and print out the duration since the creation
    * of this object.
    * Marks message as "printed" so it doesn't autoprint at
    * desctruction too.
-   * @todo automate time units in printout
    */
   void _print_timing(std::string msg = "") {
     long duration = _get_duration();
     // Allow users to pass a second message, if they want.
     // Use case can be e.g. to add function call automatically at
     // creation time, and additional msg at end of measurement.
-    std::cout << "[Timing] " << _msg << " " << msg << ": " << duration << " microsec\n";
+    std::cout << "[Timing] " << _msg << " " << msg << ": " << duration << " " << _units_str() << "\n";
     _printed = true;
   }
 
@@ -74,7 +105,5 @@ public:
     void end(std::string msg = "") {
       _print_timing(msg);
     }
-
-
   };
 }
