@@ -9,7 +9,7 @@ CXXFLAGS=   $(OPTFLAGS) $(WFLAGS) $(STDFLAGS)
 
 
 
-timer_example.o: timer_example.cpp
+timer_example.o: timer_example.cpp timer.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 clean:
