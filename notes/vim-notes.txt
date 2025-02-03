@@ -33,6 +33,7 @@ YouCompleteMe
 F5                      compile and do diagnostics
 ,yfw                    find symbol in workspace
 ,zfd                    find symbol in document
+,f                      fixit
 
 
 
