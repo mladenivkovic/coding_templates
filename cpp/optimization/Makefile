@@ -2,9 +2,13 @@
 # ------------------------------------------------------------
 CXX=icpx
 
+# OPTFLAGS = 	-O3 -g
+# WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds # -fsanitize=address
+# STDFLAGS= 	-std=c++20
+
 OPTFLAGS = 	-O3
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
-STDFLAGS= 	-std=c++20 
+STDFLAGS= 	-std=c++20
 
 CXXFLAGS=   $(OPTFLAGS) $(WFLAGS) $(STDFLAGS)
 # ------------------------------------------------------------
