@@ -1,5 +1,7 @@
 /**
  * Test array access speeds between C-style arrays, std::array, and std::vector.
+ *
+ * NOTE: This program requires a big stack. Allow it to have it with `ulimit -s unlimited`.
  */
 
 #include <array>
@@ -15,7 +17,7 @@ constexpr size_t Nsmall = 10;
 constexpr size_t Nmid = 10000;
 // constexpr size_t Nmid = 100;
 //! Number of elements in large array
-constexpr size_t Nlarge = 500000000;
+constexpr size_t Nlarge = 50000000;
 // constexpr size_t Nlarge = 1000;
 
 //! stride for strided access in small array
