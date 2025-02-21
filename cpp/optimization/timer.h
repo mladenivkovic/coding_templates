@@ -47,16 +47,12 @@ private:
 
 public:
   //! Constructor
-  Timer() {
-    _start_timing();
-  }
+  Timer() { _start_timing(); }
 
   /**
    * End measurement.
    */
-  dt_type end() {
-    return _get_duration();
-  }
+  dt_type end() { return _get_duration(); }
 
   /**
    * Get the used units as a string.
@@ -79,7 +75,5 @@ public:
       return "[unknown units]";
     }
   }
-
-
 };
 } // namespace timer

@@ -2,7 +2,6 @@
  * Test array access speeds between C-style arrays, std::array, and std::vector.
  */
 
-
 #include <array>
 #include <iomanip>
 #include <iostream>
@@ -32,47 +31,39 @@ constexpr size_t Nrepeat = 10;
 //! Talk to me?
 constexpr bool verbose = false;
 
-
 using datatype = double;
 using time_units = timer::unit::ns;
-
-
-
-
 
 /**
  * Print out the array.
  */
-template <typename T>
-void print_array(T& arr, const size_t size){
-  for (size_t i = 0; i < size; i++){
+template <typename T> void print_array(T &arr, const size_t size) {
+  for (size_t i = 0; i < size; i++) {
     std::cout << arr[i] << ",";
   }
   std::cout << "\n";
 }
 
-
 /**
  * Fill the array with dummy values using sequential access.
  */
 template <typename T>
-inline void fill_array_sequential(T& arr, const size_t size){
-  for (size_t i = 0; i < size; i++){
+inline void fill_array_sequential(T &arr, const size_t size) {
+  for (size_t i = 0; i < size; i++) {
     datatype x = static_cast<datatype>(i);
     arr[i] = x * x + 7.;
     // arr[i] = static_cast<datatype>(i);
   }
 }
 
-
 /**
  * Fill the array with dummy values using strided access.
  */
 template <typename T>
-inline void fill_array_strided(T& arr, const size_t size, const size_t stride){
+inline void fill_array_strided(T &arr, const size_t size, const size_t stride) {
   // start index within stride
-  for (size_t i = 0; i < stride; i++){
-    for (size_t j = i; j < size; j+= stride){
+  for (size_t i = 0; i < stride; i++) {
+    for (size_t j = i; j < size; j += stride) {
       datatype x = static_cast<datatype>(j);
       arr[j] = x * x + 7.;
       // arr[j] = static_cast<datatype>(j);
@@ -80,32 +71,24 @@ inline void fill_array_strided(T& arr, const size_t size, const size_t stride){
   }
 }
 
-
 /**
  * Compute average time interval
  */
-double average(const timer::dt_type dt){
+double average(const timer::dt_type dt) {
   return static_cast<double>(dt) / static_cast<double>(Nrepeat);
 }
 
-
-
-
-
 int main() {
-
 
   const size_t sizes[3] = {Nsmall, Nmid, Nlarge};
   const size_t strides[3] = {stride_small, stride_mid, stride_large};
-  const char* runnames[3] = {"small", "mid", "large"};
+  const char *runnames[3] = {"small", "mid", "large"};
 
-
-
-  for (int i = 0; i < 3; i++){
+  for (int i = 0; i < 3; i++) {
 
     const size_t N = sizes[i];
     const size_t stride = strides[i];
-    const char* name = runnames[i];
+    const char *name = runnames[i];
 
     // Reset timers
     timer::dt_type dt_vec_alloc = 0;
@@ -123,7 +106,7 @@ int main() {
       std::cout << "Running " << name << " (N=" << N << ")\n";
     }
 
-    for (size_t r = 0; r < Nrepeat; r++){
+    for (size_t r = 0; r < Nrepeat; r++) {
 
       timer::Timer<time_units> iterTimer;
       if (verbose) {
@@ -151,10 +134,9 @@ int main() {
         // vec.~vector();
       }
 
-
       // C Array
       timer::Timer<time_units> t_carr_alloc;
-      datatype* carr = new datatype[N];
+      datatype *carr = new datatype[N];
       dt_carr_alloc += t_carr_alloc.end();
 
       timer::Timer<time_units> t_carr_seq;
@@ -168,11 +150,10 @@ int main() {
       // dealloc so we don't run out of memory
       delete[] carr;
 
-
       // std::array
       // needs size to be known at compile time, so we do this
       // in three branches
-      if (N == Nsmall){
+      if (N == Nsmall) {
         timer::Timer<time_units> t_stdarr_alloc;
         std::array<datatype, Nsmall> stdarr;
         dt_stdarr_alloc += t_stdarr_alloc.end();
@@ -189,7 +170,7 @@ int main() {
         // not needed since scope ends automatically
         // stdarr.~array();
 
-      } else if (N == Nmid){
+      } else if (N == Nmid) {
 
         timer::Timer<time_units> t_stdarr_alloc;
         std::array<datatype, Nmid> stdarr;
@@ -207,7 +188,7 @@ int main() {
         // not needed since scope ends automatically
         // stdarr.~array();
 
-      } else if (N == Nlarge){
+      } else if (N == Nlarge) {
 
         timer::Timer<time_units> t_stdarr_alloc;
         std::array<datatype, Nlarge> stdarr;
@@ -227,43 +208,37 @@ int main() {
       }
 
       if (verbose) {
-        std::cout << " took " << iterTimer.end() << " " << timer::Timer<time_units>::units_str() << "\n";
+        std::cout << " took " << iterTimer.end() << " "
+                  << timer::Timer<time_units>::units_str() << "\n";
       }
-
     }
 
     if (verbose) {
-      std::cout << "Run " << name << " (N=" << N << ") took " << runTimer.end() << " " << timer::Timer<time_units>::units_str() << "\n";
+      std::cout << "Run " << name << " (N=" << N << ") took " << runTimer.end()
+                << " " << timer::Timer<time_units>::units_str() << "\n";
     }
 
+    std::cout << "Run " << name << " (N=" << N << ", iters=" << Nrepeat
+              << ", units=" << timer::Timer<time_units>::units_str()
+              << "):\n\n";
 
-    std::cout << "Run " << name << " (N=" << N << ", iters=" << Nrepeat << ", units=" << timer::Timer<time_units>::units_str() << "):\n\n";
+    std::cout << std::setw(20) << "stage" << std::setw(20) << "c-array"
+              << std::setw(20) << "std::vector" << std::setw(20) << "std::array"
+              << "\n";
 
-    std::cout << std::setw(20) << "stage" <<
-      std::setw(20) << "c-array" <<
-      std::setw(20) << "std::vector" <<
-      std::setw(20) << "std::array"
-      << "\n";
+    std::cout << std::setw(20) << "alloc" << std::setw(20)
+              << average(dt_carr_alloc) << std::setw(20)
+              << average(dt_vec_alloc) << std::setw(20)
+              << average(dt_stdarr_alloc) << "\n";
 
-    std::cout << std::setw(20) << "alloc" <<
-      std::setw(20) << average(dt_carr_alloc) <<
-      std::setw(20) << average(dt_vec_alloc) <<
-      std::setw(20) << average(dt_stdarr_alloc)
-      << "\n";
+    std::cout << std::setw(20) << "sequential" << std::setw(20)
+              << average(dt_carr_seq) << std::setw(20) << average(dt_vec_seq)
+              << std::setw(20) << average(dt_stdarr_seq) << "\n";
 
-    std::cout << std::setw(20) << "sequential" <<
-      std::setw(20) << average(dt_carr_seq) <<
-      std::setw(20) << average(dt_vec_seq) <<
-      std::setw(20) << average(dt_stdarr_seq)
-      << "\n";
-
-    std::cout << std::setw(20) << "strided" <<
-      std::setw(20) << average(dt_carr_stride) <<
-      std::setw(20) << average(dt_vec_stride) <<
-      std::setw(20) << average(dt_stdarr_stride)
-      << "\n";
-
-
+    std::cout << std::setw(20) << "strided" << std::setw(20)
+              << average(dt_carr_stride) << std::setw(20)
+              << average(dt_vec_stride) << std::setw(20)
+              << average(dt_stdarr_stride) << "\n";
   }
 
   return 0;

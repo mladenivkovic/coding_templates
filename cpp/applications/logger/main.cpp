@@ -4,18 +4,18 @@
 
 #include "Logging.h"
 
-
 void printFatLine(void) {
   std::cout << "====================================================";
   std::cout << "====================================================";
-  std::cout << "====================================================" << std::endl;
+  std::cout << "===================================================="
+            << std::endl;
 }
 void printThinLine(void) {
   std::cout << "----------------------------------------------------";
   std::cout << "----------------------------------------------------";
-  std::cout << "----------------------------------------------------" << std::endl;
+  std::cout << "----------------------------------------------------"
+            << std::endl;
 }
-
 
 int main(void) {
 
@@ -25,34 +25,30 @@ int main(void) {
   // with macros involved.
   // -----------------------------------------------------------------
 
-  const char*       char_msg = "Const Char message";
-  std::string       str_msg  = std::string("String message");
+  const char *char_msg = "Const Char message";
+  std::string str_msg = std::string("String message");
   std::stringstream ss_msg;
   ss_msg << "String stream message";
 
-  logging::Log::logMessage(
-    FILENAME_, __FUNCTION__, __LINE__, char_msg, logging::LogLevel::Quiet, logging::LogStage::ProgramStage1
-  );
-  logging::Log::logMessage(
-    FILENAME_, __FUNCTION__, __LINE__, str_msg, logging::LogLevel::Quiet, logging::LogStage::ProgramStage2
-  );
-  logging::Log::logMessage(
-    FILENAME_, __FUNCTION__, __LINE__, ss_msg, logging::LogLevel::Quiet, logging::LogStage::ProgramStage3
-  );
-  logging::Log::logMessage(
-    FILENAME_,
-    __FUNCTION__,
-    __LINE__,
-    "Directly writing in here",
-    logging::LogLevel::Quiet,
-    logging::LogStage::ProgramStage1
-  );
+  logging::Log::logMessage(FILENAME_, __FUNCTION__, __LINE__, char_msg,
+                           logging::LogLevel::Quiet,
+                           logging::LogStage::ProgramStage1);
+  logging::Log::logMessage(FILENAME_, __FUNCTION__, __LINE__, str_msg,
+                           logging::LogLevel::Quiet,
+                           logging::LogStage::ProgramStage2);
+  logging::Log::logMessage(FILENAME_, __FUNCTION__, __LINE__, ss_msg,
+                           logging::LogLevel::Quiet,
+                           logging::LogStage::ProgramStage3);
+  logging::Log::logMessage(FILENAME_, __FUNCTION__, __LINE__,
+                           "Directly writing in here", logging::LogLevel::Quiet,
+                           logging::LogStage::ProgramStage1);
 
   // Check all warning overloads
   logging::Log::logWarning(FILENAME_, __FUNCTION__, __LINE__, char_msg);
   logging::Log::logWarning(FILENAME_, __FUNCTION__, __LINE__, str_msg);
   logging::Log::logWarning(FILENAME_, __FUNCTION__, __LINE__, ss_msg);
-  logging::Log::logWarning(FILENAME_, __FUNCTION__, __LINE__, "Directly writing in here");
+  logging::Log::logWarning(FILENAME_, __FUNCTION__, __LINE__,
+                           "Directly writing in here");
 
   // Now try the message() macros
   message(char_msg);
@@ -65,7 +61,8 @@ int main(void) {
   message(ss_msg, logging::LogLevel::Quiet, logging::LogStage::Undefined);
 
   message("Directly writing in here");
-  message("Directly writing in here", logging::LogLevel::Quiet, logging::LogStage::Undefined);
+  message("Directly writing in here", logging::LogLevel::Quiet,
+          logging::LogStage::Undefined);
 
   // Now try the warning() macros
   warning(char_msg);
@@ -73,9 +70,7 @@ int main(void) {
   warning(ss_msg);
   warning("Directly writing in here");
 
-
   printFatLine();
-
 
   // -----------------------------------------------------------------
   // Now, let's see whether the verbosity levels work as intended.
@@ -121,7 +116,6 @@ int main(void) {
     }
     printFatLine();
   }
-
 
   return 0;
 }
