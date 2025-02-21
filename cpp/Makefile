@@ -15,7 +15,7 @@ SRCDIR=.
 
 #Compiler to use
 # CC=gcc -I$(IDIR)
-CC=g++
+CXX=g++
 
 
 
