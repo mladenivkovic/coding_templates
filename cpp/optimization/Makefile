@@ -2,7 +2,7 @@
 # ------------------------------------------------------------
 CXX=icpx
 
-OPTFLAGS = 	-O3
+OPTFLAGS = 	-O2
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds # -fsanitize=address
 STDFLAGS= 	-std=c++20
 
