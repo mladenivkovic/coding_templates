@@ -3,7 +3,7 @@ CXX=icpx
 
 OPTFLAGS = 	-O2 -g 
 WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
-STDFLAGS= 	-std=c++20
+STDFLAGS= 	-stdlib=libc++ -std=c++20 
 
 CXXFLAGS=   $(OPTFLAGS) $(WFLAGS) $(STDFLAGS)
 
