@@ -18,7 +18,8 @@ using mus = chr::microseconds;
 using s = chr::seconds;
 } // namespace unit
 
-using default_time_units = unit::mus;
+using default_time_units = unit::ns;
+// using default_time_units = unit::mus;
 using dt_type = long;
 
 /**
@@ -44,10 +45,23 @@ private:
     return duration.count();
   }
 
+public:
+  //! Constructor
+  Timer() {
+    _start_timing();
+  }
+
+  /**
+   * End measurement.
+   */
+  dt_type end() {
+    return _get_duration();
+  }
+
   /**
    * Get the used units as a string.
    */
-  static std::string _units_str() {
+  static std::string units_str() {
 
     if (typeid(time_units) == typeid(chr::nanoseconds)) {
       return "[ns]";
@@ -66,14 +80,6 @@ private:
     }
   }
 
-public:
-  // Constructor
-  Timer() {
-    _start_timing();
-  }
 
-  dt_type end() {
-    return _get_duration();
-  }
 };
 } // namespace timer
