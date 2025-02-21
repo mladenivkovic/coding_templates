@@ -16,7 +16,7 @@ constexpr size_t Nsmall = 10;
 constexpr size_t Nmid = 10000;
 // constexpr size_t Nmid = 100;
 //! Number of elements in large array
-constexpr size_t Nlarge = 1000000000;
+constexpr size_t Nlarge = 500000000;
 // constexpr size_t Nlarge = 1000;
 
 //! stride for strided access in small array
@@ -97,15 +97,15 @@ int main() {
 
   const size_t sizes[3] = {Nsmall, Nmid, Nlarge};
   const size_t strides[3] = {stride_small, stride_mid, stride_large};
-  std::string runnames[3] = {"small", "mid", "large"};
+  const char* runnames[3] = {"small", "mid", "large"};
 
 
 
   for (int i = 0; i < 3; i++){
 
-    const std::size_t N = sizes[i];
-    size_t stride = strides[i];
-    std::string name = runnames[i];
+    const size_t N = sizes[i];
+    const size_t stride = strides[i];
+    const char* name = runnames[i];
 
     // Reset timers
     timer::dt_type dt_vec_alloc = 0;
@@ -182,7 +182,7 @@ int main() {
         dt_stdarr_seq += t_stdarr_seq.end();
 
         timer::Timer<time_units> t_stdarr_stride;
-        fill_array_strided(stdarr, Nsmall, stride);
+        fill_array_strided(stdarr, Nsmall, stride_small);
         dt_stdarr_stride += t_stdarr_stride.end();
 
         // destruct so we don't run out of memory
@@ -200,7 +200,7 @@ int main() {
         dt_stdarr_seq += t_stdarr_seq.end();
 
         timer::Timer<time_units> t_stdarr_stride;
-        fill_array_strided(stdarr, Nmid, stride);
+        fill_array_strided(stdarr, Nmid, stride_mid);
         dt_stdarr_stride += t_stdarr_stride.end();
 
         // destruct so we don't run out of memory
@@ -218,7 +218,7 @@ int main() {
         dt_stdarr_seq += t_stdarr_seq.end();
 
         timer::Timer<time_units> t_stdarr_stride;
-        fill_array_strided(stdarr, Nlarge, stride);
+        fill_array_strided(stdarr, Nlarge, stride_large);
         dt_stdarr_stride += t_stdarr_stride.end();
 
         // destruct so we don't run out of memory
@@ -263,8 +263,6 @@ int main() {
       std::setw(20) << average(dt_stdarr_stride)
       << "\n";
 
-
-    return 0;
 
   }
 
