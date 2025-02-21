@@ -13,9 +13,9 @@ STDFLAGS= 	-std=c++20
 
 CXXFLAGS=   $(OPTFLAGS) $(WFLAGS) $(STDFLAGS)
 # ------------------------------------------------------------
-# CXX=gcc
+# CXX=g++
 #
-# OPTFLAGS = 	-O2 -g
+# OPTFLAGS = 	-O3
 # WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
 # STDFLAGS= 	-std=c++20
 #
