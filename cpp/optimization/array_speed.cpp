@@ -36,6 +36,7 @@ constexpr bool verbose = false;
 using datatype = double;
 using time_units = timer::unit::ns;
 
+
 /**
  * Print out the array.
  */
@@ -45,6 +46,7 @@ template <typename T> void print_array(T &arr, const size_t size) {
   }
   std::cout << "\n";
 }
+
 
 /**
  * Fill the array with dummy values using sequential access.
@@ -58,6 +60,20 @@ inline void fill_array_sequential(T &arr, const size_t size) {
   }
 }
 
+
+
+/**
+ * Fill the array with dummy values using sequential access.
+ */
+template <typename T>
+inline void fill_array_sequential2(T &arr, const size_t size) {
+  for (size_t i = 0; i < size; i++) {
+    size_t j = i < size - 1 ? i + 1 : i-1;
+    arr[i] = arr[i] + 2 * arr[j];
+  }
+}
+
+
 /**
  * Fill the array with dummy values using strided access.
  */
@@ -68,10 +84,25 @@ inline void fill_array_strided(T &arr, const size_t size, const size_t stride) {
     for (size_t j = i; j < size; j += stride) {
       datatype x = static_cast<datatype>(j);
       arr[j] = x * x + 7.;
-      // arr[j] = static_cast<datatype>(j);
     }
   }
 }
+
+
+/**
+ * Fill the array with dummy values using strided access.
+ */
+template <typename T>
+inline void fill_array_strided2(T &arr, const size_t size, const size_t stride) {
+  // start index within stride
+  for (size_t i = 0; i < stride; i++) {
+    for (size_t j = i; j < size; j += stride) {
+      size_t k = j + stride < size ? j + stride : j - stride;
+      arr[j] = arr[j] + arr[k] * 2 + 7;
+    }
+  }
+}
+
 
 /**
  * Compute average time interval
@@ -94,14 +125,20 @@ int main() {
 
     // Reset timers
     timer::dt_type dt_vec_alloc = 0;
-    timer::dt_type dt_vec_seq = 0;
-    timer::dt_type dt_vec_stride = 0;
+    timer::dt_type dt_vec_seq1 = 0;
+    timer::dt_type dt_vec_seq2 = 0;
+    timer::dt_type dt_vec_stride1 = 0;
+    timer::dt_type dt_vec_stride2 = 0;
     timer::dt_type dt_carr_alloc = 0;
-    timer::dt_type dt_carr_seq = 0;
-    timer::dt_type dt_carr_stride = 0;
+    timer::dt_type dt_carr_seq1 = 0;
+    timer::dt_type dt_carr_seq2 = 0;
+    timer::dt_type dt_carr_stride1 = 0;
+    timer::dt_type dt_carr_stride2 = 0;
     timer::dt_type dt_stdarr_alloc = 0;
-    timer::dt_type dt_stdarr_seq = 0;
-    timer::dt_type dt_stdarr_stride = 0;
+    timer::dt_type dt_stdarr_seq1 = 0;
+    timer::dt_type dt_stdarr_seq2 = 0;
+    timer::dt_type dt_stdarr_stride1 = 0;
+    timer::dt_type dt_stdarr_stride2 = 0;
 
     timer::Timer<time_units> runTimer;
     if (verbose) {
@@ -124,13 +161,21 @@ int main() {
         vec.resize(N);
         dt_vec_alloc += t_vec_alloc.end();
 
-        timer::Timer<time_units> t_vec_seq;
+        timer::Timer<time_units> t_vec_seq1;
         fill_array_sequential(vec, N);
-        dt_vec_seq += t_vec_seq.end();
+        dt_vec_seq1 += t_vec_seq1.end();
 
-        timer::Timer<time_units> t_vec_stride;
+        timer::Timer<time_units> t_vec_seq2;
+        fill_array_sequential2(vec, N);
+        dt_vec_seq2 += t_vec_seq2.end();
+
+        timer::Timer<time_units> t_vec_stride1;
         fill_array_strided(vec, N, stride);
-        dt_vec_stride += t_vec_stride.end();
+        dt_vec_stride1 += t_vec_stride1.end();
+
+        timer::Timer<time_units> t_vec_stride2;
+        fill_array_strided2(vec, N, stride);
+        dt_vec_stride2 += t_vec_stride2.end();
 
         // destruct so we don't run out of memory
         // vec.~vector();
@@ -141,13 +186,21 @@ int main() {
       datatype *carr = new datatype[N];
       dt_carr_alloc += t_carr_alloc.end();
 
-      timer::Timer<time_units> t_carr_seq;
+      timer::Timer<time_units> t_carr_seq1;
       fill_array_sequential(carr, N);
-      dt_carr_seq += t_carr_seq.end();
+      dt_carr_seq1 += t_carr_seq1.end();
 
-      timer::Timer<time_units> t_carr_stride;
+      timer::Timer<time_units> t_carr_seq2;
+      fill_array_sequential2(carr, N);
+      dt_carr_seq2 += t_carr_seq1.end();
+
+      timer::Timer<time_units> t_carr_stride1;
       fill_array_strided(carr, N, stride);
-      dt_carr_stride += t_carr_stride.end();
+      dt_carr_stride1 += t_carr_stride1.end();
+
+      timer::Timer<time_units> t_carr_stride2;
+      fill_array_strided2(carr, N, stride);
+      dt_carr_stride2 += t_carr_stride2.end();
 
       // dealloc so we don't run out of memory
       delete[] carr;
@@ -160,13 +213,21 @@ int main() {
         std::array<datatype, Nsmall> stdarr;
         dt_stdarr_alloc += t_stdarr_alloc.end();
 
-        timer::Timer<time_units> t_stdarr_seq;
+        timer::Timer<time_units> t_stdarr_seq1;
         fill_array_sequential(stdarr, Nsmall);
-        dt_stdarr_seq += t_stdarr_seq.end();
+        dt_stdarr_seq1 += t_stdarr_seq1.end();
 
-        timer::Timer<time_units> t_stdarr_stride;
+        timer::Timer<time_units> t_stdarr_seq2;
+        fill_array_sequential2(stdarr, Nsmall);
+        dt_stdarr_seq2 += t_stdarr_seq2.end();
+
+        timer::Timer<time_units> t_stdarr_stride1;
         fill_array_strided(stdarr, Nsmall, stride_small);
-        dt_stdarr_stride += t_stdarr_stride.end();
+        dt_stdarr_stride1 += t_stdarr_stride1.end();
+
+        timer::Timer<time_units> t_stdarr_stride2;
+        fill_array_strided2(stdarr, Nsmall, stride_small);
+        dt_stdarr_stride2 += t_stdarr_stride2.end();
 
         // destruct so we don't run out of memory
         // not needed since scope ends automatically
@@ -178,13 +239,21 @@ int main() {
         std::array<datatype, Nmid> stdarr;
         dt_stdarr_alloc += t_stdarr_alloc.end();
 
-        timer::Timer<time_units> t_stdarr_seq;
+        timer::Timer<time_units> t_stdarr_seq1;
         fill_array_sequential(stdarr, Nmid);
-        dt_stdarr_seq += t_stdarr_seq.end();
+        dt_stdarr_seq1 += t_stdarr_seq1.end();
 
-        timer::Timer<time_units> t_stdarr_stride;
-        fill_array_strided(stdarr, Nmid, stride_mid);
-        dt_stdarr_stride += t_stdarr_stride.end();
+        timer::Timer<time_units> t_stdarr_seq2;
+        fill_array_sequential2(stdarr, Nmid);
+        dt_stdarr_seq2 += t_stdarr_seq2.end();
+
+        timer::Timer<time_units> t_stdarr_stride1;
+        fill_array_strided(stdarr, Nmid, stride_small);
+        dt_stdarr_stride1 += t_stdarr_stride1.end();
+
+        timer::Timer<time_units> t_stdarr_stride2;
+        fill_array_strided2(stdarr, Nmid, stride_small);
+        dt_stdarr_stride2 += t_stdarr_stride2.end();
 
         // destruct so we don't run out of memory
         // not needed since scope ends automatically
@@ -196,13 +265,21 @@ int main() {
         std::array<datatype, Nlarge> stdarr;
         dt_stdarr_alloc += t_stdarr_alloc.end();
 
-        timer::Timer<time_units> t_stdarr_seq;
+        timer::Timer<time_units> t_stdarr_seq1;
         fill_array_sequential(stdarr, Nlarge);
-        dt_stdarr_seq += t_stdarr_seq.end();
+        dt_stdarr_seq1 += t_stdarr_seq1.end();
 
-        timer::Timer<time_units> t_stdarr_stride;
-        fill_array_strided(stdarr, Nlarge, stride_large);
-        dt_stdarr_stride += t_stdarr_stride.end();
+        timer::Timer<time_units> t_stdarr_seq2;
+        fill_array_sequential2(stdarr, Nlarge);
+        dt_stdarr_seq2 += t_stdarr_seq2.end();
+
+        timer::Timer<time_units> t_stdarr_stride1;
+        fill_array_strided(stdarr, Nlarge, stride_small);
+        dt_stdarr_stride1 += t_stdarr_stride1.end();
+
+        timer::Timer<time_units> t_stdarr_stride2;
+        fill_array_strided2(stdarr, Nlarge, stride_small);
+        dt_stdarr_stride2 += t_stdarr_stride2.end();
 
         // destruct so we don't run out of memory
         // not needed since scope ends automatically
@@ -233,14 +310,23 @@ int main() {
               << average(dt_vec_alloc) << std::setw(20)
               << average(dt_stdarr_alloc) << "\n";
 
-    std::cout << std::setw(20) << "sequential" << std::setw(20)
-              << average(dt_carr_seq) << std::setw(20) << average(dt_vec_seq)
-              << std::setw(20) << average(dt_stdarr_seq) << "\n";
+    std::cout << std::setw(20) << "sequential 1" << std::setw(20)
+              << average(dt_carr_seq1) << std::setw(20) << average(dt_vec_seq1)
+              << std::setw(20) << average(dt_stdarr_seq1) << "\n";
 
-    std::cout << std::setw(20) << "strided" << std::setw(20)
-              << average(dt_carr_stride) << std::setw(20)
-              << average(dt_vec_stride) << std::setw(20)
-              << average(dt_stdarr_stride) << "\n";
+    std::cout << std::setw(20) << "sequential 1" << std::setw(20)
+              << average(dt_carr_seq2) << std::setw(20) << average(dt_vec_seq2)
+              << std::setw(20) << average(dt_stdarr_seq2) << "\n";
+
+    std::cout << std::setw(20) << "strided 1" << std::setw(20)
+              << average(dt_carr_stride1) << std::setw(20)
+              << average(dt_vec_stride1) << std::setw(20)
+              << average(dt_stdarr_stride1) << "\n";
+
+    std::cout << std::setw(20) << "strided 2" << std::setw(20)
+              << average(dt_carr_stride2) << std::setw(20)
+              << average(dt_vec_stride2) << std::setw(20)
+              << average(dt_stdarr_stride2) << "\n";
   }
 
   return 0;
