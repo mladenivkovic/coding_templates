@@ -12,8 +12,9 @@ for file in *.aux *.run.xml *.snm *.log *-blx.bib *.bbl *.nav *.out *.toc *.md *
 done
 
 master=LaTeXdoc-letter-template.tex
-read -p "Enter a name to rename the master document into (manually include .tex): " newname
-mv $master $newname
+read -p "Enter a name to rename the master document into (don't include .tex suffix): " newname
+mv $master $newname.tex
+sed -i "s/main_file = LaTeXdoc-letter-template/main_file = ${newname}/" Makefile
 
 
 read -p "Finished. Hit any key to remove this script. ctrl-c to quit" junk
