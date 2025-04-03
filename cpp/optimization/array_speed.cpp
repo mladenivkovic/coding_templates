@@ -1,7 +1,8 @@
 /**
  * Test array access speeds between C-style arrays, std::array, and std::vector.
  *
- * NOTE: This program requires a big stack. Allow it to have it with `ulimit -s unlimited`.
+ * NOTE: This program requires a big stack. Allow it to have it with `ulimit -s
+ * unlimited`.
  */
 
 #include <array>
@@ -36,7 +37,6 @@ constexpr bool verbose = false;
 using datatype = double;
 using time_units = timer::unit::ns;
 
-
 /**
  * Print out the array.
  */
@@ -46,7 +46,6 @@ template <typename T> void print_array(T &arr, const size_t size) {
   }
   std::cout << "\n";
 }
-
 
 /**
  * Fill the array with dummy values using sequential access.
@@ -60,19 +59,16 @@ inline void fill_array_sequential(T &arr, const size_t size) {
   }
 }
 
-
-
 /**
  * Fill the array with dummy values using sequential access.
  */
 template <typename T>
 inline void fill_array_sequential2(T &arr, const size_t size) {
   for (size_t i = 0; i < size; i++) {
-    size_t j = i < size - 1 ? i + 1 : i-1;
+    size_t j = i < size - 1 ? i + 1 : i - 1;
     arr[i] = arr[i] + 2 * arr[j];
   }
 }
-
 
 /**
  * Fill the array with dummy values using strided access.
@@ -88,12 +84,12 @@ inline void fill_array_strided(T &arr, const size_t size, const size_t stride) {
   }
 }
 
-
 /**
  * Fill the array with dummy values using strided access.
  */
 template <typename T>
-inline void fill_array_strided2(T &arr, const size_t size, const size_t stride) {
+inline void fill_array_strided2(T &arr, const size_t size,
+                                const size_t stride) {
   // start index within stride
   for (size_t i = 0; i < stride; i++) {
     for (size_t j = i; j < size; j += stride) {
@@ -102,7 +98,6 @@ inline void fill_array_strided2(T &arr, const size_t size, const size_t stride) 
     }
   }
 }
-
 
 /**
  * Compute average time interval
