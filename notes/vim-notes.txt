@@ -22,6 +22,8 @@ zw                      add "correctly spelled" word to dictionary as incorrect
 YouCompleteMe
 ==============================
 
+(, is <leader>, \ is <localleader>)
+
 ,d                      go to definition
 ,D                      go to declaration
 ,H                      show documentation
@@ -33,7 +35,13 @@ YouCompleteMe
 F5                      compile and do diagnostics
 ,yfw                    find symbol in workspace
 ,zfd                    find symbol in document
+\d                      show detailed diagnostic
 ,f                      fixit
+,j                      go to next error
+,k                      go to previous error
+
+call DisableYCM()       turn YCM off
+call EnableYCM()        turn YCM on
 
 
 
