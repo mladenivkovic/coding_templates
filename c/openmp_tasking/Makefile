@@ -4,7 +4,7 @@
 CC=icx
 OMPFLAGS=-qopenmp
 
-CFLAGS=-Wall -pedantic -std=c11 -O0 -Wno-gnu-statement-expression-from-macro-expansion
+CFLAGS=-g -Wall -pedantic -std=c11 -O0 -Wno-gnu-statement-expression-from-macro-expansion
 
 
 default: all
