@@ -72,6 +72,9 @@ CXXTEST=g++
 array.o: array.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
+assignment_operator.o: assignment_operator.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
 bitwise_operations.o: bitwise_operations.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
