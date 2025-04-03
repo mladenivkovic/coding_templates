@@ -20,16 +20,16 @@ void sections(void);
 int main(void) {
 
   /* worksharing: for loop */
-  forloop();
+  /* forloop(); */
 
   /* for loop for reduction */
-  reduction();
+  /* reduction(); */
 
   /* different scheduling */
   scheduling();
 
   /* sections baby */
-  sections();
+  /* sections(); */
 
   return (0);
 }
@@ -182,7 +182,7 @@ void scheduling(void) {
 
   /* set up */
 
-  int niter = 8;
+  int niter = 32;
 
   /*parallel region*/
 

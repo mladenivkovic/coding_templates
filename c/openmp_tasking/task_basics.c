@@ -7,7 +7,7 @@
 int main(void){
 
   const int niter = 1024;
-  const int loopscale = 1000;
+  const int loopscale = 500;
 
 
 #pragma omp parallel
