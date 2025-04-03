@@ -1,6 +1,8 @@
 #ifndef STORAGE_CLASSES_HEADER
 #define STORAGE_CLASSES_HEADER
 
+#include <iostream>
+
 // Contains some declarations and definitions to demonstrate
 // how to use some storage classes.
 
