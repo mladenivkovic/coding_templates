@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clang=${CLANG_FORMAT_CMD:="clang-format-14"}
+clang=${CLANG_FORMAT_CMD:="clang-format-18"}
 
 # Formatting command
 cmd="$clang -style=file $(git ls-files | grep '\.[ch]$')"
