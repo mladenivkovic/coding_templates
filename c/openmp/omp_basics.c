@@ -7,17 +7,17 @@ int main(void) {
 
   int tid, inpar;
 
-  inpar = omp_in_parallel();  // is in parallel region?
+  inpar = omp_in_parallel();  /* is in parallel region? */
   printf("Not in parallel region.\n");
   printf("In parallel? = %d\n", inpar);
 
-// start parallel region
+/* start parallel region */
 #pragma omp parallel
   {
 
     printf("Started parallel region.\n");
 
-    inpar = omp_in_parallel();  // is in parallel region?
+    inpar = omp_in_parallel();  /* is in parallel region? */
     printf("In parallel? = %d\n", inpar);
 
     /* Obtain thread number */
@@ -25,7 +25,7 @@ int main(void) {
 
     printf("Unsorted printing: Hi from processor %d!\n", tid);
 
-  }  // end of parallel region
+  }  /* end of parallel region */
 
   return (0);
 }
