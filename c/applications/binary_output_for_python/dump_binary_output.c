@@ -191,7 +191,8 @@ int main(void) {
   /* structs    */
   /*------------*/
   exitCode = fread(&count_struct, sizeof(size_t), 1, fp);
-  exitCode = fread(structarr, sizeof(struct arbitrary_struct), count_struct, fp);
+  exitCode =
+      fread(structarr, sizeof(struct arbitrary_struct), count_struct, fp);
   print_array((void *)structarr, 's', count_struct);
 
   fclose(fp);

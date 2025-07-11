@@ -15,14 +15,10 @@ int main(void) {
   b = 842;
   s = 4132;
 
-
   printf("initialised private a outside parallel region: %d\n", a);
   printf("initialised firstprivate b outside parallel region: %d\n", b);
   printf("initialised shared s outside parallel region : %d\n\n", s);
-#pragma omp parallel \
-  default(private) \
-  firstprivate(b) \
-  shared(s)
+#pragma omp parallel default(private) firstprivate(b) shared(s)
   // default: set default status of variables as private. Options: (shared|none)
   // implicit default is shared for already defined variables.
   // firstprivate: b keeps previously assigned value.
