@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <omp.h>
 
 #ifdef LIKWID_PERFMON
 #include "likwid-marker.h"
@@ -48,39 +49,46 @@ void copy(float *A, float *B, size_t size) {
 
 int main(void) {
 
-  const size_t size = 100000000;  // 1e8
+  const size_t size = 10000000;  // 1e7;
   const size_t nrepeat = 10;
 
   LIKWID_MARKER_INIT;
-  LIKWID_MARKER_REGISTER("init");
-  LIKWID_MARKER_REGISTER("compute");
-  LIKWID_MARKER_REGISTER("copy");
 
-  for (size_t i = 0; i < nrepeat; i++) {
+#pragma omp parallel
+  {
+    LIKWID_MARKER_REGISTER("init");
+    LIKWID_MARKER_REGISTER("compute");
+    LIKWID_MARKER_REGISTER("copy");
+    /* Needs a barrier between REGISTER and START */
 
-    float *A = malloc(size * sizeof(float));
-    float *B = malloc(size * sizeof(float));
-    float *C = malloc(size * sizeof(float));
+#pragma omp barrier
 
-    LIKWID_MARKER_START("init");
-    init(A, B, C, size);
-    LIKWID_MARKER_STOP("init");
+#pragma omp for
+    for (size_t i = 0; i < nrepeat; i++) {
 
-    LIKWID_MARKER_START("compute");
-    compute(A, B, C, size);
-    LIKWID_MARKER_STOP("compute");
+      float *A = malloc(size * sizeof(float));
+      float *B = malloc(size * sizeof(float));
+      float *C = malloc(size * sizeof(float));
 
-    LIKWID_MARKER_START("copy");
-    copy(A, B, size);
-    LIKWID_MARKER_STOP("copy");
+      LIKWID_MARKER_START("init");
+      init(A, B, C, size);
+      LIKWID_MARKER_STOP("init");
 
-    free(A);
-    free(B);
-    free(C);
+      LIKWID_MARKER_START("compute");
+      compute(A, B, C, size);
+      LIKWID_MARKER_STOP("compute");
 
-    if (i < nrepeat + 1) printf("%2zu/%2zu\n", i + 1, nrepeat);
+      LIKWID_MARKER_START("copy");
+      copy(A, B, size);
+      LIKWID_MARKER_STOP("copy");
+
+      free(A);
+      free(B);
+      free(C);
+
+      if (i < nrepeat + 1) printf("%2zu/%2zu\n", i + 1, nrepeat);
+    }
   }
-
   LIKWID_MARKER_CLOSE;
 
   printf("Done, bye.\n");
