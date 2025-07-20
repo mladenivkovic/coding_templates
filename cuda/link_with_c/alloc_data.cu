@@ -6,7 +6,11 @@
 extern "C" {
 #endif
 
+/**
+ * Allocate an array and fill it up with some data.
+ */
 void alloc_array(int** array){
+
   cudaMallocHost((void**)array, 10 * sizeof(int));
 
   for (int i = 0; i < 10; i++){
