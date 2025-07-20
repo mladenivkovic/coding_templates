@@ -16,5 +16,7 @@ int main(void){
   }
   printf("\n");
 
+  free_array(&my_array);
+
   printf("Done.\n");
 }
