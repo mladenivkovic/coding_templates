@@ -9,13 +9,15 @@
 CC=gcc
 NVCC=nvcc
 
-
 CFLAGS=-g -O3
 NVCC_FLAGS=-g -O3 -arch=sm_80
 
+CUDA_PATH ?= $(NVHPC_ROOT)/cuda/
+
 CUDA_INCLUDES=-I$(CUDA_PATH)/include
-CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib -L/$(CUDA_PATH)/lib/stubs
-CUDA_LIBS=-lcudadevrt -lcudart -lcudart_static -lcuda
+#adding both lib and lib64 here for convenience, in case one or the other doesn't exist. You probably shouldn't be doing that.
+CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib -L/$(CUDA_PATH)/lib64 -L/$(CUDA_PATH)/lib/stubs
+CUDA_LIBS=-lcudadevrt -lcudart -lcuda
 
 
 EXEC = my_exec
