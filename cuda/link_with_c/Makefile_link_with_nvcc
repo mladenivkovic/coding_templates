@@ -1,0 +1,32 @@
+# Here's a recipe how to link the final executable using nvcc
+
+CC=gcc
+NVCC=nvcc
+
+
+CFLAGS=-g -O3
+NVCC_FLAGS=-g -O3 -arch=sm_80
+
+CUDA_INCLUDES=-I$(CUDA_PATH)/include
+CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib
+CUDA_LIBS=-lcudart -lcuda
+
+
+EXEC = my_exec
+
+# $(EXEC) : main.o
+
+$(EXEC): main.o alloc_data.o
+	# link with nvcc!
+	$(NVCC) $(NVCC_FLAGS) $(CUDA_INCLUDES) $(CUDA_LD_LIBRARY_PATH) $(CUDA_LIBS) main.o alloc_data.o -o $(EXEC)
+
+main.o: main.c
+	$(CC) -c -o main.o main.c
+
+alloc_data.o: alloc_data.cu
+	$(NVCC) $(NVCC_FLAGS) alloc_data.cu -dc alloc_data.o  
+
+clean:
+	rm -f *.o $(EXEC)
+
+.PHONY: clean
