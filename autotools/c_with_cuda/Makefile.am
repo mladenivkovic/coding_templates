@@ -15,7 +15,7 @@ bin_PROGRAMS = my_exec
 my_exec_SOURCES = main.c src/cfunc1.c src/cfunc2.c src/clib2func.c
 my_exec_CFLAGS = $(AM_CFLAGS) $(CUDA_CFLAGS) $(CUDA_INCLUDES)
 # my_exec_LDADD = $(CUDA_LDFLAGS) $(CUDA_LIBS) src/cfunc1.o src/cfunc2.o src/clib2func.o
-my_exec_LDADD = $(CUDA_LDFLAGS) $(CUDA_LIBS) src/cuda/cudafunc.cuo src/cuda/cudafunc.dlink_o
+my_exec_LDADD = $(CUDA_LDFLAGS) $(CUDA_LIBS) src/cuda/cudafunc.o src/cuda/cudafunc.dlink_o
 
 # wildcard making recipes for *.cu -> *.o
 .cu.o:
