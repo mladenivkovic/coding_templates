@@ -1,0 +1,52 @@
+CC=gcc
+NVCC=nvcc
+
+CFLAGS=-g -O3 -Wall -pedantic
+NVCC_FLAGS=-g -G -O3 -Wall -pedantic
+
+CUDA_INCLUDES=-I$(CUDA_PATH)/include
+CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib
+CUDA_LIBS=-lcudart -lcuda
+
+LDFLAGS=
+INCLUDES=-I. -I./src -I./src/cuda
+LIBS=
+
+OBJECTS=cfunc1.o cfunc2.o clib2func.o main.o
+EXEC= my_exec
+
+# add paths
+VPATH=.:./src:./src/cuda
+
+$(EXEC) : $(OBJECTS)
+	$(CC) $(CFLAGS) $^ -o $@
+
+# $(EXEC): main.o alloc_data.o
+#         # link with nvcc!
+#         # $(NVCC) $(CUDA_INCLUDES) $(CUDA_LD_LIBRARY_PATH) $(CUDA_LIBS) main.o alloc_data.o -o $(EXEC)
+#         # link with nvcc!
+#         $(CC) $(CUDA_INCLUDES) $(CUDA_LDFLAGS) $(CUDA_LIBS) main.o alloc_data.o -o $(EXEC)
+
+main.o: main.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+cfunc1.o: cfunc1.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+cfunc2.o: cfunc2.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+clib2func.o: clib2func.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+# Wildcard 
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+# alloc_data.o: alloc_data.cu
+#         $(NVCC) alloc_data.cu -dc alloc_data.o
+#
+clean:
+	rm -f *.o $(EXEC)
+
+.PHONY: clean
