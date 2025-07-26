@@ -14,7 +14,7 @@ void alloc_array(int** array){
   cudaError_t err;
   err = cudaMallocHost((void**)array, 10 * sizeof(int));
   if (err != cudaSuccess){
-    printf("Error allocating array on host. Do you have a GPU?");
+    printf("Error allocating array on host. Do you have a GPU?\n");
     fflush(stdout);
     exit(err);
   }
