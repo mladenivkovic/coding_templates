@@ -1,0 +1,62 @@
+CC=gcc
+NVCC=nvcc
+
+# keep optimisation low to avoid compiler being smart and inlining stuff
+CFLAGS=-g -O0 -Wall -pedantic
+NVCC_FLAGS=-g -O0 -arch=sm_80
+
+CUDA_PATH ?= $(NVHPC_ROOT)/cuda/
+
+CUDA_INCLUDES=-I$(CUDA_PATH)/include
+#adding both lib and lib64 here for convenience, in case one or the other doesn't exist. You probably shouldn't be doing that.
+CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib -L/$(CUDA_PATH)/lib64 -L/$(CUDA_PATH)/lib/stubs
+CUDA_LIBS= -lcudart
+
+# ------------------------------------------------------------------------
+
+LDFLAGS=
+INCLUDES=-I. -I./src -I./src/cuda
+LIBS=
+
+NVCC_LDFLAGS=
+NVCC_INCLUDES=
+NVCC_LIBS=
+
+LDFLAGS += $(CUDA_LDFLAGS)
+INCLUDES += $(CUDA_INCLUDES)
+LIBS += $(CUDA_LIBS)
+
+OBJECTS=cfunc1.o cfunc2.o clib2func.o main.o cudafunc.o
+DLINK_OBJECTS=cudafunc-dlink.o
+EXEC= my_exec
+
+# add paths
+VPATH=.:./src:./src/cuda
+
+all: $(EXEC)
+
+$(EXEC) : $(OBJECTS) $(DLINK_OBJECTS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $^ -o $@ 
+
+main.o: main.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+cfunc1.o: cfunc1.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+cfunc2.o: cfunc2.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+clib2func.o: clib2func.c
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) $(LIBS) $< -c -o $@ 
+
+cudafunc.o: cudafunc.cu
+	$(NVCC) $(NVCC_FLAGS) $(NVCC_INCLUDES) $(NVCC_LDFLAGS) $(NVCC_LIBS) $< -dc -o $@ 
+
+cudafunc-dlink.o: cudafunc.o
+	$(NVCC) $(NVCC_FLAGS) $(NVCC_INCLUDES) $(NVCC_LDFLAGS) $(NVCC_LIBS) $< -dlink -o $@ 
+
+clean:
+	rm -f *.o $(EXEC)
+
+.PHONY: clean default all
