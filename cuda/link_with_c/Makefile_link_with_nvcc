@@ -3,18 +3,17 @@
 CC=gcc
 NVCC=nvcc
 
-
 CFLAGS=-g -O3
 NVCC_FLAGS=-g -O3 -arch=sm_80
 
+CUDA_PATH ?= $(NVHPC_ROOT)/cuda/
+
 CUDA_INCLUDES=-I$(CUDA_PATH)/include
-CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib
-CUDA_LIBS=-lcudart -lcuda
+CUDA_LDFLAGS=-L/$(CUDA_PATH)/lib -L/$(CUDA_PATH)/lib64 -L/$(CUDA_PATH)/lib/stubs
+CUDA_LIBS=-lcudadevrt -lcudart -lcuda
 
 
 EXEC = my_exec
-
-# $(EXEC) : main.o
 
 $(EXEC): main.o alloc_data.o
 	# link with nvcc!
