@@ -66,9 +66,9 @@ AC_SUBST(NVCC_FLAGS)
 AC_SUBST(NVCC_LDFLAGS)
 AC_SUBST(NVCC_LIBS)
 
-# We need this to create libraries without libtool
-# AC_PROG_RANLIB
-# AM_PROG_AR
+AM_PROG_AR # needed when using non-POSIX archiver. Call before LT_INIT
+LT_INIT([disable-shared])
+AC_CONFIG_MACRO_DIRS([m4]) # recommended when libtool is in use
 
 AC_OUTPUT
 
