@@ -19,3 +19,12 @@ ar-lib
 .dirstamp
 *.cuo
 *dlink_o
+*.a
+*.la
+m4
+*.lo
+.libs
+libtool
+ltmain.sh
+config.guess
+config.sub
