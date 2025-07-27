@@ -31,7 +31,8 @@ if test "x$with_cuda" != "xno"; then
   # grab the flags we want from provided path
   CUDA_CFLAGS="$CUDA_CFLAGS -I$with_cuda/include"
   CUDA_CXXFLAGS="$CUDA_CXXFLAGS -I$with_cuda/include"
-  CUDA_LIBS="-L$with_cuda/lib -L$with_cuda/lib64 -lcudart"
+  CUDA_LDFLAGS="-L$with_cuda/lib -L$with_cuda/lib64"
+  CUDA_LIBS="-lcudart"
   NVCC="$with_cuda/bin/nvcc"
   NVCC_FLAGS="$NVCC_FLAGS"
   NVCC_LDFLAGS="$NVCC_LDFLAGS"
@@ -45,7 +46,8 @@ else
     CUDA_HOME="`dirname $NVCC`/.."
     CUDA_CFLAGS="$CUDA_CFLAGS -I${CUDA_HOME}/include"
     CUDA_CXXFLAGS="$CUDA_CXXFLAGS -I${CUDA_HOME}/include"
-    CUDA_LIBS="-L${CUDA_HOME}/lib -L${CUDA_HOME}/lib64 -lcudart"
+    CUDA_LDFLAGS="-L${CUDA_HOME}/lib -L${CUDA_HOME}/lib64"
+    CUDA_LIBS="-lcudart"
     NVCC_FLAGS="$NVCC_FLAGS"
     NVCC_LDFLAGS="$NVCC_LDFLAGS"
     NVCC_LIBS="$NVCC_LIBS"
@@ -60,6 +62,7 @@ fi
 
 AC_SUBST(CUDA_CFLAGS)
 AC_SUBST(CUDA_CXXFLAGS)
+AC_SUBST(CUDA_LDFLAGS)
 AC_SUBST(CUDA_LIBS)
 AC_SUBST(NVCC)
 AC_SUBST(NVCC_FLAGS)
