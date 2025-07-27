@@ -18,11 +18,4 @@ my_exec_SOURCES = main.c
 my_exec_CFLAGS = $(AM_CFLAGS) $(CUDA_CFLAGS) $(CUDA_INCLUDES)
 my_exec_LDADD = $(CUDA_LDFLAGS) $(CUDA_LIBS) src/libmylib1.la src/libmylib2.la src/cuda/libmycudalib.a
 
-# # wildcard making recipes for *.cu -> *.o
-# .cu.o:
-#         $(NVCC) $(NVCC_FLAGS) $(AM_CFLAGS) $(CUDA_CFLAGS) $(CUDA_MYFLAGS) $< -dc -o $@
-# # wildcard making recipes for *.cuo -> *.dlink_o
-# .o.dlink_o:
-#         $(NVCC) $(NVCC_FLAGS) $(AM_CFLAGS) $(CUDA_CFLAGS) $(CUDA_MYFLAGS) $< -dlink -o $@
-
 
