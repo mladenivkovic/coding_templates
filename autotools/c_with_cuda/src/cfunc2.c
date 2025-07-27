@@ -1,6 +1,6 @@
 /**
  * Contents for second non-main c file.
- * This should be part of the FIRSTLIBRARY library.
+ * This should be part of the `libmylib1` library.
  */
 
 #include "cfunc2.h"

@@ -13,9 +13,8 @@ noinst_LTLIBRARIES = libmylib1.la libmylib2.la
 # specifications for libmylib1.la
 libmylib1_la_SOURCES = cfunc1.c cfunc2.c
 libmylib1_la_CFLAGS = $(AM_CFLAGS)
-libmylib1_la_LIBADD = cuda/libmycudalib.a 
+# Don't link libmycudalib.a here, only for the executable.
 
 # specifications for libmylib2.la
 libmylib2_la_SOURCES = clib2func.c
 libmylib2_la_CFLAGS = $(AM_CFLAGS)
-# $(CUDA_CFLAGS) $(CUDA_INCLUDES)

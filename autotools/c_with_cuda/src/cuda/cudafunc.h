@@ -2,7 +2,7 @@
 
 /**
  * Header containing cuda functions.
- * This should be part of the CUDALIBRARY library.
+ * This should be part of the `libcudalib` library.
  */
 
 void cuda_alloc_array(int** array);

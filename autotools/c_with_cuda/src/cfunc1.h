@@ -2,7 +2,7 @@
 
 /**
  * Header for first non-main c file.
- * This should be part of the FIRSTLIBRARY library.
+ * This should be part of the `libmylib1` library.
  */
 
 void c_function_1(void);

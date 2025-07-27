@@ -1,6 +1,6 @@
 /**
  * Contents of the cuda functions.
- * This should be part of the CUDALIBRARY library.
+ * This should be part of the `libcudalib` library.
  */
 
 #ifdef __cplusplus
