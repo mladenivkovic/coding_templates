@@ -16,6 +16,6 @@ bin_PROGRAMS = my_exec
 # only main.c will be compiled to create the executable. The others will be linked in
 my_exec_SOURCES = main.c 
 my_exec_CFLAGS = $(AM_CFLAGS) $(CUDA_CFLAGS) $(CUDA_INCLUDES)
-my_exec_LDADD = $(CUDA_LDFLAGS) $(CUDA_LIBS) src/libmylib1.la src/libmylib2.la src/cuda/libmycudalib.a
+my_exec_LDADD = $(CUDA_LDFLAGS) src/libmylib1.la src/libmylib2.la src/cuda/libmycudalib.a $(CUDA_LIBS) 
 
 
