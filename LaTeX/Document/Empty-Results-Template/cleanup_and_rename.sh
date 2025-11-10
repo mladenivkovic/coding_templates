@@ -14,6 +14,7 @@ done
 master=results.tex
 read -p "Enter a name to rename the master document into (manually include .tex): " newname
 mv $master $newname
+sed -i "s/main_file = results/main_file = $newname/" Makefile
 
 
 read -p "Finished. Hit any key to remove this script. ctrl-c to quit" junk
