@@ -2,7 +2,7 @@
 #
 # SYNTAX:
 #target: depencencies
-#[tab] 	system command
+#[tab]  system command
 
 #==================================
 # COMPILATION TIME PARAMETERS
@@ -26,16 +26,16 @@ CC=gcc -I$(IDIR)
 #--------------------------
 
 
-# OPTFLAGS = 	-Og -g 			# debug
-OPTFLAGS = 	-O3  		# performance
-WFLAGS= 	-Wall -Wextra -pedantic -Warray-bounds
-FFLAGS= 	-fsignaling-nans -ffinite-math-only -fno-signed-zeros 
-STDFLAGS= 	-std=c11
+# OPTFLAGS =    -Og -g		  # debug
+OPTFLAGS =      -O3	     # performance
+WFLAGS=         -Wall -Wextra -pedantic -Warray-bounds
+FFLAGS=         -fsignaling-nans -ffinite-math-only -fno-signed-zeros 
+STDFLAGS=       -std=c11
 
 
-CFLAGS=      	$(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS)
-CFLAGS_NOSTD=	$(OPTFLAGS) $(WFLAGS) $(FFLAGS)				# no standard
-CFLAGS_MIN=		$(OPTFLAGS) 							    # so I can force errors for demonstration
+CFLAGS=	        $(OPTFLAGS) $(WFLAGS) $(FFLAGS) $(STDFLAGS)
+CFLAGS_NOSTD=   $(OPTFLAGS) $(WFLAGS) $(FFLAGS)	                 # no standard
+CFLAGS_MIN=     $(OPTFLAGS)                                      # so I can force errors for demonstration
 
 
 
@@ -84,6 +84,9 @@ bitwise_comparison.o: bitwise_comparison.c
 
 branches.o: branches.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+call_system_cmd.o: call_system_cmd.c
+	$(CC) $(CFLAGS_NOSTD) -o $@ $< $(LDFLAGS)
 
 cmdlineargs.o: cmdlineargs.c
 	$(CC) $(CFLAGS_NOSTD) -o $@ $< $(LDFLAGS)
