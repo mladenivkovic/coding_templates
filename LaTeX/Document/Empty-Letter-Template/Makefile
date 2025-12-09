@@ -11,7 +11,7 @@ all: ${main_file}.pdf
 
 ${main_file}.pdf: ${main_file}.tex ${TEXFILES}
 	pdflatex ${main_file}.tex
-	biber ${main_file}
+	bibtex ${main_file}
 	pdflatex ${main_file}.tex
 	pdflatex ${main_file}.tex
 
@@ -19,4 +19,4 @@ ${main_file}.pdf: ${main_file}.tex ${TEXFILES}
 clean:
 	rm -f ${main_file}.pdf *.aux *.log *.out *.dvi *.bbl *.blg *.toc *.gz *.lof *.lot
 
-.PHONY: clean
+.PHONY: clean ${main_file}.pdf
