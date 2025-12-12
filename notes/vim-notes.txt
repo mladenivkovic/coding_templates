@@ -16,6 +16,9 @@ z=                      when cursor on misspelt word, suggest fixes
 zg                      add "misspelt" word to dictionary
 zw                      add "correctly spelled" word to dictionary as incorrect
 
+zR                      "open all folds" (Actually does something else, but in effect works like this)
+zM                      close all folds (Fold everything foldable)
+
 
 
 ==============================
