@@ -100,6 +100,6 @@ echo
 echo
 echo "Loop over integers"
 for ((i=0; i<2; i++)); do
-    name="${first_names[i]} ${last_names[i]}"
-    echo $name
+  name="${first_names[i]} ${last_names[i]}"
+  echo $name
 done

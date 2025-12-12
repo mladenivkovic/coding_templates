@@ -7,9 +7,9 @@
 
 
 if [ "foo" == "foo" ]; then
-    echo "true"
+  echo "true"
 else
-    echo "false"
+  echo "false"
 fi
 
 

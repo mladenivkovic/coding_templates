@@ -28,8 +28,8 @@ echo ""
 
 echo "integers"
 echo ""
-for i in $( seq 1 10 ); do 
-    printf "%05d\t" "$i"; 
+for i in $( seq 1 10 ); do
+  printf "%05d\t" "$i";
 done
 printf "\n"
 
@@ -67,7 +67,7 @@ printf "%s\t%s\t%s\t%s\t%s\n" "name" "value1" "value2" "value3" "value4"
 
 file='input/table.dat'
 while read line; do
-    printf "%s\t%s\t%s\t%s\t%s\n" $line
+  printf "%s\t%s\t%s\t%s\t%s\n" $line
 done <$file
 
 

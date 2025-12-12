@@ -5,7 +5,7 @@
 
 # Write output and errors to null:
 
-input/somescript.sh  > /dev/null 2>&1 
+input/somescript.sh  > /dev/null 2>&1
 
 
 
@@ -18,8 +18,8 @@ input/somescript.sh  > /dev/null 2>&1
 # Write Error to file stderrlog, write stdout to screen AND file stdoutlog
 
 f() {
-    echo "hi"
-    asd
+  echo "hi"
+  asd
 }
 
 

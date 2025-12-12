@@ -5,12 +5,12 @@
 #----------------------
 
 myfunction() {
-    nargs=$# #store initial number of args; shift reduces $#
-    echo "I was given" $nargs "arguments"
-    for ((i=0; i<$nargs; i++)); do
-        echo "argument "$i " is" $1
-        shift
-    done;
+  nargs=$# #store initial number of args; shift reduces $#
+  echo "I was given" $nargs "arguments"
+  for ((i=0; i<$nargs; i++)); do
+    echo "argument "$i " is" $1
+    shift
+  done;
 }
 
 
