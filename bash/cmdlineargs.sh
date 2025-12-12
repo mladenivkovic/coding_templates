@@ -2,42 +2,42 @@
 
 
 if [[ $# == 0 ]]; then
-    echo "no arguments given. Can't handle that."
-    exit
+  echo "no arguments given. Can't handle that."
+  exit
 else
 
-    while [[ $# > 0 ]]; do
+  while [[ $# > 0 ]]; do
     arg="$1"
 
-    case $arg in 
-        -s | --something)
-        echo "detected something."
-        echo "it is:"
-        echo $2
-        stuff=$2
-        shift   #another shift here, so the argument after -s will not be taken as the next argument.
-        ;;
+    case $arg in
+      -s | --something)
+      echo "detected something."
+      echo "it is:"
+      echo $2
+      stuff=$2
+      shift   #another shift here, so the argument after -s will not be taken as the next argument.
+      ;;
 
-        -h | --help)
-        echo ""
-        echo "A small template script to demonstrate command line passing."
-        echo "-s <arg> or --something <arg> will get your argument recognised."
-        echo "Otherwise, the script will complain."
-        echo ""
-        
-        exit
-        ;;
+      -h | --help)
+      echo ""
+      echo "A small template script to demonstrate command line passing."
+      echo "-s <arg> or --something <arg> will get your argument recognised."
+      echo "Otherwise, the script will complain."
+      echo ""
 
-        *)
-        echo "unknown argument:" $arg
-        echo "use -h or --help for help."
-        echo ""
-        exit
-        ;;
+      exit
+      ;;
+
+      *)
+      echo "unknown argument:" $arg
+      echo "use -h or --help for help."
+      echo ""
+      exit
+      ;;
     esac
 
     shift
-    done
+  done
 fi
 
 

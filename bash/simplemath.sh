@@ -23,10 +23,10 @@ echo ""
 echo "bash internal stuff: arithmetics in loops"
 
 for i in {1..10}; do
-    result=$(( $i -20 ))
-    echo "result is: " $result
-    calc=$((i % 2))
-    if [[ $calc == 0 ]]; then
-        echo "   i= " $i " is even."
-    fi
+  result=$(( $i -20 ))
+  echo "result is: " $result
+  calc=$((i % 2))
+  if [[ $calc == 0 ]]; then
+    echo "   i= " $i " is even."
+  fi
 done

@@ -9,9 +9,9 @@
 while true; do
 	read -p "Do you wish to continue? (y/n) " yn
     case $yn in
-        [Yy]* ) echo "Program continues."; break;;
-        [Nn]* ) echo "exiting."; exit;;
-        * ) echo "Please answer yes or no.";;
+      [Yy]* ) echo "Program continues."; break;;
+      [Nn]* ) echo "exiting."; exit;;
+      * ) echo "Please answer yes or no.";;
     esac
 done
 
