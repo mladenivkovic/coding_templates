@@ -1,0 +1,123 @@
+\documentclass[12pt, a4paper, twopage]{scrbook}
+
+\usepackage{lipsum}
+
+
+% Set fonts of document parts
+\setkomafont{title}{\rmfamily\bfseries\boldmath}
+\addtokomafont{section}{\rmfamily\bfseries\boldmath}
+\addtokomafont{subsection}{\rmfamily\bfseries\boldmath}
+\addtokomafont{subsubsection}{\rmfamily\bfseries\boldmath}
+\addtokomafont{disposition}{\rmfamily} % table of contents and stuff
+\setkomafont{descriptionlabel}{\rmfamily\bfseries\boldmath}
+
+
+% Add this to remove numberings of chapters, sections etc. without using \chapter*{}.
+% Any negative depth will not be displayed.
+\setcounter{secnumdepth}{-100}
+
+% Set Section indents in TOC
+\RedeclareSectionCommand[
+    tocindent=2em
+]{chapter}
+
+\RedeclareSectionCommand[
+    tocindent=4em
+]{section}
+
+\RedeclareSectionCommand[
+    tocindent=6em
+]{subsection}
+
+\RedeclareSectionCommand[
+    tocindent=8em
+]{subsubsection}
+
+
+
+
+%------------------------------------------
+%: Metadata
+%------------------------------------------
+
+\title{Title}
+\subtitle{Subtitle}
+\author{Mladen Ivkovic}
+\date{}
+
+%------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+%Titlepage
+\maketitle
+
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+
+
+
+
+\part{Alpha}
+
+\chapter{Chap 1}
+\section{Hello World}
+\lipsum[1-3]
+\section{Hello World2}
+\lipsum[4-6]
+
+\chapter{Chap 2}
+\section{Hello World}
+\lipsum[1-3]
+\section{Hello World2}
+\lipsum[4-6]
+
+
+\part{Beta}
+
+\chapter{Chap 3}
+\section{Hello World}
+\lipsum[1-3]
+\section{Hello World2}
+\lipsum[1-3]
+
+\chapter{Chap 4}
+\section{Hello World}
+\lipsum[1-3]
+\section{Hello World2}
+\lipsum[1-3]
+
+\part{Gamma}
+
+\chapter{Chap 5}
+\section{Hello World}
+\lipsum[1-3]
+\section{Hello World2}
+\lipsum[1-3]
+
+\chapter{Chap 6}
+\section{Hello World}
+\lipsum[1-3]
+\section{Hello World2}
+\lipsum[1-3]
+
+
+
+
+
+
+
+
+\end{document}
