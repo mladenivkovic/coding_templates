@@ -18,19 +18,28 @@
 
 % Set Section indents in TOC
 \RedeclareSectionCommand[
-    tocindent=2em
+    tocindent=0em,
+    tocbeforeskip=6pt plus .2pt
+]{part}
+
+\RedeclareSectionCommand[
+    tocindent=2em,
+    tocbeforeskip=0pt plus .2pt
 ]{chapter}
 
 \RedeclareSectionCommand[
-    tocindent=4em
+    tocindent=4em,
+    tocbeforeskip=0pt plus .2pt
 ]{section}
 
 \RedeclareSectionCommand[
-    tocindent=6em
+    tocindent=6em,
+    tocbeforeskip=0pt plus .2pt
 ]{subsection}
 
 \RedeclareSectionCommand[
-    tocindent=8em
+    tocindent=8em,
+    tocbeforeskip=0pt plus .2pt
 ]{subsubsection}
 
 
