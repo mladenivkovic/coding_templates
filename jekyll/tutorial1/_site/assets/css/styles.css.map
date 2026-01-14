@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["../../_sass/main.scss","styles.scss"],"names":[],"mappings":"AAAA;EACE;;;ACDc","sourcesContent":[".current {\n  color: yellow;\n}\n","@import \"main\"; /* looks for main.scss in _sass */\n"],"file":"styles.css"}
