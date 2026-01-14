@@ -1,0 +1,72 @@
+https://jekyllrb.com/docs/
+
+Installation
+---------------------
+
+https://jekyllrb.com/docs/installation/other-linux/
+
+$ sudo pacman -S ruby base-devel ruby-erb
+$ gem install jekyll bundler
+
+add ruby stuff to path:
+$ export PATH=$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH
+$ export GEM_HOME=$HOME/.gem # so additional installations jekyll tries don't ask for admin privileges to put them in /usr
+
+
+
+First Steps
+----------------------
+
+https://jekyllrb.com/docs/step-by-step
+
+
+
+
+Notes
+----------------------
+
+Front Matter
+~~~~~~~~~~~~~~
+
+Front matter tells jekyll to process your file with the Liquid templating language.
+It's YAML snippets between 3 dashes at the top of the file:
+
+
+```
+---
+# this is front matter
+my_name: Hihi hoho
+---
+<html....>
+```
+
+
+Access via `{{page.my_name}}`.
+
+You can leave it empty if you want no objects defined, but want jekyll to
+process your tags strewn throughout the rest of the file.
+
+
+
+
+Layouts
+~~~~~~~~~~~~~~
+
+Store site layouts to be reused in `_layouts`.
+
+Load them up in the front matter:
+
+```
+---
+layout: default # loads _layouts/default.html
+---
+```
+
+
+
+
+
+Includes
+~~~~~~~~~~~~~~
+
+Include stuff you want to repeat over and over again from `_includes` directory.
