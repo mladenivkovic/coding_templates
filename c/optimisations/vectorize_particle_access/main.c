@@ -23,8 +23,9 @@ struct cell_part_data part_data_global;
 
 int main() {
 
-  const int N = 1048576; /* 2^20 */
-  const int NREPEAT = 1000; /* 2^20 */
+  const int N = 1048576; /* 2^20; Array size */
+  /* const int NREPEAT = 1000; [> How many times to repeat copy op <] */
+  const int NREPEAT = 100; /* How many times to repeat copy op */
   clock_t start, stop;
 
   struct cell_part_data part_data;
@@ -65,10 +66,29 @@ int main() {
   start = clock();
 #pragma GCC novector /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
-    copy_data_AOS2AOS_global_index(parts, &part_data_copy, N);
+    copy_data_AOS2AOS_global_index(&part_data_copy, N);
   stop = clock();
 
   printf("copy_data_AOS2AOS_global_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC);
+
+  /* AOS to AOS copies using explicit particle array pointer and index instead of particle */
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_data_AOS2AOS_explicit(parts, &part_data, &part_data_copy, N);
+  stop = clock();
+
+  printf("copy_data_AOS2AOS_explicit took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC);
+
+  /* AOS to AOS copies using explicit particle array pointer and index instead of particle */
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_data_AOS2AOS_explicit_index(&part_data, &part_data_copy, N);
+  stop = clock();
+
+  printf("copy_data_AOS2AOS_explicit_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC);
+
 
 
 
