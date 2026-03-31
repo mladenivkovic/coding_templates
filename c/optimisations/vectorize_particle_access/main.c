@@ -18,8 +18,9 @@
 
 #include "part.h"
 #include "error.h"
+#include "copy.h"
 
-struct cell_part_data part_data_global;
+extern struct cell_part_data part_data_global;
 
 int main() {
 

@@ -1,15 +1,12 @@
-#pragma once
-
-#include "part_struct.h"
+#include "copy.h"
 #include "part_getters.h"
 
-struct cell_part_data part_data_global;
+extern struct cell_part_data part_data_global;
 
 /**
  * Copy the data from particles to array containing copies
  */
-__attribute__((always_inline)) inline void
-copy_data_AOS2AOS(struct part* parts, struct cell_part_data* part_data_copy,  int N){
+void copy_data_AOS2AOS(struct part* parts, struct cell_part_data* part_data_copy,  int N){
 
   for ( int i = 0; i < N; i++){
     const struct part* p = &parts[i];
@@ -38,8 +35,7 @@ copy_data_AOS2AOS(struct part* parts, struct cell_part_data* part_data_copy,  in
  * Copy the data from particles to array containing copies
  * using the global particle data array pointer
  */
-__attribute__((always_inline)) inline void
-copy_data_AOS2AOS_global(struct part* parts, struct cell_part_data* part_data_copy, int N){
+void copy_data_AOS2AOS_global(struct part* parts, struct cell_part_data* part_data_copy, int N){
 
   for ( int i = 0; i < N; i++){
     const struct part* p = &parts[i];
@@ -68,8 +64,7 @@ copy_data_AOS2AOS_global(struct part* parts, struct cell_part_data* part_data_co
  * using the global particle data array pointer and integer
  * indices instead of part structs
  */
-__attribute__((always_inline)) inline void
-copy_data_AOS2AOS_global_index(struct cell_part_data* part_data_copy, int N){
+void copy_data_AOS2AOS_global_index(struct cell_part_data* part_data_copy, int N){
 
   for ( int i = 0; i < N; i++){
     /* const struct part* p = &parts[i]; */
@@ -99,8 +94,7 @@ copy_data_AOS2AOS_global_index(struct cell_part_data* part_data_copy, int N){
  * while explicitly passing the particle data array pointer
  * to getters/setters
  */
-__attribute__((always_inline)) inline void
-copy_data_AOS2AOS_explicit(struct part* parts, struct cell_part_data* restrict part_data, struct cell_part_data* part_data_copy, int N){
+void copy_data_AOS2AOS_explicit(struct part* parts, struct cell_part_data* restrict part_data, struct cell_part_data* part_data_copy, int N){
 
   const struct cell_part_data* restrict cpd = part_data;
 
@@ -132,8 +126,7 @@ copy_data_AOS2AOS_explicit(struct part* parts, struct cell_part_data* restrict p
  * to getters/setters and using integer indices instead of
  * part structs
  */
-__attribute__((always_inline)) inline void
-copy_data_AOS2AOS_explicit_index(struct cell_part_data* restrict part_data, struct cell_part_data* part_data_copy, int N){
+void copy_data_AOS2AOS_explicit_index(struct cell_part_data* restrict part_data, struct cell_part_data* part_data_copy, int N){
 
   const struct cell_part_data* restrict cpd = part_data;
 
@@ -158,8 +151,5 @@ copy_data_AOS2AOS_explicit_index(struct cell_part_data* restrict part_data, stru
 #endif
   }
 }
-
-
-
 
 

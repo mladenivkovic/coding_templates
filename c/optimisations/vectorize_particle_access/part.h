@@ -1,8 +1,6 @@
 #pragma once
 
 #include "error.h"
-#include "part_copy.h"
-#include "part_getters.h"
 #include "part_struct.h"
 
 #include <stdlib.h>
