@@ -40,8 +40,8 @@ CFLAGS += -fdump-tree-vect-optall -fdump-tree-slp1-optall # dump outputs of vect
 # CFLAGS += -Wall -Wextra -fsanitize=address
 
 
-# DEFINES=-DBIG_STRUCTS # make structs bigger and contain doubles and ints too
-DEFINES=
+DEFINES=-DBIG_STRUCTS # make structs bigger and contain doubles and ints too
+# DEFINES=
 INCLUDES =
 LIBS = 
 LDFLAGS = 
@@ -59,13 +59,17 @@ CFLAGS += $(DEFINES) $(INCLUDES) $(LDFLAGS) $(LIBS)
 
 default: main.o
 
-main.o : main.c copy.o part.h error.h part_struct.h part_getters.h copy.h
-	$(CC) $(CFLAGS) -o $@ main.c copy.o $(LDFLAGS) 
+main.o : main.c copy_particle_carried.o copy_global_var.o copy_explicit_var.o part.h error.h part_struct.h part_getters.h
+	$(CC) $(CFLAGS) -o $@ main.c copy_particle_carried.o copy_global_var.o copy_explicit_var.o $(LDFLAGS) 
 
-copy.o : copy.c copy.h part_struct.h part_getters.h
-	$(CC) $(CFLAGS) -c -o $@ copy.c $(LDFLAGS) 
+copy_particle_carried.o : copy_particle_carried.c copy_particle_carried.h part_struct.h part_getters.h
+	$(CC) $(CFLAGS) -c -o $@ copy_particle_carried.c $(LDFLAGS) 
 
+copy_global_var.o : copy_global_var.c copy_global_var.h part_struct.h part_getters.h
+	$(CC) $(CFLAGS) -c -o $@ copy_global_var.c $(LDFLAGS) 
 
+copy_explicit_var.o : copy_explicit_var.c copy_explicit_var.h part_struct.h part_getters.h
+	$(CC) $(CFLAGS) -c -o $@ copy_explicit_var.c $(LDFLAGS) 
 
 
 #==================================
@@ -74,4 +78,4 @@ copy.o : copy.c copy.h part_struct.h part_getters.h
 .PHONY: clean # keeps makefile from doing something with a file named clean
 
 clean:
-	rm -f main.o copy.o main.o-main.c.* *.opt.yaml *.vect *.slp1 *.optrpt
+	rm -f *.o main.o-main.c.* *.opt.yaml *.vect *.slp1 *.optrpt

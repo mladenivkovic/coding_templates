@@ -2,10 +2,11 @@
 
 #include "part_struct.h"
 
-#include <stdlib.h>
 
+/* -------------------------------------------------- */
+/* Getters with particle carried pointers and indexes */
+/* -------------------------------------------------- */
 
-/* Getters */
 __attribute__((always_inline)) inline
 float get_p1_f1(const struct part* restrict p){
   const struct p1* restrict p1_p = p->part_data->s1_p + p->index;
@@ -43,6 +44,14 @@ int get_p1_i1(const struct part* restrict p){
   return p1_p->p1_i1;
 }
 #endif
+
+__attribute__((always_inline)) inline
+struct p1 get_p1(const struct part* restrict p){
+  const struct p1* restrict s1_p = p->part_data->s1_p;
+  struct p1 p1s = s1_p[p->index];
+  return p1s;
+}
+
 
 
 
@@ -84,10 +93,123 @@ int get_p2_i1(const struct part* restrict p){
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p2 get_p2(const struct part* restrict p){
+  const struct p2* restrict s2_p = p->part_data->s2_p;
+  struct p2 p2s = s2_p[p->index];
+  return p2s;
+}
 
 
 
-struct cell_part_data part_data_global;
+
+
+/* ----------------------------------------------------------------- */
+/* Getters with particle carried pointers and indexes, using indexes */
+/* ----------------------------------------------------------------- */
+
+__attribute__((always_inline)) inline
+float get_p1_f1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict p1_p = cpd->s1_p + index;
+  return p1_p->p1_f1;
+}
+
+__attribute__((always_inline)) inline
+float get_p1_f2_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict p1_p = cpd->s1_p + index;
+  return p1_p->p1_f2;
+}
+
+__attribute__((always_inline)) inline
+float get_p1_f3_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict p1_p = cpd->s1_p + index;
+  return p1_p->p1_f3;
+}
+
+#ifdef BIG_STRUCTS
+__attribute__((always_inline)) inline
+double get_p1_d1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict p1_p = cpd->s1_p + index;
+  return p1_p->p1_d1;
+}
+
+__attribute__((always_inline)) inline
+double get_p1_d2_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict p1_p = cpd->s1_p + index;
+  return p1_p->p1_d2;
+}
+
+__attribute__((always_inline)) inline
+int get_p1_i1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict p1_p = cpd->s1_p + index;
+  return p1_p->p1_i1;
+}
+#endif
+
+__attribute__((always_inline)) inline
+struct p1 get_p1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p1* restrict s1_p = cpd->s1_p;
+  struct p1 p1s = s1_p[index];
+  return p1s;
+}
+
+
+
+
+__attribute__((always_inline)) inline
+float get_p2_f1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict p2_p = cpd->s2_p + index;
+  return p2_p->p2_f1;
+}
+
+__attribute__((always_inline)) inline
+float get_p2_f2_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict p2_p = cpd->s2_p + index;
+  return p2_p->p2_f2;
+}
+
+__attribute__((always_inline)) inline
+float get_p2_f3_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict p2_p = cpd->s2_p + index;
+  return p2_p->p2_f3;
+}
+
+#ifdef BIG_STRUCTS
+__attribute__((always_inline)) inline
+double get_p2_d1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict p2_p = cpd->s2_p + index;
+  return p2_p->p2_d1;
+}
+
+__attribute__((always_inline)) inline
+double get_p2_d2_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict p2_p = cpd->s2_p + index;
+  return p2_p->p2_d2;
+}
+
+__attribute__((always_inline)) inline
+int get_p2_i1_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict p2_p = cpd->s2_p + index;
+  return p2_p->p2_i1;
+}
+#endif
+
+__attribute__((always_inline)) inline
+struct p2 get_p2_ind(const struct cell_part_data* restrict cpd, int index){
+  const struct p2* restrict s2_p = cpd->s2_p;
+  struct p2 p2s = s2_p[index];
+  return p2s;
+}
+
+
+
+
+
+
+
+
+
+extern struct cell_part_data part_data_global;
 
 
 /* GETTERS USING GLOBAL VAR */
@@ -213,10 +335,6 @@ int get_p1_i1_global_ind(const int index){
 
 __attribute__((always_inline)) inline
 struct p1 get_p1_global_ind(const int index){
-  /* __assume_aligned(part_data_global.s1_p, 16); */
-  /* struct p1 p1s = part_data_global.s1_p[index]; */
-  /* return p1s; */
-  /* return part_data_global.s1_p[index]; */
   const struct p1* restrict s1_p = __builtin_assume_aligned(part_data_global.s1_p, 16);
   struct p1 p1s = s1_p[index];
   return p1s;
@@ -224,8 +342,6 @@ struct p1 get_p1_global_ind(const int index){
 
 __attribute__((always_inline)) inline
 struct p2 get_p2_global_ind(const int index){
-  /* __assume_aligned(part_data_global.s1_p, 16); */
-  /* return part_data_global.s2_p[index]; */
   const struct p2* restrict s2_p = __builtin_assume_aligned(part_data_global.s2_p, 16);
   return s2_p[index];
 }
@@ -275,8 +391,6 @@ int get_p2_i1_global_ind(const int index){
 /* GETTERS USING GLOBAL VAR */
 __attribute__((always_inline)) inline
 float get_p1_f1_explicit(const struct part* restrict p, const struct cell_part_data* restrict cpd){
-  /* __builtin_assume(cpd != NULL); */
-  /* __builtin_assume(p != NULL); */
   const struct p1* restrict p1_p = cpd->s1_p + p->index;
   return p1_p->p1_f1;
 }

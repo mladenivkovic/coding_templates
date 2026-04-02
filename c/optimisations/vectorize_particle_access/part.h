@@ -17,7 +17,7 @@ __attribute__((always_inline)) inline
 void alloc_arrays(struct cell_part_data* part_data,
     struct cell_part_data* part_data_copy,
     struct part** parts,
-    struct cell_part_data* part_data_global,
+    struct cell_part_data* part_data_global_,
     int N){
 
   part_data->s1_p = (struct p1*) malloc(sizeof(struct p1) * N);
@@ -41,12 +41,12 @@ void alloc_arrays(struct cell_part_data* part_data,
 
 
   /* Globally available particle data array pointers */
-  part_data_global->s1_p = (struct p1*) malloc(sizeof(struct p1) * N);
-  if (part_data_global->s1_p == NULL)
+  part_data_global_->s1_p = (struct p1*) malloc(sizeof(struct p1) * N);
+  if (part_data_global_->s1_p == NULL)
     error("Error allocating part_data->s1_p");
 
-  part_data_global->s2_p = (struct p2*) malloc(sizeof(struct p2) * N);
-  if (part_data_global->s2_p == NULL)
+  part_data_global_->s2_p = (struct p2*) malloc(sizeof(struct p2) * N);
+  if (part_data_global_->s2_p == NULL)
     error("Error allocating part_data->s2_p");
 }
 
