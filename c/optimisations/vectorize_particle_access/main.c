@@ -63,6 +63,7 @@ int main() {
 
   printf("copy_data_AOS2AOS_global took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC);
 
+
   /* AOS to AOS copies using global particle array pointer and index instead of particle */
   start = clock();
 #pragma GCC novector /* Don't vectorize this outer loop. */
@@ -71,6 +72,17 @@ int main() {
   stop = clock();
 
   printf("copy_data_AOS2AOS_global_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC);
+
+
+  /* AOS to AOS copies using global particle array pointer and index instead of particle */
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_data_AOS2AOS_structs_global_index(&part_data_copy, N);
+  stop = clock();
+
+  printf("copy_data_AOS2AOS_structs_global_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC);
+
 
   /* AOS to AOS copies using explicit particle array pointer and index instead of particle */
   start = clock();

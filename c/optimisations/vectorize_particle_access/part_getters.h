@@ -2,6 +2,8 @@
 
 #include "part_struct.h"
 
+#include <stdlib.h>
+
 
 /* Getters */
 __attribute__((always_inline)) inline
@@ -209,6 +211,26 @@ int get_p1_i1_global_ind(const int index){
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p1 get_p1_global_ind(const int index){
+  /* __assume_aligned(part_data_global.s1_p, 16); */
+  /* struct p1 p1s = part_data_global.s1_p[index]; */
+  /* return p1s; */
+  /* return part_data_global.s1_p[index]; */
+  const struct p1* restrict s1_p = __builtin_assume_aligned(part_data_global.s1_p, 16);
+  struct p1 p1s = s1_p[index];
+  return p1s;
+}
+
+__attribute__((always_inline)) inline
+struct p2 get_p2_global_ind(const int index){
+  /* __assume_aligned(part_data_global.s1_p, 16); */
+  /* return part_data_global.s2_p[index]; */
+  const struct p2* restrict s2_p = __builtin_assume_aligned(part_data_global.s2_p, 16);
+  return s2_p[index];
+}
+
+
 
 __attribute__((always_inline)) inline
 float get_p2_f1_global_ind(const int index){
@@ -253,6 +275,8 @@ int get_p2_i1_global_ind(const int index){
 /* GETTERS USING GLOBAL VAR */
 __attribute__((always_inline)) inline
 float get_p1_f1_explicit(const struct part* restrict p, const struct cell_part_data* restrict cpd){
+  /* __builtin_assume(cpd != NULL); */
+  /* __builtin_assume(p != NULL); */
   const struct p1* restrict p1_p = cpd->s1_p + p->index;
   return p1_p->p1_f1;
 }
