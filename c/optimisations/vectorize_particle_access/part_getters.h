@@ -206,8 +206,9 @@ struct p2 get_p2_ind(const struct cell_part_data* restrict cpd, int index){
 
 
 
-
-
+/* ---------------------------- */
+/* Getters using global pointer */
+/* ---------------------------- */
 
 extern struct cell_part_data part_data_global;
 
@@ -251,6 +252,13 @@ double get_p1_i1_global(const struct part* restrict p){
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p1 get_p1_global(const struct part* restrict p){
+  const struct p1* restrict s1_p = part_data_global.s1_p;
+  struct p1 p1s = s1_p[p->index];
+  return p1s;
+}
+
 
 
 __attribute__((always_inline)) inline
@@ -291,8 +299,21 @@ double get_p2_i1_global(const struct part* restrict p){
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p2 get_p2_global(const struct part* restrict p){
+  const struct p2* restrict s2_p = part_data_global.s2_p;
+  struct p2 p2s = s2_p[p->index];
+  return p2s;
+}
 
 
+
+
+
+
+/* ---------------------------------------- */
+/* Getters using global pointer and indexes */
+/* ---------------------------------------- */
 
 /* GETTERS USING GLOBAL VAR AND INDEX INSTEAD OF PARTICLE*/
 __attribute__((always_inline)) inline
@@ -340,12 +361,6 @@ struct p1 get_p1_global_ind(const int index){
   return p1s;
 }
 
-__attribute__((always_inline)) inline
-struct p2 get_p2_global_ind(const int index){
-  const struct p2* restrict s2_p = __builtin_assume_aligned(part_data_global.s2_p, 16);
-  return s2_p[index];
-}
-
 
 
 __attribute__((always_inline)) inline
@@ -385,6 +400,18 @@ int get_p2_i1_global_ind(const int index){
   return p2_p->p2_i1;
 }
 #endif
+
+__attribute__((always_inline)) inline
+struct p2 get_p2_global_ind(const int index){
+  const struct p2* restrict s2_p = __builtin_assume_aligned(part_data_global.s2_p, 16);
+  return s2_p[index];
+}
+
+
+
+
+
+
 
 
 

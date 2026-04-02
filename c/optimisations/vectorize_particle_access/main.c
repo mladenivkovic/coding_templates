@@ -123,68 +123,150 @@ int main() {
   double t_copy_structs_pc_index_split_loop = (double)(stop - start) / CLOCKS_PER_SEC;
 
 
+  /* --------------------- */
+  /* Using global pointers */
+  /* --------------------- */
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_global(parts, &part_data_copy, N);
+  stop = clock();
+  double t_copy_global = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_global_split_loop_by_struct(parts, &part_data_copy, N);
+  stop = clock();
+  double t_copy_global_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_global_split_loop_by_element(parts, &part_data_copy, N);
+  stop = clock();
+  double t_copy_global_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_structs_global(parts, &part_data_copy, N);
+  stop = clock();
+  double t_copy_structs_global = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_structs_global_split_loop_by_struct(parts, &part_data_copy, N);
+  stop = clock();
+  double t_copy_structs_global_split_loop = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  /* Acces by index */
+  /* -------------- */
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_global_index(&part_data_copy, N);
+  stop = clock();
+  double t_copy_global_index = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_global_index_split_loop_by_struct(&part_data_copy, N);
+  stop = clock();
+  double t_copy_global_index_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_global_index_split_loop_by_element(&part_data_copy, N);
+  stop = clock();
+  double t_copy_global_index_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_structs_global_index(&part_data_copy, N);
+  stop = clock();
+  double t_copy_structs_global_index = (double)(stop - start) / CLOCKS_PER_SEC;
+
+  start = clock();
+#pragma GCC novector /* Don't vectorize this outer loop. */
+  for (int i = 0; i < NREPEAT; i++)
+    copy_structs_global_index_split_loop_by_struct(&part_data_copy, N);
+  stop = clock();
+  double t_copy_structs_global_index_split_loop = (double)(stop - start) / CLOCKS_PER_SEC;
+
+
+
+
+
+  /* ============= */
+  /* Print results */
+  /* ============= */
 
   printf("%30s  |%25s|%25s|%25s|\n",
     "", "particle carried pointers", "global pointers", "explicitly passed ptrs");
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "particle pointer access",
       t_copy_pc, t_copy_pc/t_copy_pc,
-      0., 0.,
+      t_copy_global, t_copy_global/t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "ppa + loop split by struct",
       t_copy_pc_split_loop_by_struct, t_copy_pc_split_loop_by_struct / t_copy_pc,
+      t_copy_global_split_loop_by_struct, t_copy_global_split_loop_by_struct / t_copy_pc,
       0., 0.,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "ppa + loop split by element",
       t_copy_pc_split_loop_by_element, t_copy_pc_split_loop_by_element / t_copy_pc,
-      0., 0.,
+      t_copy_global_split_loop_by_element, t_copy_global_split_loop_by_element / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "ppa copy full struct",
       t_copy_structs_pc,  t_copy_structs_pc / t_copy_pc,
-      0., 0.,
+      t_copy_structs_global,  t_copy_structs_global / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "ppa copy struct + split loop",
       t_copy_structs_pc_split_loop, t_copy_structs_pc_split_loop / t_copy_pc,
-      0., 0.,
+      t_copy_structs_global_split_loop, t_copy_structs_global_split_loop / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "particle index access",
       t_copy_pc_index, t_copy_pc_index / t_copy_pc,
-      0., 0.,
+      t_copy_global_index, t_copy_global_index / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "pia + loop split by struct",
       t_copy_pc_index_split_loop_by_struct, t_copy_pc_index_split_loop_by_struct / t_copy_pc,
-      0., 0.,
+      t_copy_global_index_split_loop_by_struct, t_copy_global_index_split_loop_by_struct / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "pia + loop split by element",
       t_copy_pc_index_split_loop_by_element, t_copy_pc_index_split_loop_by_element / t_copy_pc,
-      0., 0.,
+      t_copy_global_index_split_loop_by_element, t_copy_global_index_split_loop_by_element / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "pia copy full struct",
       t_copy_structs_pc_index, t_copy_structs_pc_index / t_copy_pc,
-      0., 0.,
+      t_copy_structs_global_index, t_copy_structs_global_index / t_copy_pc,
       0., 0.
       );
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
       "pia copy struct + split loop",
-      t_copy_structs_pc_index_split_loop,
-      t_copy_structs_pc_index_split_loop / t_copy_pc,
-      0., 0.,
+      t_copy_structs_pc_index_split_loop, t_copy_structs_pc_index_split_loop / t_copy_pc,
+      t_copy_structs_global_index_split_loop, t_copy_structs_global_index_split_loop / t_copy_pc,
       0., 0.
       );
 
