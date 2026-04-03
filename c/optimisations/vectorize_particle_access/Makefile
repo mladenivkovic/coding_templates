@@ -40,8 +40,8 @@ CFLAGS += -fdump-tree-vect-optall -fdump-tree-slp1-optall # dump outputs of vect
 # CFLAGS += -Wall -Wextra -fsanitize=address
 
 
-# DEFINES=-DBIG_STRUCTS # make structs bigger and contain doubles and ints too
-DEFINES=
+DEFINES=-DBIG_STRUCTS # make structs bigger and contain doubles and ints too
+# DEFINES=
 INCLUDES =
 LIBS = 
 LDFLAGS = 

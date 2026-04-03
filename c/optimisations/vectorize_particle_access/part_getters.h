@@ -7,6 +7,7 @@
 /* Getters with particle carried pointers and indexes */
 /* -------------------------------------------------- */
 
+/* Struct p1 */
 __attribute__((always_inline)) inline
 float get_p1_f1(const struct part* restrict p){
   const struct p1* restrict p1_p = p->part_data->s1_p + p->index;
@@ -53,7 +54,7 @@ struct p1 get_p1(const struct part* restrict p){
 }
 
 
-
+/* Struct p2 */
 
 __attribute__((always_inline)) inline
 float get_p2_f1(const struct part* restrict p){
@@ -108,6 +109,7 @@ struct p2 get_p2(const struct part* restrict p){
 /* Getters with particle carried pointers and indexes, using indexes */
 /* ----------------------------------------------------------------- */
 
+/* Struct p1 */
 __attribute__((always_inline)) inline
 float get_p1_f1_ind(const struct cell_part_data* restrict cpd, int index){
   const struct p1* restrict p1_p = cpd->s1_p + index;
@@ -154,7 +156,7 @@ struct p1 get_p1_ind(const struct cell_part_data* restrict cpd, int index){
 }
 
 
-
+/* Struct p2 */
 
 __attribute__((always_inline)) inline
 float get_p2_f1_ind(const struct cell_part_data* restrict cpd, int index){
@@ -212,8 +214,8 @@ struct p2 get_p2_ind(const struct cell_part_data* restrict cpd, int index){
 
 extern struct cell_part_data part_data_global;
 
+/* Struct p1 */
 
-/* GETTERS USING GLOBAL VAR */
 __attribute__((always_inline)) inline
 float get_p1_f1_global(const struct part* restrict p){
   const struct p1* restrict p1_p = part_data_global.s1_p + p->index;
@@ -260,6 +262,7 @@ struct p1 get_p1_global(const struct part* restrict p){
 }
 
 
+/* Struct p2 */
 
 __attribute__((always_inline)) inline
 float get_p2_f1_global(const struct part* restrict p){
@@ -315,7 +318,8 @@ struct p2 get_p2_global(const struct part* restrict p){
 /* Getters using global pointer and indexes */
 /* ---------------------------------------- */
 
-/* GETTERS USING GLOBAL VAR AND INDEX INSTEAD OF PARTICLE*/
+/* Struct p1 */
+
 __attribute__((always_inline)) inline
 float get_p1_f1_global_ind(const int index){
   const struct p1* restrict p1_p = part_data_global.s1_p + index;
@@ -362,6 +366,7 @@ struct p1 get_p1_global_ind(const int index){
 }
 
 
+/* Struct p2 */
 
 __attribute__((always_inline)) inline
 float get_p2_f1_global_ind(const int index){
@@ -412,10 +417,13 @@ struct p2 get_p2_global_ind(const int index){
 
 
 
+/* --------------------------------------- */
+/* Getters with explicitly passed pointers */
+/* --------------------------------------- */
 
 
+/* Struct p1 */
 
-/* GETTERS USING GLOBAL VAR */
 __attribute__((always_inline)) inline
 float get_p1_f1_explicit(const struct part* restrict p, const struct cell_part_data* restrict cpd){
   const struct p1* restrict p1_p = cpd->s1_p + p->index;
@@ -454,7 +462,13 @@ double get_p1_i1_explicit(const struct part* restrict p, const struct cell_part_
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p1 get_p1_explicit(const struct part* restrict p, const struct cell_part_data* restrict cpd){
+  struct p1 p1_p = cpd->s1_p[p->index];
+  return p1_p;
+}
 
+/* Struct p2 */
 
 __attribute__((always_inline)) inline
 float get_p2_f1_explicit(const struct part* restrict p, const struct cell_part_data* restrict cpd){
@@ -494,10 +508,21 @@ double get_p2_i1_explicit(const struct part* restrict p, const struct cell_part_
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p2 get_p2_explicit(const struct part* restrict p, const struct cell_part_data* restrict cpd){
+  struct p2 p2_p = cpd->s2_p[p->index];
+  return p2_p;
+}
 
 
 
-/* GETTERS USING GLOBAL VAR AND INDEX INSTEAD OF PARTICLE*/
+
+/* --------------------------------------- */
+/* Getters with explicitly passed pointers */
+/* --------------------------------------- */
+
+/* Struct p1 */
+
 __attribute__((always_inline)) inline
 float get_p1_f1_explicit_ind(const struct cell_part_data* restrict cpd, const int index){
   const struct p1* restrict p1_p = cpd->s1_p + index;
@@ -536,6 +561,14 @@ int get_p1_i1_explicit_ind(const struct cell_part_data* restrict cpd, const int 
 }
 #endif
 
+__attribute__((always_inline)) inline
+struct p1 get_p1_explicit_ind(const struct cell_part_data* restrict cpd, const int index){
+  const struct p1 p1_p = cpd->s1_p[index];
+  return p1_p;
+}
+
+
+/* Struct p2 */
 
 __attribute__((always_inline)) inline
 float get_p2_f1_explicit_ind(const struct cell_part_data* restrict cpd, const int index){
@@ -574,5 +607,12 @@ int get_p2_i1_explicit_ind(const struct cell_part_data* restrict cpd, const int 
   return p2_p->p2_i1;
 }
 #endif
+
+__attribute__((always_inline)) inline
+struct p2 get_p2_explicit_ind(const struct cell_part_data* restrict cpd, const int index){
+  const struct p2 p2_p = cpd->s2_p[index];
+  return p2_p;
+}
+
 
 
