@@ -1,10 +1,15 @@
 #pragma once
 
 #ifdef BIG_STRUCTS
-#define MY_STRUCT_ALIGN __attribute__((aligned(32)))
+#define STRUCT_ALIGNMENT 32
+#define MY_STRUCT_ALIGN __attribute__((packed, aligned(STRUCT_ALIGNMENT)))
 #else
-#define MY_STRUCT_ALIGN __attribute__((aligned(16)))
+#define STRUCT_ALIGNMENT 16
+#define MY_STRUCT_ALIGN __attribute__((aligned(STRUCT_ALIGNMENT)))
 #endif
+
+#define PART_STRUCT_ALIGNMENT 8
+#define ARRAY_STRUCT_ALIGNMENT 32
 
 
 
@@ -46,7 +51,7 @@ struct cell_part_data {
 struct part {
   struct cell_part_data* part_data;
   int index;
-};
+} __attribute__((packed, aligned(PART_STRUCT_ALIGNMENT)));
 
 
 

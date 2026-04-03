@@ -13,14 +13,15 @@
  * - This should be nicely vectorized.
  * ====================================================== */
 
-#include <stdio.h>
-#include <time.h>
-
+/* This needs to go first for _GNU_SOURCE define */
 #include "part.h"
-#include "error.h"
+
 #include "copy_particle_carried.h"
 #include "copy_global_var.h"
 #include "copy_explicit_var.h"
+
+#include <stdio.h>
+#include <time.h>
 
 struct cell_part_data part_data_global;
 
@@ -28,7 +29,7 @@ int main() {
 
   const int N = 1048576; /* 2^20; Array size */
   /* const int NREPEAT = 1000; [> How many times to repeat copy op <] */
-  /* const int N = 16777216; 2^24; Array size */
+  /* const int N = 16777216;  [> 2^24; Array size <] */
   const int NREPEAT = 100; /* How many times to repeat copy op */
   clock_t start, stop;
 
@@ -284,6 +285,10 @@ int main() {
   /* Print results */
   /* ============= */
 
+  printf("Size of particle struct: %ld\n", sizeof(struct part));
+  printf("Size of p1 struct: %ld\n", sizeof(struct p1));
+  printf("Size of p2 struct: %ld\n\n", sizeof(struct p2));
+
   printf("%30s  |%25s|%25s|%25s|\n",
     "", "particle carried pointers", "global pointers", "explicitly passed ptrs");
   printf("%30s: |%10.4gs / %10.3g |%10.4gs / %10.3g | %10.4gs / %10.3g|\n",
@@ -346,63 +351,6 @@ int main() {
       t_copy_structs_global_index_split_loop, t_copy_structs_global_index_split_loop / t_copy_pc,
       t_copy_structs_explicit_index_split_loop, t_copy_structs_explicit_index_split_loop / t_copy_pc
       );
-
-
-
-
-
-
-
-
-/*   [> AOS to AOS copies using global particle array pointer <] */
-/*   start = clock(); */
-/* #pragma GCC novector [> Don't vectorize this outer loop. <] */
-/*   for (int i = 0; i < NREPEAT; i++) */
-/*     copy_data_AOS2AOS_global(parts, &part_data_copy, N); */
-/*   stop = clock(); */
-/*  */
-/*   printf("copy_data_AOS2AOS_global took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC); */
-/*  */
-/*  */
-/*   [> AOS to AOS copies using global particle array pointer and index instead of particle <] */
-/*   start = clock(); */
-/* #pragma GCC novector [> Don't vectorize this outer loop. <] */
-/*   for (int i = 0; i < NREPEAT; i++) */
-/*     copy_data_AOS2AOS_global_index(&part_data_copy, N); */
-/*   stop = clock(); */
-/*  */
-/*   printf("copy_data_AOS2AOS_global_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC); */
-/*  */
-/*  */
-/*   [> AOS to AOS copies using global particle array pointer and index instead of particle <] */
-/*   start = clock(); */
-/* #pragma GCC novector [> Don't vectorize this outer loop. <] */
-/*   for (int i = 0; i < NREPEAT; i++) */
-/*     copy_data_AOS2AOS_structs_global_index(&part_data_copy, N); */
-/*   stop = clock(); */
-/*  */
-/*   printf("copy_data_AOS2AOS_structs_global_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC); */
-/*  */
-/*  */
-/*   [> AOS to AOS copies using explicit particle array pointer and index instead of particle <] */
-/*   start = clock(); */
-/* #pragma GCC novector [> Don't vectorize this outer loop. <] */
-/*   for (int i = 0; i < NREPEAT; i++) */
-/*     copy_data_AOS2AOS_explicit(parts, &part_data, &part_data_copy, N); */
-/*   stop = clock(); */
-/*  */
-/*   printf("copy_data_AOS2AOS_explicit took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC); */
-/*  */
-/*   [> AOS to AOS copies using explicit particle array pointer and index instead of particle <] */
-/*   start = clock(); */
-/* #pragma GCC novector [> Don't vectorize this outer loop. <] */
-/*   for (int i = 0; i < NREPEAT; i++) */
-/*     copy_data_AOS2AOS_explicit_index(&part_data, &part_data_copy, N); */
-/*   stop = clock(); */
-/*  */
-/*   printf("copy_data_AOS2AOS_explicit_index took %.4g s\n", (float)(stop - start) / CLOCKS_PER_SEC); */
-/*  */
-
 
 
 

@@ -1,9 +1,11 @@
 #pragma once
 
+#define _GNU_SOURCE
+#include <stdlib.h>
+
 #include "error.h"
 #include "part_struct.h"
 
-#include <stdlib.h>
 
 
 /**
@@ -20,6 +22,41 @@ void alloc_arrays(struct cell_part_data* part_data,
     struct cell_part_data* part_data_global_,
     int N){
 
+#ifndef USE_MALLOC
+  /* Use posix_memalign */
+
+  /* int err = posix_memalign((void **)&part_data->s1_p, STRUCT_ALIGNMENT, sizeof(struct p1) * N); */
+  int err = posix_memalign((void **)&part_data->s1_p, ARRAY_STRUCT_ALIGNMENT, sizeof(struct p1) * N);
+  if (err) error("Error in posix_memalign");
+
+  /* err = posix_memalign((void **)&part_data->s2_p, STRUCT_ALIGNMENT, sizeof(struct p2) * N); */
+  err = posix_memalign((void **)&part_data->s2_p, ARRAY_STRUCT_ALIGNMENT, sizeof(struct p2) * N);
+  if (err) error("Error in posix_memalign");
+
+  /* err = posix_memalign((void **)&part_data_copy->s1_p, STRUCT_ALIGNMENT, sizeof(struct p1) * N); */
+  err = posix_memalign((void **)&part_data_copy->s1_p, ARRAY_STRUCT_ALIGNMENT, sizeof(struct p1) * N);
+  if (err) error("Error in posix_memalign");
+
+  /* err = posix_memalign((void **)&part_data_copy->s2_p, STRUCT_ALIGNMENT, sizeof(struct p2) * N); */
+  err = posix_memalign((void **)&part_data_copy->s2_p, ARRAY_STRUCT_ALIGNMENT, sizeof(struct p2) * N);
+  if (err) error("Error in posix_memalign");
+
+  /* err = posix_memalign((void **)parts, PART_STRUCT_ALIGNMENT, sizeof(struct part) * N); */
+  err = posix_memalign((void **)parts, ARRAY_STRUCT_ALIGNMENT, sizeof(struct part) * N);
+  if (err) error("Error in posix_memalign");
+
+  /* err = posix_memalign((void **)&part_data_global_->s1_p, STRUCT_ALIGNMENT, sizeof(struct p1) * N); */
+  err = posix_memalign((void **)&part_data_global_->s1_p, ARRAY_STRUCT_ALIGNMENT, sizeof(struct p1) * N);
+  if (err) error("Error in posix_memalign");
+
+  /* err = posix_memalign((void **)&part_data_global_->s2_p, STRUCT_ALIGNMENT, sizeof(struct p2) * N); */
+  err = posix_memalign((void **)&part_data_global_->s2_p, ARRAY_STRUCT_ALIGNMENT, sizeof(struct p2) * N);
+  if (err) error("Error in posix_memalign");
+
+#else
+
+  /* Use good ole malloc */
+
   part_data->s1_p = (struct p1*) malloc(sizeof(struct p1) * N);
   if (part_data->s1_p == NULL)
     error("Error allocating part_data->s1_p");
@@ -31,6 +68,7 @@ void alloc_arrays(struct cell_part_data* part_data,
   part_data_copy->s1_p = (struct p1*) malloc(sizeof(struct p1) * N);
   if (part_data_copy->s1_p == NULL)
     error("Error allocating part_data_copy->s1_p");
+
   part_data_copy->s2_p = (struct p2*) malloc(sizeof(struct p2) * N);
   if (part_data_copy->s2_p == NULL)
     error("Error allocating part_data_copy->s2_p");
@@ -48,6 +86,7 @@ void alloc_arrays(struct cell_part_data* part_data,
   part_data_global_->s2_p = (struct p2*) malloc(sizeof(struct p2) * N);
   if (part_data_global_->s2_p == NULL)
     error("Error allocating part_data->s2_p");
+#endif
 }
 
 
