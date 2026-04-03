@@ -59,7 +59,10 @@ CFLAGS += $(DEFINES) $(INCLUDES) $(LDFLAGS) $(LIBS)
 
 default: main.o
 
-main.o : main.c copy_particle_carried.o copy_global_var.o copy_explicit_var.o part.h error.h part_struct.h part_getters.h
+main.o : main.c part.h error.h part_struct.h part_getters.h
+	$(CC) $(CFLAGS) -o $@ main.c $(LDFLAGS) 
+
+full_test.o : full_test.c copy_particle_carried.o copy_global_var.o copy_explicit_var.o part.h error.h part_struct.h part_getters.h
 	$(CC) $(CFLAGS) -o $@ main.c copy_particle_carried.o copy_global_var.o copy_explicit_var.o $(LDFLAGS) 
 
 copy_particle_carried.o : copy_particle_carried.c copy_particle_carried.h part_struct.h part_getters.h
