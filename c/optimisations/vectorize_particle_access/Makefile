@@ -11,19 +11,19 @@ SRCDIR=.
 
 # GCC
 # -----------------
-CC=gcc
-CFLAGS= -O3 -std=c11 -g -march=native
-# CFLAGS += -fdump-passes # show all available passes
-# CFLAGS += -fdump-tree-all-optall -fdump-rtl-all-optall # dump outputs of all tree and RTL passes
+# CC=gcc
+# CFLAGS= -O3 -std=c11 -g -march=native -DGCC_COMPILER
+# # CFLAGS += -fdump-passes # show all available passes
+# # CFLAGS += -fdump-tree-all-optall -fdump-rtl-all-optall # dump outputs of all tree and RTL passes
 # CFLAGS += -fopt-info-optall # dump optimization info
-# CFLAGS += -fopt-info-optall=gcc_optrpt.txt # dump optimization info only
+# # CFLAGS += -fopt-info-optall=gcc_optrpt.txt # dump optimization info only
 # CFLAGS += -fdump-tree-vect-optall -fdump-tree-slp1-optall # dump outputs of vect and slp1 passes
 
  
 # CLANG
 # -----------------
-# CC=clang
-# CFLAGS= -O3 -std=c11 -g
+CC=clang
+CFLAGS= -O3 -std=c11 -g -march=native -DCLANG_COMPILER
 # CFLAGS += -fsave-optimization-record
 # CFLAGS += -Rpass-missed=all -Rpass-analysis=all
 
@@ -37,7 +37,8 @@ CFLAGS= -O3 -std=c11 -g -march=native
 
 
 # development flags
-# CFLAGS += -Wall -Wextra -fsanitize=address
+CFLAGS += -Wall -Wextra 
+# CFLAGS += -fsanitize=address
 
 
 DEFINES=

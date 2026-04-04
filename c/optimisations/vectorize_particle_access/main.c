@@ -29,33 +29,35 @@
 
 
 void copy_explicit_index(const struct cell_part_data* restrict part_data,
-                        struct cell_part_data* restrict part_data_copy, int N){
+                        const struct cell_part_data* restrict part_data_copy, int N){
 
   const struct cell_part_data* restrict cpd = part_data;
+  struct p1* restrict dest_p1 = part_data_copy->s1_p;
+  struct p2* restrict dest_p2 = part_data_copy->s2_p;
 
   for ( int i = 0; i < N; i++){
-    part_data_copy->s1_p[i].p1_f1 = get_p1_f1_explicit_ind(cpd, i);
-    part_data_copy->s1_p[i].p1_f2 = get_p1_f2_explicit_ind(cpd, i);
-    part_data_copy->s1_p[i].p1_f3 = get_p1_f3_explicit_ind(cpd, i);
+    dest_p1[i].p1_f1 = get_p1_f1_explicit_ind(cpd, i);
+    dest_p1[i].p1_f2 = get_p1_f2_explicit_ind(cpd, i);
+    dest_p1[i].p1_f3 = get_p1_f3_explicit_ind(cpd, i);
 #ifdef BIG_STRUCTS
-    part_data_copy->s1_p[i].p1_d1 = get_p1_d1_explicit_ind(cpd, i);
-    part_data_copy->s1_p[i].p1_d2 = get_p1_d2_explicit_ind(cpd, i);
-    part_data_copy->s1_p[i].p1_i1 = get_p1_i1_explicit_ind(cpd, i);
+    dest_p1[i].p1_d1 = get_p1_d1_explicit_ind(cpd, i);
+    dest_p1[i].p1_d2 = get_p1_d2_explicit_ind(cpd, i);
+    dest_p1[i].p1_i1 = get_p1_i1_explicit_ind(cpd, i);
 #endif
 
-    part_data_copy->s2_p[i].p2_f1 = get_p2_f1_explicit_ind(cpd, i);
-    part_data_copy->s2_p[i].p2_f2 = get_p2_f2_explicit_ind(cpd, i);
-    part_data_copy->s2_p[i].p2_f3 = get_p2_f3_explicit_ind(cpd, i);
+    dest_p2[i].p2_f1 = get_p2_f1_explicit_ind(cpd, i);
+    dest_p2[i].p2_f2 = get_p2_f2_explicit_ind(cpd, i);
+    dest_p2[i].p2_f3 = get_p2_f3_explicit_ind(cpd, i);
 #ifdef BIG_STRUCTS
-    part_data_copy->s2_p[i].p2_d1 = get_p2_d1_explicit_ind(cpd, i);
-    part_data_copy->s2_p[i].p2_d2 = get_p2_d2_explicit_ind(cpd, i);
-    part_data_copy->s2_p[i].p2_i1 = get_p2_i1_explicit_ind(cpd, i);
+    dest_p2[i].p2_d1 = get_p2_d1_explicit_ind(cpd, i);
+    dest_p2[i].p2_d2 = get_p2_d2_explicit_ind(cpd, i);
+    dest_p2[i].p2_i1 = get_p2_i1_explicit_ind(cpd, i);
 #endif
   }
 }
 
 
-void copy_global_index(struct cell_part_data* restrict part_data_copy, int N){
+void copy_global_index(const struct cell_part_data* restrict part_data_copy, int N){
 
   for ( int i = 0; i < N; i++){
     part_data_copy->s1_p[i].p1_f1 = get_p1_f1_global_ind(i);
@@ -108,19 +110,18 @@ int main() {
 
   init_arrays(&part_data, parts, N);
 
-
   /* --------------------- */
   /* Let the party start   */
   /* --------------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit_index(&part_data, &part_data_copy, N);
   stop = clock();
   double t1 = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP
   for (int i = 0; i < NREPEAT; i++)
     copy_global_index(&part_data_copy, N);
   stop = clock();

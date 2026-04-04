@@ -52,35 +52,35 @@ int main() {
   /* Using particle carried pointers */
   /* ------------------------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_pc(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_pc = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_pc_split_loop_by_struct(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_pc_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_pc_split_loop_by_element(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_pc_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_pc(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_structs_pc = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_pc_split_loop_by_struct(parts, &part_data_copy, N);
   stop = clock();
@@ -89,35 +89,35 @@ int main() {
   /* Acces by index */
   /* -------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_pc_index(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_pc_index = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_pc_index_split_loop_by_struct(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_pc_index_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_pc_index_split_loop_by_element(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_pc_index_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_pc_index(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_structs_pc_index = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_pc_index_split_loop_by_struct(parts, &part_data_copy, N);
   stop = clock();
@@ -128,35 +128,35 @@ int main() {
   /* Using global pointers */
   /* --------------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_global(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_global = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_global_split_loop_by_struct(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_global_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_global_split_loop_by_element(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_global_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_global(parts, &part_data_copy, N);
   stop = clock();
   double t_copy_structs_global = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_global_split_loop_by_struct(parts, &part_data_copy, N);
   stop = clock();
@@ -165,35 +165,35 @@ int main() {
   /* Acces by index */
   /* -------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_global_index(&part_data_copy, N);
   stop = clock();
   double t_copy_global_index = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_global_index_split_loop_by_struct(&part_data_copy, N);
   stop = clock();
   double t_copy_global_index_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_global_index_split_loop_by_element(&part_data_copy, N);
   stop = clock();
   double t_copy_global_index_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_global_index(&part_data_copy, N);
   stop = clock();
   double t_copy_structs_global_index = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_global_index_split_loop_by_struct(&part_data_copy, N);
   stop = clock();
@@ -205,35 +205,35 @@ int main() {
   /* Using explicitly passed pointers */
   /* -------------------------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit(parts, &part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_explicit = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit_split_loop_by_struct(parts, &part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_explicit_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit_split_loop_by_element(parts, &part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_explicit_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_explicit(parts, &part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_structs_explicit = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_explicit_split_loop_by_struct(parts, &part_data, &part_data_copy, N);
   stop = clock();
@@ -242,35 +242,35 @@ int main() {
   /* Acces by index */
   /* -------------- */
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit_index(&part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_explicit_index = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit_index_split_loop_by_struct(&part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_explicit_index_split_loop_by_struct = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_explicit_index_split_loop_by_element(&part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_explicit_index_split_loop_by_element = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_explicit_index(&part_data, &part_data_copy, N);
   stop = clock();
   double t_copy_structs_explicit_index = (double)(stop - start) / CLOCKS_PER_SEC;
 
   start = clock();
-#pragma GCC novector /* Don't vectorize this outer loop. */
+  DONT_VECTORIZE_OUTER_LOOP /* Don't vectorize this outer loop. */
   for (int i = 0; i < NREPEAT; i++)
     copy_structs_explicit_index_split_loop_by_struct(&part_data, &part_data_copy, N);
   stop = clock();

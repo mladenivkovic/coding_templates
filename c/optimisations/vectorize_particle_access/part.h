@@ -6,6 +6,13 @@
 #include "error.h"
 #include "part_struct.h"
 
+#if defined(GCC_COMPILER)
+#define DONT_VECTORIZE_OUTER_LOOP _Pragma("GCC novector")
+#elif defined(CLANG_COMPILER)
+#define DONT_VECTORIZE_OUTER_LOOP _Pragma("clang loop vectorize(disable)")
+#else
+#error "DONT_VECTORIZE_OUTER_LOOP macro not implemented"
+#endif
 
 
 /**
