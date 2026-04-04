@@ -124,6 +124,9 @@ new_types.o: new_types.c
 pointers.o: pointers.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
+pragmas.o: pragmas.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 printf.o: printf.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
