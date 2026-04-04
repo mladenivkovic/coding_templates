@@ -22,18 +22,28 @@ SRCDIR=.
  
 # CLANG
 # -----------------
-CC=clang
-CFLAGS= -O3 -std=c11 -g -march=native -DCLANG_COMPILER
+# CC=clang
+# CFLAGS= -O3 -std=c11 -g -march=native -DCLANG_COMPILER
 # CFLAGS += -fsave-optimization-record
-# CFLAGS += -Rpass-missed=all -Rpass-analysis=all
+# # CFLAGS += -Rpass-missed=all -Rpass-analysis=all
+# CFLAGS += -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize
 
 
 # INTEL CLASSIC
 # -----------------
 # CC=icc
-# CFLAGS= -O3 -std=c11 -g
+# CFLAGS= -O3 -std=c11 -g -march=native -DINTEL_CLASSIC_COMPILER
 # CFLAGS += -qopt-report=5
 # CFLAGS += -diag-disable=10441
+
+
+# INTEL ONEAPI
+# -----------------
+CC=icx
+CFLAGS= -O3 -std=c11 -g -march=native -DINTEL_COMPILER
+CFLAGS += -qopt-report=max
+
+
 
 
 # development flags
@@ -45,7 +55,7 @@ DEFINES=
 # DEFINES+=-DBIG_STRUCTS # make structs bigger and contain doubles and ints too
 # DEFINES+=-DUSE_MALLOC # use malloc() instead of posix_memalign()
 INCLUDES =
-LIBS = -lc
+LIBS = 
 LDFLAGS = 
 
 CFLAGS += $(INCLUDES) $(LDFLAGS) $(LIBS)

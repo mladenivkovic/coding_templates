@@ -28,12 +28,44 @@
 #include "part_getters.h"
 
 
-void copy_explicit_index(const struct cell_part_data* restrict part_data,
+void copy_explicit_index_test(const struct cell_part_data* restrict part_data,
                         const struct cell_part_data* restrict part_data_copy, int N){
 
   const struct cell_part_data* restrict cpd = part_data;
   struct p1* restrict dest_p1 = part_data_copy->s1_p;
   struct p2* restrict dest_p2 = part_data_copy->s2_p;
+
+  for ( int i = 0; i < N; i++){
+    dest_p1[i].p1_f1 = get_p1_f1_explicit_ind(cpd, i);
+    dest_p1[i].p1_f2 = get_p1_f2_explicit_ind(cpd, i);
+    dest_p1[i].p1_f3 = get_p1_f3_explicit_ind(cpd, i);
+#ifdef BIG_STRUCTS
+    dest_p1[i].p1_d1 = get_p1_d1_explicit_ind(cpd, i);
+    dest_p1[i].p1_d2 = get_p1_d2_explicit_ind(cpd, i);
+    dest_p1[i].p1_i1 = get_p1_i1_explicit_ind(cpd, i);
+#endif
+
+    dest_p2[i].p2_f1 = get_p2_f1_explicit_ind(cpd, i);
+    dest_p2[i].p2_f2 = get_p2_f2_explicit_ind(cpd, i);
+    dest_p2[i].p2_f3 = get_p2_f3_explicit_ind(cpd, i);
+#ifdef BIG_STRUCTS
+    dest_p2[i].p2_d1 = get_p2_d1_explicit_ind(cpd, i);
+    dest_p2[i].p2_d2 = get_p2_d2_explicit_ind(cpd, i);
+    dest_p2[i].p2_i1 = get_p2_i1_explicit_ind(cpd, i);
+#endif
+  }
+}
+
+
+
+void copy_explicit_index(const struct cell_part_data* restrict part_data,
+                        const struct cell_part_data* restrict part_data_copy, int N){
+
+  const struct cell_part_data* restrict cpd = part_data;
+  struct p1* restrict dest_p1 = __builtin_assume_aligned(part_data_copy->s1_p, STRUCT_ALIGNMENT);
+  struct p2* restrict dest_p2 = __builtin_assume_aligned(part_data_copy->s2_p, STRUCT_ALIGNMENT);
+  /* struct p1* restrict dest_p1 = part_data_copy->s1_p; */
+  /* struct p2* restrict dest_p2 = part_data_copy->s2_p; */
 
   for ( int i = 0; i < N; i++){
     dest_p1[i].p1_f1 = get_p1_f1_explicit_ind(cpd, i);
@@ -113,6 +145,15 @@ int main() {
   /* --------------------- */
   /* Let the party start   */
   /* --------------------- */
+
+  start = clock();
+  DONT_VECTORIZE_OUTER_LOOP
+  for (int i = 0; i < NREPEAT; i++)
+    copy_explicit_index_test(&part_data, &part_data_copy, N);
+  stop = clock();
+  double t3 = (double)(stop - start) / CLOCKS_PER_SEC;
+
+
   start = clock();
   DONT_VECTORIZE_OUTER_LOOP
   for (int i = 0; i < NREPEAT; i++)
@@ -129,12 +170,18 @@ int main() {
 
 
 
+
   /* ============= */
   /* Print results */
   /* ============= */
 
-  printf("t1: %12.3gs\n", t1);
-  printf("t2: %12.3gs\n", t2);
+  printf("Size of particle struct: %ld\n", sizeof(struct part));
+  printf("Size of p1 struct: %ld\n", sizeof(struct p1));
+  printf("Size of p2 struct: %ld\n\n", sizeof(struct p2));
+
+  printf("t1       : %12.3gs\n", t1);
+  printf("t2       : %12.3gs\n", t2);
+  printf("t3 (test): %12.3gs\n", t3);
 
 
 

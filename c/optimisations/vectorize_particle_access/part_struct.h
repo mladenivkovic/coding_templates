@@ -5,7 +5,7 @@
 #define MY_STRUCT_ALIGN __attribute__((packed, aligned(STRUCT_ALIGNMENT)))
 #else
 #define STRUCT_ALIGNMENT 16
-#define MY_STRUCT_ALIGN __attribute__((aligned(STRUCT_ALIGNMENT)))
+#define MY_STRUCT_ALIGN __attribute__((packed, aligned(STRUCT_ALIGNMENT)))
 #endif
 
 #define PART_STRUCT_ALIGNMENT 8

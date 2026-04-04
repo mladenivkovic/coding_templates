@@ -10,6 +10,8 @@
 #define DONT_VECTORIZE_OUTER_LOOP _Pragma("GCC novector")
 #elif defined(CLANG_COMPILER)
 #define DONT_VECTORIZE_OUTER_LOOP _Pragma("clang loop vectorize(disable)")
+#elif defined(INTEL_CLASSIC_COMPILER) || defined(INTEL_COMPILER)
+#define DONT_VECTORIZE_OUTER_LOOP _Pragma("novector")
 #else
 #error "DONT_VECTORIZE_OUTER_LOOP macro not implemented"
 #endif
