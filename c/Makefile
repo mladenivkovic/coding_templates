@@ -151,6 +151,9 @@ type_casting.o: type_casting.c
 type_limits.o: type_limits.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
+type_sizes.o: type_sizes.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 unions.o: unions.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
