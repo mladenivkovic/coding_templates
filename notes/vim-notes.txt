@@ -200,7 +200,7 @@ ctrl+q                  Kill "Freeze out"
 SEARCH AND REPLACE
 =============================
 
-/wort                   search word
+/word                   search word
 n                       next entry
 N                       previous entry
 %                       next brace of same kind
@@ -211,6 +211,15 @@ N                       previous entry
 :s/word1/word2/g        replace all word1 with word2 on this line
 :%s/word1/word2/g       replace all word1 with word2 in file
 :%s/word1/word2/gc      replace all word1 with word2 in file with manual control
+
+:%s/\CWord/word2/g      case-sensitive search for `Word`
+:%s/Word/word2/gI       case-sensitive search for `Word`
+:%s/\cWord/word2/g      case-insensitive search for `Word`
+:s/\<foo\>/bar/         match only whole words for `foo`, not embedded ones (e.g. abcfoodef doesn't get matched)
+
+:%s/word/&secondword/   append `secondword` to `word` (copies what was matched)
+:%s/abc\(.*\)def/ABC-\1-DEF/g  store matched wildcard pattern using `\(` and `\)`, access it in replacement using `\1`.
+
 :noh                    no highlight (remove highlighted words)
 
 @:                      repeat last search/replace command 
