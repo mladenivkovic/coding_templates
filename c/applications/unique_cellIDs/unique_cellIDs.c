@@ -14,7 +14,7 @@
  *  that level and to make it unique.
  *
  *  Simplified Example:
- *   - using 3 rightmostbits instead of 15 for top
+ *   - using 3 rightmost bits instead of 15 for top
  *   level cells
  *   - dots every three digits are included for
  *   improved readability
