@@ -69,6 +69,9 @@ all: $(EXECS) # $(EXECS_NOSTD) $(EXECS_NODEBUG)
 quicksort.o: quicksort.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
+convert_nan_to_int_and_back.o: convert_nan_to_int_and_back.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
 # Wildcard baby
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) 
