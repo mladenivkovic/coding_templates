@@ -28,3 +28,4 @@ libtool
 ltmain.sh
 config.guess
 config.sub
+**/hello
